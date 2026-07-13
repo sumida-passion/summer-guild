@@ -1,0 +1,1 @@
+# Summer Guild Skeleton v1.0
