@@ -59,12 +59,24 @@
 <body>
 
     <!-- ========================= -->
+    <!-- 横画面への案内 -->
+    <!-- ========================= -->
+
+    <div class="orientation-message">
+        画面を横向きにして<br>
+        夏休みギルドを開いてください
+    </div>
+
+
+
+    <!-- ========================= -->
     <!-- タイトル画面 -->
     <!-- ========================= -->
 
     <section
         id="title-screen"
-        class="screen active">
+        class="screen active"
+        aria-hidden="false">
 
         <div
             class="background title-background">
@@ -122,14 +134,14 @@
 
 
             <img
-                id="player-top"
-                src="assets/characters/player/clothes/tops/default_tops.png"
+                id="player-bottom"
+                src="assets/characters/player/clothes/bottoms/default_bottoms.png"
                 alt="">
 
 
             <img
-                id="player-bottom"
-                src="assets/characters/player/clothes/bottoms/default_bottoms.png"
+                id="player-top"
+                src="assets/characters/player/clothes/tops/default_tops.png"
                 alt="">
 
         </div>
@@ -159,11 +171,180 @@
         </div>
 
 
+        <div class="guildhall-menu">
+
+            <button
+                id="gotoQuestBoard"
+                type="button">
+                今日のクエスト
+            </button>
+
+        </div>
+
+
         <button
             id="backRoom"
             type="button">
             部屋へ戻る
         </button>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- クエストボード -->
+    <!-- ========================= -->
+
+    <section
+        id="questboard-screen"
+        class="screen"
+        aria-hidden="true">
+
+        <div
+            class="background guildhall-background">
+        </div>
+
+
+        <div class="questboard-window">
+
+            <header class="questboard-header">
+
+                <p class="questboard-label">
+                    DAILY QUEST
+                </p>
+
+                <h2>
+                    今日のクエスト
+                </h2>
+
+                <p
+                    id="gpDisplay"
+                    class="gp-display">
+                    所持GP：0
+                </p>
+
+            </header>
+
+
+            <!--
+                daily.jsが今日のクエスト一覧を
+                この中へ表示する。
+            -->
+
+            <div
+                id="dailyQuestList"
+                class="daily-quest-list">
+
+                <p class="quest-loading">
+                    クエストを確認しています……
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="backGuildHall"
+            type="button">
+            ギルドホールへ戻る
+        </button>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- クエスト実行画面 -->
+    <!-- ========================= -->
+
+    <section
+        id="quest-screen"
+        class="screen"
+        aria-hidden="true">
+
+        <div
+            class="background quest-background">
+        </div>
+
+
+        <!--
+            hyakumasu.jsなどの各クエストが、
+            この中へゲーム画面を表示する。
+        -->
+
+        <main
+            id="questContainer"
+            class="quest-container"
+            aria-live="polite">
+        </main>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- クエスト結果画面 -->
+    <!-- ========================= -->
+
+    <section
+        id="result-screen"
+        class="screen"
+        aria-hidden="true">
+
+        <div
+            class="background result-background">
+        </div>
+
+
+        <div class="result-window">
+
+            <p class="result-label">
+                QUEST COMPLETE
+            </p>
+
+
+            <h2 id="resultTitle">
+                クエストクリア！
+            </h2>
+
+
+            <p
+                id="resultMessage"
+                class="result-message">
+                最後まで取り組みました
+            </p>
+
+
+            <div class="reward-panel">
+
+                <span class="reward-label">
+                    獲得報酬
+                </span>
+
+
+                <strong id="rewardText">
+                    10 GP
+                </strong>
+
+            </div>
+
+
+            <p
+                id="totalGpText"
+                class="total-gp-text">
+                所持GP：10
+            </p>
+
+
+            <button
+                id="resultBackQuestBoard"
+                type="button">
+                クエストボードへ戻る
+            </button>
+
+        </div>
 
     </section>
 
@@ -187,9 +368,32 @@
     <!-- 読み込み順が重要 -->
     <!-- ========================= -->
 
+    <!-- 保存・設定 -->
+
     <script src="js/settings.js"></script>
 
+
+    <!-- クエスト共通システム -->
+
+    <script src="js/quests/engine.js"></script>
+
+
+    <!-- デイリークエスト定義 -->
+
+    <script src="js/quests/daily.js"></script>
+
+
+    <!-- 個別クエスト -->
+
+    <script src="js/quests/hyakumasu.js"></script>
+
+
+    <!-- Developer Mode -->
+
     <script src="js/developer.js"></script>
+
+
+    <!-- ゲーム全体起動 -->
 
     <script src="js/app.js"></script>
 
