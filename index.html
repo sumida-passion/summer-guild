@@ -1,1 +1,570 @@
-<!-- Summer Guild -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#24170f">
+
+  <title>夏休みギルド ～自分を定義する冒険～</title>
+
+  <style>
+    /* =========================
+       基本設定
+    ========================= */
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #160f0a;
+      font-family:
+        "Hiragino Mincho ProN",
+        "Yu Mincho",
+        "YuMincho",
+        serif;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================
+       ゲーム全体
+    ========================= */
+
+    #game {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      overflow: hidden;
+      background: #160f0a;
+    }
+
+    /* =========================
+       シーン共通
+    ========================= */
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: none;
+      overflow: hidden;
+      background-color: #160f0a;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .scene.active {
+      display: block;
+      animation: sceneFade 0.55s ease;
+    }
+
+    @keyframes sceneFade {
+      from {
+        opacity: 0;
+        transform: scale(1.015);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* 背景を少し暗くして、ボタンを見やすくする */
+    .scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.05),
+          rgba(0, 0, 0, 0.14)
+        );
+    }
+
+    /* =========================
+       タイトル画面
+    ========================= */
+
+    #scene-title {
+      background-image:
+        url("assets/backgrounds/title/title.png");
+    }
+
+    .title-ui {
+      position: absolute;
+      z-index: 10;
+      left: 50%;
+      bottom: max(8vh, 48px);
+      transform: translateX(-50%);
+      width: min(88vw, 560px);
+      text-align: center;
+    }
+
+    .title-name {
+      margin: 0 0 10px;
+      color: #fff3ce;
+      font-size: clamp(34px, 7vw, 72px);
+      line-height: 1.2;
+      letter-spacing: 0.08em;
+      text-shadow:
+        0 3px 0 rgba(40, 20, 6, 0.85),
+        0 0 18px rgba(255, 199, 92, 0.55);
+    }
+
+    .title-subtitle {
+      margin: 0 0 28px;
+      color: #f7dfad;
+      font-size: clamp(15px, 2.7vw, 24px);
+      letter-spacing: 0.12em;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+    }
+
+    /* =========================
+       ボタン共通
+    ========================= */
+
+    .guild-button {
+      position: relative;
+      min-width: 220px;
+      min-height: 58px;
+      padding: 13px 28px;
+      border: 3px solid #5d371b;
+      border-radius: 12px;
+      color: #3a210e;
+      background:
+        linear-gradient(
+          to bottom,
+          #f3d99b,
+          #cda25c
+        );
+      box-shadow:
+        inset 0 0 0 2px rgba(255, 244, 203, 0.55),
+        0 5px 0 #44240e,
+        0 9px 22px rgba(0, 0, 0, 0.42);
+      font-size: clamp(18px, 3vw, 25px);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .guild-button:active {
+      transform: translateY(4px);
+      box-shadow:
+        inset 0 0 0 2px rgba(255, 244, 203, 0.55),
+        0 1px 0 #44240e,
+        0 4px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    /* =========================
+       自分の部屋
+    ========================= */
+
+    #scene-room {
+      background-image:
+        url("assets/backgrounds/home/room.png");
+    }
+
+    /*
+      キャラクター用ステージ。
+
+      base・top・bottomはすべて
+      left: 0;
+      top: 0;
+      width: 100%;
+      で完全に重なる。
+    */
+    .character-stage {
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      bottom: 4%;
+      transform: translateX(-50%);
+      width: min(43vw, 520px);
+      aspect-ratio: 1 / 1;
+      pointer-events: none;
+    }
+
+    .character-layer {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* レイヤー順 */
+    .layer-base {
+      z-index: 10;
+    }
+
+    .layer-bottom {
+      z-index: 20;
+    }
+
+    .layer-top {
+      z-index: 30;
+    }
+
+    .room-navigation {
+      position: absolute;
+      z-index: 20;
+      right: max(22px, env(safe-area-inset-right));
+      bottom: max(24px, env(safe-area-inset-bottom));
+    }
+
+    /* =========================
+       ギルドホール
+    ========================= */
+
+    #scene-guildhall {
+      background-image:
+        url("assets/backgrounds/guild-hall/guildhall.png");
+    }
+
+    .guildhall-navigation {
+      position: absolute;
+      z-index: 20;
+      left: max(22px, env(safe-area-inset-left));
+      bottom: max(24px, env(safe-area-inset-bottom));
+    }
+
+    /*
+      中央掲示板の透明タップ領域。
+
+      今はタップすると準備中メッセージ。
+      後でクエスト一覧と百ます計算につなげる。
+    */
+    .quest-board-hotspot {
+      position: absolute;
+      z-index: 15;
+      left: 40%;
+      top: 45%;
+      width: 20%;
+      height: 30%;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    /* 開発中だけ範囲を見る場合は、
+       下のコメントを外す。
+
+    .quest-board-hotspot {
+      outline: 3px solid red;
+      background: rgba(255, 0, 0, 0.18);
+    }
+    */
+
+    /* =========================
+       メッセージウィンドウ
+    ========================= */
+
+    .message-overlay {
+      position: absolute;
+      z-index: 100;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(10, 6, 3, 0.62);
+    }
+
+    .message-overlay.open {
+      display: flex;
+    }
+
+    .message-box {
+      width: min(88vw, 560px);
+      padding: 28px 24px 24px;
+      border: 4px solid #6a3e1c;
+      border-radius: 16px;
+      color: #3a210e;
+      background:
+        linear-gradient(
+          to bottom,
+          #f6e5b5,
+          #d6b46e
+        );
+      box-shadow:
+        inset 0 0 0 3px rgba(255, 250, 217, 0.5),
+        0 16px 45px rgba(0, 0, 0, 0.55);
+      text-align: center;
+    }
+
+    .message-box p {
+      margin: 0 0 24px;
+      font-size: clamp(19px, 3.5vw, 27px);
+      line-height: 1.8;
+      font-weight: 700;
+    }
+
+    /* =========================
+       スマホ・縦画面調整
+    ========================= */
+
+    @media (orientation: portrait) {
+      .character-stage {
+        width: min(76vw, 500px);
+        bottom: 8%;
+      }
+
+      .room-navigation,
+      .guildhall-navigation {
+        bottom: max(18px, env(safe-area-inset-bottom));
+      }
+
+      .guild-button {
+        min-width: 190px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main id="game">
+
+    <!-- ======================
+         タイトル画面
+    ======================= -->
+    <section
+      id="scene-title"
+      class="scene active"
+      aria-label="タイトル画面"
+    >
+      <div class="title-ui">
+        <h1 class="title-name">夏休みギルド</h1>
+
+        <p class="title-subtitle">
+          ～自分を定義する冒険～
+        </p>
+
+        <button
+          id="start-button"
+          class="guild-button"
+          type="button"
+        >
+          冒険を始める
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================
+         自分の部屋
+    ======================= -->
+    <section
+      id="scene-room"
+      class="scene"
+      aria-label="自分の部屋"
+    >
+      <div
+        class="character-stage"
+        aria-label="主人公"
+      >
+        <img
+          class="character-layer layer-base"
+          src="assets/characters/player/base/base.png"
+          alt=""
+        >
+
+        <img
+          class="character-layer layer-bottom"
+          src="assets/characters/player/clothes/bottoms/default_bottom.png"
+          alt=""
+        >
+
+        <img
+          class="character-layer layer-top"
+          src="assets/characters/player/clothes/tops/default_top.png"
+          alt=""
+        >
+      </div>
+
+      <nav class="room-navigation">
+        <button
+          id="to-guildhall-button"
+          class="guild-button"
+          type="button"
+        >
+          ギルドホールへ
+        </button>
+      </nav>
+    </section>
+
+    <!-- ======================
+         ギルドホール
+    ======================= -->
+    <section
+      id="scene-guildhall"
+      class="scene"
+      aria-label="ギルドホール"
+    >
+      <button
+        id="quest-board-button"
+        class="quest-board-hotspot"
+        type="button"
+        aria-label="中央の掲示板を見る"
+      ></button>
+
+      <nav class="guildhall-navigation">
+        <button
+          id="to-room-button"
+          class="guild-button"
+          type="button"
+        >
+          自分の部屋へ
+        </button>
+      </nav>
+    </section>
+
+    <!-- ======================
+         準備中メッセージ
+    ======================= -->
+    <div
+      id="message-overlay"
+      class="message-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="message-text"
+    >
+      <div class="message-box">
+        <p id="message-text">
+          本日の依頼は、まだ準備中です。
+        </p>
+
+        <button
+          id="close-message-button"
+          class="guild-button"
+          type="button"
+        >
+          わかった
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    "use strict";
+
+    /*
+      シーン名とHTML要素を対応させる。
+    */
+    const scenes = {
+      title: document.getElementById("scene-title"),
+      room: document.getElementById("scene-room"),
+      guildhall: document.getElementById("scene-guildhall")
+    };
+
+    const startButton =
+      document.getElementById("start-button");
+
+    const toGuildhallButton =
+      document.getElementById("to-guildhall-button");
+
+    const toRoomButton =
+      document.getElementById("to-room-button");
+
+    const questBoardButton =
+      document.getElementById("quest-board-button");
+
+    const messageOverlay =
+      document.getElementById("message-overlay");
+
+    const closeMessageButton =
+      document.getElementById("close-message-button");
+
+    /*
+      指定されたシーンだけを表示する。
+    */
+    function showScene(sceneName) {
+      const nextScene = scenes[sceneName];
+
+      if (!nextScene) {
+        console.error(
+          `存在しないシーンです: ${sceneName}`
+        );
+        return;
+      }
+
+      Object.values(scenes).forEach((scene) => {
+        scene.classList.remove("active");
+      });
+
+      nextScene.classList.add("active");
+    }
+
+    /*
+      メッセージを表示する。
+    */
+    function openMessage() {
+      messageOverlay.classList.add("open");
+    }
+
+    /*
+      メッセージを閉じる。
+    */
+    function closeMessage() {
+      messageOverlay.classList.remove("open");
+    }
+
+    /*
+      画面移動
+    */
+    startButton.addEventListener("click", () => {
+      showScene("room");
+    });
+
+    toGuildhallButton.addEventListener("click", () => {
+      showScene("guildhall");
+    });
+
+    toRoomButton.addEventListener("click", () => {
+      showScene("room");
+    });
+
+    /*
+      中央掲示板
+    */
+    questBoardButton.addEventListener("click", () => {
+      openMessage();
+    });
+
+    closeMessageButton.addEventListener("click", () => {
+      closeMessage();
+    });
+
+    /*
+      黒い背景部分を押しても閉じる。
+    */
+    messageOverlay.addEventListener("click", (event) => {
+      if (event.target === messageOverlay) {
+        closeMessage();
+      }
+    });
+  </script>
+</body>
+</html><!-- Summer Guild -->
