@@ -1,1 +1,222 @@
+/* =========================================================
+   夏休みギルド Ver0.3
+   developer.css
 
+   Developer Mode 専用
+   ========================================================= */
+
+
+/* =========================================================
+   1. Developer Panel
+   ========================================================= */
+
+#developerPanel{
+
+    position:fixed;
+
+    top:20px;
+    right:20px;
+
+    width:min(360px,90vw);
+
+    max-height:80vh;
+
+    overflow-y:auto;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    background:rgba(28,22,18,.95);
+
+    border:2px solid rgba(255,220,150,.35);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.45);
+
+    color:#fff;
+
+    z-index:9999;
+
+    display:none;
+
+}
+
+
+/* =========================================================
+   2. 開いた状態
+   ========================================================= */
+
+#developerPanel.developer-panel-open{
+
+    display:block;
+
+}
+
+
+/* =========================================================
+   3. Header
+   ========================================================= */
+
+.developer-panel-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+
+.developer-panel-header h2{
+
+    margin:0;
+
+    font-size:1.2rem;
+
+    color:#ffe9a6;
+
+}
+
+
+/* =========================================================
+   4. 閉じるボタン
+   ========================================================= */
+
+#closeDeveloperMode{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:1.2rem;
+
+    color:#fff;
+
+    background:#7d2f2f;
+
+}
+
+
+#closeDeveloperMode:hover{
+
+    background:#a63f3f;
+
+}
+
+
+/* =========================================================
+   5. 説明
+   ========================================================= */
+
+.developer-status{
+
+    margin-bottom:10px;
+
+    font-weight:bold;
+
+    color:#ffe7a3;
+
+}
+
+
+.developer-description{
+
+    line-height:1.6;
+
+    font-size:.95rem;
+
+    margin-bottom:18px;
+
+}
+
+
+/* =========================================================
+   6. Placeholder
+   ========================================================= */
+
+.developer-placeholder{
+
+    padding:18px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px dashed rgba(255,255,255,.2);
+
+    margin-bottom:20px;
+
+}
+
+
+.developer-placeholder strong{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#fff0ba;
+
+}
+
+
+.developer-placeholder span{
+
+    color:#cccccc;
+
+}
+
+
+/* =========================================================
+   7. 終了ボタン
+   ========================================================= */
+
+#exitDeveloperMode{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:1rem;
+
+    background:#5b8d46;
+
+    color:white;
+
+}
+
+
+#exitDeveloperMode:hover{
+
+    background:#71a858;
+
+}
+
+
+/* =========================================================
+   8. 開発モード中
+   ========================================================= */
+
+body.developer-mode-active{
+
+    user-select:none;
+
+}
