@@ -3,21 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>夏休みギルド ～自分を定義する冒険～</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
+    <title>
+        夏休みギルド ～自分を定義する冒険～
+    </title>
+
+
+    <!-- ========================= -->
     <!-- CSS -->
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/layout.css">
+    <!-- ========================= -->
 
+    <link
+        rel="stylesheet"
+        href="css/common.css">
+
+    <link
+        rel="stylesheet"
+        href="css/layout.css">
+
+    <link
+        rel="stylesheet"
+        href="css/developer.css">
+
+
+    <!-- ========================= -->
     <!-- PWA -->
-    <link rel="manifest" href="manifest.webmanifest">
-    <meta name="theme-color" content="#2b1b12">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="夏休みギルド">
+    <!-- ========================= -->
+
+    <link
+        rel="manifest"
+        href="manifest.webmanifest">
+
+    <meta
+        name="theme-color"
+        content="#2b1b12">
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes">
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent">
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="夏休みギルド">
 </head>
+
 
 <body>
 
@@ -25,21 +62,32 @@
     <!-- タイトル画面 -->
     <!-- ========================= -->
 
-    <section id="title-screen" class="screen active">
+    <section
+        id="title-screen"
+        class="screen active">
 
-        <div class="background title-background"></div>
+        <div
+            class="background title-background">
+        </div>
+
 
         <div class="title-panel">
 
-            <h1 id="gameTitle">
+            <h1
+                id="gameTitle"
+                tabindex="-1">
                 夏休みギルド
             </h1>
+
 
             <p class="subtitle">
                 ～ 自分を定義する冒険 ～
             </p>
 
-            <button id="startButton">
+
+            <button
+                id="startButton"
+                type="button">
                 はじめる
             </button>
 
@@ -53,9 +101,15 @@
     <!-- 自分の部屋 -->
     <!-- ========================= -->
 
-    <section id="room-screen" class="screen">
+    <section
+        id="room-screen"
+        class="screen"
+        aria-hidden="true">
 
-        <div class="background room-background"></div>
+        <div
+            class="background room-background">
+        </div>
+
 
         <!-- 主人公 -->
 
@@ -66,19 +120,24 @@
                 src="assets/characters/player/base/base.png"
                 alt="主人公">
 
+
             <img
                 id="player-top"
                 src="assets/characters/player/clothes/tops/default_tops.png"
-                alt="トップス">
+                alt="">
+
 
             <img
                 id="player-bottom"
                 src="assets/characters/player/clothes/bottoms/default_bottoms.png"
-                alt="ボトムス">
+                alt="">
 
         </div>
 
-        <button id="gotoGuildHall">
+
+        <button
+            id="gotoGuildHall"
+            type="button">
             ギルドホールへ
         </button>
 
@@ -90,11 +149,19 @@
     <!-- ギルドホール -->
     <!-- ========================= -->
 
-    <section id="guildhall-screen" class="screen">
+    <section
+        id="guildhall-screen"
+        class="screen"
+        aria-hidden="true">
 
-        <div class="background guildhall-background"></div>
+        <div
+            class="background guildhall-background">
+        </div>
 
-        <button id="backRoom">
+
+        <button
+            id="backRoom"
+            type="button">
             部屋へ戻る
         </button>
 
@@ -104,7 +171,7 @@
 
     <!-- ========================= -->
     <!-- Developer Mode -->
-    <!-- 通常はdeveloper.jsから非表示管理 -->
+    <!-- 通常は完全非表示 -->
     <!-- ========================= -->
 
     <aside
@@ -117,10 +184,13 @@
 
     <!-- ========================= -->
     <!-- JavaScript -->
+    <!-- 読み込み順が重要 -->
     <!-- ========================= -->
 
     <script src="js/settings.js"></script>
+
     <script src="js/developer.js"></script>
+
     <script src="js/app.js"></script>
 
 </body>
