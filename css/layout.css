@@ -118,12 +118,12 @@
 
 #room-screen #player {
     left: 50%;
-    bottom: 2.5%;
+    bottom: -4%;
 
-    width: min(34vw, 390px);
+    width: min(56vw, 640px);
 
     transform: translateX(-50%);
-}
+}}}
 
 /*
   ギルドホールへボタン
