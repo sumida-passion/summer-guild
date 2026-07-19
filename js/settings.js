@@ -1,12 +1,13 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.3.1
+   夏休みギルド Ver0.3.2
    settings.js
 
    ゲーム設定
    LocalStorage
    プレイヤー設定の反映
+   JSON出力
    ========================================================= */
 
 
@@ -24,7 +25,7 @@ const SETTINGS_STORAGE_KEY =
 
 const DEFAULT_SETTINGS = {
 
-    version: "0.3.1",
+    version: "0.3.2",
 
     player: {
 
@@ -88,6 +89,16 @@ function mergeSettings(
 
 
     if (
+        typeof savedSettings.version === "string"
+    ) {
+
+        merged.version =
+            savedSettings.version;
+
+    }
+
+
+    if (
         savedSettings.player
         && typeof savedSettings.player === "object"
     ) {
@@ -98,6 +109,14 @@ function mergeSettings(
         );
 
     }
+
+
+    /*
+      現在のゲームバージョンへ更新する。
+    */
+
+    merged.version =
+        DEFAULT_SETTINGS.version;
 
 
     return merged;
@@ -193,7 +212,7 @@ function saveSettings() {
 
 
 /* =========================================================
-   8. 初期化 -->
+   8. 全設定の初期化
    ========================================================= */
 
 function resetSettings() {
@@ -264,41 +283,100 @@ function applyPlayerSettings() {
     }
 
 
+    const player =
+        document.getElementById(
+            "player"
+        );
+
+
+    if (!player) {
+        return;
+    }
+
+
+    const x =
+        Number(playerSettings.x);
+
+
+    const y =
+        Number(playerSettings.y);
+
+
     const scale =
         Number(playerSettings.scale);
 
 
-    if (Number.isFinite(scale)) {
+    const rotation =
+        Number(playerSettings.rotation);
 
-        document.documentElement.style.setProperty(
 
-            "--player-scale",
+    /*
+      X位置
+      画面左端を0、中央を50、右端を100とする。
+    */
 
-            scale.toFixed(2)
+    if (Number.isFinite(x)) {
 
-        );
+        player.style.left =
+            `${x}%`;
+
+    }
+
+
+    /*
+      Y位置
+      画面下端を基準にbottomで指定する。
+    */
+
+    if (Number.isFinite(y)) {
+
+        player.style.bottom =
+            `${y}%`;
 
     }
 
 
-    const player =
-        document.getElementById("player");
+    /*
+      ScaleとRotation
+    */
+
+    const safeScale =
+        Number.isFinite(scale)
+            ? scale
+            : DEFAULT_SETTINGS.player.scale;
 
 
-    if (player) {
+    const safeRotation =
+        Number.isFinite(rotation)
+            ? rotation
+            : DEFAULT_SETTINGS.player.rotation;
 
-        player.style.display =
-            playerSettings.visible
-                ? ""
-                : "none";
 
-    }
+    player.style.transform = `
+
+        translateX(-50%)
+
+        scale(${safeScale})
+
+        rotate(${safeRotation}deg)
+
+    `;
+
+
+    /*
+      表示・非表示
+    */
+
+    player.style.display =
+        playerSettings.visible
+            ? ""
+            : "none";
 
 }
 
 
 /* =========================================================
-   12. すべての設定を反映
+   12. 全設定を反映
    ========================================================= */
 
 function applyAllSettings() {
@@ -319,5 +397,174 @@ function getSettingsJson() {
         null,
         2
     );
+
+}
+
+
+/* =========================================================
+   14. JSONをクリップボードへコピー
+   ========================================================= */
+
+async function copySettingsJson() {
+
+    const json =
+        getSettingsJson();
+
+
+    try {
+
+        if (
+            navigator.clipboard
+            && window.isSecureContext
+        ) {
+
+            await navigator.clipboard.writeText(
+                json
+            );
+
+            return true;
+
+        }
+
+
+        /*
+          Clipboard APIが使えない場合の代替処理。
+        */
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+
+        textarea.value =
+            json;
+
+
+        textarea.setAttribute(
+            "readonly",
+            ""
+        );
+
+
+        textarea.style.position =
+            "fixed";
+
+        textarea.style.opacity =
+            "0";
+
+
+        document.body.appendChild(
+            textarea
+        );
+
+
+        textarea.select();
+
+
+        const copied =
+            document.execCommand(
+                "copy"
+            );
+
+
+        textarea.remove();
+
+
+        return copied;
+
+    } catch (error) {
+
+        console.error(
+            "settings.jsonのコピーに失敗しました。",
+            error
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   15. settings.jsonをダウンロード
+   ========================================================= */
+
+function downloadSettingsJson() {
+
+    try {
+
+        const json =
+            getSettingsJson();
+
+
+        const blob =
+            new Blob(
+                [json],
+                {
+                    type:
+                        "application/json;charset=utf-8"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            url;
+
+
+        link.download =
+            "settings.json";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        window.setTimeout(
+            () => {
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+            },
+            1000
+        );
+
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "settings.jsonのダウンロードに失敗しました。",
+            error
+        );
+
+
+        return false;
+
+    }
 
 }
