@@ -1,13 +1,38 @@
 /* =========================================================
-   夏休みギルド Ver0.2
+   夏休みギルド Ver0.2.1
    layout.css
 
-   各画面の背景・配置・大きさを管理する
+   Part 1
+   共通設定・タイトル画面・自分の部屋
    ========================================================= */
 
 
 /* =========================================================
-   1. 共通レイアウト
+   1. 調整用の共通数値
+   ========================================================= */
+
+/*
+  主人公の大きさや位置は、基本的にここで調整する。
+
+  --player-width：
+  透明部分を含めたPNGキャンバス全体の幅
+
+  --player-scale：
+  PNGキャンバス内の人物が小さい場合の拡大率
+
+  --player-bottom：
+  主人公を画面下からどの位置に置くか
+*/
+
+:root {
+    --player-width: min(56vw, 640px);
+    --player-scale: 1.65;
+    --player-bottom: -7%;
+}
+
+
+/* =========================================================
+   2. 全画面共通レイアウト
    ========================================================= */
 
 .screen {
@@ -23,7 +48,7 @@
 
 
 /* =========================================================
-   2. タイトル画面
+   3. タイトル画面
    ========================================================= */
 
 .title-background {
@@ -37,11 +62,10 @@
 
 .title-panel {
     position: absolute;
-    left: 50%;
     top: 50%;
+    left: 50%;
 
     width: min(82vw, 760px);
-
     padding: clamp(24px, 4vw, 46px);
 
     text-align: center;
@@ -86,7 +110,7 @@
 
 
 /* =========================================================
-   3. 自分の部屋
+   4. 自分の部屋
    ========================================================= */
 
 .room-background {
@@ -103,41 +127,80 @@
     justify-content: center;
 }
 
+
+/* =========================================================
+   5. 自分の部屋の主人公
+   ========================================================= */
+
 /*
-  主人公の位置
+  common.cssで定義した#playerに対して、
+  この画面での位置と大きさを指定する。
 
-  bottom：
-  画面下からどれだけ上げるか
-
-  left：
-  画面左からの位置
-
-  width：
-  主人公全体の大きさ
+  transformの順番が重要なので変更しない。
 */
 
 #room-screen #player {
-    left: 50%;
-    bottom: -4%;
-
-    width: min(56vw, 640px);
-
-    transform: translateX(-50%);
-}}}
-
-/*
-  ギルドホールへボタン
-*/
-
-#gotoGuildHall {
     position: absolute;
-    right: clamp(20px, 4vw, 56px);
-    bottom: clamp(20px, 4vh, 42px);
+
+    left: 50%;
+    bottom: var(--player-bottom);
+
+    width: var(--player-width);
+
+    transform:
+        translateX(-50%)
+        scale(var(--player-scale));
+
+    transform-origin: center bottom;
 }
 
 
 /* =========================================================
-   4. ギルドホール
+   6. ギルドホールへ進むボタン
+   ========================================================= */
+
+#gotoGuildHall {
+    position: absolute;
+
+    right: clamp(20px, 4vw, 56px);
+    bottom: clamp(20px, 4vh, 42px);
+
+    z-index: 30;
+}
+
+
+/* =========================================================
+   7. タイトル画面の登場アニメーション
+   ========================================================= */
+
+@keyframes titlePanelAppear {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, calc(-50% + 18px))
+            scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+}
+/* =========================================================
+   夏休みギルド Ver0.2.1
+   layout.css
+
+   Part 2
+   ギルドホール・暗転・レスポンシブ
+   ========================================================= */
+
+
+/* =========================================================
+   8. ギルドホール
    ========================================================= */
 
 .guildhall-background {
@@ -151,142 +214,156 @@
 
 #guildhall-screen {
     align-items: flex-end;
-    justify-content: flex-start;
-}
-
-#backRoom {
-    position: absolute;
-    left: clamp(20px, 4vw, 56px);
-    bottom: clamp(20px, 4vh, 42px);
+    justify-content: center;
 }
 
 
 /* =========================================================
-   5. 画面切り替え用の暗転演出
+   9. ギルドホール主人公
+   ========================================================= */
+
+#guildhall-screen #player {
+    position: absolute;
+
+    left: 50%;
+    bottom: var(--player-bottom);
+
+    width: var(--player-width);
+
+    transform:
+        translateX(-50%)
+        scale(var(--player-scale));
+
+    transform-origin: center bottom;
+}
+
+
+/* =========================================================
+   10. 部屋へ戻るボタン
+   ========================================================= */
+
+#backRoom {
+    position: absolute;
+
+    left: clamp(20px, 4vw, 56px);
+    bottom: clamp(20px, 4vh, 42px);
+
+    z-index: 30;
+}
+
+
+/* =========================================================
+   11. 暗転演出
    ========================================================= */
 
 body::after {
+
     content: "";
 
     position: fixed;
     inset: 0;
+
     z-index: 999;
 
     background: #0b0705;
 
     opacity: 0;
     visibility: hidden;
+
     pointer-events: none;
 
     transition:
-        opacity 0.35s ease,
-        visibility 0s linear 0.35s;
+        opacity .35s ease,
+        visibility 0s linear .35s;
+
 }
 
 body.scene-changing::after {
+
     opacity: 1;
     visibility: visible;
 
     transition:
-        opacity 0.35s ease,
+        opacity .35s ease,
         visibility 0s linear 0s;
+
 }
 
 
 /* =========================================================
-   6. タイトル画面アニメーション
+   12. iPad横画面
    ========================================================= */
 
-@keyframes titlePanelAppear {
-    0% {
-        opacity: 0;
-        transform:
-            translate(-50%, calc(-50% + 18px))
-            scale(0.98);
+@media (orientation:landscape) {
+
+    .title-panel{
+
+        width:min(72vw,760px);
+
     }
 
-    100% {
-        opacity: 1;
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-    }
 }
 
 
 /* =========================================================
-   7. iPad横画面向け調整
+   13. スマホ・小画面
    ========================================================= */
 
-@media screen and (min-width: 900px) and (orientation: landscape) {
-    .title-panel {
-        width: min(70vw, 760px);
+@media (max-width:900px){
+
+    :root{
+
+        --player-width:min(70vw,560px);
+        --player-scale:1.45;
+        --player-bottom:-6%;
+
     }
 
-    #room-screen #player {
-        width: min(30vw, 380px);
+    .title-panel{
+
+        width:min(90vw,640px);
+
+        padding:22px;
+
     }
 
-    #gotoGuildHall,
-    #backRoom {
-        min-width: 210px;
-    }
 }
 
 
 /* =========================================================
-   8. 小さめ横画面向け調整
+   14. 非常に横幅が狭い画面
    ========================================================= */
 
-@media screen and (max-width: 899px) and (orientation: landscape) {
-    .title-panel {
-        width: min(86vw, 660px);
-        padding: 20px 28px;
+@media (max-height:520px){
+
+    :root{
+
+        --player-width:min(62vw,500px);
+        --player-scale:1.25;
+        --player-bottom:-3%;
+
     }
 
-    #room-screen #player {
-        bottom: 1%;
-        width: min(36vw, 320px);
-    }
-
-    #gotoGuildHall,
-    #backRoom {
-        min-width: 150px;
-        min-height: 46px;
-
-        padding: 10px 20px;
-
-        font-size: 14px;
-    }
 }
 
 
 /* =========================================================
-   9. 極端に低い画面への調整
+   15. デバッグ用
    ========================================================= */
 
-@media screen and (max-height: 520px) and (orientation: landscape) {
-    .title-panel {
-        top: 51%;
+/*
 
-        padding-top: 16px;
-        padding-bottom: 16px;
-    }
+主人公をさらに大きくしたい場合は
 
-    .title-panel h1 {
-        margin-bottom: 0.1em;
-    }
+:root{
 
-    .title-panel .subtitle {
-        margin-bottom: 1em;
-    }
+    --player-scale:2.0;
 
-    #room-screen #player {
-        width: min(31vw, 280px);
-    }
-
-    #gotoGuildHall,
-    #backRoom {
-        bottom: 16px;
-    }
 }
+
+だけ変更すればOK。
+
+PNGが変わっても
+ここだけで調整できる。
+
+*/
