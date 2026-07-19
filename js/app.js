@@ -1,11 +1,12 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.3
+   夏休みギルド Ver0.3.1
    app.js
 
    ゲーム全体の起動
    画面切り替え
+   設定反映
    Developer Mode初期化
    PWA登録
    ========================================================= */
@@ -16,9 +17,13 @@
    ========================================================= */
 
 const SCREENS = {
+
     title: "title-screen",
+
     room: "room-screen",
+
     guildhall: "guildhall-screen"
+
 };
 
 
@@ -35,10 +40,19 @@ let isSceneChanging = false;
    3. ゲーム起動
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-    initGame();
-});
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
+        initGame();
+
+    }
+);
+
+
+/* =========================================================
+   4. 初期化
+   ========================================================= */
 
 function initGame() {
 
@@ -46,12 +60,39 @@ function initGame() {
       保存済み設定を読み込む。
     */
 
-    if (typeof loadSettings === "function") {
+    if (
+        typeof loadSettings
+        === "function"
+    ) {
+
         loadSettings();
+
     } else {
+
         console.warn(
-            "loadSettings() が見つかりません。settings.jsを確認してください。"
+            "loadSettings() が見つかりません。"
         );
+
+    }
+
+
+    /*
+      読み込んだ設定を画面へ反映する。
+    */
+
+    if (
+        typeof applyAllSettings
+        === "function"
+    ) {
+
+        applyAllSettings();
+
+    } else {
+
+        console.warn(
+            "applyAllSettings() が見つかりません。"
+        );
+
     }
 
 
@@ -59,18 +100,21 @@ function initGame() {
       Developer Modeを初期化する。
     */
 
-    if (typeof initDeveloperMode === "function") {
+    if (
+        typeof initDeveloperMode
+        === "function"
+    ) {
+
         initDeveloperMode();
+
     } else {
+
         console.warn(
-            "initDeveloperMode() が見つかりません。developer.jsを確認してください。"
+            "initDeveloperMode() が見つかりません。"
         );
+
     }
 
-
-    /*
-      ゲーム本体を初期化する。
-    */
 
     bindButtons();
 
@@ -80,94 +124,75 @@ function initGame() {
 
 
     console.log(
-        "夏休みギルド Ver0.3 起動"
+        "夏休みギルド Ver0.3.1 起動"
     );
+
 }
 
 
 /* =========================================================
-   4. ボタン設定
+   5. ボタン設定
    ========================================================= */
 
 function bindButtons() {
 
     const startButton =
-        document.getElementById("startButton");
+        document.getElementById(
+            "startButton"
+        );
+
 
     const gotoGuildHallButton =
-        document.getElementById("gotoGuildHall");
+        document.getElementById(
+            "gotoGuildHall"
+        );
+
 
     const backRoomButton =
-        document.getElementById("backRoom");
+        document.getElementById(
+            "backRoom"
+        );
 
-
-    /*
-      タイトル
-      ↓
-      自分の部屋
-    */
 
     if (startButton) {
 
         startButton.addEventListener(
             "click",
             () => {
+
                 changeScreen("room");
+
             }
-        );
-
-    } else {
-
-        console.warn(
-            "#startButton が見つかりません。"
         );
 
     }
 
-
-    /*
-      自分の部屋
-      ↓
-      ギルドホール
-    */
 
     if (gotoGuildHallButton) {
 
         gotoGuildHallButton.addEventListener(
             "click",
             () => {
-                changeScreen("guildhall");
+
+                changeScreen(
+                    "guildhall"
+                );
+
             }
-        );
-
-    } else {
-
-        console.warn(
-            "#gotoGuildHall が見つかりません。"
         );
 
     }
 
-
-    /*
-      ギルドホール
-      ↓
-      自分の部屋
-    */
 
     if (backRoomButton) {
 
         backRoomButton.addEventListener(
             "click",
             () => {
+
                 changeScreen("room");
+
             }
-        );
-
-    } else {
-
-        console.warn(
-            "#backRoom が見つかりません。"
         );
 
     }
@@ -176,7 +201,7 @@ function bindButtons() {
 
 
 /* =========================================================
-   5. 暗転付き画面切り替え
+   6. 暗転付き画面切り替え
    ========================================================= */
 
 async function changeScreen(screenName) {
@@ -198,6 +223,7 @@ async function changeScreen(screenName) {
 
 
     isSceneChanging = true;
+
 
     document.body.classList.add(
         "scene-changing"
@@ -236,7 +262,7 @@ async function changeScreen(screenName) {
 
 
 /* =========================================================
-   6. 画面表示
+   7. 画面表示
    ========================================================= */
 
 function activateScreen(screenName) {
@@ -246,21 +272,26 @@ function activateScreen(screenName) {
 
 
     const screens =
-        document.querySelectorAll(".screen");
-
-
-    screens.forEach((screen) => {
-
-        screen.classList.remove(
-            "active"
+        document.querySelectorAll(
+            ".screen"
         );
 
-        screen.setAttribute(
-            "aria-hidden",
-            "true"
-        );
 
-    });
+    screens.forEach(
+        (screen) => {
+
+            screen.classList.remove(
+                "active"
+            );
+
+
+            screen.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+        }
+    );
 
 
     const targetScreen =
@@ -284,6 +315,7 @@ function activateScreen(screenName) {
         "active"
     );
 
+
     targetScreen.setAttribute(
         "aria-hidden",
         "false"
@@ -292,10 +324,9 @@ function activateScreen(screenName) {
 }
 
 
-/*
-  起動時などに、
-  暗転なしで即座に表示する。
-*/
+/* =========================================================
+   8. 即時表示
+   ========================================================= */
 
 function showScreenImmediately(screenName) {
 
@@ -323,30 +354,34 @@ function showScreenImmediately(screenName) {
 
 
 /* =========================================================
-   7. 待機処理
+   9. 待機処理
    ========================================================= */
 
 function wait(milliseconds) {
 
-    return new Promise((resolve) => {
+    return new Promise(
+        (resolve) => {
 
-        window.setTimeout(
-            resolve,
-            milliseconds
-        );
+            window.setTimeout(
+                resolve,
+                milliseconds
+            );
 
-    });
+        }
+    );
 
 }
 
 
 /* =========================================================
-   8. Service Worker登録
+   10. Service Worker登録
    ========================================================= */
 
 function registerServiceWorker() {
 
-    if (!("serviceWorker" in navigator)) {
+    if (
+        !("serviceWorker" in navigator)
+    ) {
 
         console.warn(
             "このブラウザはService Workerに対応していません。"
@@ -364,9 +399,11 @@ function registerServiceWorker() {
             try {
 
                 const registration =
-                    await navigator.serviceWorker.register(
-                        "./service-worker.js"
-                    );
+                    await navigator
+                        .serviceWorker
+                        .register(
+                            "./service-worker.js"
+                        );
 
 
                 console.log(
