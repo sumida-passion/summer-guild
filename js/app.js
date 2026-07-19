@@ -1,10 +1,13 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.2
+   夏休みギルド Ver0.3
    app.js
 
-   ゲームの起動・画面切り替え・PWA登録を管理する
+   ゲーム全体の起動
+   画面切り替え
+   Developer Mode初期化
+   PWA登録
    ========================================================= */
 
 
@@ -38,11 +41,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function initGame() {
+
+    /*
+      保存済み設定を読み込む。
+    */
+
+    if (typeof loadSettings === "function") {
+        loadSettings();
+    } else {
+        console.warn(
+            "loadSettings() が見つかりません。settings.jsを確認してください。"
+        );
+    }
+
+
+    /*
+      Developer Modeを初期化する。
+    */
+
+    if (typeof initDeveloperMode === "function") {
+        initDeveloperMode();
+    } else {
+        console.warn(
+            "initDeveloperMode() が見つかりません。developer.jsを確認してください。"
+        );
+    }
+
+
+    /*
+      ゲーム本体を初期化する。
+    */
+
     bindButtons();
+
     showScreenImmediately("title");
+
     registerServiceWorker();
 
-    console.log("夏休みギルド Ver0.2 起動");
+
+    console.log(
+        "夏休みギルド Ver0.3 起動"
+    );
 }
 
 
@@ -51,6 +90,7 @@ function initGame() {
    ========================================================= */
 
 function bindButtons() {
+
     const startButton =
         document.getElementById("startButton");
 
@@ -68,9 +108,20 @@ function bindButtons() {
     */
 
     if (startButton) {
-        startButton.addEventListener("click", () => {
-            changeScreen("room");
-        });
+
+        startButton.addEventListener(
+            "click",
+            () => {
+                changeScreen("room");
+            }
+        );
+
+    } else {
+
+        console.warn(
+            "#startButton が見つかりません。"
+        );
+
     }
 
 
@@ -81,9 +132,20 @@ function bindButtons() {
     */
 
     if (gotoGuildHallButton) {
-        gotoGuildHallButton.addEventListener("click", () => {
-            changeScreen("guildhall");
-        });
+
+        gotoGuildHallButton.addEventListener(
+            "click",
+            () => {
+                changeScreen("guildhall");
+            }
+        );
+
+    } else {
+
+        console.warn(
+            "#gotoGuildHall が見つかりません。"
+        );
+
     }
 
 
@@ -94,10 +156,22 @@ function bindButtons() {
     */
 
     if (backRoomButton) {
-        backRoomButton.addEventListener("click", () => {
-            changeScreen("room");
-        });
+
+        backRoomButton.addEventListener(
+            "click",
+            () => {
+                changeScreen("room");
+            }
+        );
+
+    } else {
+
+        console.warn(
+            "#backRoom が見つかりません。"
+        );
+
     }
+
 }
 
 
@@ -106,33 +180,58 @@ function bindButtons() {
    ========================================================= */
 
 async function changeScreen(screenName) {
+
     if (!SCREENS[screenName]) {
+
         console.error(
             `画面が登録されていません: ${screenName}`
         );
 
         return;
+
     }
+
 
     if (isSceneChanging) {
         return;
     }
 
+
     isSceneChanging = true;
 
-    document.body.classList.add("scene-changing");
+    document.body.classList.add(
+        "scene-changing"
+    );
 
-    await wait(SCENE_FADE_TIME);
 
-    activateScreen(screenName);
+    await wait(
+        SCENE_FADE_TIME
+    );
 
-    window.scrollTo(0, 0);
 
-    document.body.classList.remove("scene-changing");
+    activateScreen(
+        screenName
+    );
 
-    await wait(SCENE_FADE_TIME);
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+
+    document.body.classList.remove(
+        "scene-changing"
+    );
+
+
+    await wait(
+        SCENE_FADE_TIME
+    );
+
 
     isSceneChanging = false;
+
 }
 
 
@@ -141,29 +240,55 @@ async function changeScreen(screenName) {
    ========================================================= */
 
 function activateScreen(screenName) {
-    const targetScreenId = SCREENS[screenName];
+
+    const targetScreenId =
+        SCREENS[screenName];
+
 
     const screens =
         document.querySelectorAll(".screen");
 
+
     screens.forEach((screen) => {
-        screen.classList.remove("active");
-        screen.setAttribute("aria-hidden", "true");
+
+        screen.classList.remove(
+            "active"
+        );
+
+        screen.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
     });
 
+
     const targetScreen =
-        document.getElementById(targetScreenId);
+        document.getElementById(
+            targetScreenId
+        );
+
 
     if (!targetScreen) {
+
         console.error(
             `画面要素が見つかりません: ${targetScreenId}`
         );
 
         return;
+
     }
 
-    targetScreen.classList.add("active");
-    targetScreen.setAttribute("aria-hidden", "false");
+
+    targetScreen.classList.add(
+        "active"
+    );
+
+    targetScreen.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
 }
 
 
@@ -173,17 +298,27 @@ function activateScreen(screenName) {
 */
 
 function showScreenImmediately(screenName) {
+
     if (!SCREENS[screenName]) {
+
         console.error(
             `画面が登録されていません: ${screenName}`
         );
 
         return;
+
     }
 
-    document.body.classList.remove("scene-changing");
 
-    activateScreen(screenName);
+    document.body.classList.remove(
+        "scene-changing"
+    );
+
+
+    activateScreen(
+        screenName
+    );
+
 }
 
 
@@ -192,9 +327,16 @@ function showScreenImmediately(screenName) {
    ========================================================= */
 
 function wait(milliseconds) {
+
     return new Promise((resolve) => {
-        window.setTimeout(resolve, milliseconds);
+
+        window.setTimeout(
+            resolve,
+            milliseconds
+        );
+
     });
+
 }
 
 
@@ -203,30 +345,45 @@ function wait(milliseconds) {
    ========================================================= */
 
 function registerServiceWorker() {
+
     if (!("serviceWorker" in navigator)) {
+
         console.warn(
             "このブラウザはService Workerに対応していません。"
         );
 
         return;
+
     }
 
-    window.addEventListener("load", async () => {
-        try {
-            const registration =
-                await navigator.serviceWorker.register(
-                    "./service-worker.js"
+
+    window.addEventListener(
+        "load",
+        async () => {
+
+            try {
+
+                const registration =
+                    await navigator.serviceWorker.register(
+                        "./service-worker.js"
+                    );
+
+
+                console.log(
+                    "Service Worker登録成功:",
+                    registration.scope
                 );
 
-            console.log(
-                "Service Worker登録成功:",
-                registration.scope
-            );
-        } catch (error) {
-            console.error(
-                "Service Worker登録失敗:",
-                error
-            );
+            } catch (error) {
+
+                console.error(
+                    "Service Worker登録失敗:",
+                    error
+                );
+
+            }
+
         }
-    });
+    );
+
 }
