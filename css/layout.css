@@ -1,1 +1,292 @@
-/* layout */
+/* =========================================================
+   夏休みギルド Ver0.2
+   layout.css
+
+   各画面の背景・配置・大きさを管理する
+   ========================================================= */
+
+
+/* =========================================================
+   1. 共通レイアウト
+   ========================================================= */
+
+.screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen > *:not(.background) {
+    position: relative;
+    z-index: 10;
+}
+
+
+/* =========================================================
+   2. タイトル画面
+   ========================================================= */
+
+.title-background {
+    background-image:
+        linear-gradient(
+            rgba(12, 7, 4, 0.12),
+            rgba(12, 7, 4, 0.32)
+        ),
+        url("../assets/backgrounds/title/title.PNG");
+}
+
+.title-panel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: min(82vw, 760px);
+
+    padding: clamp(24px, 4vw, 46px);
+
+    text-align: center;
+
+    transform: translate(-50%, -50%);
+
+    border: 2px solid rgba(255, 235, 184, 0.68);
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(40, 23, 13, 0.62),
+            rgba(20, 12, 8, 0.76)
+        );
+
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    animation: titlePanelAppear 1.1s ease both;
+}
+
+.title-panel h1 {
+    animation:
+        gentleAppear 0.9s ease 0.15s both,
+        gentleFloat 4.5s ease-in-out 1.2s infinite;
+}
+
+.title-panel .subtitle {
+    animation: gentleAppear 0.9s ease 0.35s both;
+}
+
+#startButton {
+    animation:
+        gentleAppear 0.9s ease 0.55s both,
+        softPulse 2.8s ease-in-out 1.6s infinite;
+}
+
+
+/* =========================================================
+   3. 自分の部屋
+   ========================================================= */
+
+.room-background {
+    background-image:
+        linear-gradient(
+            rgba(8, 5, 3, 0.03),
+            rgba(8, 5, 3, 0.12)
+        ),
+        url("../assets/backgrounds/home/room.png");
+}
+
+#room-screen {
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/*
+  主人公の位置
+
+  bottom：
+  画面下からどれだけ上げるか
+
+  left：
+  画面左からの位置
+
+  width：
+  主人公全体の大きさ
+*/
+
+#room-screen #player {
+    left: 50%;
+    bottom: 2.5%;
+
+    width: min(34vw, 390px);
+
+    transform: translateX(-50%);
+}
+
+/*
+  ギルドホールへボタン
+*/
+
+#gotoGuildHall {
+    position: absolute;
+    right: clamp(20px, 4vw, 56px);
+    bottom: clamp(20px, 4vh, 42px);
+}
+
+
+/* =========================================================
+   4. ギルドホール
+   ========================================================= */
+
+.guildhall-background {
+    background-image:
+        linear-gradient(
+            rgba(7, 4, 2, 0.03),
+            rgba(7, 4, 2, 0.16)
+        ),
+        url("../assets/backgrounds/guild-hall/guildhall.png");
+}
+
+#guildhall-screen {
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+#backRoom {
+    position: absolute;
+    left: clamp(20px, 4vw, 56px);
+    bottom: clamp(20px, 4vh, 42px);
+}
+
+
+/* =========================================================
+   5. 画面切り替え用の暗転演出
+   ========================================================= */
+
+body::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+
+    background: #0b0705;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0s linear 0.35s;
+}
+
+body.scene-changing::after {
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0s linear 0s;
+}
+
+
+/* =========================================================
+   6. タイトル画面アニメーション
+   ========================================================= */
+
+@keyframes titlePanelAppear {
+    0% {
+        opacity: 0;
+        transform:
+            translate(-50%, calc(-50% + 18px))
+            scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   7. iPad横画面向け調整
+   ========================================================= */
+
+@media screen and (min-width: 900px) and (orientation: landscape) {
+    .title-panel {
+        width: min(70vw, 760px);
+    }
+
+    #room-screen #player {
+        width: min(30vw, 380px);
+    }
+
+    #gotoGuildHall,
+    #backRoom {
+        min-width: 210px;
+    }
+}
+
+
+/* =========================================================
+   8. 小さめ横画面向け調整
+   ========================================================= */
+
+@media screen and (max-width: 899px) and (orientation: landscape) {
+    .title-panel {
+        width: min(86vw, 660px);
+        padding: 20px 28px;
+    }
+
+    #room-screen #player {
+        bottom: 1%;
+        width: min(36vw, 320px);
+    }
+
+    #gotoGuildHall,
+    #backRoom {
+        min-width: 150px;
+        min-height: 46px;
+
+        padding: 10px 20px;
+
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================================
+   9. 極端に低い画面への調整
+   ========================================================= */
+
+@media screen and (max-height: 520px) and (orientation: landscape) {
+    .title-panel {
+        top: 51%;
+
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .title-panel h1 {
+        margin-bottom: 0.1em;
+    }
+
+    .title-panel .subtitle {
+        margin-bottom: 1em;
+    }
+
+    #room-screen #player {
+        width: min(31vw, 280px);
+    }
+
+    #gotoGuildHall,
+    #backRoom {
+        bottom: 16px;
+    }
+}
