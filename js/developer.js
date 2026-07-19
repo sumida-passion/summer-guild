@@ -1,60 +1,52 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.3
+   夏休みギルド Ver0.3.1
    developer.js
 
-   開発者モードの起動・終了・UI管理
+   開発者モード
+   Player Scale Editor
    ========================================================= */
 
 
 /* =========================================================
-   1. 開発者モード基本設定
+   1. 隠しコマンド設定
    ========================================================= */
 
-/*
-  タイトルを何回タップすると開くか
-*/
 const DEVELOPER_TAP_COUNT = 10;
 
-
-/*
-  何ミリ秒以内の連続タップを有効とするか
-
-  4000 = 4秒
-*/
 const DEVELOPER_TAP_TIME_LIMIT = 4000;
 
 
 /* =========================================================
-   2. 開発者モードの状態
+   2. Scale設定
+   ========================================================= */
+
+const PLAYER_SCALE_STEP = 0.05;
+
+const PLAYER_SCALE_MIN = 0.50;
+
+const PLAYER_SCALE_MAX = 3.00;
+
+
+/* =========================================================
+   3. 状態
    ========================================================= */
 
 let developerModeActive = false;
+
+let developerModeInitialized = false;
 
 let developerTapCounter = 0;
 
 let developerFirstTapTime = 0;
 
-let developerModeInitialized = false;
-
 
 /* =========================================================
-   3. 初期化
+   4. 初期化
    ========================================================= */
 
-/*
-  起動はapp.jsから行う。
-
-  developer.js自身では
-  DOMContentLoadedを監視しない。
-*/
-
 function initDeveloperMode() {
-
-    /*
-      二重初期化を防ぐ。
-    */
 
     if (developerModeInitialized) {
 
@@ -70,15 +62,12 @@ function initDeveloperMode() {
     const gameTitle =
         document.getElementById("gameTitle");
 
+
     const developerPanel =
-        document.getElementById("developerPanel");
+        document.getElementById(
+            "developerPanel"
+        );
 
-
-    /*
-      必要なHTML要素が存在しない場合は、
-      ゲーム本体を止めずに
-      Developer Modeだけ無効にする。
-    */
 
     if (!gameTitle) {
 
@@ -102,10 +91,6 @@ function initDeveloperMode() {
     }
 
 
-    /*
-      起動時は完全に非表示にする。
-    */
-
     developerPanel.hidden = true;
 
     developerPanel.setAttribute(
@@ -113,32 +98,20 @@ function initDeveloperMode() {
         "true"
     );
 
+
     developerPanel.classList.remove(
         "developer-panel-open"
     );
 
 
-    /*
-      Developer Panelの中身を作る。
-    */
-
     buildDeveloperPanel();
 
-
-    /*
-      タイトルの連続タップを監視する。
-    */
 
     gameTitle.addEventListener(
         "click",
         handleDeveloperTitleTap
     );
 
-
-    /*
-      キーボードが使える端末では
-      Escキーでも閉じられるようにする。
-    */
 
     document.addEventListener(
         "keydown",
@@ -157,13 +130,15 @@ function initDeveloperMode() {
 
 
 /* =========================================================
-   4. Developer Panelを作る
+   5. Developer Panelの作成
    ========================================================= */
 
 function buildDeveloperPanel() {
 
     const developerPanel =
-        document.getElementById("developerPanel");
+        document.getElementById(
+            "developerPanel"
+        );
 
 
     if (!developerPanel) {
@@ -175,12 +150,22 @@ function buildDeveloperPanel() {
 
         <div class="developer-panel-header">
 
-            <h2>
-                ⚙ Developer Mode
-            </h2>
+            <div>
+
+                <p class="developer-kicker">
+                    SUMMER GUILD EDITOR
+                </p>
+
+                <h2>
+                    開発者モード
+                </h2>
+
+            </div>
+
 
             <button
                 id="closeDeveloperMode"
+                class="developer-close-button"
                 type="button"
                 aria-label="開発者モードを閉じる"
             >
@@ -192,31 +177,104 @@ function buildDeveloperPanel() {
 
         <div id="developerContent">
 
-            <p class="developer-status">
-                開発者モードが起動しました。
+            <section class="developer-editor-section">
+
+                <div class="developer-section-heading">
+
+                    <span class="developer-section-icon">
+                        👤
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Player
+                        </h3>
+
+                        <p>
+                            主人公の表示倍率
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="developer-control">
+
+                    <div class="developer-control-label">
+
+                        <span>
+                            Scale
+                        </span>
+
+                        <span class="developer-save-status">
+                            自動保存
+                        </span>
+
+                    </div>
+
+
+                    <div class="developer-stepper">
+
+                        <button
+                            id="decreasePlayerScale"
+                            class="developer-step-button"
+                            type="button"
+                            aria-label="主人公を小さくする"
+                        >
+                            −
+                        </button>
+
+
+                        <output
+                            id="playerScaleValue"
+                            class="developer-value"
+                            aria-live="polite"
+                        >
+                            1.65
+                        </output>
+
+
+                        <button
+                            id="increasePlayerScale"
+                            class="developer-step-button"
+                            type="button"
+                            aria-label="主人公を大きくする"
+                        >
+                            ＋
+                        </button>
+
+                    </div>
+
+
+                    <p class="developer-control-note">
+                        0.05ずつ変更します
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="resetPlayerScale"
+                    class="developer-secondary-button"
+                    type="button"
+                >
+                    Scaleを初期値へ戻す
+                </button>
+
+            </section>
+
+
+            <p class="developer-next-message">
+                X・Y位置調整とsettings.json出力は、
+                次の段階で追加します。
             </p>
-
-            <p class="developer-description">
-                次の段階で、主人公の大きさと位置を
-                画面上から調整できるようにします。
-            </p>
-
-
-            <div class="developer-placeholder">
-
-                <strong>
-                    Player Editor
-                </strong>
-
-                <span>
-                    準備中
-                </span>
-
-            </div>
 
 
             <button
                 id="exitDeveloperMode"
+                class="developer-exit-button"
                 type="button"
             >
                 開発者モードを終了
@@ -227,14 +285,46 @@ function buildDeveloperPanel() {
     `;
 
 
+    bindDeveloperPanelButtons();
+
+    updateDeveloperValues();
+
+}
+
+
+/* =========================================================
+   6. パネル内ボタンの設定
+   ========================================================= */
+
+function bindDeveloperPanelButtons() {
+
     const closeButton =
         document.getElementById(
             "closeDeveloperMode"
         );
 
+
     const exitButton =
         document.getElementById(
             "exitDeveloperMode"
+        );
+
+
+    const decreaseScaleButton =
+        document.getElementById(
+            "decreasePlayerScale"
+        );
+
+
+    const increaseScaleButton =
+        document.getElementById(
+            "increasePlayerScale"
+        );
+
+
+    const resetScaleButton =
+        document.getElementById(
+            "resetPlayerScale"
         );
 
 
@@ -257,32 +347,192 @@ function buildDeveloperPanel() {
 
     }
 
+
+    if (decreaseScaleButton) {
+
+        decreaseScaleButton.addEventListener(
+            "click",
+            () => {
+                changePlayerScale(
+                    -PLAYER_SCALE_STEP
+                );
+            }
+        );
+
+    }
+
+
+    if (increaseScaleButton) {
+
+        increaseScaleButton.addEventListener(
+            "click",
+            () => {
+                changePlayerScale(
+                    PLAYER_SCALE_STEP
+                );
+            }
+        );
+
+    }
+
+
+    if (resetScaleButton) {
+
+        resetScaleButton.addEventListener(
+            "click",
+            resetPlayerScale
+        );
+
+    }
+
 }
 
 
 /* =========================================================
-   5. タイトル10回タップの判定
+   7. Scale変更
+   ========================================================= */
+
+function changePlayerScale(amount) {
+
+    if (
+        typeof getPlayerSettings
+        !== "function"
+    ) {
+
+        console.error(
+            "getPlayerSettings() が見つかりません。"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        typeof updatePlayerSettings
+        !== "function"
+    ) {
+
+        console.error(
+            "updatePlayerSettings() が見つかりません。"
+        );
+
+        return;
+
+    }
+
+
+    const playerSettings =
+        getPlayerSettings();
+
+
+    const currentScale =
+        Number(playerSettings.scale);
+
+
+    const safeCurrentScale =
+        Number.isFinite(currentScale)
+            ? currentScale
+            : 1.65;
+
+
+    const nextScale =
+        clampNumber(
+
+            safeCurrentScale + amount,
+
+            PLAYER_SCALE_MIN,
+
+            PLAYER_SCALE_MAX
+
+        );
+
+
+    updatePlayerSettings({
+
+        scale: roundToTwoDecimals(
+            nextScale
+        )
+
+    });
+
+
+    updateDeveloperValues();
+
+}
+
+
+/* =========================================================
+   8. Scale初期化
+   ========================================================= */
+
+function resetPlayerScale() {
+
+    const defaultScale =
+        Number(
+            DEFAULT_SETTINGS.player.scale
+        );
+
+
+    updatePlayerSettings({
+
+        scale: defaultScale
+
+    });
+
+
+    updateDeveloperValues();
+
+}
+
+
+/* =========================================================
+   9. 表示値更新
+   ========================================================= */
+
+function updateDeveloperValues() {
+
+    const scaleOutput =
+        document.getElementById(
+            "playerScaleValue"
+        );
+
+
+    if (!scaleOutput) {
+        return;
+    }
+
+
+    const playerSettings =
+        getPlayerSettings();
+
+
+    const scale =
+        Number(playerSettings.scale);
+
+
+    scaleOutput.textContent =
+        Number.isFinite(scale)
+            ? scale.toFixed(2)
+            : "1.65";
+
+}
+
+
+/* =========================================================
+   10. タイトル10回タップ
    ========================================================= */
 
 function handleDeveloperTitleTap() {
-
-    const currentTime =
-        Date.now();
-
-
-    /*
-      Developer Modeがすでに開いている場合は
-      タップ回数を数えない。
-    */
 
     if (developerModeActive) {
         return;
     }
 
 
-    /*
-      最初のタップ。
-    */
+    const currentTime =
+        Date.now();
+
 
     if (developerTapCounter === 0) {
 
@@ -291,11 +541,6 @@ function handleDeveloperTitleTap() {
 
     }
 
-
-    /*
-      制限時間を超えていた場合は、
-      今回のタップを1回目として数え直す。
-    */
 
     if (
         currentTime - developerFirstTapTime
@@ -313,10 +558,6 @@ function handleDeveloperTitleTap() {
     developerTapCounter += 1;
 
 
-    /*
-      指定回数に到達したら開く。
-    */
-
     if (
         developerTapCounter
         >= DEVELOPER_TAP_COUNT
@@ -332,34 +573,41 @@ function handleDeveloperTitleTap() {
 
 
 /* =========================================================
-   6. 開発者モードを開く
+   11. 開く
    ========================================================= */
 
 function openDeveloperMode() {
 
     const developerPanel =
-        document.getElementById("developerPanel");
+        document.getElementById(
+            "developerPanel"
+        );
 
 
-    if (!developerPanel) {
+    if (
+        !developerPanel
+        || developerModeActive
+    ) {
+
         return;
-    }
 
-
-    if (developerModeActive) {
-        return;
     }
 
 
     developerModeActive = true;
 
 
+    updateDeveloperValues();
+
+
     developerPanel.hidden = false;
+
 
     developerPanel.setAttribute(
         "aria-hidden",
         "false"
     );
+
 
     developerPanel.classList.add(
         "developer-panel-open"
@@ -371,10 +619,6 @@ function openDeveloperMode() {
     );
 
 
-    /*
-      閉じるボタンへフォーカスする。
-    */
-
     const closeButton =
         document.getElementById(
             "closeDeveloperMode"
@@ -383,7 +627,9 @@ function openDeveloperMode() {
 
     if (closeButton) {
 
-        closeButton.focus();
+        closeButton.focus({
+            preventScroll: true
+        });
 
     }
 
@@ -396,22 +642,24 @@ function openDeveloperMode() {
 
 
 /* =========================================================
-   7. 開発者モードを閉じる
+   12. 閉じる
    ========================================================= */
 
 function closeDeveloperMode() {
 
     const developerPanel =
-        document.getElementById("developerPanel");
+        document.getElementById(
+            "developerPanel"
+        );
 
 
-    if (!developerPanel) {
+    if (
+        !developerPanel
+        || !developerModeActive
+    ) {
+
         return;
-    }
 
-
-    if (!developerModeActive) {
-        return;
     }
 
 
@@ -440,24 +688,6 @@ function closeDeveloperMode() {
     resetDeveloperTapState();
 
 
-    /*
-      タイトルへフォーカスを戻す。
-      キーボード操作時のため。
-    */
-
-    const gameTitle =
-        document.getElementById("gameTitle");
-
-
-    if (gameTitle) {
-
-        gameTitle.focus({
-            preventScroll: true
-        });
-
-    }
-
-
     console.log(
         "Developer Mode OFF"
     );
@@ -466,7 +696,7 @@ function closeDeveloperMode() {
 
 
 /* =========================================================
-   8. タップ状態の初期化
+   13. タップ状態初期化
    ========================================================= */
 
 function resetDeveloperTapState() {
@@ -479,7 +709,7 @@ function resetDeveloperTapState() {
 
 
 /* =========================================================
-   9. キーボード操作
+   14. キーボード操作
    ========================================================= */
 
 function handleDeveloperKeydown(event) {
@@ -499,17 +729,35 @@ function handleDeveloperKeydown(event) {
 
 
 /* =========================================================
-   10. 開発者モード状態の取得
+   15. 補助関数
    ========================================================= */
 
-/*
-  将来、app.jsや別の機能から
+function clampNumber(
+    value,
+    minimum,
+    maximum
+) {
 
-  isDeveloperModeActive()
+    return Math.min(
+        Math.max(value, minimum),
+        maximum
+    );
 
-  と呼び出して、
-  Developer Mode中かどうかを確認できる。
-*/
+}
+
+
+function roundToTwoDecimals(value) {
+
+    return Math.round(
+        value * 100
+    ) / 100;
+
+}
+
+
+/* =========================================================
+   16. 開発者モード状態取得
+   ========================================================= */
 
 function isDeveloperModeActive() {
 
