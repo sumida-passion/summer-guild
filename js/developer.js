@@ -36,17 +36,37 @@ let developerTapCounter = 0;
 
 let developerFirstTapTime = 0;
 
+let developerModeInitialized = false;
+
 
 /* =========================================================
    3. 初期化
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-    initDeveloperMode();
-});
+/*
+  起動はapp.jsから行う。
 
+  developer.js自身では
+  DOMContentLoadedを監視しない。
+*/
 
 function initDeveloperMode() {
+
+    /*
+      二重初期化を防ぐ。
+    */
+
+    if (developerModeInitialized) {
+
+        console.warn(
+            "Developer Modeはすでに初期化されています。"
+        );
+
+        return;
+
+    }
+
+
     const gameTitle =
         document.getElementById("gameTitle");
 
@@ -56,29 +76,34 @@ function initDeveloperMode() {
 
     /*
       必要なHTML要素が存在しない場合は、
-      ゲーム本体を止めずに開発者モードだけ無効にする。
+      ゲーム本体を止めずに
+      Developer Modeだけ無効にする。
     */
 
     if (!gameTitle) {
+
         console.warn(
             "Developer Mode: #gameTitle が見つかりません。"
         );
 
         return;
+
     }
 
+
     if (!developerPanel) {
+
         console.warn(
             "Developer Mode: #developerPanel が見つかりません。"
         );
 
         return;
+
     }
 
 
     /*
-      CSSがまだ読み込まれていない状態でも、
-      起動時に開発者パネルが見えないようにする。
+      起動時は完全に非表示にする。
     */
 
     developerPanel.hidden = true;
@@ -88,9 +113,13 @@ function initDeveloperMode() {
         "true"
     );
 
+    developerPanel.classList.remove(
+        "developer-panel-open"
+    );
+
 
     /*
-      開発者パネルの中身を作る。
+      Developer Panelの中身を作る。
     */
 
     buildDeveloperPanel();
@@ -107,8 +136,8 @@ function initDeveloperMode() {
 
 
     /*
+      キーボードが使える端末では
       Escキーでも閉じられるようにする。
-      キーボードのある端末での開発用。
     */
 
     document.addEventListener(
@@ -117,19 +146,25 @@ function initDeveloperMode() {
     );
 
 
+    developerModeInitialized = true;
+
+
     console.log(
         "Developer Mode 準備完了"
     );
+
 }
 
 
 /* =========================================================
-   4. 開発者パネルを作る
+   4. Developer Panelを作る
    ========================================================= */
 
 function buildDeveloperPanel() {
+
     const developerPanel =
         document.getElementById("developerPanel");
+
 
     if (!developerPanel) {
         return;
@@ -166,6 +201,7 @@ function buildDeveloperPanel() {
                 画面上から調整できるようにします。
             </p>
 
+
             <div class="developer-placeholder">
 
                 <strong>
@@ -177,6 +213,7 @@ function buildDeveloperPanel() {
                 </span>
 
             </div>
+
 
             <button
                 id="exitDeveloperMode"
@@ -202,19 +239,24 @@ function buildDeveloperPanel() {
 
 
     if (closeButton) {
+
         closeButton.addEventListener(
             "click",
             closeDeveloperMode
         );
+
     }
 
 
     if (exitButton) {
+
         exitButton.addEventListener(
             "click",
             closeDeveloperMode
         );
+
     }
+
 }
 
 
@@ -223,15 +265,30 @@ function buildDeveloperPanel() {
    ========================================================= */
 
 function handleDeveloperTitleTap() {
-    const currentTime = Date.now();
+
+    const currentTime =
+        Date.now();
 
 
     /*
-      最初のタップ
+      Developer Modeがすでに開いている場合は
+      タップ回数を数えない。
+    */
+
+    if (developerModeActive) {
+        return;
+    }
+
+
+    /*
+      最初のタップ。
     */
 
     if (developerTapCounter === 0) {
-        developerFirstTapTime = currentTime;
+
+        developerFirstTapTime =
+            currentTime;
+
     }
 
 
@@ -244,8 +301,12 @@ function handleDeveloperTitleTap() {
         currentTime - developerFirstTapTime
         > DEVELOPER_TAP_TIME_LIMIT
     ) {
+
         developerTapCounter = 0;
-        developerFirstTapTime = currentTime;
+
+        developerFirstTapTime =
+            currentTime;
+
     }
 
 
@@ -260,11 +321,13 @@ function handleDeveloperTitleTap() {
         developerTapCounter
         >= DEVELOPER_TAP_COUNT
     ) {
-        developerTapCounter = 0;
-        developerFirstTapTime = 0;
+
+        resetDeveloperTapState();
 
         openDeveloperMode();
+
     }
+
 }
 
 
@@ -273,15 +336,23 @@ function handleDeveloperTitleTap() {
    ========================================================= */
 
 function openDeveloperMode() {
+
     const developerPanel =
         document.getElementById("developerPanel");
+
 
     if (!developerPanel) {
         return;
     }
 
 
+    if (developerModeActive) {
+        return;
+    }
+
+
     developerModeActive = true;
+
 
     developerPanel.hidden = false;
 
@@ -294,13 +365,14 @@ function openDeveloperMode() {
         "developer-panel-open"
     );
 
+
     document.body.classList.add(
         "developer-mode-active"
     );
 
 
     /*
-      パネル内の閉じるボタンへフォーカスする。
+      閉じるボタンへフォーカスする。
     */
 
     const closeButton =
@@ -308,14 +380,18 @@ function openDeveloperMode() {
             "closeDeveloperMode"
         );
 
+
     if (closeButton) {
+
         closeButton.focus();
+
     }
 
 
     console.log(
         "Developer Mode ON"
     );
+
 }
 
 
@@ -324,75 +400,119 @@ function openDeveloperMode() {
    ========================================================= */
 
 function closeDeveloperMode() {
+
     const developerPanel =
         document.getElementById("developerPanel");
+
 
     if (!developerPanel) {
         return;
     }
 
 
+    if (!developerModeActive) {
+        return;
+    }
+
+
     developerModeActive = false;
+
 
     developerPanel.classList.remove(
         "developer-panel-open"
     );
 
+
     document.body.classList.remove(
         "developer-mode-active"
     );
+
 
     developerPanel.setAttribute(
         "aria-hidden",
         "true"
     );
 
+
     developerPanel.hidden = true;
 
 
+    resetDeveloperTapState();
+
+
     /*
-      連続タップの状態も初期化する。
+      タイトルへフォーカスを戻す。
+      キーボード操作時のため。
     */
 
-    developerTapCounter = 0;
-    developerFirstTapTime = 0;
+    const gameTitle =
+        document.getElementById("gameTitle");
+
+
+    if (gameTitle) {
+
+        gameTitle.focus({
+            preventScroll: true
+        });
+
+    }
 
 
     console.log(
         "Developer Mode OFF"
     );
+
 }
 
 
 /* =========================================================
-   8. キーボード操作
+   8. タップ状態の初期化
+   ========================================================= */
+
+function resetDeveloperTapState() {
+
+    developerTapCounter = 0;
+
+    developerFirstTapTime = 0;
+
+}
+
+
+/* =========================================================
+   9. キーボード操作
    ========================================================= */
 
 function handleDeveloperKeydown(event) {
+
     if (!developerModeActive) {
         return;
     }
 
 
     if (event.key === "Escape") {
+
         closeDeveloperMode();
+
     }
+
 }
 
 
 /* =========================================================
-   9. 開発者モード状態の取得
+   10. 開発者モード状態の取得
    ========================================================= */
 
 /*
-  将来、app.jsや他の機能から
+  将来、app.jsや別の機能から
 
   isDeveloperModeActive()
 
-  と呼び出して、開発者モード中かどうかを
-  確認できるようにしておく。
+  と呼び出して、
+  Developer Mode中かどうかを確認できる。
 */
 
 function isDeveloperModeActive() {
+
     return developerModeActive;
+
 }
