@@ -1,5 +1,5 @@
 /* =========================================================
-   夏休みギルド Ver0.3.1
+   夏休みギルド Ver0.3.2
    developer.css
 
    Developer Mode 専用
@@ -16,24 +16,28 @@
 
     top:
         max(
-            18px,
+            14px,
             env(safe-area-inset-top)
         );
 
     right:
         max(
-            18px,
+            14px,
             env(safe-area-inset-right)
         );
 
     z-index: 10000;
 
-    width: min(390px, calc(100vw - 36px));
+    width:
+        min(
+            400px,
+            calc(100vw - 28px)
+        );
 
     max-height:
         calc(
             100vh
-            - 36px
+            - 28px
             - env(safe-area-inset-top)
             - env(safe-area-inset-bottom)
         );
@@ -58,20 +62,15 @@
         );
 
     box-shadow:
-        0 20px 70px rgba(0, 0, 0, 0.58),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        0 20px 70px
+        rgba(0, 0, 0, 0.58),
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.12);
 
     backdrop-filter: blur(12px);
 
     -webkit-backdrop-filter:
         blur(12px);
-
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Hiragino Sans",
-        "Yu Gothic",
-        sans-serif;
 
     box-sizing: border-box;
 
@@ -91,18 +90,12 @@
 }
 
 
-/* hidden属性を最優先する */
-
 #developerPanel[hidden] {
 
     display: none !important;
 
 }
 
-
-/* =========================================================
-   2. 開いた状態
-   ========================================================= */
 
 #developerPanel.developer-panel-open {
 
@@ -118,7 +111,7 @@
 
 
 /* =========================================================
-   3. Header
+   2. Header
    ========================================================= */
 
 .developer-panel-header {
@@ -131,7 +124,7 @@
 
     gap: 16px;
 
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 
 }
 
@@ -140,7 +133,8 @@
 
     margin: 0 0 5px;
 
-    color: rgba(255, 220, 150, 0.72);
+    color:
+        rgba(255, 220, 150, 0.72);
 
     font-size: 0.68rem;
 
@@ -159,13 +153,11 @@
 
     font-size: 1.28rem;
 
-    line-height: 1.25;
-
 }
 
 
 /* =========================================================
-   4. 閉じるボタン
+   3. 閉じるボタン
    ========================================================= */
 
 #developerPanel
@@ -174,8 +166,6 @@
     display: grid;
 
     place-items: center;
-
-    flex: 0 0 auto;
 
     width: 42px;
 
@@ -202,8 +192,6 @@
 
     font-size: 1.35rem;
 
-    line-height: 1;
-
     cursor: pointer;
 
     appearance: none;
@@ -214,12 +202,13 @@
 
 
 /* =========================================================
-   5. Editor Section
+   4. セクション共通
    ========================================================= */
 
-.developer-editor-section {
+.developer-editor-section,
+.developer-export-section {
 
-    padding: 17px;
+    padding: 16px;
 
     border:
         1px solid
@@ -233,6 +222,13 @@
 }
 
 
+.developer-export-section {
+
+    margin-top: 14px;
+
+}
+
+
 .developer-section-heading {
 
     display: flex;
@@ -241,7 +237,7 @@
 
     gap: 12px;
 
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 
 }
 
@@ -256,12 +252,14 @@
 
     height: 42px;
 
+    flex: 0 0 auto;
+
     border-radius: 12px;
 
     background:
         rgba(255, 220, 150, 0.12);
 
-    font-size: 1.3rem;
+    font-size: 1.25rem;
 
 }
 
@@ -272,7 +270,7 @@
 
     color: #fff2c4;
 
-    font-size: 1.08rem;
+    font-size: 1.05rem;
 
 }
 
@@ -284,18 +282,20 @@
     color:
         rgba(255, 255, 255, 0.62);
 
-    font-size: 0.8rem;
+    font-size: 0.78rem;
 
 }
 
 
 /* =========================================================
-   6. Scaleコントロール
+   5. 調整コントロール
    ========================================================= */
 
 .developer-control {
 
-    padding: 14px;
+    padding: 13px;
+
+    margin-top: 10px;
 
     border-radius: 14px;
 
@@ -313,11 +313,11 @@
 
     justify-content: space-between;
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     color: #fff4d1;
 
-    font-size: 0.94rem;
+    font-size: 0.9rem;
 
     font-weight: 700;
 
@@ -328,9 +328,17 @@
 
     color: #bde3ae;
 
-    font-size: 0.72rem;
+    font-size: 0.7rem;
 
-    font-weight: 600;
+}
+
+
+.developer-control-unit {
+
+    color:
+        rgba(255, 255, 255, 0.48);
+
+    font-size: 0.72rem;
 
 }
 
@@ -358,7 +366,7 @@
 
     width: 58px;
 
-    height: 52px;
+    height: 50px;
 
     min-width: 0;
 
@@ -382,13 +390,12 @@
         );
 
     box-shadow:
-        0 5px 14px rgba(0, 0, 0, 0.28);
+        0 5px 14px
+        rgba(0, 0, 0, 0.28);
 
-    font-size: 1.55rem;
+    font-size: 1.45rem;
 
     font-weight: 800;
-
-    line-height: 1;
 
     cursor: pointer;
 
@@ -407,7 +414,7 @@
 
     place-items: center;
 
-    min-height: 52px;
+    min-height: 50px;
 
     color: #fff4cf;
 
@@ -426,7 +433,7 @@
         Menlo,
         monospace;
 
-    font-size: 1.35rem;
+    font-size: 1.25rem;
 
     font-weight: 700;
 
@@ -436,22 +443,8 @@
 }
 
 
-.developer-control-note {
-
-    margin: 10px 0 0;
-
-    color:
-        rgba(255, 255, 255, 0.5);
-
-    text-align: center;
-
-    font-size: 0.72rem;
-
-}
-
-
 /* =========================================================
-   7. 初期化ボタン
+   6. 初期化ボタン
    ========================================================= */
 
 #developerPanel
@@ -459,7 +452,7 @@
 
     width: 100%;
 
-    min-height: 46px;
+    min-height: 45px;
 
     margin: 14px 0 0;
 
@@ -478,7 +471,7 @@
 
     box-shadow: none;
 
-    font-size: 0.83rem;
+    font-size: 0.82rem;
 
     cursor: pointer;
 
@@ -490,25 +483,119 @@
 
 
 /* =========================================================
-   8. 次機能の案内
+   7. JSON出力
    ========================================================= */
 
-.developer-next-message {
+.developer-export-buttons {
 
-    margin: 16px 2px;
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+}
+
+
+#developerPanel
+.developer-copy-button,
+#developerPanel
+.developer-download-button {
+
+    min-height: 48px;
+
+    padding: 10px;
+
+    margin: 0;
+
+    border-radius: 12px;
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+}
+
+
+#developerPanel
+.developer-copy-button {
+
+    color: #fff0c0;
+
+    border:
+        1px solid
+        rgba(255, 220, 150, 0.3);
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+}
+
+
+#developerPanel
+.developer-download-button {
+
+    color: #2b1b12;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.35);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffe7a1,
+            #d5ad62
+        );
+
+}
+
+
+.developer-export-message {
+
+    min-height: 1.4em;
+
+    margin: 12px 0 0;
 
     color:
-        rgba(255, 255, 255, 0.54);
+        rgba(255, 255, 255, 0.55);
 
-    font-size: 0.76rem;
+    text-align: center;
 
-    line-height: 1.65;
+    font-size: 0.7rem;
+
+    line-height: 1.5;
+
+}
+
+
+.developer-export-message[
+    data-status="success"
+] {
+
+    color: #bde3ae;
+
+}
+
+
+.developer-export-message[
+    data-status="error"
+] {
+
+    color: #ffaaa4;
 
 }
 
 
 /* =========================================================
-   9. 終了ボタン
+   8. 終了ボタン
    ========================================================= */
 
 #developerPanel
@@ -518,7 +605,7 @@
 
     min-height: 50px;
 
-    margin: 0;
+    margin: 14px 0 0;
 
     padding: 12px 16px;
 
@@ -538,9 +625,10 @@
         );
 
     box-shadow:
-        0 6px 16px rgba(0, 0, 0, 0.27);
+        0 6px 16px
+        rgba(0, 0, 0, 0.27);
 
-    font-size: 0.94rem;
+    font-size: 0.92rem;
 
     font-weight: 700;
 
@@ -554,7 +642,7 @@
 
 
 /* =========================================================
-   10. 開発モード中
+   9. 開発モード中
    ========================================================= */
 
 body.developer-mode-active {
@@ -565,7 +653,7 @@ body.developer-mode-active {
 
 
 /* =========================================================
-   11. iPad・小画面
+   10. iPad・小画面
    ========================================================= */
 
 @media (max-width: 900px) {
@@ -574,31 +662,31 @@ body.developer-mode-active {
 
         top:
             max(
-                12px,
+                10px,
                 env(safe-area-inset-top)
             );
 
         right:
             max(
-                12px,
+                10px,
                 env(safe-area-inset-right)
             );
 
         width:
             min(
-                360px,
-                calc(100vw - 24px)
+                380px,
+                calc(100vw - 20px)
             );
 
         max-height:
             calc(
                 100vh
-                - 24px
+                - 20px
                 - env(safe-area-inset-top)
                 - env(safe-area-inset-bottom)
             );
 
-        padding: 17px;
+        padding: 16px;
 
     }
 
@@ -606,18 +694,25 @@ body.developer-mode-active {
 
 
 /* =========================================================
-   12. 横幅が非常に狭い場合
+   11. 狭い画面
    ========================================================= */
 
 @media (max-width: 520px) {
 
     #developerPanel {
 
-        left: 12px;
+        left: 10px;
 
-        right: 12px;
+        right: 10px;
 
         width: auto;
+
+    }
+
+
+    .developer-export-buttons {
+
+        grid-template-columns: 1fr;
 
     }
 
