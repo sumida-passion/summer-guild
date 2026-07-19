@@ -31,7 +31,9 @@
 
         <div class="title-panel">
 
-            <h1 id="gameTitle">夏休みギルド</h1>
+            <h1 id="gameTitle">
+                夏休みギルド
+            </h1>
 
             <p class="subtitle">
                 ～ 自分を定義する冒険 ～
@@ -59,14 +61,20 @@
 
         <div id="player">
 
-            <img id="player-base"
-                src="assets/characters/player/base/base.png">
+            <img
+                id="player-base"
+                src="assets/characters/player/base/base.png"
+                alt="主人公">
 
-            <img id="player-top"
-                src="assets/characters/player/clothes/tops/default_tops.png">
+            <img
+                id="player-top"
+                src="assets/characters/player/clothes/tops/default_tops.png"
+                alt="トップス">
 
-            <img id="player-bottom"
-                src="assets/characters/player/clothes/bottoms/default_bottoms.png">
+            <img
+                id="player-bottom"
+                src="assets/characters/player/clothes/bottoms/default_bottoms.png"
+                alt="ボトムス">
 
         </div>
 
@@ -95,25 +103,24 @@
 
 
     <!-- ========================= -->
-    <!-- Developer Mode（通常は非表示） -->
+    <!-- Developer Mode -->
+    <!-- 通常はdeveloper.jsから非表示管理 -->
     <!-- ========================= -->
 
-    <aside id="developerPanel">
-
-        <h2>⚙ Developer Mode</h2>
-
-        <div id="developerContent">
-
-            準備中...
-
-        </div>
-
+    <aside
+        id="developerPanel"
+        hidden
+        aria-hidden="true">
     </aside>
 
 
 
+    <!-- ========================= -->
     <!-- JavaScript -->
+    <!-- ========================= -->
 
+    <script src="js/settings.js"></script>
+    <script src="js/developer.js"></script>
     <script src="js/app.js"></script>
 
 </body>
