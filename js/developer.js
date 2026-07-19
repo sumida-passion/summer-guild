@@ -1,11 +1,12 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.3.1
+   夏休みギルド Ver0.3.2
    developer.js
 
    開発者モード
-   Player Scale Editor
+   Player Position Editor
+   settings.json出力
    ========================================================= */
 
 
@@ -19,7 +20,7 @@ const DEVELOPER_TAP_TIME_LIMIT = 4000;
 
 
 /* =========================================================
-   2. Scale設定
+   2. プレイヤー調整値
    ========================================================= */
 
 const PLAYER_SCALE_STEP = 0.05;
@@ -27,6 +28,20 @@ const PLAYER_SCALE_STEP = 0.05;
 const PLAYER_SCALE_MIN = 0.50;
 
 const PLAYER_SCALE_MAX = 3.00;
+
+
+const PLAYER_X_STEP = 1;
+
+const PLAYER_X_MIN = 0;
+
+const PLAYER_X_MAX = 100;
+
+
+const PLAYER_Y_STEP = 1;
+
+const PLAYER_Y_MIN = -40;
+
+const PLAYER_Y_MAX = 60;
 
 
 /* =========================================================
@@ -60,7 +75,9 @@ function initDeveloperMode() {
 
 
     const gameTitle =
-        document.getElementById("gameTitle");
+        document.getElementById(
+            "gameTitle"
+        );
 
 
     const developerPanel =
@@ -92,6 +109,7 @@ function initDeveloperMode() {
 
 
     developerPanel.hidden = true;
+
 
     developerPanel.setAttribute(
         "aria-hidden",
@@ -130,7 +148,7 @@ function initDeveloperMode() {
 
 
 /* =========================================================
-   5. Developer Panelの作成
+   5. Developer Panel作成
    ========================================================= */
 
 function buildDeveloperPanel() {
@@ -192,13 +210,15 @@ function buildDeveloperPanel() {
                         </h3>
 
                         <p>
-                            主人公の表示倍率
+                            主人公の大きさと位置
                         </p>
 
                     </div>
 
                 </div>
 
+
+                <!-- Scale -->
 
                 <div class="developer-control">
 
@@ -221,7 +241,6 @@ function buildDeveloperPanel() {
                             id="decreasePlayerScale"
                             class="developer-step-button"
                             type="button"
-                            aria-label="主人公を小さくする"
                         >
                             −
                         </button>
@@ -240,36 +259,186 @@ function buildDeveloperPanel() {
                             id="increasePlayerScale"
                             class="developer-step-button"
                             type="button"
-                            aria-label="主人公を大きくする"
                         >
                             ＋
                         </button>
 
                     </div>
 
+                </div>
 
-                    <p class="developer-control-note">
-                        0.05ずつ変更します
-                    </p>
+
+                <!-- X位置 -->
+
+                <div class="developer-control">
+
+                    <div class="developer-control-label">
+
+                        <span>
+                            X位置
+                        </span>
+
+                        <span class="developer-control-unit">
+                            %
+                        </span>
+
+                    </div>
+
+
+                    <div class="developer-stepper">
+
+                        <button
+                            id="decreasePlayerX"
+                            class="developer-step-button"
+                            type="button"
+                            aria-label="主人公を左へ動かす"
+                        >
+                            ←
+                        </button>
+
+
+                        <output
+                            id="playerXValue"
+                            class="developer-value"
+                            aria-live="polite"
+                        >
+                            50
+                        </output>
+
+
+                        <button
+                            id="increasePlayerX"
+                            class="developer-step-button"
+                            type="button"
+                            aria-label="主人公を右へ動かす"
+                        >
+                            →
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Y位置 -->
+
+                <div class="developer-control">
+
+                    <div class="developer-control-label">
+
+                        <span>
+                            Y位置
+                        </span>
+
+                        <span class="developer-control-unit">
+                            %
+                        </span>
+
+                    </div>
+
+
+                    <div class="developer-stepper">
+
+                        <button
+                            id="decreasePlayerY"
+                            class="developer-step-button"
+                            type="button"
+                            aria-label="主人公を下へ動かす"
+                        >
+                            ↓
+                        </button>
+
+
+                        <output
+                            id="playerYValue"
+                            class="developer-value"
+                            aria-live="polite"
+                        >
+                            -7
+                        </output>
+
+
+                        <button
+                            id="increasePlayerY"
+                            class="developer-step-button"
+                            type="button"
+                            aria-label="主人公を上へ動かす"
+                        >
+                            ↑
+                        </button>
+
+                    </div>
 
                 </div>
 
 
                 <button
-                    id="resetPlayerScale"
+                    id="resetPlayerPosition"
                     class="developer-secondary-button"
                     type="button"
                 >
-                    Scaleを初期値へ戻す
+                    Playerを初期位置へ戻す
                 </button>
 
             </section>
 
 
-            <p class="developer-next-message">
-                X・Y位置調整とsettings.json出力は、
-                次の段階で追加します。
-            </p>
+            <!-- JSON出力 -->
+
+            <section class="developer-export-section">
+
+                <div class="developer-section-heading">
+
+                    <span class="developer-section-icon">
+                        📄
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            settings.json
+                        </h3>
+
+                        <p>
+                            現在の調整値を書き出す
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="developer-export-buttons">
+
+                    <button
+                        id="copySettingsJson"
+                        class="developer-copy-button"
+                        type="button"
+                    >
+                        JSONをコピー
+                    </button>
+
+
+                    <button
+                        id="downloadSettingsJson"
+                        class="developer-download-button"
+                        type="button"
+                    >
+                        settings.jsonを保存
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="developerExportMessage"
+                    class="developer-export-message"
+                    aria-live="polite"
+                >
+                    GitHubへ反映するときに使用します。
+                </p>
+
+            </section>
 
 
             <button
@@ -293,94 +462,159 @@ function buildDeveloperPanel() {
 
 
 /* =========================================================
-   6. パネル内ボタンの設定
+   6. ボタン設定
    ========================================================= */
 
 function bindDeveloperPanelButtons() {
 
-    const closeButton =
+    bindClick(
+        "closeDeveloperMode",
+        closeDeveloperMode
+    );
+
+
+    bindClick(
+        "exitDeveloperMode",
+        closeDeveloperMode
+    );
+
+
+    bindClick(
+        "decreasePlayerScale",
+        () => {
+
+            changePlayerSetting(
+                "scale",
+                -PLAYER_SCALE_STEP,
+                PLAYER_SCALE_MIN,
+                PLAYER_SCALE_MAX,
+                2
+            );
+
+        }
+    );
+
+
+    bindClick(
+        "increasePlayerScale",
+        () => {
+
+            changePlayerSetting(
+                "scale",
+                PLAYER_SCALE_STEP,
+                PLAYER_SCALE_MIN,
+                PLAYER_SCALE_MAX,
+                2
+            );
+
+        }
+    );
+
+
+    bindClick(
+        "decreasePlayerX",
+        () => {
+
+            changePlayerSetting(
+                "x",
+                -PLAYER_X_STEP,
+                PLAYER_X_MIN,
+                PLAYER_X_MAX,
+                0
+            );
+
+        }
+    );
+
+
+    bindClick(
+        "increasePlayerX",
+        () => {
+
+            changePlayerSetting(
+                "x",
+                PLAYER_X_STEP,
+                PLAYER_X_MIN,
+                PLAYER_X_MAX,
+                0
+            );
+
+        }
+    );
+
+
+    bindClick(
+        "decreasePlayerY",
+        () => {
+
+            changePlayerSetting(
+                "y",
+                -PLAYER_Y_STEP,
+                PLAYER_Y_MIN,
+                PLAYER_Y_MAX,
+                0
+            );
+
+        }
+    );
+
+
+    bindClick(
+        "increasePlayerY",
+        () => {
+
+            changePlayerSetting(
+                "y",
+                PLAYER_Y_STEP,
+                PLAYER_Y_MIN,
+                PLAYER_Y_MAX,
+                0
+            );
+
+        }
+    );
+
+
+    bindClick(
+        "resetPlayerPosition",
+        resetPlayerPosition
+    );
+
+
+    bindClick(
+        "copySettingsJson",
+        handleCopySettingsJson
+    );
+
+
+    bindClick(
+        "downloadSettingsJson",
+        handleDownloadSettingsJson
+    );
+
+}
+
+
+/* =========================================================
+   7. 共通クリック登録
+   ========================================================= */
+
+function bindClick(
+    elementId,
+    callback
+) {
+
+    const element =
         document.getElementById(
-            "closeDeveloperMode"
+            elementId
         );
 
 
-    const exitButton =
-        document.getElementById(
-            "exitDeveloperMode"
-        );
+    if (element) {
 
-
-    const decreaseScaleButton =
-        document.getElementById(
-            "decreasePlayerScale"
-        );
-
-
-    const increaseScaleButton =
-        document.getElementById(
-            "increasePlayerScale"
-        );
-
-
-    const resetScaleButton =
-        document.getElementById(
-            "resetPlayerScale"
-        );
-
-
-    if (closeButton) {
-
-        closeButton.addEventListener(
+        element.addEventListener(
             "click",
-            closeDeveloperMode
-        );
-
-    }
-
-
-    if (exitButton) {
-
-        exitButton.addEventListener(
-            "click",
-            closeDeveloperMode
-        );
-
-    }
-
-
-    if (decreaseScaleButton) {
-
-        decreaseScaleButton.addEventListener(
-            "click",
-            () => {
-                changePlayerScale(
-                    -PLAYER_SCALE_STEP
-                );
-            }
-        );
-
-    }
-
-
-    if (increaseScaleButton) {
-
-        increaseScaleButton.addEventListener(
-            "click",
-            () => {
-                changePlayerScale(
-                    PLAYER_SCALE_STEP
-                );
-            }
-        );
-
-    }
-
-
-    if (resetScaleButton) {
-
-        resetScaleButton.addEventListener(
-            "click",
-            resetPlayerScale
+            callback
         );
 
     }
@@ -389,70 +623,62 @@ function bindDeveloperPanelButtons() {
 
 
 /* =========================================================
-   7. Scale変更
+   8. プレイヤー値変更
    ========================================================= */
 
-function changePlayerScale(amount) {
-
-    if (
-        typeof getPlayerSettings
-        !== "function"
-    ) {
-
-        console.error(
-            "getPlayerSettings() が見つかりません。"
-        );
-
-        return;
-
-    }
-
-
-    if (
-        typeof updatePlayerSettings
-        !== "function"
-    ) {
-
-        console.error(
-            "updatePlayerSettings() が見つかりません。"
-        );
-
-        return;
-
-    }
-
+function changePlayerSetting(
+    propertyName,
+    amount,
+    minimum,
+    maximum,
+    decimalPlaces
+) {
 
     const playerSettings =
         getPlayerSettings();
 
 
-    const currentScale =
-        Number(playerSettings.scale);
+    const currentValue =
+        Number(
+            playerSettings[propertyName]
+        );
 
 
-    const safeCurrentScale =
-        Number.isFinite(currentScale)
-            ? currentScale
-            : 1.65;
+    const safeCurrentValue =
+        Number.isFinite(currentValue)
+            ? currentValue
+            : Number(
+                DEFAULT_SETTINGS
+                    .player[propertyName]
+            );
 
 
-    const nextScale =
+    const nextValue =
         clampNumber(
 
-            safeCurrentScale + amount,
+            safeCurrentValue + amount,
 
-            PLAYER_SCALE_MIN,
+            minimum,
 
-            PLAYER_SCALE_MAX
+            maximum
 
         );
 
 
+    const multiplier =
+        10 ** decimalPlaces;
+
+
+    const roundedValue =
+        Math.round(
+            nextValue * multiplier
+        ) / multiplier;
+
+
     updatePlayerSettings({
 
-        scale: roundToTwoDecimals(
-            nextScale
-        )
+        [propertyName]:
+            roundedValue
 
     });
 
@@ -463,64 +689,201 @@ function changePlayerScale(amount) {
 
 
 /* =========================================================
-   8. Scale初期化
+   9. Player初期化
    ========================================================= */
 
-function resetPlayerScale() {
-
-    const defaultScale =
-        Number(
-            DEFAULT_SETTINGS.player.scale
-        );
-
+function resetPlayerPosition() {
 
     updatePlayerSettings({
 
-        scale: defaultScale
+        x:
+            DEFAULT_SETTINGS.player.x,
+
+        y:
+            DEFAULT_SETTINGS.player.y,
+
+        scale:
+            DEFAULT_SETTINGS.player.scale
 
     });
 
 
     updateDeveloperValues();
 
+
+    showExportMessage(
+        "Playerを初期値へ戻しました。",
+        "success"
+    );
+
 }
 
 
 /* =========================================================
-   9. 表示値更新
+   10. 表示値更新
    ========================================================= */
 
 function updateDeveloperValues() {
 
-    const scaleOutput =
-        document.getElementById(
-            "playerScaleValue"
-        );
-
-
-    if (!scaleOutput) {
-        return;
-    }
-
-
     const playerSettings =
         getPlayerSettings();
 
 
-    const scale =
-        Number(playerSettings.scale);
+    setOutputValue(
+        "playerScaleValue",
+        Number(
+            playerSettings.scale
+        ).toFixed(2)
+    );
 
 
-    scaleOutput.textContent =
-        Number.isFinite(scale)
-            ? scale.toFixed(2)
-            : "1.65";
+    setOutputValue(
+        "playerXValue",
+        Math.round(
+            Number(playerSettings.x)
+        )
+    );
+
+
+    setOutputValue(
+        "playerYValue",
+        Math.round(
+            Number(playerSettings.y)
+        )
+    );
 
 }
 
 
 /* =========================================================
-   10. タイトル10回タップ
+   11. output更新
+   ========================================================= */
+
+function setOutputValue(
+    elementId,
+    value
+) {
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+
+    if (element) {
+
+        element.textContent =
+            String(value);
+
+    }
+
+}
+
+
+/* =========================================================
+   12. JSONコピー
+   ========================================================= */
+
+async function handleCopySettingsJson() {
+
+    const success =
+        await copySettingsJson();
+
+
+    if (success) {
+
+        showExportMessage(
+            "settings.jsonの内容をコピーしました。",
+            "success"
+        );
+
+    } else {
+
+        showExportMessage(
+            "コピーできませんでした。",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   13. JSONダウンロード
+   ========================================================= */
+
+function handleDownloadSettingsJson() {
+
+    const success =
+        downloadSettingsJson();
+
+
+    if (success) {
+
+        showExportMessage(
+            "settings.jsonを書き出しました。",
+            "success"
+        );
+
+    } else {
+
+        showExportMessage(
+            "書き出しに失敗しました。",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   14. 出力メッセージ
+   ========================================================= */
+
+function showExportMessage(
+    message,
+    status
+) {
+
+    const messageElement =
+        document.getElementById(
+            "developerExportMessage"
+        );
+
+
+    if (!messageElement) {
+        return;
+    }
+
+
+    messageElement.textContent =
+        message;
+
+
+    messageElement.dataset.status =
+        status;
+
+
+    window.setTimeout(
+        () => {
+
+            messageElement.textContent =
+                "GitHubへ反映するときに使用します。";
+
+
+            delete messageElement.dataset.status;
+
+        },
+        3000
+    );
+
+}
+
+
+/* =========================================================
+   15. タイトル10回タップ
    ========================================================= */
 
 function handleDeveloperTitleTap() {
@@ -573,7 +936,7 @@ function handleDeveloperTitleTap() {
 
 
 /* =========================================================
-   11. 開く
+   16. 開く
    ========================================================= */
 
 function openDeveloperMode() {
@@ -619,21 +982,6 @@ function openDeveloperMode() {
     );
 
 
-    const closeButton =
-        document.getElementById(
-            "closeDeveloperMode"
-        );
-
-
-    if (closeButton) {
-
-        closeButton.focus({
-            preventScroll: true
-        });
-
-    }
-
-
     console.log(
         "Developer Mode ON"
     );
@@ -642,7 +990,7 @@ function openDeveloperMode() {
 
 
 /* =========================================================
-   12. 閉じる
+   17. 閉じる
    ========================================================= */
 
 function closeDeveloperMode() {
@@ -696,7 +1044,7 @@ function closeDeveloperMode() {
 
 
 /* =========================================================
-   13. タップ状態初期化
+   18. 補助処理
    ========================================================= */
 
 function resetDeveloperTapState() {
@@ -708,8 +1056,22 @@ function resetDeveloperTapState() {
 }
 
 
+function clampNumber(
+    value,
+    minimum,
+    maximum
+) {
+
+    return Math.min(
+        Math.max(value, minimum),
+        maximum
+    );
+
+}
+
+
 /* =========================================================
-   14. キーボード操作
+   19. キーボード
    ========================================================= */
 
 function handleDeveloperKeydown(event) {
@@ -729,34 +1091,7 @@ function handleDeveloperKeydown(event) {
 
 
 /* =========================================================
-   15. 補助関数
-   ========================================================= */
-
-function clampNumber(
-    value,
-    minimum,
-    maximum
-) {
-
-    return Math.min(
-        Math.max(value, minimum),
-        maximum
-    );
-
-}
-
-
-function roundToTwoDecimals(value) {
-
-    return Math.round(
-        value * 100
-    ) / 100;
-
-}
-
-
-/* =========================================================
-   16. 開発者モード状態取得
+   20. 状態取得
    ========================================================= */
 
 function isDeveloperModeActive() {
