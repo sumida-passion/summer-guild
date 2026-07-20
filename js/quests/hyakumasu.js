@@ -2155,3 +2155,929 @@ window.startHyakumasu =
 
 window.cancelHyakumasu =
     cancelHyakumasuQuest;
+/* =========================================================
+   27. ソフトウェアキーボード用・上段追従バー
+   Ver0.4.4 追記
+
+   ・入力中だけ上段の数字を画面上部へ表示
+   ・左と上を見る百マス本来の視線移動は維持
+   ・現在入力中の列だけ、少し明るく表示
+   ・既存の入力、採点、報酬処理は変更しない
+   ========================================================= */
+
+
+/* =========================================================
+   27-1. 既存の開始処理を拡張
+   ========================================================= */
+
+const originalStartHyakumasuQuestForFloatingHeader =
+    startHyakumasuQuest;
+
+
+startHyakumasuQuest = function (
+    context
+) {
+
+    const started =
+        originalStartHyakumasuQuestForFloatingHeader(
+            context
+        );
+
+
+    if (
+        started === false
+    ) {
+
+        return false;
+
+    }
+
+
+    /*
+      百マス本体のHTMLが作られたあとで、
+      上段追従バーを追加する。
+    */
+
+    window.requestAnimationFrame(
+        () => {
+
+            initializeHyakumasuFloatingHeader();
+
+        }
+    );
+
+
+    return started;
+
+};
+
+
+/* =========================================================
+   27-2. 既存の初期化処理を拡張
+   ========================================================= */
+
+const originalResetHyakumasuQuestForFloatingHeader =
+    resetHyakumasuQuest;
+
+
+resetHyakumasuQuest = function () {
+
+    removeHyakumasuFloatingHeaderEvents();
+
+
+    originalResetHyakumasuQuestForFloatingHeader();
+
+};
+
+
+/* =========================================================
+   27-3. 上段追従バー初期化
+   ========================================================= */
+
+function initializeHyakumasuFloatingHeader() {
+
+    installHyakumasuFloatingHeaderStyles();
+
+
+    const game =
+        document.getElementById(
+            "hyakumasuGame"
+        );
+
+
+    const tableArea =
+        document.getElementById(
+            "hyakumasuTableArea"
+        );
+
+
+    if (
+        !game
+        || !tableArea
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+      再初期化時に古いバーが残っていた場合は削除する。
+    */
+
+    const oldHeader =
+        document.getElementById(
+            "hyakumasuFloatingHeader"
+        );
+
+
+    if (
+        oldHeader
+    ) {
+
+        oldHeader.remove();
+
+    }
+
+
+    const floatingHeader =
+        document.createElement(
+            "div"
+        );
+
+
+    floatingHeader.id =
+        "hyakumasuFloatingHeader";
+
+
+    floatingHeader.className =
+        "hyakumasu-floating-header";
+
+
+    floatingHeader.hidden =
+        true;
+
+
+    floatingHeader.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    floatingHeader.innerHTML =
+        createHyakumasuFloatingHeaderHtml();
+
+
+    /*
+      百マス表の直前へ入れる。
+
+      position:fixedなので通常レイアウトの高さには
+      影響しない。
+    */
+
+    tableArea.parentNode.insertBefore(
+        floatingHeader,
+        tableArea
+    );
+
+
+    bindHyakumasuFloatingHeaderEvents();
+
+}
+
+
+/* =========================================================
+   27-4. 追従バーHTML
+   ========================================================= */
+
+function createHyakumasuFloatingHeaderHtml() {
+
+    const columnCells =
+        hyakumasuState
+            .columnNumbers
+            .map(
+                (
+                    number,
+                    columnIndex
+                ) => {
+
+                    return `
+                        <th
+                            class="hyakumasu-floating-number-cell"
+                            scope="col"
+                            data-floating-column="${columnIndex}"
+                        >
+                            ${number}
+                        </th>
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    return `
+        <div class="hyakumasu-floating-header-inner">
+
+            <table
+                class="hyakumasu-floating-table"
+                aria-label="百マス計算の上段数字"
+            >
+
+                <tbody>
+
+                    <tr>
+
+                        <th
+                            class="hyakumasu-floating-corner-cell"
+                            scope="col"
+                        >
+                            ＋
+                        </th>
+
+                        ${columnCells}
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+    `;
+
+}
+
+
+/* =========================================================
+   27-5. 追従バー用CSS
+   ========================================================= */
+
+function installHyakumasuFloatingHeaderStyles() {
+
+    if (
+        document.getElementById(
+            "hyakumasuFloatingHeaderStyles"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const style =
+        document.createElement(
+            "style"
+        );
+
+
+    style.id =
+        "hyakumasuFloatingHeaderStyles";
+
+
+    style.textContent = `
+
+        .hyakumasu-floating-header[hidden] {
+            display: none !important;
+        }
+
+
+        .hyakumasu-floating-header {
+            box-sizing: border-box;
+
+            position: fixed;
+
+            top:
+                calc(
+                    env(safe-area-inset-top, 0px)
+                    + 5px
+                );
+
+            left: 50%;
+
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: auto;
+            max-width: calc(100vw - 18px);
+
+            margin: 0;
+            padding: 5px 7px;
+
+            border:
+                1px solid
+                rgba(239, 194, 118, 0.55);
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(75, 42, 24, 0.96),
+                    rgba(38, 22, 14, 0.96)
+                );
+
+            box-shadow:
+                0 5px 14px
+                rgba(0, 0, 0, 0.3);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transform:
+                translateX(-50%)
+                translateY(-8px);
+
+            transition:
+                opacity 120ms ease,
+                transform 120ms ease;
+        }
+
+
+        .hyakumasu-floating-header.visible {
+            opacity: 1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+
+        .hyakumasu-floating-header-inner {
+            box-sizing: border-box;
+
+            width: auto;
+            max-width: 100%;
+
+            margin: 0;
+            padding: 0;
+
+            overflow: hidden;
+        }
+
+
+        .hyakumasu-floating-table {
+            width: auto !important;
+
+            margin: 0 !important;
+
+            border-collapse: separate !important;
+
+            border-spacing:
+                var(--hyakumasu-cell-gap)
+                0 !important;
+
+            table-layout: fixed !important;
+        }
+
+
+        .hyakumasu-floating-table th {
+            box-sizing: border-box !important;
+
+            width:
+                var(--hyakumasu-cell-size) !important;
+
+            min-width:
+                var(--hyakumasu-cell-size) !important;
+
+            max-width:
+                var(--hyakumasu-cell-size) !important;
+
+            height:
+                calc(
+                    var(--hyakumasu-cell-size)
+                    * 0.78
+                ) !important;
+
+            min-height:
+                calc(
+                    var(--hyakumasu-cell-size)
+                    * 0.78
+                ) !important;
+
+            max-height:
+                calc(
+                    var(--hyakumasu-cell-size)
+                    * 0.78
+                ) !important;
+
+            margin: 0 !important;
+            padding: 0 !important;
+
+            border:
+                1px solid
+                rgba(228, 178, 105, 0.42);
+
+            border-radius: 5px;
+
+            text-align: center;
+            vertical-align: middle;
+
+            font-size:
+                clamp(
+                    16px,
+                    calc(
+                        var(--hyakumasu-cell-size)
+                        * 0.48
+                    ),
+                    27px
+                );
+
+            font-weight: 800;
+            line-height: 1;
+
+            color: #fff5d7;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(93, 53, 29, 0.98),
+                    rgba(50, 28, 17, 0.98)
+                );
+
+            transition:
+                border-color 100ms ease,
+                background 100ms ease,
+                box-shadow 100ms ease;
+        }
+
+
+        .hyakumasu-floating-table
+        .hyakumasu-floating-corner-cell {
+            color: #ffe49a;
+        }
+
+
+        .hyakumasu-floating-table
+        .hyakumasu-floating-number-cell.active {
+            border-color:
+                rgba(255, 224, 138, 0.95);
+
+            color: #fff9df;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(139, 89, 36, 0.99),
+                    rgba(76, 43, 20, 0.99)
+                );
+
+            box-shadow:
+                inset 0 0 0 2px
+                rgba(255, 218, 112, 0.32);
+        }
+
+
+        @media (max-height: 700px) {
+
+            .hyakumasu-floating-header {
+                top:
+                    calc(
+                        env(safe-area-inset-top, 0px)
+                        + 3px
+                    );
+
+                padding: 3px 5px;
+            }
+
+
+            .hyakumasu-floating-table th {
+                height:
+                    calc(
+                        var(--hyakumasu-cell-size)
+                        * 0.7
+                    ) !important;
+
+                min-height:
+                    calc(
+                        var(--hyakumasu-cell-size)
+                        * 0.7
+                    ) !important;
+
+                max-height:
+                    calc(
+                        var(--hyakumasu-cell-size)
+                        * 0.7
+                    ) !important;
+            }
+
+        }
+
+    `;
+
+
+    document.head.appendChild(
+        style
+    );
+
+}
+
+
+/* =========================================================
+   27-6. 入力欄と追従バーを接続
+   ========================================================= */
+
+function bindHyakumasuFloatingHeaderEvents() {
+
+    removeHyakumasuFloatingHeaderEvents();
+
+
+    const inputs =
+        Array.from(
+            document.querySelectorAll(
+                ".hyakumasu-cell-input"
+            )
+        );
+
+
+    if (
+        inputs.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const focusHandlers = [];
+
+
+    inputs.forEach(
+        (
+            input,
+            index
+        ) => {
+
+            const focusHandler =
+                () => {
+
+                    showHyakumasuFloatingHeader(
+                        index
+                    );
+
+                };
+
+
+            const blurHandler =
+                () => {
+
+                    window.setTimeout(
+                        hideHyakumasuFloatingHeaderIfNecessary,
+                        80
+                    );
+
+                };
+
+
+            input.addEventListener(
+                "focus",
+                focusHandler
+            );
+
+
+            input.addEventListener(
+                "blur",
+                blurHandler
+            );
+
+
+            focusHandlers.push({
+
+                input,
+
+                focusHandler,
+
+                blurHandler
+
+            });
+
+        }
+    );
+
+
+    const viewport =
+        window.visualViewport;
+
+
+    const viewportHandler =
+        () => {
+
+            updateHyakumasuFloatingHeaderForViewport();
+
+        };
+
+
+    if (
+        viewport
+    ) {
+
+        viewport.addEventListener(
+            "resize",
+            viewportHandler
+        );
+
+
+        viewport.addEventListener(
+            "scroll",
+            viewportHandler
+        );
+
+    }
+
+
+    hyakumasuState
+        .floatingHeaderCleanup =
+        () => {
+
+            focusHandlers.forEach(
+                (
+                    handlers
+                ) => {
+
+                    handlers.input
+                        .removeEventListener(
+                            "focus",
+                            handlers.focusHandler
+                        );
+
+
+                    handlers.input
+                        .removeEventListener(
+                            "blur",
+                            handlers.blurHandler
+                        );
+
+                }
+            );
+
+
+            if (
+                viewport
+            ) {
+
+                viewport.removeEventListener(
+                    "resize",
+                    viewportHandler
+                );
+
+
+                viewport.removeEventListener(
+                    "scroll",
+                    viewportHandler
+                );
+
+            }
+
+        };
+
+}
+
+
+/* =========================================================
+   27-7. 追従バー表示
+   ========================================================= */
+
+function showHyakumasuFloatingHeader(
+    answerIndex
+) {
+
+    const header =
+        document.getElementById(
+            "hyakumasuFloatingHeader"
+        );
+
+
+    if (
+        !header
+    ) {
+
+        return;
+
+    }
+
+
+    const columnIndex =
+        answerIndex
+        % HYAKUMASU_SIZE;
+
+
+    updateHyakumasuFloatingActiveColumn(
+        columnIndex
+    );
+
+
+    header.hidden =
+        false;
+
+
+    header.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    window.requestAnimationFrame(
+        () => {
+
+            header.classList.add(
+                "visible"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   27-8. 現在列の表示
+   ========================================================= */
+
+function updateHyakumasuFloatingActiveColumn(
+    columnIndex
+) {
+
+    const cells =
+        document.querySelectorAll(
+            ".hyakumasu-floating-number-cell"
+        );
+
+
+    cells.forEach(
+        (
+            cell
+        ) => {
+
+            const cellColumn =
+                Number(
+                    cell.dataset
+                        .floatingColumn
+                );
+
+
+            cell.classList.toggle(
+                "active",
+                cellColumn === columnIndex
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   27-9. キーボード状態に合わせる
+   ========================================================= */
+
+function updateHyakumasuFloatingHeaderForViewport() {
+
+    const activeElement =
+        document.activeElement;
+
+
+    const inputIsActive =
+        activeElement
+        && activeElement
+            .classList
+        && activeElement
+            .classList
+            .contains(
+                "hyakumasu-cell-input"
+            );
+
+
+    if (
+        inputIsActive
+    ) {
+
+        const answerIndex =
+            Number(
+                activeElement
+                    .dataset
+                    .answerIndex
+            );
+
+
+        if (
+            Number.isFinite(
+                answerIndex
+            )
+        ) {
+
+            showHyakumasuFloatingHeader(
+                answerIndex
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    hideHyakumasuFloatingHeader();
+
+}
+
+
+/* =========================================================
+   27-10. 必要な場合だけ非表示
+   ========================================================= */
+
+function hideHyakumasuFloatingHeaderIfNecessary() {
+
+    const activeElement =
+        document.activeElement;
+
+
+    if (
+        activeElement
+        && activeElement.classList
+        && activeElement
+            .classList
+            .contains(
+                "hyakumasu-cell-input"
+            )
+    ) {
+
+        return;
+
+    }
+
+
+    hideHyakumasuFloatingHeader();
+
+}
+
+
+/* =========================================================
+   27-11. 追従バー非表示
+   ========================================================= */
+
+function hideHyakumasuFloatingHeader() {
+
+    const header =
+        document.getElementById(
+            "hyakumasuFloatingHeader"
+        );
+
+
+    if (
+        !header
+    ) {
+
+        return;
+
+    }
+
+
+    header.classList.remove(
+        "visible"
+    );
+
+
+    header.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    window.setTimeout(
+        () => {
+
+            if (
+                !header.classList
+                    .contains(
+                        "visible"
+                    )
+            ) {
+
+                header.hidden =
+                    true;
+
+            }
+
+        },
+        140
+    );
+
+}
+
+
+/* =========================================================
+   27-12. イベント解除
+   ========================================================= */
+
+function removeHyakumasuFloatingHeaderEvents() {
+
+    if (
+        hyakumasuState
+        && typeof hyakumasuState
+            .floatingHeaderCleanup
+            === "function"
+    ) {
+
+        hyakumasuState
+            .floatingHeaderCleanup();
+
+    }
+
+
+    if (
+        hyakumasuState
+    ) {
+
+        hyakumasuState
+            .floatingHeaderCleanup =
+            null;
+
+    }
+
+}
