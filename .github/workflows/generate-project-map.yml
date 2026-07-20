@@ -1,0 +1,216 @@
+name: Generate Project Map
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "AI_PROJECT/**"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Generate AI project documents
+        shell: bash
+        run: |
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          from collections import Counter, defaultdict
+          from datetime import datetime, timezone
+          import hashlib, re, struct, subprocess
+
+          ROOT = Path.cwd()
+          OUT = ROOT / "AI_PROJECT"
+          IGNORE = {".git", "AI_PROJECT", "node_modules", "__pycache__", ".idea", ".vscode"}
+          TEXT = {".html", ".css", ".js", ".json", ".md", ".txt", ".yml", ".yaml", ".csv", ".py", ".ts", ".tsx", ".jsx"}
+          IMAGES = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
+          CODE = {".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx"}
+
+          def rel(path): return path.relative_to(ROOT).as_posix()
+          def ignored(path): return any(part in IGNORE for part in path.relative_to(ROOT).parts)
+          def read_text(path):
+              for enc in ("utf-8", "utf-8-sig"):
+                  try: return path.read_text(encoding=enc)
+                  except UnicodeDecodeError: pass
+                  except OSError: return ""
+              return ""
+          def git(*args):
+              try: return subprocess.check_output(["git", *args], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
+              except Exception: return ""
+          def human_size(size):
+              value = float(size)
+              for unit in ("B", "KB", "MB", "GB"):
+                  if value < 1024 or unit == "GB": return f"{int(value)} {unit}" if unit == "B" else f"{value:.1f} {unit}"
+                  value /= 1024
+          def sha1(path):
+              h = hashlib.sha1()
+              try:
+                  with path.open("rb") as f:
+                      for chunk in iter(lambda: f.read(65536), b""): h.update(chunk)
+                  return h.hexdigest()[:10]
+              except OSError: return "unknown"
+          def tree_text(items):
+              tree = {}
+              for path in items:
+                  node = tree
+                  for part in path.relative_to(ROOT).parts: node = node.setdefault(part, {})
+              lines = ["summer-guild/"]
+              def walk(node, prefix=""):
+                  entries = sorted(node.items(), key=lambda x: (not bool(x[1]), x[0].lower()))
+                  for i, (name, children) in enumerate(entries):
+                      last = i == len(entries) - 1
+                      lines.append(prefix + ("└── " if last else "├── ") + name + ("/" if children else ""))
+                      if children: walk(children, prefix + ("    " if last else "│   "))
+              walk(tree)
+              return "\n".join(lines)
+          def image_size(path):
+              try:
+                  if path.suffix.lower() == ".png":
+                      data = path.read_bytes()[:24]
+                      if data.startswith(b"\x89PNG\r\n\x1a\n"):
+                          w, h = struct.unpack(">II", data[16:24]); return f"{w} × {h}"
+                  if path.suffix.lower() == ".gif":
+                      data = path.read_bytes()[:10]
+                      if data[:6] in (b"GIF87a", b"GIF89a"):
+                          w, h = struct.unpack("<HH", data[6:10]); return f"{w} × {h}"
+              except OSError: pass
+              return "不明"
+          def extract_api(path):
+              text = read_text(path)
+              funcs = re.findall(r"^\s*(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(", text, re.M)
+              funcs += re.findall(r"^\s*const\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?\([^)]*\)\s*=>", text, re.M)
+              classes = re.findall(r"^\s*class\s+([A-Za-z_$][\w$]*)", text, re.M)
+              windows = re.findall(r"window\.([A-Za-z_$][\w$]*)\s*=", text)
+              unique = lambda values: list(dict.fromkeys(values))[:100]
+              return unique(funcs), unique(classes), unique(windows)
+          def write(name, text):
+              OUT.mkdir(parents=True, exist_ok=True)
+              (OUT / name).write_text(text.rstrip() + "\n", encoding="utf-8")
+
+          files = sorted([p for p in ROOT.rglob("*") if p.is_file() and not ignored(p)], key=lambda p: rel(p).lower())
+          images = [p for p in files if p.suffix.lower() in IMAGES]
+          code_files = [p for p in files if p.suffix.lower() in CODE]
+          commit = git("rev-parse", "--short", "HEAD") or "unknown"
+          subject = git("log", "-1", "--pretty=%s") or "unknown"
+          generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+          total = sum(p.stat().st_size for p in files)
+          ext_counts = Counter(p.suffix.lower() if p.suffix else "[拡張子なし]" for p in files)
+          ext_rows = "\n".join(f"| `{ext}` | {count} |" for ext, count in sorted(ext_counts.items(), key=lambda x: (-x[1], x[0])))
+
+          project_map = f"""# Summer Guild — AI Project Map
+
+> GitHub Actionsによる自動生成文書です。
+
+## 核心コンセプト
+
+夏休みギルドは、勉強そのものをゲーム化するものではない。子どもの体験・努力・挑戦・継続を「認定」「思い出」「世界の成長」として可視化する。
+
+## 開発ルール
+
+- GitHub PagesとiPad Safariを前提にする
+- 推測で既存APIを書き換えない
+- 改修前に対象ファイルと依存ファイルを読む
+- ファイル名と拡張子の大文字・小文字を厳密に守る
+- 大きな完成JS・CSS・HTMLはZIPで渡す
+- ソフトウェアキーボードを出したくない入力では共通NumberPadを使う
+- 動いている機能を守りながら一つずつ改修する
+
+## 現在の状態
+
+| 項目 | 値 |
+|---|---|
+| 対象コミット | `{commit}` |
+| 最終コミット | {subject} |
+| 自動生成 | {generated} |
+| 総ファイル数 | {len(files)} |
+| 総容量 | {human_size(total)} |
+| コードファイル | {len(code_files)} |
+| 画像ファイル | {len(images)} |
+
+## 新しいGPTスレッドの開始文
+
+```text
+夏休みギルドの開発を続けます。
+まずAI_PROJECT内の文書を読み、既存API・実ファイル・大文字小文字を確認してください。
+推測でコードを書かず、大きな完成ファイルはZIPで渡してください。
+```
+
+## 読む順番
+
+1. `AI_PROJECT/PROJECT_MAP.md`
+2. `AI_PROJECT/FILE_TREE.md`
+3. `AI_PROJECT/API_REFERENCE.md`
+4. `AI_PROJECT/IMAGE_DATABASE.md`
+5. `AI_PROJECT/CASE_WARNINGS.md`
+6. 改修対象の実ファイル
+
+## 拡張子別件数
+
+| 拡張子 | 件数 |
+|---|---:|
+{ext_rows}
+"""
+          write("PROJECT_MAP.md", project_map)
+          write("FILE_TREE.md", f"# File Tree\n\n対象コミット：`{commit}`\n\n```text\n{tree_text(files)}\n```")
+
+          index_rows = []
+          for path in files:
+              lines = len(read_text(path).splitlines()) if path.suffix.lower() in TEXT else "—"
+              index_rows.append(f"| `{rel(path)}` | `{path.suffix or 'なし'}` | {human_size(path.stat().st_size)} | {lines} | `{sha1(path)}` |")
+          write("FILE_INDEX.md", "# File Index\n\n| パス | 拡張子 | サイズ | 行数 | SHA-1 |\n|---|---|---:|---:|---|\n" + "\n".join(index_rows))
+
+          image_rows = [f"| `{rel(p)}` | `{p.suffix}` | {image_size(p)} | {human_size(p.stat().st_size)} |" for p in images]
+          write("IMAGE_DATABASE.md", "# Image Database\n\nGitHub Pagesでは大文字・小文字を区別します。\n\n| パス | 実拡張子 | 寸法 | サイズ |\n|---|---|---:|---:|\n" + ("\n".join(image_rows) if image_rows else "| 画像なし | — | — | — |"))
+
+          api_sections = []
+          for path in code_files[:300]:
+              funcs, classes, windows = extract_api(path)
+              if not (funcs or classes or windows): continue
+              section = [f"## `{rel(path)}`"]
+              if windows: section.append("\n**window公開**\n\n" + "\n".join(f"- `{x}`" for x in windows))
+              if classes: section.append("\n**クラス**\n\n" + "\n".join(f"- `{x}`" for x in classes))
+              if funcs: section.append("\n**検出関数**\n\n" + "\n".join(f"- `{x}()`" for x in funcs))
+              api_sections.append("\n".join(section))
+          write("API_REFERENCE.md", "# API Reference\n\n> 自動抽出です。改修前に対象ファイル本体を確認してください。\n\n" + ("\n\n".join(api_sections) if api_sections else "APIを検出できませんでした。"))
+
+          lower_map = defaultdict(list)
+          uppercase_ext = []
+          for path in files:
+              lower_map[rel(path).lower()].append(rel(path))
+              if "." in path.name:
+                  ext = path.name.rsplit(".", 1)[-1]
+                  if ext != ext.lower(): uppercase_ext.append(rel(path))
+          collisions = [group for group in lower_map.values() if len(group) > 1]
+          warning = ["# Case and Path Warnings", "", "GitHub Pagesは大文字・小文字を区別します。", "", "## 大文字・小文字だけが違う重複パス", ""]
+          warning += ["- " + " / ".join(f"`{x}`" for x in group) for group in collisions] or ["検出なし。"]
+          warning += ["", "## 大文字を含む拡張子", ""]
+          warning += [f"- `{x}`" for x in uppercase_ext] or ["検出なし。"]
+          write("CASE_WARNINGS.md", "\n".join(warning))
+
+          changed = git("diff", "--name-status", "HEAD^", "HEAD")
+          write("CHANGE_SUMMARY.md", f"# Latest Change Summary\n\n対象コミット：`{commit}`  \nコミット名：{subject}\n\n```text\n{changed or '直前コミットとの差分を取得できませんでした。'}\n```")
+          write("README.md", "# AI_PROJECT\n\nこのフォルダは `.github/workflows/generate-project-map.yml` によって自動生成されます。\n新しいGPTスレッドでは、リポジトリ全体をZIPで添付し、AI_PROJECTから先に読むよう伝えてください。")
+          print("AI_PROJECT generated")
+          PYTHON
+
+      - name: Commit generated documents
+        shell: bash
+        run: |
+          if git diff --quiet -- AI_PROJECT; then
+            echo "AI_PROJECT に変更はありません。"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add AI_PROJECT
+          git commit -m "docs: update AI project map"
+          git push
