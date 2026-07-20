@@ -1,1 +1,26 @@
-{}
+{
+  "name": "勉強ギルド",
+  "short_name": "勉強ギルド",
+  "description": "毎日の学びを積み重ねる冒険ゲーム",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#1f1b17",
+  "theme_color": "#1f1b17",
+
+  "icons": [
+    {
+      "src": "assets/app-icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/app-icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
