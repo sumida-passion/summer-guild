@@ -1,12 +1,13 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.3.1
+   夏休みギルド Ver0.4.0
    app.js
 
    ゲーム全体の起動
    画面切り替え
-   設定反映
+   クエスト画面への接続
+   GP・挑戦回数表示
    Developer Mode初期化
    PWA登録
    ========================================================= */
@@ -18,11 +19,23 @@
 
 const SCREENS = {
 
-    title: "title-screen",
+    title:
+        "title-screen",
 
-    room: "room-screen",
+    room:
+        "room-screen",
 
-    guildhall: "guildhall-screen"
+    guildhall:
+        "guildhall-screen",
+
+    questboard:
+        "questboard-screen",
+
+    quest:
+        "quest-screen",
+
+    result:
+        "result-screen"
 
 };
 
@@ -31,9 +44,16 @@ const SCREENS = {
    2. 基本設定
    ========================================================= */
 
-const SCENE_FADE_TIME = 350;
+const SCENE_FADE_TIME =
+    350;
 
-let isSceneChanging = false;
+
+let isSceneChanging =
+    false;
+
+
+let currentScreenName =
+    "title";
 
 
 /* =========================================================
@@ -118,13 +138,17 @@ function initGame() {
 
     bindButtons();
 
-    showScreenImmediately("title");
+
+    showScreenImmediately(
+        "title"
+    );
+
 
     registerServiceWorker();
 
 
     console.log(
-        "夏休みギルド Ver0.3.1 起動"
+        "夏休みギルド Ver0.4.0 起動"
     );
 
 }
@@ -136,63 +160,629 @@ function initGame() {
 
 function bindButtons() {
 
-    const startButton =
-        document.getElementById(
+    /*
+      タイトル
+      ↓
+      部屋
+    */
+
+    bindScreenButton(
+        [
             "startButton"
-        );
+        ],
+        "room"
+    );
 
 
-    const gotoGuildHallButton =
-        document.getElementById(
+    /*
+      部屋
+      ↓
+      ギルドホール
+    */
+
+    bindScreenButton(
+        [
             "gotoGuildHall"
-        );
+        ],
+        "guildhall"
+    );
 
 
-    const backRoomButton =
-        document.getElementById(
+    /*
+      ギルドホール
+      ↓
+      部屋
+    */
+
+    bindScreenButton(
+        [
             "backRoom"
+        ],
+        "room"
+    );
+
+
+    /*
+      ギルドホール
+      ↓
+      クエストボード
+
+      HTML側のID表記に多少違いがあっても
+      接続できるように候補を持たせている。
+    */
+
+    bindActionButton(
+        [
+            "gotoQuestBoard",
+            "openQuestBoard",
+            "questBoardButton",
+            "dailyQuestButton"
+        ],
+        openQuestBoard
+    );
+
+
+    /*
+      クエストボード
+      ↓
+      ギルドホール
+    */
+
+    bindScreenButton(
+        [
+            "backGuildHall"
+        ],
+        "guildhall"
+    );
+
+
+    /*
+      クエスト画面
+      ↓
+      クエストボード
+
+      百マス計算を途中でやめるボタン。
+    */
+
+    bindActionButton(
+        [
+            "cancelQuest",
+            "cancelHyakumasu",
+            "backQuestBoard"
+        ],
+        cancelCurrentQuest
+    );
+
+
+    /*
+      結果画面
+      ↓
+      クエストボード
+    */
+
+    bindActionButton(
+        [
+            "resultBackQuestBoard",
+            "backToQuestBoard",
+            "resultContinueButton",
+            "resultReturnButton"
+        ],
+        returnToQuestBoard
+    );
+
+
+    /*
+      結果画面
+      ↓
+      もう一度同じクエスト
+
+      HTMLに該当ボタンがある場合だけ接続する。
+    */
+
+    bindActionButton(
+        [
+            "retryQuestButton",
+            "retryHyakumasuButton"
+        ],
+        retryCurrentQuest
+    );
+
+}
+
+
+/* =========================================================
+   6. 画面移動ボタン接続
+   ========================================================= */
+
+function bindScreenButton(
+    elementIds,
+    screenName
+) {
+
+    bindActionButton(
+        elementIds,
+        () => {
+
+            changeScreen(
+                screenName
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   7. 汎用ボタン接続
+   ========================================================= */
+
+/*
+  elementIdsの中で実際に存在する要素へ
+  クリック処理を設定する。
+
+  同じ処理を二重登録しないよう、
+  datasetで登録済みを記録する。
+*/
+
+function bindActionButton(
+    elementIds,
+    handler
+) {
+
+    if (
+        !Array.isArray(
+            elementIds
+        )
+        || typeof handler
+            !== "function"
+    ) {
+
+        return;
+
+    }
+
+
+    for (
+        const elementId
+        of elementIds
+    ) {
+
+        const element =
+            document.getElementById(
+                elementId
+            );
+
+
+        if (!element) {
+
+            continue;
+
+        }
+
+
+        if (
+            element.dataset
+                .summerGuildBound
+            === "true"
+        ) {
+
+            continue;
+
+        }
+
+
+        element.addEventListener(
+            "click",
+            handler
         );
 
 
-    if (startButton) {
+        element.dataset
+            .summerGuildBound =
+            "true";
 
-        startButton.addEventListener(
-            "click",
-            () => {
+    }
 
-                changeScreen("room");
+}
 
-            }
+
+/* =========================================================
+   8. クエストボードを開く
+   ========================================================= */
+
+async function openQuestBoard() {
+
+    refreshGameDisplays();
+
+
+    /*
+      daily.jsまたはquestEngine.js側に
+      一覧描画機能ができた場合は、
+      ここから呼び出す。
+    */
+
+    renderQuestBoardIfAvailable();
+
+
+    await changeScreen(
+        "questboard"
+    );
+
+}
+
+
+/* =========================================================
+   9. クエストボード描画
+   ========================================================= */
+
+function renderQuestBoardIfAvailable() {
+
+    /*
+      これから作るdaily.jsの関数候補。
+
+      実際に存在する最初の関数だけを使う。
+    */
+
+    const rendererCandidates = [
+
+        window.renderDailyQuestList,
+
+        window.renderQuestBoard,
+
+        window.updateQuestBoard
+
+    ];
+
+
+    for (
+        const renderer
+        of rendererCandidates
+    ) {
+
+        if (
+            typeof renderer
+            === "function"
+        ) {
+
+            renderer();
+
+            return;
+
+        }
+
+    }
+
+
+    /*
+      オブジェクト形式で作られた場合にも対応。
+    */
+
+    if (
+        window.DailyQuest
+        && typeof window.DailyQuest.render
+            === "function"
+    ) {
+
+        window.DailyQuest.render();
+
+        return;
+
+    }
+
+
+    if (
+        window.QuestManager
+        && typeof window.QuestManager.renderBoard
+            === "function"
+    ) {
+
+        window.QuestManager
+            .renderBoard();
+
+    }
+
+}
+
+
+/* =========================================================
+   10. クエストを開始
+   ========================================================= */
+
+/*
+  questEngine.jsやdaily.jsから利用できる共通入口。
+
+  使用例：
+
+  startQuest("hyakumasu");
+*/
+
+async function startQuest(
+    questId
+) {
+
+    if (
+        typeof questId !== "string"
+        || questId.trim() === ""
+    ) {
+
+        console.error(
+            "開始するクエストIDがありません。"
+        );
+
+        return false;
+
+    }
+
+
+    const safeQuestId =
+        questId.trim();
+
+
+    let started =
+        false;
+
+
+    /*
+      QuestManager方式
+    */
+
+    if (
+        window.QuestManager
+        && typeof window.QuestManager.start
+            === "function"
+    ) {
+
+        const result =
+            window.QuestManager.start(
+                safeQuestId
+            );
+
+
+        started =
+            result !== false;
+
+    }
+
+
+    /*
+      QuestEngine方式
+    */
+
+    else if (
+        window.QuestEngine
+        && typeof window.QuestEngine.start
+            === "function"
+    ) {
+
+        const result =
+            window.QuestEngine.start(
+                safeQuestId
+            );
+
+
+        started =
+            result !== false;
+
+    }
+
+
+    /*
+      百マス単独方式
+    */
+
+    else if (
+        safeQuestId === "hyakumasu"
+        && typeof window.startHyakumasu
+            === "function"
+    ) {
+
+        const result =
+            window.startHyakumasu();
+
+
+        started =
+            result !== false;
+
+    }
+
+
+    if (!started) {
+
+        console.error(
+            `クエストを開始できませんでした: ${safeQuestId}`
+        );
+
+        return false;
+
+    }
+
+
+    await changeScreen(
+        "quest"
+    );
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   11. 現在のクエストを中止
+   ========================================================= */
+
+async function cancelCurrentQuest() {
+
+    /*
+      QuestEngine側に中止処理があれば呼び出す。
+    */
+
+    if (
+        window.QuestEngine
+        && typeof window.QuestEngine.cancel
+            === "function"
+    ) {
+
+        window.QuestEngine.cancel();
+
+    } else if (
+        typeof window.cancelHyakumasu
+        === "function"
+    ) {
+
+        window.cancelHyakumasu();
+
+    }
+
+
+    renderQuestBoardIfAvailable();
+
+
+    await changeScreen(
+        "questboard"
+    );
+
+}
+
+
+/* =========================================================
+   12. 結果画面を表示
+   ========================================================= */
+
+/*
+  questEngine.jsから使う共通関数。
+
+  resultData例：
+
+  {
+      message: "百マス計算クリア！",
+      reward: 10,
+      totalGp: 10,
+      todayChallengeCount: 1,
+      totalChallengeCount: 1
+  }
+*/
+
+async function showQuestResult(
+    resultData = {}
+) {
+
+    updateResultScreen(
+        resultData
+    );
+
+
+    refreshGameDisplays();
+
+
+    await changeScreen(
+        "result"
+    );
+
+}
+
+
+/* =========================================================
+   13. 結果画面の内容更新
+   ========================================================= */
+
+function updateResultScreen(
+    resultData
+) {
+
+    const safeData =
+        resultData
+        && typeof resultData === "object"
+            ? resultData
+            : {};
+
+
+    setTextIfExists(
+        "resultMessage",
+        safeData.message
+        || "クエストを達成しました。"
+    );
+
+
+    const reward =
+        Number.isFinite(
+            Number(
+                safeData.reward
+            )
+        )
+            ? Math.max(
+                0,
+                Math.floor(
+                    Number(
+                        safeData.reward
+                    )
+                )
+            )
+            : 0;
+
+
+    setTextIfExists(
+        "rewardText",
+        `+${reward}GP`
+    );
+
+
+    const totalGp =
+        Number.isFinite(
+            Number(
+                safeData.totalGp
+            )
+        )
+            ? Math.max(
+                0,
+                Math.floor(
+                    Number(
+                        safeData.totalGp
+                    )
+                )
+            )
+            : (
+                typeof getGp
+                === "function"
+                    ? getGp()
+                    : 0
+            );
+
+
+    setTextIfExists(
+        "totalGpText",
+        `所持GP：${totalGp}`
+    );
+
+
+    if (
+        safeData.todayChallengeCount
+        !== undefined
+    ) {
+
+        setTextIfExists(
+            "resultTodayChallengeCount",
+            String(
+                safeData
+                    .todayChallengeCount
+            )
         );
 
     }
 
 
-    if (gotoGuildHallButton) {
+    if (
+        safeData.totalChallengeCount
+        !== undefined
+    ) {
 
-        gotoGuildHallButton.addEventListener(
-            "click",
-            () => {
-
-                changeScreen(
-                    "guildhall"
-                );
-
-            }
-        );
-
-    }
-
-
-    if (backRoomButton) {
-
-        backRoomButton.addEventListener(
-            "click",
-            () => {
-
-                changeScreen("room");
-
-            }
+        setTextIfExists(
+            "resultTotalChallengeCount",
+            String(
+                safeData
+                    .totalChallengeCount
+            )
         );
 
     }
@@ -201,28 +791,172 @@ function bindButtons() {
 
 
 /* =========================================================
-   6. 暗転付き画面切り替え
+   14. 結果画面からクエストボードへ戻る
    ========================================================= */
 
-async function changeScreen(screenName) {
+async function returnToQuestBoard() {
 
-    if (!SCREENS[screenName]) {
+    refreshGameDisplays();
+
+    renderQuestBoardIfAvailable();
+
+
+    await changeScreen(
+        "questboard"
+    );
+
+}
+
+
+/* =========================================================
+   15. 同じクエストへ再挑戦
+   ========================================================= */
+
+async function retryCurrentQuest() {
+
+    let questId =
+        "hyakumasu";
+
+
+    if (
+        window.QuestEngine
+        && typeof window.QuestEngine
+            .getCurrentQuestId
+            === "function"
+    ) {
+
+        const currentQuestId =
+            window.QuestEngine
+                .getCurrentQuestId();
+
+
+        if (
+            typeof currentQuestId
+            === "string"
+            && currentQuestId.trim()
+                !== ""
+        ) {
+
+            questId =
+                currentQuestId.trim();
+
+        }
+
+    }
+
+
+    await startQuest(
+        questId
+    );
+
+}
+
+
+/* =========================================================
+   16. 画面表示用データ更新
+   ========================================================= */
+
+function refreshGameDisplays() {
+
+    if (
+        typeof updateGpDisplay
+        === "function"
+    ) {
+
+        updateGpDisplay();
+
+    }
+
+
+    if (
+        typeof updateChallengeCountDisplay
+        === "function"
+    ) {
+
+        updateChallengeCountDisplay();
+
+    }
+
+}
+
+
+/* =========================================================
+   17. 要素がある場合だけ文字を変更
+   ========================================================= */
+
+function setTextIfExists(
+    elementId,
+    text
+) {
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+
+    if (!element) {
+
+        return false;
+
+    }
+
+
+    element.textContent =
+        String(text);
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   18. 暗転付き画面切り替え
+   ========================================================= */
+
+async function changeScreen(
+    screenName
+) {
+
+    if (
+        !SCREENS[
+            screenName
+        ]
+    ) {
 
         console.error(
             `画面が登録されていません: ${screenName}`
         );
 
-        return;
+        return false;
 
     }
 
 
-    if (isSceneChanging) {
-        return;
+    if (
+        isSceneChanging
+    ) {
+
+        return false;
+
     }
 
 
-    isSceneChanging = true;
+    if (
+        currentScreenName
+        === screenName
+    ) {
+
+        refreshGameDisplays();
+
+        return true;
+
+    }
+
+
+    isSceneChanging =
+        true;
 
 
     document.body.classList.add(
@@ -235,15 +969,35 @@ async function changeScreen(screenName) {
     );
 
 
-    activateScreen(
-        screenName
-    );
+    const activated =
+        activateScreen(
+            screenName
+        );
+
+
+    if (!activated) {
+
+        document.body.classList.remove(
+            "scene-changing"
+        );
+
+
+        isSceneChanging =
+            false;
+
+
+        return false;
+
+    }
 
 
     window.scrollTo(
         0,
         0
     );
+
+
+    refreshGameDisplays();
 
 
     document.body.classList.remove(
@@ -256,19 +1010,27 @@ async function changeScreen(screenName) {
     );
 
 
-    isSceneChanging = false;
+    isSceneChanging =
+        false;
+
+
+    return true;
 
 }
 
 
 /* =========================================================
-   7. 画面表示
+   19. 画面表示
    ========================================================= */
 
-function activateScreen(screenName) {
+function activateScreen(
+    screenName
+) {
 
     const targetScreenId =
-        SCREENS[screenName];
+        SCREENS[
+            screenName
+        ];
 
 
     const screens =
@@ -306,7 +1068,7 @@ function activateScreen(screenName) {
             `画面要素が見つかりません: ${targetScreenId}`
         );
 
-        return;
+        return false;
 
     }
 
@@ -321,22 +1083,35 @@ function activateScreen(screenName) {
         "false"
     );
 
+
+    currentScreenName =
+        screenName;
+
+
+    return true;
+
 }
 
 
 /* =========================================================
-   8. 即時表示
+   20. 即時表示
    ========================================================= */
 
-function showScreenImmediately(screenName) {
+function showScreenImmediately(
+    screenName
+) {
 
-    if (!SCREENS[screenName]) {
+    if (
+        !SCREENS[
+            screenName
+        ]
+    ) {
 
         console.error(
             `画面が登録されていません: ${screenName}`
         );
 
-        return;
+        return false;
 
     }
 
@@ -346,18 +1121,35 @@ function showScreenImmediately(screenName) {
     );
 
 
-    activateScreen(
-        screenName
-    );
+    isSceneChanging =
+        false;
+
+
+    const activated =
+        activateScreen(
+            screenName
+        );
+
+
+    if (activated) {
+
+        refreshGameDisplays();
+
+    }
+
+
+    return activated;
 
 }
 
 
 /* =========================================================
-   9. 待機処理
+   21. 待機処理
    ========================================================= */
 
-function wait(milliseconds) {
+function wait(
+    milliseconds
+) {
 
     return new Promise(
         (resolve) => {
@@ -374,13 +1166,16 @@ function wait(milliseconds) {
 
 
 /* =========================================================
-   10. Service Worker登録
+   22. Service Worker登録
    ========================================================= */
 
 function registerServiceWorker() {
 
     if (
-        !("serviceWorker" in navigator)
+        !(
+            "serviceWorker"
+            in navigator
+        )
     ) {
 
         console.warn(
