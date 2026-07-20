@@ -1,12 +1,14 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.3.2
+   夏休みギルド Ver0.4.0
    settings.js
 
    ゲーム設定
    LocalStorage
-   プレイヤー設定の反映
+   プレイヤー設定
+   GP
+   デイリークエスト達成記録
    JSON出力
    ========================================================= */
 
@@ -25,7 +27,12 @@ const SETTINGS_STORAGE_KEY =
 
 const DEFAULT_SETTINGS = {
 
-    version: "0.3.2",
+    version: "0.4.0",
+
+
+    /*
+      主人公の表示設定
+    */
 
     player: {
 
@@ -38,6 +45,36 @@ const DEFAULT_SETTINGS = {
         rotation: 0,
 
         visible: true
+
+    },
+
+
+    /*
+      ゲーム全体の進行データ
+    */
+
+    game: {
+
+        gp: 0
+
+    },
+
+
+    /*
+      デイリークエストの進行データ
+
+      date：
+      達成記録が属する日付
+
+      completed：
+      その日に達成したクエスト
+    */
+
+    daily: {
+
+        date: "",
+
+        completed: {}
 
     }
 
@@ -66,7 +103,79 @@ function cloneSettings(source) {
 
 
 /* =========================================================
-   5. 保存済み設定を初期設定へ統合
+   5. 今日の日付キー取得
+   ========================================================= */
+
+/*
+  端末の現地時刻を使って、
+
+  2026-07-20
+
+  のような文字列を作る。
+*/
+
+function getLocalDateKey() {
+
+    const now =
+        new Date();
+
+
+    const year =
+        now.getFullYear();
+
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+/* =========================================================
+   6. 数値の安全確認
+   ========================================================= */
+
+function getSafeNumber(
+    value,
+    fallback
+) {
+
+    const number =
+        Number(value);
+
+
+    if (
+        !Number.isFinite(number)
+    ) {
+
+        return fallback;
+
+    }
+
+
+    return number;
+
+}
+
+
+/* =========================================================
+   7. 保存済み設定を初期設定へ統合
    ========================================================= */
 
 function mergeSettings(
@@ -75,7 +184,9 @@ function mergeSettings(
 ) {
 
     const merged =
-        cloneSettings(defaultSettings);
+        cloneSettings(
+            defaultSettings
+        );
 
 
     if (
@@ -88,15 +199,9 @@ function mergeSettings(
     }
 
 
-    if (
-        typeof savedSettings.version === "string"
-    ) {
-
-        merged.version =
-            savedSettings.version;
-
-    }
-
+    /*
+      主人公設定
+    */
 
     if (
         savedSettings.player
@@ -112,7 +217,72 @@ function mergeSettings(
 
 
     /*
-      現在のゲームバージョンへ更新する。
+      ゲーム進行データ
+    */
+
+    if (
+        savedSettings.game
+        && typeof savedSettings.game === "object"
+    ) {
+
+        merged.game.gp =
+            Math.max(
+                0,
+                Math.floor(
+                    getSafeNumber(
+                        savedSettings.game.gp,
+                        0
+                    )
+                )
+            );
+
+    }
+
+
+    /*
+      デイリークエストデータ
+    */
+
+    if (
+        savedSettings.daily
+        && typeof savedSettings.daily === "object"
+    ) {
+
+        if (
+            typeof savedSettings.daily.date
+            === "string"
+        ) {
+
+            merged.daily.date =
+                savedSettings.daily.date;
+
+        }
+
+
+        if (
+            savedSettings.daily.completed
+            && typeof savedSettings.daily.completed
+                === "object"
+            && !Array.isArray(
+                savedSettings.daily.completed
+            )
+        ) {
+
+            merged.daily.completed = {
+
+                ...savedSettings
+                    .daily
+                    .completed
+
+            };
+
+        }
+
+    }
+
+
+    /*
+      常に現在のバージョンへ更新する。
     */
 
     merged.version =
@@ -125,7 +295,75 @@ function mergeSettings(
 
 
 /* =========================================================
-   6. 読み込み
+   8. デイリー記録の日付確認
+   ========================================================= */
+
+/*
+  保存されている日付が今日と違う場合は、
+  デイリークエストの達成記録だけをリセットする。
+
+  GPはリセットしない。
+*/
+
+function refreshDailyProgress() {
+
+    const today =
+        getLocalDateKey();
+
+
+    if (
+        !Settings.daily
+        || typeof Settings.daily !== "object"
+    ) {
+
+        Settings.daily =
+            cloneSettings(
+                DEFAULT_SETTINGS.daily
+            );
+
+    }
+
+
+    if (
+        Settings.daily.date !== today
+    ) {
+
+        Settings.daily.date =
+            today;
+
+
+        Settings.daily.completed = {};
+
+
+        return true;
+
+    }
+
+
+    if (
+        !Settings.daily.completed
+        || typeof Settings.daily.completed
+            !== "object"
+        || Array.isArray(
+            Settings.daily.completed
+        )
+    ) {
+
+        Settings.daily.completed = {};
+
+
+        return true;
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =========================================================
+   9. 読み込み
    ========================================================= */
 
 function loadSettings() {
@@ -139,7 +377,16 @@ function loadSettings() {
     if (!json) {
 
         Settings =
-            cloneSettings(DEFAULT_SETTINGS);
+            cloneSettings(
+                DEFAULT_SETTINGS
+            );
+
+
+        refreshDailyProgress();
+
+
+        saveSettings();
+
 
         return Settings;
 
@@ -158,6 +405,17 @@ function loadSettings() {
                 savedSettings
             );
 
+
+        const dailyWasReset =
+            refreshDailyProgress();
+
+
+        if (dailyWasReset) {
+
+            saveSettings();
+
+        }
+
     } catch (error) {
 
         console.warn(
@@ -167,7 +425,15 @@ function loadSettings() {
 
 
         Settings =
-            cloneSettings(DEFAULT_SETTINGS);
+            cloneSettings(
+                DEFAULT_SETTINGS
+            );
+
+
+        refreshDailyProgress();
+
+
+        saveSettings();
 
     }
 
@@ -178,7 +444,7 @@ function loadSettings() {
 
 
 /* =========================================================
-   7. 保存
+   10. 保存
    ========================================================= */
 
 function saveSettings() {
@@ -189,7 +455,9 @@ function saveSettings() {
 
             SETTINGS_STORAGE_KEY,
 
-            JSON.stringify(Settings)
+            JSON.stringify(
+                Settings
+            )
 
         );
 
@@ -212,13 +480,18 @@ function saveSettings() {
 
 
 /* =========================================================
-   8. 全設定の初期化
+   11. 全設定の初期化
    ========================================================= */
 
 function resetSettings() {
 
     Settings =
-        cloneSettings(DEFAULT_SETTINGS);
+        cloneSettings(
+            DEFAULT_SETTINGS
+        );
+
+
+    refreshDailyProgress();
 
 
     saveSettings();
@@ -229,7 +502,7 @@ function resetSettings() {
 
 
 /* =========================================================
-   9. プレイヤー設定取得
+   12. プレイヤー設定取得
    ========================================================= */
 
 function getPlayerSettings() {
@@ -240,7 +513,7 @@ function getPlayerSettings() {
 
 
 /* =========================================================
-   10. プレイヤー設定更新
+   13. プレイヤー設定更新
    ========================================================= */
 
 function updatePlayerSettings(values) {
@@ -269,7 +542,7 @@ function updatePlayerSettings(values) {
 
 
 /* =========================================================
-   11. プレイヤー設定を画面へ反映
+   14. プレイヤー設定を画面へ反映
    ========================================================= */
 
 function applyPlayerSettings() {
@@ -279,7 +552,9 @@ function applyPlayerSettings() {
 
 
     if (!playerSettings) {
+
         return;
+
     }
 
 
@@ -290,32 +565,47 @@ function applyPlayerSettings() {
 
 
     if (!player) {
+
         return;
+
     }
 
 
     const x =
-        Number(playerSettings.x);
+        Number(
+            playerSettings.x
+        );
 
 
     const y =
-        Number(playerSettings.y);
+        Number(
+            playerSettings.y
+        );
 
 
     const scale =
-        Number(playerSettings.scale);
+        Number(
+            playerSettings.scale
+        );
 
 
     const rotation =
-        Number(playerSettings.rotation);
+        Number(
+            playerSettings.rotation
+        );
 
 
     /*
       X位置
-      画面左端を0、中央を50、右端を100とする。
+
+      画面左端を0、
+      中央を50、
+      右端を100とする。
     */
 
-    if (Number.isFinite(x)) {
+    if (
+        Number.isFinite(x)
+    ) {
 
         player.style.left =
             `${x}%`;
@@ -325,10 +615,14 @@ function applyPlayerSettings() {
 
     /*
       Y位置
-      画面下端を基準にbottomで指定する。
+
+      画面下端を基準に
+      bottomで指定する。
     */
 
-    if (Number.isFinite(y)) {
+    if (
+        Number.isFinite(y)
+    ) {
 
         player.style.bottom =
             `${y}%`;
@@ -343,13 +637,17 @@ function applyPlayerSettings() {
     const safeScale =
         Number.isFinite(scale)
             ? scale
-            : DEFAULT_SETTINGS.player.scale;
+            : DEFAULT_SETTINGS
+                .player
+                .scale;
 
 
     const safeRotation =
         Number.isFinite(rotation)
             ? rotation
-            : DEFAULT_SETTINGS.player.rotation;
+            : DEFAULT_SETTINGS
+                .player
+                .rotation;
 
 
     player.style.transform = `
@@ -376,7 +674,7 @@ function applyPlayerSettings() {
 
 
 /* =========================================================
-   12. 全設定を反映
+   15. 全設定を反映
    ========================================================= */
 
 function applyAllSettings() {
@@ -387,7 +685,339 @@ function applyAllSettings() {
 
 
 /* =========================================================
-   13. JSON文字列取得
+   16. 現在のGP取得
+   ========================================================= */
+
+function getGp() {
+
+    if (
+        !Settings.game
+        || typeof Settings.game !== "object"
+    ) {
+
+        Settings.game =
+            cloneSettings(
+                DEFAULT_SETTINGS.game
+            );
+
+    }
+
+
+    return Math.max(
+        0,
+        Math.floor(
+            getSafeNumber(
+                Settings.game.gp,
+                0
+            )
+        )
+    );
+
+}
+
+
+/* =========================================================
+   17. GP加算
+   ========================================================= */
+
+function addGp(amount) {
+
+    const safeAmount =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    amount,
+                    0
+                )
+            )
+        );
+
+
+    Settings.game.gp =
+        getGp()
+        + safeAmount;
+
+
+    saveSettings();
+
+
+    return Settings.game.gp;
+
+}
+
+
+/* =========================================================
+   18. GP消費
+   ========================================================= */
+
+/*
+  将来のショップ用。
+
+  GPが足りない場合はfalseを返す。
+*/
+
+function spendGp(amount) {
+
+    const safeAmount =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    amount,
+                    0
+                )
+            )
+        );
+
+
+    const currentGp =
+        getGp();
+
+
+    if (
+        currentGp < safeAmount
+    ) {
+
+        return false;
+
+    }
+
+
+    Settings.game.gp =
+        currentGp
+        - safeAmount;
+
+
+    saveSettings();
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   19. デイリークエスト達成確認
+   ========================================================= */
+
+function isDailyQuestCompleted(
+    questId
+) {
+
+    refreshDailyProgress();
+
+
+    if (
+        typeof questId !== "string"
+        || questId.trim() === ""
+    ) {
+
+        return false;
+
+    }
+
+
+    return Boolean(
+        Settings
+            .daily
+            .completed[
+                questId
+            ]
+    );
+
+}
+
+
+/* =========================================================
+   20. デイリークエスト達成登録
+   ========================================================= */
+
+/*
+  その日に初めて達成した場合だけ、
+  GPを加算する。
+
+  戻り値：
+
+  {
+      firstClear: true,
+      reward: 10,
+      totalGp: 10
+  }
+
+  同じ日に再度クリアした場合：
+
+  {
+      firstClear: false,
+      reward: 0,
+      totalGp: 10
+  }
+*/
+
+function completeDailyQuest(
+    questId,
+    reward
+) {
+
+    refreshDailyProgress();
+
+
+    if (
+        typeof questId !== "string"
+        || questId.trim() === ""
+    ) {
+
+        console.error(
+            "クエストIDが正しくありません。"
+        );
+
+
+        return {
+
+            firstClear: false,
+
+            reward: 0,
+
+            totalGp: getGp()
+
+        };
+
+    }
+
+
+    const safeQuestId =
+        questId.trim();
+
+
+    const safeReward =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    reward,
+                    0
+                )
+            )
+        );
+
+
+    /*
+      本日すでに達成している場合は、
+      報酬を二重に渡さない。
+    */
+
+    if (
+        isDailyQuestCompleted(
+            safeQuestId
+        )
+    ) {
+
+        return {
+
+            firstClear: false,
+
+            reward: 0,
+
+            totalGp: getGp()
+
+        };
+
+    }
+
+
+    Settings.daily.completed[
+        safeQuestId
+    ] = {
+
+        completed: true,
+
+        completedAt:
+            new Date()
+                .toISOString(),
+
+        reward:
+            safeReward
+
+    };
+
+
+    Settings.game.gp =
+        getGp()
+        + safeReward;
+
+
+    saveSettings();
+
+
+    return {
+
+        firstClear: true,
+
+        reward:
+            safeReward,
+
+        totalGp:
+            getGp()
+
+    };
+
+}
+
+
+/* =========================================================
+   21. 本日の達成クエスト一覧取得
+   ========================================================= */
+
+function getDailyCompletedQuests() {
+
+    refreshDailyProgress();
+
+
+    return cloneSettings(
+        Settings.daily.completed
+    );
+
+}
+
+
+/* =========================================================
+   22. GP表示の更新
+   ========================================================= */
+
+function updateGpDisplay() {
+
+    const gpDisplay =
+        document.getElementById(
+            "gpDisplay"
+        );
+
+
+    if (gpDisplay) {
+
+        gpDisplay.textContent =
+            `所持GP：${getGp()}`;
+
+    }
+
+
+    const totalGpText =
+        document.getElementById(
+            "totalGpText"
+        );
+
+
+    if (totalGpText) {
+
+        totalGpText.textContent =
+            `所持GP：${getGp()}`;
+
+    }
+
+}
+
+
+/* =========================================================
+   23. JSON文字列取得
    ========================================================= */
 
 function getSettingsJson() {
@@ -402,7 +1032,7 @@ function getSettingsJson() {
 
 
 /* =========================================================
-   14. JSONをクリップボードへコピー
+   24. JSONをクリップボードへコピー
    ========================================================= */
 
 async function copySettingsJson() {
@@ -418,9 +1048,12 @@ async function copySettingsJson() {
             && window.isSecureContext
         ) {
 
-            await navigator.clipboard.writeText(
-                json
-            );
+            await navigator
+                .clipboard
+                .writeText(
+                    json
+                );
+
 
             return true;
 
@@ -428,7 +1061,8 @@ async function copySettingsJson() {
 
 
         /*
-          Clipboard APIが使えない場合の代替処理。
+          Clipboard APIが使えない場合の
+          代替処理。
         */
 
         const textarea =
@@ -449,6 +1083,7 @@ async function copySettingsJson() {
 
         textarea.style.position =
             "fixed";
+
 
         textarea.style.opacity =
             "0";
@@ -489,7 +1124,7 @@ async function copySettingsJson() {
 
 
 /* =========================================================
-   15. settings.jsonをダウンロード
+   25. settings.jsonをダウンロード
    ========================================================= */
 
 function downloadSettingsJson() {
