@@ -123,8 +123,6 @@
         </div>
 
 
-        <!-- 主人公 -->
-
         <div id="player">
 
             <img
@@ -227,11 +225,6 @@
             </header>
 
 
-            <!--
-                daily.jsが今日のクエスト一覧を
-                この中へ表示する。
-            -->
-
             <div
                 id="dailyQuestList"
                 class="daily-quest-list">
@@ -268,11 +261,6 @@
             class="background quest-background">
         </div>
 
-
-        <!--
-            hyakumasu.jsなどの各クエストが、
-            この中へゲーム画面を表示する。
-        -->
 
         <main
             id="questContainer"
@@ -352,7 +340,6 @@
 
     <!-- ========================= -->
     <!-- Developer Mode -->
-    <!-- 通常は完全非表示 -->
     <!-- ========================= -->
 
     <aside
@@ -368,32 +355,15 @@
     <!-- 読み込み順が重要 -->
     <!-- ========================= -->
 
-    <!-- 保存・設定 -->
-
     <script src="js/settings.js"></script>
 
-
-    <!-- クエスト共通システム -->
-
-    <script src="js/quests/engine.js"></script>
-
-
-    <!-- デイリークエスト定義 -->
+    <script src="js/systems/questEngine.js"></script>
 
     <script src="js/quests/daily.js"></script>
 
-
-    <!-- 個別クエスト -->
-
     <script src="js/quests/hyakumasu.js"></script>
 
-
-    <!-- Developer Mode -->
-
     <script src="js/developer.js"></script>
-
-
-    <!-- ゲーム全体起動 -->
 
     <script src="js/app.js"></script>
 
