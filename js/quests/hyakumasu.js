@@ -1,17 +1,17 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.4.0
+   夏休みギルド Ver0.4.1
    hyakumasu.js
 
    百マス計算クエスト
    ・10×10の足し算
-   ・100問
-   ・ランダム問題
-   ・全問入力後に採点
+   ・0～18の2桁入力対応
+   ・1桁入力は少し待って自動移動
+   ・2桁入力はすぐ自動移動
+   ・100問採点
    ・初回10GP
    ・2回目以降1GP
-   ・全問正解ボーナス
    ・挑戦回数保存
    ========================================================= */
 
@@ -50,6 +50,17 @@ const HYAKUMASU_SIZE =
     10;
 
 
+/*
+  1桁の答えを入力したあと、
+  次のマスへ移るまでの待ち時間。
+
+  この間に2桁目を入力できる。
+*/
+
+const HYAKUMASU_SINGLE_DIGIT_WAIT =
+    600;
+
+
 /* =========================================================
    2. 百マス計算の状態
    ========================================================= */
@@ -66,7 +77,9 @@ let hyakumasuState = {
 
     finished: false,
 
-    context: null
+    context: null,
+
+    moveTimers: []
 
 };
 
@@ -161,9 +174,7 @@ function startHyakumasuQuest(
 
     bindHyakumasuEvents();
 
-
     updateHyakumasuChallengeDisplay();
-
 
     focusFirstAnswer();
 
@@ -181,6 +192,11 @@ function createInitialHyakumasuState(
     context
 ) {
 
+    const cellCount =
+        HYAKUMASU_SIZE
+        * HYAKUMASU_SIZE;
+
+
     return {
 
         rowNumbers:
@@ -195,8 +211,7 @@ function createInitialHyakumasuState(
 
         answers:
             Array(
-                HYAKUMASU_SIZE
-                * HYAKUMASU_SIZE
+                cellCount
             ).fill(""),
 
         startedAt:
@@ -205,7 +220,12 @@ function createInitialHyakumasuState(
         finished:
             false,
 
-        context
+        context,
+
+        moveTimers:
+            Array(
+                cellCount
+            ).fill(null)
 
     };
 
@@ -253,8 +273,15 @@ function createHyakumasuHtml() {
         hyakumasuState
             .columnNumbers
             .map(
-                (number) =>
-                    `<th class="hyakumasu-number-cell">${number}</th>`
+                (number) => {
+
+                    return `
+                        <th class="hyakumasu-number-cell">
+                            ${number}
+                        </th>
+                    `;
+
+                }
             )
             .join("");
 
@@ -285,19 +312,21 @@ function createHyakumasuHtml() {
 
                                     return `
                                         <td class="hyakumasu-answer-cell">
+
                                             <input
                                                 class="hyakumasu-cell-input"
                                                 id="hyakumasuAnswer${answerIndex}"
                                                 data-answer-index="${answerIndex}"
                                                 data-row-number="${rowNumber}"
                                                 data-column-number="${columnNumber}"
-                                                type="number"
+                                                type="text"
                                                 inputmode="numeric"
-                                                min="0"
-                                                max="18"
+                                                maxlength="2"
                                                 autocomplete="off"
+                                                enterkeyhint="next"
                                                 aria-label="${rowNumber}たす${columnNumber}"
                                             >
+
                                         </td>
                                     `;
 
@@ -308,11 +337,13 @@ function createHyakumasuHtml() {
 
                     return `
                         <tr>
+
                             <th class="hyakumasu-number-cell">
                                 ${rowNumber}
                             </th>
 
                             ${answerCells}
+
                         </tr>
                     `;
 
@@ -322,7 +353,7 @@ function createHyakumasuHtml() {
 
 
     return `
-        <div class="hyakumasu-panel">
+        <div class="hyakumasu-panel hyakumasu-panel-large">
 
             <div class="hyakumasu-header">
 
@@ -331,7 +362,9 @@ function createHyakumasuHtml() {
                     <span id="hyakumasuTodayCount">0</span>回
                 </p>
 
-                <h2>百マス計算</h2>
+                <h2>
+                    百マス計算
+                </h2>
 
                 <p class="quest-instruction">
                     左と上の数字を足して、
@@ -339,6 +372,7 @@ function createHyakumasuHtml() {
                 </p>
 
             </div>
+
 
             <div class="hyakumasu-table-wrapper">
 
@@ -348,14 +382,19 @@ function createHyakumasuHtml() {
                 >
 
                     <thead>
+
                         <tr>
+
                             <th class="hyakumasu-corner-cell">
                                 ＋
                             </th>
 
                             ${headerCells}
+
                         </tr>
+
                     </thead>
+
 
                     <tbody>
                         ${rows}
@@ -365,27 +404,28 @@ function createHyakumasuHtml() {
 
             </div>
 
+
             <p
                 id="hyakumasuMessage"
                 class="hyakumasu-message"
-                aria-live="polite"
-            ></p>
+                aria-live="polite">
+            </p>
+
 
             <div class="hyakumasu-actions">
 
                 <button
                     id="hyakumasuSubmitButton"
                     class="game-button"
-                    type="button"
-                >
+                    type="button">
                     採点する
                 </button>
+
 
                 <button
                     id="cancelHyakumasu"
                     class="game-button hyakumasu-cancel-button"
-                    type="button"
-                >
+                    type="button">
                     クエストボードへ戻る
                 </button>
 
@@ -436,6 +476,16 @@ function bindHyakumasuEvents() {
                         event,
                         index
                     );
+
+                }
+            );
+
+
+            input.addEventListener(
+                "focus",
+                () => {
+
+                    input.select();
 
                 }
             );
@@ -507,12 +557,18 @@ function handleHyakumasuInput(
     }
 
 
+    clearMoveTimer(
+        index
+    );
+
+
     let value =
-        input.value
-            .replace(
-                /[^0-9]/g,
-                ""
-            );
+        String(
+            input.value
+        ).replace(
+            /[^0-9]/g,
+            ""
+        );
 
 
     if (
@@ -528,24 +584,38 @@ function handleHyakumasuInput(
     }
 
 
+    /*
+      00、01などが入力された場合は、
+      通常の整数表記へ直す。
+    */
+
     if (
-        value !== ""
+        value.length === 2
+        && value.startsWith("0")
     ) {
-
-        const numericValue =
-            Math.min(
-                18,
-                Math.max(
-                    0,
-                    Number(value)
-                )
-            );
-
 
         value =
             String(
-                numericValue
+                Number(value)
             );
+
+    }
+
+
+    /*
+      足し算の最大値は18。
+
+      19以上になった場合は、
+      最初の1桁だけを残す。
+    */
+
+    if (
+        value !== ""
+        && Number(value) > 18
+    ) {
+
+        value =
+            value.charAt(0);
 
     }
 
@@ -563,15 +633,117 @@ function handleHyakumasuInput(
 
 
     if (
-        value !== ""
-        && index
-            < HYAKUMASU_SIZE
-                * HYAKUMASU_SIZE
-                - 1
+        value === ""
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+      2桁の答えが完成した場合は、
+      すぐ次のマスへ移動する。
+
+      例：
+      15
+      18
+      10
+    */
+
+    if (
+        value.length === 2
+    ) {
+
+        moveToNextAnswer(
+            index
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+      1桁の場合は少しだけ待つ。
+
+      その間に2桁目を入力すれば、
+      同じマスに「15」などが入る。
+
+      2桁目が入力されなければ、
+      1桁の答えとして次へ進む。
+    */
+
+    hyakumasuState.moveTimers[
+        index
+    ] =
+        window.setTimeout(
+            () => {
+
+                const latestInput =
+                    document.getElementById(
+                        `hyakumasuAnswer${index}`
+                    );
+
+
+                if (
+                    !latestInput
+                    || latestInput.disabled
+                ) {
+
+                    return;
+
+                }
+
+
+                const latestValue =
+                    latestInput.value;
+
+
+                if (
+                    latestValue !== ""
+                    && latestValue.length === 1
+                ) {
+
+                    moveToNextAnswer(
+                        index
+                    );
+
+                }
+
+            },
+            HYAKUMASU_SINGLE_DIGIT_WAIT
+        );
+
+}
+
+
+/* =========================================================
+   10. 自動移動
+   ========================================================= */
+
+function moveToNextAnswer(
+    currentIndex
+) {
+
+    clearMoveTimer(
+        currentIndex
+    );
+
+
+    const lastIndex =
+        HYAKUMASU_SIZE
+        * HYAKUMASU_SIZE
+        - 1;
+
+
+    if (
+        currentIndex < lastIndex
     ) {
 
         focusAnswerByIndex(
-            index + 1
+            currentIndex + 1
         );
 
     }
@@ -580,7 +752,71 @@ function handleHyakumasuInput(
 
 
 /* =========================================================
-   10. キーボード移動
+   11. 移動タイマー解除
+   ========================================================= */
+
+function clearMoveTimer(
+    index
+) {
+
+    const timer =
+        hyakumasuState
+            .moveTimers[
+                index
+            ];
+
+
+    if (timer) {
+
+        window.clearTimeout(
+            timer
+        );
+
+
+        hyakumasuState
+            .moveTimers[
+                index
+            ] =
+            null;
+
+    }
+
+}
+
+
+function clearAllMoveTimers() {
+
+    hyakumasuState
+        .moveTimers
+        .forEach(
+            (
+                timer,
+                index
+            ) => {
+
+                if (timer) {
+
+                    window.clearTimeout(
+                        timer
+                    );
+
+
+                    hyakumasuState
+                        .moveTimers[
+                            index
+                        ] =
+                        null;
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   12. キーボード移動
    ========================================================= */
 
 function handleHyakumasuKeydown(
@@ -590,10 +826,14 @@ function handleHyakumasuKeydown(
 
     if (
         event.key === "Backspace"
-        && event.currentTarget.value
-            === ""
+        && event.currentTarget.value === ""
         && index > 0
     ) {
+
+        clearMoveTimer(
+            index
+        );
+
 
         focusAnswerByIndex(
             index - 1
@@ -612,6 +852,12 @@ function handleHyakumasuKeydown(
 
         event.preventDefault();
 
+
+        clearMoveTimer(
+            index
+        );
+
+
         focusAnswerByIndex(
             index - 1
         );
@@ -629,6 +875,12 @@ function handleHyakumasuKeydown(
 
         event.preventDefault();
 
+
+        clearMoveTimer(
+            index
+        );
+
+
         focusAnswerByIndex(
             index + 1
         );
@@ -638,15 +890,19 @@ function handleHyakumasuKeydown(
 
     if (
         event.key === "ArrowUp"
-        && index
-            >= HYAKUMASU_SIZE
+        && index >= HYAKUMASU_SIZE
     ) {
 
         event.preventDefault();
 
-        focusAnswerByIndex(
+
+        clearMoveTimer(
             index
-            - HYAKUMASU_SIZE
+        );
+
+
+        focusAnswerByIndex(
+            index - HYAKUMASU_SIZE
         );
 
     }
@@ -664,9 +920,14 @@ function handleHyakumasuKeydown(
 
         event.preventDefault();
 
-        focusAnswerByIndex(
+
+        clearMoveTimer(
             index
-            + HYAKUMASU_SIZE
+        );
+
+
+        focusAnswerByIndex(
+            index + HYAKUMASU_SIZE
         );
 
     }
@@ -679,11 +940,19 @@ function handleHyakumasuKeydown(
         event.preventDefault();
 
 
-        if (
+        clearMoveTimer(
             index
-            < HYAKUMASU_SIZE
-                * HYAKUMASU_SIZE
-                - 1
+        );
+
+
+        const lastIndex =
+            HYAKUMASU_SIZE
+            * HYAKUMASU_SIZE
+            - 1;
+
+
+        if (
+            index < lastIndex
         ) {
 
             focusAnswerByIndex(
@@ -702,7 +971,7 @@ function handleHyakumasuKeydown(
 
 
 /* =========================================================
-   11. 採点
+   13. 採点
    ========================================================= */
 
 async function submitHyakumasuAnswers() {
@@ -714,6 +983,9 @@ async function submitHyakumasuAnswers() {
         return;
 
     }
+
+
+    clearAllMoveTimers();
 
 
     const unansweredCount =
@@ -800,11 +1072,11 @@ async function submitHyakumasuAnswers() {
 
 
             if (
-                userAnswer
-                === correctAnswer
+                userAnswer === correctAnswer
             ) {
 
                 correctCount += 1;
+
 
                 input.classList.add(
                     "correct"
@@ -836,8 +1108,7 @@ async function submitHyakumasuAnswers() {
 
 
     const isPerfect =
-        correctCount
-        === totalQuestions;
+        correctCount === totalQuestions;
 
 
     const elapsedSeconds =
@@ -879,6 +1150,7 @@ async function submitHyakumasuAnswers() {
             "クエスト完了処理が見つかりません。"
         );
 
+
         return;
 
     }
@@ -902,7 +1174,7 @@ async function submitHyakumasuAnswers() {
 
 
 /* =========================================================
-   12. メッセージ表示
+   14. メッセージ表示
    ========================================================= */
 
 function setHyakumasuMessage(
@@ -954,7 +1226,7 @@ function clearHyakumasuMessage() {
 
 
 /* =========================================================
-   13. フォーカス処理
+   15. フォーカス処理
    ========================================================= */
 
 function focusFirstAnswer() {
@@ -967,7 +1239,7 @@ function focusFirstAnswer() {
             );
 
         },
-        100
+        150
     );
 
 }
@@ -1022,7 +1294,7 @@ function focusAnswerByIndex(
 
 
 /* =========================================================
-   14. 挑戦回数表示
+   16. 挑戦回数表示
    ========================================================= */
 
 function updateHyakumasuChallengeDisplay() {
@@ -1058,7 +1330,7 @@ function updateHyakumasuChallengeDisplay() {
 
 
 /* =========================================================
-   15. 百マス計算中止
+   17. 百マス計算中止
    ========================================================= */
 
 function cancelHyakumasuQuest() {
@@ -1069,10 +1341,13 @@ function cancelHyakumasuQuest() {
 
 
 /* =========================================================
-   16. 百マス状態初期化
+   18. 百マス状態初期化
    ========================================================= */
 
 function resetHyakumasuQuest() {
+
+    clearAllMoveTimers();
+
 
     const container =
         hyakumasuState.context
@@ -1088,7 +1363,8 @@ function resetHyakumasuQuest() {
 
     if (container) {
 
-        container.innerHTML = "";
+        container.innerHTML =
+            "";
 
     }
 
@@ -1105,7 +1381,9 @@ function resetHyakumasuQuest() {
 
         finished: false,
 
-        context: null
+        context: null,
+
+        moveTimers: []
 
     };
 
@@ -1113,13 +1391,8 @@ function resetHyakumasuQuest() {
 
 
 /* =========================================================
-   17. 外部用開始関数
+   19. 外部用開始関数
    ========================================================= */
-
-/*
-  app.jsがQuestEngineを見つけられない場合の
-  予備入口。
-*/
 
 function startHyakumasu() {
 
@@ -1142,7 +1415,7 @@ function startHyakumasu() {
 
 
 /* =========================================================
-   18. 自動登録
+   20. 自動登録
    ========================================================= */
 
 document.addEventListener(
@@ -1156,7 +1429,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   19. windowへ公開
+   21. windowへ公開
    ========================================================= */
 
 window.startHyakumasu =
