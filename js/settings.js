@@ -1203,3 +1203,949 @@ function downloadSettingsJson() {
     }
 
 }
+/* =========================================================
+   26. クエスト繰り返し挑戦システム
+   Ver0.4.1 追記
+
+   ・初回報酬
+   ・2回目以降の報酬
+   ・パーフェクト報酬
+   ・今日初パーフェクト報酬
+   ・今日の挑戦回数
+   ・累計挑戦回数
+   ========================================================= */
+
+
+/* =========================================================
+   26-1. 新しい初期データを追加
+   ========================================================= */
+
+DEFAULT_SETTINGS.game.statistics = {
+
+    totalPlayCount: 0,
+
+    totalQuestClear: 0,
+
+    totalPerfect: 0
+
+};
+
+
+DEFAULT_SETTINGS.daily.totalPlayCount = 0;
+
+
+/* =========================================================
+   26-2. 保存済み統計データの読み込み対応
+   ========================================================= */
+
+/*
+  既存のmergeSettingsを残したまま、
+  新しい統計データも読み込めるように拡張する。
+*/
+
+const originalMergeSettings =
+    mergeSettings;
+
+
+mergeSettings = function (
+    defaultSettings,
+    savedSettings
+) {
+
+    const merged =
+        originalMergeSettings(
+            defaultSettings,
+            savedSettings
+        );
+
+
+    /*
+      累計統計
+    */
+
+    if (
+        savedSettings
+        && savedSettings.game
+        && savedSettings.game.statistics
+        && typeof savedSettings.game.statistics
+            === "object"
+    ) {
+
+        merged.game.statistics = {
+
+            totalPlayCount:
+                Math.max(
+                    0,
+                    Math.floor(
+                        getSafeNumber(
+                            savedSettings
+                                .game
+                                .statistics
+                                .totalPlayCount,
+                            0
+                        )
+                    )
+                ),
+
+            totalQuestClear:
+                Math.max(
+                    0,
+                    Math.floor(
+                        getSafeNumber(
+                            savedSettings
+                                .game
+                                .statistics
+                                .totalQuestClear,
+                            0
+                        )
+                    )
+                ),
+
+            totalPerfect:
+                Math.max(
+                    0,
+                    Math.floor(
+                        getSafeNumber(
+                            savedSettings
+                                .game
+                                .statistics
+                                .totalPerfect,
+                            0
+                        )
+                    )
+                )
+
+        };
+
+    }
+
+
+    /*
+      今日の挑戦回数
+    */
+
+    if (
+        savedSettings
+        && savedSettings.daily
+    ) {
+
+        merged.daily.totalPlayCount =
+            Math.max(
+                0,
+                Math.floor(
+                    getSafeNumber(
+                        savedSettings
+                            .daily
+                            .totalPlayCount,
+                        0
+                    )
+                )
+            );
+
+    }
+
+
+    return merged;
+
+};
+
+
+/* =========================================================
+   26-3. 日付変更時の挑戦回数リセット
+   ========================================================= */
+
+const originalRefreshDailyProgress =
+    refreshDailyProgress;
+
+
+refreshDailyProgress = function () {
+
+    const previousDate =
+        Settings.daily
+            ? Settings.daily.date
+            : "";
+
+
+    const today =
+        getLocalDateKey();
+
+
+    const wasReset =
+        originalRefreshDailyProgress();
+
+
+    /*
+      日付が変わった場合、
+      今日の挑戦回数も0に戻す。
+
+      累計挑戦回数は残す。
+    */
+
+    if (
+        previousDate !== today
+    ) {
+
+        Settings.daily.totalPlayCount = 0;
+
+    }
+
+
+    if (
+        !Number.isFinite(
+            Number(
+                Settings.daily
+                    .totalPlayCount
+            )
+        )
+    ) {
+
+        Settings.daily.totalPlayCount = 0;
+
+    }
+
+
+    return wasReset;
+
+};
+
+
+/* =========================================================
+   26-4. 統計データの安全確認
+   ========================================================= */
+
+function ensureQuestStatistics() {
+
+    if (
+        !Settings.game
+        || typeof Settings.game !== "object"
+    ) {
+
+        Settings.game =
+            cloneSettings(
+                DEFAULT_SETTINGS.game
+            );
+
+    }
+
+
+    if (
+        !Settings.game.statistics
+        || typeof Settings.game.statistics
+            !== "object"
+    ) {
+
+        Settings.game.statistics =
+            cloneSettings(
+                DEFAULT_SETTINGS
+                    .game
+                    .statistics
+            );
+
+    }
+
+
+    if (
+        !Settings.daily
+        || typeof Settings.daily !== "object"
+    ) {
+
+        Settings.daily =
+            cloneSettings(
+                DEFAULT_SETTINGS.daily
+            );
+
+    }
+
+
+    if (
+        !Settings.daily.completed
+        || typeof Settings.daily.completed
+            !== "object"
+        || Array.isArray(
+            Settings.daily.completed
+        )
+    ) {
+
+        Settings.daily.completed = {};
+
+    }
+
+
+    Settings.daily.totalPlayCount =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    Settings.daily
+                        .totalPlayCount,
+                    0
+                )
+            )
+        );
+
+
+    Settings.game.statistics.totalPlayCount =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    Settings.game
+                        .statistics
+                        .totalPlayCount,
+                    0
+                )
+            )
+        );
+
+
+    Settings.game.statistics.totalQuestClear =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    Settings.game
+                        .statistics
+                        .totalQuestClear,
+                    0
+                )
+            )
+        );
+
+
+    Settings.game.statistics.totalPerfect =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    Settings.game
+                        .statistics
+                        .totalPerfect,
+                    0
+                )
+            )
+        );
+
+}
+
+
+/* =========================================================
+   26-5. クエスト別の今日の記録を取得
+   ========================================================= */
+
+function getDailyQuestRecord(
+    questId
+) {
+
+    refreshDailyProgress();
+
+    ensureQuestStatistics();
+
+
+    if (
+        typeof questId !== "string"
+        || questId.trim() === ""
+    ) {
+
+        return null;
+
+    }
+
+
+    const safeQuestId =
+        questId.trim();
+
+
+    const currentRecord =
+        Settings.daily.completed[
+            safeQuestId
+        ];
+
+
+    /*
+      旧形式との互換対応。
+
+      以前の保存形式がtrueや単純なオブジェクトでも、
+      新形式へ安全に変換する。
+    */
+
+    if (
+        !currentRecord
+        || typeof currentRecord !== "object"
+        || Array.isArray(
+            currentRecord
+        )
+    ) {
+
+        Settings.daily.completed[
+            safeQuestId
+        ] = {
+
+            playCount: 0,
+
+            clearCount: 0,
+
+            perfectCount: 0,
+
+            firstReward: false,
+
+            firstPerfect: false,
+
+            lastCompletedAt: ""
+
+        };
+
+    }
+
+
+    const record =
+        Settings.daily.completed[
+            safeQuestId
+        ];
+
+
+    record.playCount =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    record.playCount,
+                    0
+                )
+            )
+        );
+
+
+    record.clearCount =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    record.clearCount,
+                    0
+                )
+            )
+        );
+
+
+    record.perfectCount =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    record.perfectCount,
+                    0
+                )
+            )
+        );
+
+
+    record.firstReward =
+        Boolean(
+            record.firstReward
+        );
+
+
+    record.firstPerfect =
+        Boolean(
+            record.firstPerfect
+        );
+
+
+    if (
+        typeof record.lastCompletedAt
+        !== "string"
+    ) {
+
+        record.lastCompletedAt = "";
+
+    }
+
+
+    return record;
+
+}
+
+
+/* =========================================================
+   26-6. 今日の挑戦回数取得
+   ========================================================= */
+
+function getTodayChallengeCount() {
+
+    refreshDailyProgress();
+
+    ensureQuestStatistics();
+
+
+    return Settings.daily
+        .totalPlayCount;
+
+}
+
+
+/* =========================================================
+   26-7. 累計挑戦回数取得
+   ========================================================= */
+
+function getTotalChallengeCount() {
+
+    ensureQuestStatistics();
+
+
+    return Settings.game
+        .statistics
+        .totalPlayCount;
+
+}
+
+
+/* =========================================================
+   26-8. クエストごとの今日の挑戦回数取得
+   ========================================================= */
+
+function getQuestChallengeCount(
+    questId
+) {
+
+    const record =
+        getDailyQuestRecord(
+            questId
+        );
+
+
+    if (!record) {
+
+        return 0;
+
+    }
+
+
+    return record.playCount;
+
+}
+
+
+/* =========================================================
+   26-9. クエスト完了・報酬計算
+   ========================================================= */
+
+/*
+  使用例：
+
+  completeQuestAttempt({
+
+      questId: "hyakumasu",
+
+      firstReward: 10,
+
+      repeatReward: 1,
+
+      isPerfect: true,
+
+      perfectReward: 1,
+
+      firstPerfectBonus: 2
+
+  });
+
+
+  戻り値の例：
+
+  {
+      success: true,
+      questId: "hyakumasu",
+      playCount: 1,
+      todayChallengeCount: 1,
+      totalChallengeCount: 1,
+      firstClear: true,
+      perfect: true,
+      firstPerfect: true,
+      baseReward: 10,
+      perfectReward: 1,
+      firstPerfectBonus: 2,
+      reward: 13,
+      totalGp: 13
+  }
+*/
+
+function completeQuestAttempt(options) {
+
+    refreshDailyProgress();
+
+    ensureQuestStatistics();
+
+
+    if (
+        !options
+        || typeof options !== "object"
+    ) {
+
+        console.error(
+            "クエスト完了データがありません。"
+        );
+
+
+        return {
+
+            success: false,
+
+            reward: 0,
+
+            totalGp: getGp()
+
+        };
+
+    }
+
+
+    const questId =
+        typeof options.questId === "string"
+            ? options.questId.trim()
+            : "";
+
+
+    if (questId === "") {
+
+        console.error(
+            "クエストIDが正しくありません。"
+        );
+
+
+        return {
+
+            success: false,
+
+            reward: 0,
+
+            totalGp: getGp()
+
+        };
+
+    }
+
+
+    const firstReward =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    options.firstReward,
+                    0
+                )
+            )
+        );
+
+
+    const repeatReward =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    options.repeatReward,
+                    0
+                )
+            )
+        );
+
+
+    const perfectReward =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    options.perfectReward,
+                    0
+                )
+            )
+        );
+
+
+    const firstPerfectBonus =
+        Math.max(
+            0,
+            Math.floor(
+                getSafeNumber(
+                    options.firstPerfectBonus,
+                    0
+                )
+            )
+        );
+
+
+    const isPerfect =
+        Boolean(
+            options.isPerfect
+        );
+
+
+    const record =
+        getDailyQuestRecord(
+            questId
+        );
+
+
+    const firstClear =
+        !record.firstReward;
+
+
+    const isFirstPerfect =
+        isPerfect
+        && !record.firstPerfect;
+
+
+    /*
+      基本報酬
+
+      今日初回：
+      firstReward
+
+      今日2回目以降：
+      repeatReward
+    */
+
+    const baseReward =
+        firstClear
+            ? firstReward
+            : repeatReward;
+
+
+    /*
+      パーフェクト報酬
+    */
+
+    const earnedPerfectReward =
+        isPerfect
+            ? perfectReward
+            : 0;
+
+
+    /*
+      今日初パーフェクト報酬
+    */
+
+    const earnedFirstPerfectBonus =
+        isFirstPerfect
+            ? firstPerfectBonus
+            : 0;
+
+
+    const totalReward =
+        baseReward
+        + earnedPerfectReward
+        + earnedFirstPerfectBonus;
+
+
+    /*
+      今日のクエスト別記録
+    */
+
+    record.playCount += 1;
+
+    record.clearCount += 1;
+
+    record.firstReward = true;
+
+    record.lastCompletedAt =
+        new Date()
+            .toISOString();
+
+
+    if (isPerfect) {
+
+        record.perfectCount += 1;
+
+        record.firstPerfect = true;
+
+    }
+
+
+    /*
+      今日・累計の挑戦回数
+    */
+
+    Settings.daily.totalPlayCount += 1;
+
+    Settings.game
+        .statistics
+        .totalPlayCount += 1;
+
+    Settings.game
+        .statistics
+        .totalQuestClear += 1;
+
+
+    if (isPerfect) {
+
+        Settings.game
+            .statistics
+            .totalPerfect += 1;
+
+    }
+
+
+    /*
+      GPを加算
+    */
+
+    Settings.game.gp =
+        getGp()
+        + totalReward;
+
+
+    saveSettings();
+
+    updateGpDisplay();
+
+    updateChallengeCountDisplay();
+
+
+    return {
+
+        success: true,
+
+        questId,
+
+        playCount:
+            record.playCount,
+
+        todayChallengeCount:
+            getTodayChallengeCount(),
+
+        totalChallengeCount:
+            getTotalChallengeCount(),
+
+        firstClear,
+
+        perfect:
+            isPerfect,
+
+        firstPerfect:
+            isFirstPerfect,
+
+        baseReward,
+
+        perfectReward:
+            earnedPerfectReward,
+
+        firstPerfectBonus:
+            earnedFirstPerfectBonus,
+
+        reward:
+            totalReward,
+
+        totalGp:
+            getGp()
+
+    };
+
+}
+
+
+/* =========================================================
+   26-10. 挑戦回数表示の更新
+   ========================================================= */
+
+/*
+  HTMLに該当IDが存在する場合だけ表示する。
+
+  今は存在しなくてもエラーにならない。
+  後ほどindex.html側へ追加する。
+*/
+
+function updateChallengeCountDisplay() {
+
+    const todayChallengeCount =
+        getTodayChallengeCount();
+
+
+    const totalChallengeCount =
+        getTotalChallengeCount();
+
+
+    const todayElements = [
+
+        document.getElementById(
+            "todayChallengeCount"
+        ),
+
+        document.getElementById(
+            "questBoardTodayChallengeCount"
+        ),
+
+        document.getElementById(
+            "resultTodayChallengeCount"
+        )
+
+    ];
+
+
+    for (
+        const element
+        of todayElements
+    ) {
+
+        if (element) {
+
+            element.textContent =
+                String(
+                    todayChallengeCount
+                );
+
+        }
+
+    }
+
+
+    const totalElements = [
+
+        document.getElementById(
+            "totalChallengeCount"
+        ),
+
+        document.getElementById(
+            "questBoardTotalChallengeCount"
+        ),
+
+        document.getElementById(
+            "resultTotalChallengeCount"
+        )
+
+    ];
+
+
+    for (
+        const element
+        of totalElements
+    ) {
+
+        if (element) {
+
+            element.textContent =
+                String(
+                    totalChallengeCount
+                );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   26-11. 全設定反映へ挑戦回数表示を追加
+   ========================================================= */
+
+const originalApplyAllSettings =
+    applyAllSettings;
+
+
+applyAllSettings = function () {
+
+    originalApplyAllSettings();
+
+    updateGpDisplay();
+
+    updateChallengeCountDisplay();
+
+};
