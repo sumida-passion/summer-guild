@@ -1,17 +1,21 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.4.1
+   夏休みギルド Ver0.4.2
    hyakumasu.js
 
    百マス計算クエスト
+
    ・10×10の足し算
-   ・0～18の2桁入力対応
-   ・1桁入力は少し待って自動移動
-   ・2桁入力はすぐ自動移動
+   ・答えは0～18
+   ・10～18の2桁入力に対応
+   ・iPad Safariの文字選択問題を修正
+   ・1を入力した時だけ2桁目を待つ
+   ・0、2～9はすぐ次のマスへ移動
    ・100問採点
    ・初回10GP
    ・2回目以降1GP
+   ・パーフェクト報酬
    ・挑戦回数保存
    ========================================================= */
 
@@ -51,14 +55,18 @@ const HYAKUMASU_SIZE =
 
 
 /*
-  1桁の答えを入力したあと、
-  次のマスへ移るまでの待ち時間。
+  「1」を入力したあと、
+  2桁目を待つ時間。
 
-  この間に2桁目を入力できる。
+  例：
+  1 → 5 で「15」
+
+  この時間内に2桁目が入力されなければ、
+  答え「1」として次のマスへ進む。
 */
 
-const HYAKUMASU_SINGLE_DIGIT_WAIT =
-    600;
+const HYAKUMASU_SECOND_DIGIT_WAIT =
+    800;
 
 
 /* =========================================================
@@ -251,7 +259,8 @@ function createRandomNumberList(
 
         numbers.push(
             Math.floor(
-                Math.random() * 10
+                Math.random()
+                * 10
             )
         );
 
@@ -323,6 +332,9 @@ function createHyakumasuHtml() {
                                                 inputmode="numeric"
                                                 maxlength="2"
                                                 autocomplete="off"
+                                                autocorrect="off"
+                                                autocapitalize="off"
+                                                spellcheck="false"
                                                 enterkeyhint="next"
                                                 aria-label="${rowNumber}たす${columnNumber}"
                                             >
@@ -485,7 +497,28 @@ function bindHyakumasuEvents() {
                 "focus",
                 () => {
 
-                    input.select();
+                    placeCursorAtEnd(
+                        input
+                    );
+
+                }
+            );
+
+
+            input.addEventListener(
+                "pointerup",
+                () => {
+
+                    window.setTimeout(
+                        () => {
+
+                            placeCursorAtEnd(
+                                input
+                            );
+
+                        },
+                        0
+                    );
 
                 }
             );
@@ -571,22 +604,25 @@ function handleHyakumasuInput(
         );
 
 
+    /*
+      最大2桁。
+    */
+
     if (
         value.length > 2
     ) {
 
         value =
             value.slice(
-                0,
-                2
+                -2
             );
 
     }
 
 
     /*
-      00、01などが入力された場合は、
-      通常の整数表記へ直す。
+      00、01などは、
+      0または1へ整える。
     */
 
     if (
@@ -603,10 +639,14 @@ function handleHyakumasuInput(
 
 
     /*
-      足し算の最大値は18。
+      百マス足し算の答えは0～18。
 
       19以上になった場合は、
-      最初の1桁だけを残す。
+      最後に押された数字を残す。
+
+      例：
+      1のあとに9を押した場合
+      19ではなく9として扱う。
     */
 
     if (
@@ -615,7 +655,9 @@ function handleHyakumasuInput(
     ) {
 
         value =
-            value.charAt(0);
+            value.slice(
+                -1
+            );
 
     }
 
@@ -626,7 +668,13 @@ function handleHyakumasuInput(
 
     hyakumasuState.answers[
         index
-    ] = value;
+    ] =
+        value;
+
+
+    placeCursorAtEnd(
+        input
+    );
 
 
     clearHyakumasuMessage();
@@ -642,13 +690,10 @@ function handleHyakumasuInput(
 
 
     /*
-      2桁の答えが完成した場合は、
-      すぐ次のマスへ移動する。
+      10～18が入力された場合。
 
-      例：
-      15
-      18
-      10
+      2桁の答えが完成しているので、
+      すぐ次のマスへ進む。
     */
 
     if (
@@ -665,15 +710,57 @@ function handleHyakumasuInput(
     }
 
 
+    const numericValue =
+        Number(value);
+
+
     /*
-      1桁の場合は少しだけ待つ。
+      0、2～9は、
+      これ以上有効な2桁にはならない。
 
-      その間に2桁目を入力すれば、
-      同じマスに「15」などが入る。
-
-      2桁目が入力されなければ、
-      1桁の答えとして次へ進む。
+      入力完了として、
+      すぐ次のマスへ進む。
     */
+
+    if (
+        numericValue === 0
+        || numericValue >= 2
+    ) {
+
+        moveToNextAnswer(
+            index
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+      「1」だけは、
+      答え1の可能性と、
+      10～18の可能性がある。
+
+      一定時間だけ2桁目を待つ。
+    */
+
+    scheduleMoveAfterOneDigit(
+        input,
+        index
+    );
+
+}
+
+
+/* =========================================================
+   10. 「1」の2桁目待機
+   ========================================================= */
+
+function scheduleMoveAfterOneDigit(
+    input,
+    index
+) {
 
     hyakumasuState.moveTimers[
         index
@@ -697,13 +784,13 @@ function handleHyakumasuInput(
                 }
 
 
-                const latestValue =
-                    latestInput.value;
-
+                /*
+                  まだ値が1のままなら、
+                  答え1として次へ進む。
+                */
 
                 if (
-                    latestValue !== ""
-                    && latestValue.length === 1
+                    latestInput.value === "1"
                 ) {
 
                     moveToNextAnswer(
@@ -713,14 +800,19 @@ function handleHyakumasuInput(
                 }
 
             },
-            HYAKUMASU_SINGLE_DIGIT_WAIT
+            HYAKUMASU_SECOND_DIGIT_WAIT
         );
+
+
+    placeCursorAtEnd(
+        input
+    );
 
 }
 
 
 /* =========================================================
-   10. 自動移動
+   11. 次のマスへ移動
    ========================================================= */
 
 function moveToNextAnswer(
@@ -742,8 +834,15 @@ function moveToNextAnswer(
         currentIndex < lastIndex
     ) {
 
-        focusAnswerByIndex(
-            currentIndex + 1
+        window.setTimeout(
+            () => {
+
+                focusAnswerByIndex(
+                    currentIndex + 1
+                );
+
+            },
+            0
         );
 
     }
@@ -752,12 +851,23 @@ function moveToNextAnswer(
 
 
 /* =========================================================
-   11. 移動タイマー解除
+   12. 移動タイマー解除
    ========================================================= */
 
 function clearMoveTimer(
     index
 ) {
+
+    if (
+        !Array.isArray(
+            hyakumasuState.moveTimers
+        )
+    ) {
+
+        return;
+
+    }
+
 
     const timer =
         hyakumasuState
@@ -786,6 +896,17 @@ function clearMoveTimer(
 
 function clearAllMoveTimers() {
 
+    if (
+        !Array.isArray(
+            hyakumasuState.moveTimers
+        )
+    ) {
+
+        return;
+
+    }
+
+
     hyakumasuState
         .moveTimers
         .forEach(
@@ -794,20 +915,23 @@ function clearAllMoveTimers() {
                 index
             ) => {
 
-                if (timer) {
+                if (!timer) {
 
-                    window.clearTimeout(
-                        timer
-                    );
-
-
-                    hyakumasuState
-                        .moveTimers[
-                            index
-                        ] =
-                        null;
+                    return;
 
                 }
+
+
+                window.clearTimeout(
+                    timer
+                );
+
+
+                hyakumasuState
+                    .moveTimers[
+                        index
+                    ] =
+                    null;
 
             }
         );
@@ -816,7 +940,7 @@ function clearAllMoveTimers() {
 
 
 /* =========================================================
-   12. キーボード移動
+   13. キーボード移動
    ========================================================= */
 
 function handleHyakumasuKeydown(
@@ -852,15 +976,16 @@ function handleHyakumasuKeydown(
 
         event.preventDefault();
 
-
         clearMoveTimer(
             index
         );
 
-
         focusAnswerByIndex(
             index - 1
         );
+
+
+        return;
 
     }
 
@@ -875,15 +1000,16 @@ function handleHyakumasuKeydown(
 
         event.preventDefault();
 
-
         clearMoveTimer(
             index
         );
 
-
         focusAnswerByIndex(
             index + 1
         );
+
+
+        return;
 
     }
 
@@ -895,15 +1021,17 @@ function handleHyakumasuKeydown(
 
         event.preventDefault();
 
-
         clearMoveTimer(
             index
         );
 
-
         focusAnswerByIndex(
-            index - HYAKUMASU_SIZE
+            index
+            - HYAKUMASU_SIZE
         );
+
+
+        return;
 
     }
 
@@ -920,15 +1048,17 @@ function handleHyakumasuKeydown(
 
         event.preventDefault();
 
-
         clearMoveTimer(
             index
         );
 
-
         focusAnswerByIndex(
-            index + HYAKUMASU_SIZE
+            index
+            + HYAKUMASU_SIZE
         );
+
+
+        return;
 
     }
 
@@ -938,7 +1068,6 @@ function handleHyakumasuKeydown(
     ) {
 
         event.preventDefault();
-
 
         clearMoveTimer(
             index
@@ -971,7 +1100,58 @@ function handleHyakumasuKeydown(
 
 
 /* =========================================================
-   13. 採点
+   14. カーソルを数字の末尾へ置く
+   ========================================================= */
+
+/*
+  input.select()は使わない。
+
+  iPad Safariで入力済み数字が青く選択され、
+  次の数字で置き換えられる問題を防ぐ。
+*/
+
+function placeCursorAtEnd(
+    input
+) {
+
+    if (!input) {
+
+        return;
+
+    }
+
+
+    window.requestAnimationFrame(
+        () => {
+
+            try {
+
+                const cursorPosition =
+                    input.value.length;
+
+
+                input.setSelectionRange(
+                    cursorPosition,
+                    cursorPosition
+                );
+
+            } catch (error) {
+
+                /*
+                  対応していないブラウザでは
+                  何もしない。
+                */
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   15. 採点
    ========================================================= */
 
 async function submitHyakumasuAnswers() {
@@ -1072,7 +1252,8 @@ async function submitHyakumasuAnswers() {
 
 
             if (
-                userAnswer === correctAnswer
+                userAnswer
+                === correctAnswer
             ) {
 
                 correctCount += 1;
@@ -1108,7 +1289,8 @@ async function submitHyakumasuAnswers() {
 
 
     const isPerfect =
-        correctCount === totalQuestions;
+        correctCount
+        === totalQuestions;
 
 
     const elapsedSeconds =
@@ -1174,7 +1356,7 @@ async function submitHyakumasuAnswers() {
 
 
 /* =========================================================
-   14. メッセージ表示
+   16. メッセージ表示
    ========================================================= */
 
 function setHyakumasuMessage(
@@ -1226,7 +1408,7 @@ function clearHyakumasuMessage() {
 
 
 /* =========================================================
-   15. フォーカス処理
+   17. フォーカス処理
    ========================================================= */
 
 function focusFirstAnswer() {
@@ -1286,15 +1468,28 @@ function focusAnswerByIndex(
     }
 
 
-    input.focus();
+    try {
 
-    input.select();
+        input.focus({
+            preventScroll: true
+        });
+
+    } catch (error) {
+
+        input.focus();
+
+    }
+
+
+    placeCursorAtEnd(
+        input
+    );
 
 }
 
 
 /* =========================================================
-   16. 挑戦回数表示
+   18. 挑戦回数表示
    ========================================================= */
 
 function updateHyakumasuChallengeDisplay() {
@@ -1330,7 +1525,7 @@ function updateHyakumasuChallengeDisplay() {
 
 
 /* =========================================================
-   17. 百マス計算中止
+   19. 百マス計算中止
    ========================================================= */
 
 function cancelHyakumasuQuest() {
@@ -1341,7 +1536,7 @@ function cancelHyakumasuQuest() {
 
 
 /* =========================================================
-   18. 百マス状態初期化
+   20. 百マス状態初期化
    ========================================================= */
 
 function resetHyakumasuQuest() {
@@ -1391,7 +1586,7 @@ function resetHyakumasuQuest() {
 
 
 /* =========================================================
-   19. 外部用開始関数
+   21. 外部用開始関数
    ========================================================= */
 
 function startHyakumasu() {
@@ -1415,7 +1610,7 @@ function startHyakumasu() {
 
 
 /* =========================================================
-   20. 自動登録
+   22. 自動登録
    ========================================================= */
 
 document.addEventListener(
@@ -1429,7 +1624,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   21. windowへ公開
+   23. windowへ公開
    ========================================================= */
 
 window.startHyakumasu =
