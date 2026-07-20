@@ -1,0 +1,385 @@
+name: Generate Project Index
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "project-index.json"
+
+permissions:
+  contents: write
+
+jobs:
+  generate-project-index:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Create complete project-index.json
+        shell: bash
+        run: |
+          cat > /tmp/generate_project_index.py <<'PYTHON'
+          from __future__ import annotations
+          
+          import hashlib
+          import json
+          import re
+          import subprocess
+          from collections import Counter, defaultdict
+          from datetime import datetime, timezone
+          from pathlib import Path
+          
+          ROOT = Path(".")
+          OUTPUT = ROOT / "project-index.json"
+          
+          IGNORE_DIRS = {".git", "node_modules", "__pycache__", ".idea", ".vscode"}
+          IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
+          TEXT_EXTENSIONS = {
+              ".html", ".css", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx",
+              ".json", ".md", ".txt", ".yml", ".yaml", ".xml", ".csv", ".py",
+          }
+          
+          def relative(path: Path) -> str:
+              return path.relative_to(ROOT).as_posix()
+          
+          def ignored(path: Path) -> bool:
+              return any(part in IGNORE_DIRS for part in path.relative_to(ROOT).parts)
+          
+          def safe_text(path: Path) -> str:
+              for encoding in ("utf-8", "utf-8-sig"):
+                  try:
+                      return path.read_text(encoding=encoding)
+                  except UnicodeDecodeError:
+                      continue
+                  except OSError:
+                      return ""
+              return ""
+          
+          def sha1_short(path: Path) -> str:
+              digest = hashlib.sha1()
+              try:
+                  with path.open("rb") as file:
+                      for chunk in iter(lambda: file.read(65536), b""):
+                          digest.update(chunk)
+                  return digest.hexdigest()[:10]
+              except OSError:
+                  return "unknown"
+          
+          def git_output(*args: str) -> str:
+              try:
+                  return subprocess.check_output(
+                      ["git", *args],
+                      cwd=ROOT,
+                      text=True,
+                      stderr=subprocess.DEVNULL,
+                  ).strip()
+              except Exception:
+                  return ""
+          
+          def build_tree(paths: list[Path]) -> dict:
+              tree = {}
+              for path in paths:
+                  node = tree
+                  for part in path.relative_to(ROOT).parts:
+                      node = node.setdefault(part, {})
+              return tree
+          
+          def tree_lines(tree: dict) -> list[str]:
+              lines = ["summer-guild/"]
+          
+              def walk(node: dict, prefix: str = "") -> None:
+                  entries = sorted(node.items(), key=lambda item: (not bool(item[1]), item[0].lower()))
+                  for index, (name, children) in enumerate(entries):
+                      last = index == len(entries) - 1
+                      lines.append(
+                          f"{prefix}{'└── ' if last else '├── '}{name}{'/' if children else ''}"
+                      )
+                      if children:
+                          walk(children, prefix + ("    " if last else "│   "))
+          
+              walk(tree)
+              return lines
+          
+          def extract_js_api(text: str) -> dict:
+              functions = re.findall(
+                  r"^\s*(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(",
+                  text,
+                  re.MULTILINE,
+              )
+              functions += re.findall(
+                  r"^\s*(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?\([^)]*\)\s*=>",
+                  text,
+                  re.MULTILINE,
+              )
+              classes = re.findall(
+                  r"^\s*class\s+([A-Za-z_$][\w$]*)",
+                  text,
+                  re.MULTILINE,
+              )
+              window_exports = re.findall(r"window\.([A-Za-z_$][\w$]*)\s*=", text)
+          
+              def unique(values: list[str]) -> list[str]:
+                  return list(dict.fromkeys(values))[:100]
+          
+              return {
+                  "functions": unique(functions),
+                  "classes": unique(classes),
+                  "windowExports": unique(window_exports),
+              }
+          
+          def extract_html_links(text: str) -> dict:
+              return {
+                  "scripts": sorted(set(re.findall(
+                      r'''<script[^>]+src=["']([^"'?#]+)''', text, re.IGNORECASE
+                  ))),
+                  "stylesheetsAndLinks": sorted(set(re.findall(
+                      r'''<link[^>]+href=["']([^"'?#]+)''', text, re.IGNORECASE
+                  ))),
+                  "images": sorted(set(re.findall(
+                      r'''<img[^>]+src=["']([^"'?#]+)''', text, re.IGNORECASE
+                  ))),
+              }
+          
+          all_files = sorted(
+              [
+                  path for path in ROOT.rglob("*")
+                  if path.is_file()
+                  and not ignored(path)
+                  and relative(path) != "project-index.json"
+              ],
+              key=lambda path: relative(path).lower(),
+          )
+          
+          directories = sorted(
+              {path.parent.as_posix() for path in all_files if path.parent.as_posix() != "."},
+              key=str.lower,
+          )
+          
+          extension_counts = Counter(
+              path.suffix.lower() if path.suffix else "[no-extension]"
+              for path in all_files
+          )
+          
+          file_entries = []
+          image_entries = []
+          api_entries = []
+          html_entrypoints = []
+          basename_groups = defaultdict(list)
+          case_groups = defaultdict(list)
+          uppercase_extensions = []
+          
+          for path in all_files:
+              rel = relative(path)
+              suffix_actual = path.suffix
+              suffix_lower = suffix_actual.lower()
+              size = path.stat().st_size
+              text = safe_text(path) if suffix_lower in TEXT_EXTENSIONS else ""
+          
+              basename_groups[path.name.lower()].append(rel)
+              case_groups[rel.lower()].append(rel)
+          
+              if suffix_actual and suffix_actual != suffix_lower:
+                  uppercase_extensions.append(rel)
+          
+              file_entry = {
+                  "path": rel,
+                  "directory": path.parent.as_posix(),
+                  "name": path.name,
+                  "stem": path.stem,
+                  "extension": suffix_actual or None,
+                  "extensionNormalized": suffix_lower or None,
+                  "sizeBytes": size,
+                  "sha1": sha1_short(path),
+              }
+              if text:
+                  file_entry["lineCount"] = len(text.splitlines())
+              file_entries.append(file_entry)
+          
+              if suffix_lower in IMAGE_EXTENSIONS:
+                  image_entries.append({
+                      "path": rel,
+                      "directory": path.parent.as_posix(),
+                      "fileName": path.name,
+                      "stem": path.stem,
+                      "extension": suffix_actual,
+                      "extensionNormalized": suffix_lower,
+                      "sizeBytes": size,
+                  })
+          
+              if suffix_lower in {".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx"} and text:
+                  api = extract_js_api(text)
+                  if any(api.values()):
+                      api_entries.append({"path": rel, **api})
+          
+              if suffix_lower == ".html" and text:
+                  html_entrypoints.append({"path": rel, **extract_html_links(text)})
+          
+          duplicate_basenames = [
+              {"fileNameNormalized": name, "paths": paths}
+              for name, paths in sorted(basename_groups.items())
+              if len(paths) > 1
+          ]
+          case_collisions = [paths for paths in case_groups.values() if len(paths) > 1]
+          
+          latest_changes = []
+          diff = git_output("diff", "--name-status", "HEAD^", "HEAD")
+          if diff:
+              for line in diff.splitlines():
+                  parts = line.split("\t")
+                  latest_changes.append({"status": parts[0], "paths": parts[1:]})
+          
+          project_index = {
+              "schemaVersion": 2,
+              "purpose": (
+                  "GPTとGitHubの連携を滑らかにし、新しいChatGPTスレッドでも"
+                  "開発品質と文脈を維持するための自動更新型プロジェクト引き継ぎファイル。"
+              ),
+              "project": {
+                  "name": "summer-guild",
+                  "displayName": "夏休みギルド",
+                  "concept": (
+                      "子どもの体験・努力・挑戦・継続を、"
+                      "認定・思い出・世界の成長として可視化する。"
+                  ),
+                  "platform": ["GitHub Pages", "PWA", "iPad Safari", "Local Storage"],
+              },
+              "generated": {
+                  "atUtc": datetime.now(timezone.utc).isoformat(),
+                  "commit": git_output("rev-parse", "--short", "HEAD") or "unknown",
+                  "commitSubject": git_output("log", "-1", "--pretty=%s") or "unknown",
+              },
+              "summary": {
+                  "fileCount": len(file_entries),
+                  "directoryCount": len(directories),
+                  "imageCount": len(image_entries),
+                  "javascriptApiFileCount": len(api_entries),
+                  "totalBytes": sum(item["sizeBytes"] for item in file_entries),
+                  "extensions": dict(sorted(extension_counts.items())),
+              },
+              "directoryStructure": {
+                  "directories": directories,
+                  "treeText": "\n".join(tree_lines(build_tree(all_files))),
+              },
+              "files": file_entries,
+              "images": image_entries,
+              "entrypoints": {
+                  "html": html_entrypoints,
+                  "manifest": "manifest.webmanifest"
+                  if any(relative(path) == "manifest.webmanifest" for path in all_files)
+                  else None,
+                  "serviceWorker": "service-worker.js"
+                  if any(relative(path) == "service-worker.js" for path in all_files)
+                  else None,
+              },
+              "javascriptApi": api_entries,
+              "warnings": {
+                  "uppercaseExtensions": sorted(uppercase_extensions),
+                  "caseCollisions": case_collisions,
+                  "duplicateFileNames": duplicate_basenames,
+                  "importantReminder": (
+                      "GitHub Pagesではファイル名と拡張子の大文字・小文字を区別する。"
+                  ),
+              },
+              "latestCommitChanges": latest_changes,
+              "gptHandoff": {
+                  "primaryGoal": (
+                      "新しいスレッドでも、直前のスレッドから続いているような"
+                      "理解度と実装品質を維持する。"
+                  ),
+                  "firstInstruction": (
+                      "最初にproject-index.jsonを最後まで読み、"
+                      "フォルダ階層・実ファイル名・画像拡張子・警告を確認すること。"
+                  ),
+                  "readingOrder": [
+                      "project-index.json",
+                      "README.md",
+                      "docs/game-rules.md",
+                      "docs/asset-guide.md",
+                      "docs/development-log.md",
+                      "今回の改修対象ファイル",
+                      "その依存先・関連ファイル",
+                  ],
+                  "taskStartProtocol": [
+                      "依頼対象の実ファイルを読む。",
+                      "関連するJS・CSS・HTML・画像を確認する。",
+                      "既存APIと呼び出し方法を確認する。",
+                      "推測と確認済み情報を分ける。",
+                      "変更範囲と守るべき既存挙動を整理してから実装する。",
+                  ],
+                  "nonNegotiableRules": [
+                      "既存APIを推測で書き換えない。",
+                      "ファイル名と拡張子の大文字・小文字を厳密に守る。",
+                      "動いている機能を守りながら一つずつ改修する。",
+                      "iPad Safariとタッチ操作を前提にする。",
+                      "ソフトウェアキーボードを出したくない入力では共通NumberPadを優先する。",
+                      "透過レイヤー画像は基準画像とキャンバスサイズ・座標基準を揃える。",
+                      "レベル・経験値・強さを中心にせず、認定・思い出・世界の成長を重視する。",
+                  ],
+                  "deliveryRules": [
+                      "大きなJS・CSS・HTMLは部分パッチではなく完成ファイルを優先する。",
+                      "大きなソースファイルはZIPで渡す。",
+                      "置換対象パスと変更内容を明記する。",
+                      "未確認の動作を確認済みとは言わない。",
+                  ],
+                  "ipadWorkflow": [
+                      "ユーザーは基本的にiPadのSafariでGitHubを操作する。",
+                      "PCのドラッグ＆ドロップやターミナル操作を前提にしない。",
+                      "GitHub WebのAdd file、Upload files、Create new fileを基準に案内する。",
+                      "空フォルダ維持には.gitkeepを使う。",
+                  ],
+                  "knownStableModules": ["js/numberpad.js", "js/quests/hyakumasu.js"],
+                  "newThreadOpeningMessage": (
+                      "夏休みギルドの開発を続けます。"
+                      "最初にproject-index.jsonを最後まで読み、"
+                      "次に今回の改修対象と関連ファイルを確認してください。"
+                      "既存API・ファイル名・画像拡張子を推測で扱わず、"
+                      "iPad Safari前提で進めてください。"
+                      "大きな完成ファイルはZIPで渡してください。"
+                  ),
+                  "importantLimitation": (
+                      "project-index.jsonは構造と引き継ぎ指示を伝えるが、"
+                      "各ソースコード本文までは含まない。"
+                      "高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も"
+                      "新しいスレッドへ渡す必要がある。"
+                  ),
+              },
+          }
+          
+          OUTPUT.write_text(
+              json.dumps(project_index, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          
+          print("project-index.json を更新しました")
+          print(f"ファイル数: {len(file_entries)}")
+          print(f"フォルダ数: {len(directories)}")
+          print(f"画像数: {len(image_entries)}")
+          PYTHON
+          python3 /tmp/generate_project_index.py
+
+      - name: Commit project-index.json
+        shell: bash
+        run: |
+          if [ ! -f project-index.json ]; then
+            echo "project-index.json が作成されていません。"
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add project-index.json
+
+          if git diff --cached --quiet; then
+            echo "project-index.json に変更はありません。"
+            exit 0
+          fi
+
+          git commit -m "docs: update complete project index"
+          git push
