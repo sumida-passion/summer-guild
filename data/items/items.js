@@ -3,56 +3,89 @@
 /* =========================================================
    ギルドショップ商品マスター
 
-   新しい商品は、この配列へ1件追加する。
-   idは重複させない。
+   ・ショップに並ぶのは、この配列へ登録した商品だけ。
+   ・通常衣装は単品販売し、自由な上下コーディネートを楽しむ。
+   ・ギルドマントは認定報酬のため、ここには登録しない。
+   ・全身固定装備は専用制御を実装するまで登録しない。
    ========================================================= */
 
 window.GUILD_SHOP_ITEMS = [
+    { id: "green_tshirt", name: "森風の緑Tシャツ", price: 20 },
 
-    {
-        id: "green_tshirt",
-        name: "森風の緑Tシャツ",
-        price: 20
-    },
+    { id: "lightning_tshirt", name: "稲妻のTシャツ", price: 30, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/lightning_tops.PNG" } },
 
-    {
-        id: "lightning_tshirt",
-        name: "稲妻のTシャツ",
-        price: 30,
-        wearable: true,
-        layers: {
-            tops: "assets/characters/player/clothes/tops/lightning_tops.PNG"
-        }
-    },
+    { id: "border_tops", name: "旅人のボーダーシャツ", price: 12, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/border_tops.PNG" } },
 
-    {
-        id: "doctor_white_coat",
-        name: "癒やし手の白衣",
-        price: 80
-    },
+    { id: "foody_tops", name: "街歩きのフーディー", price: 18, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/foody_tops.PNG" } },
 
-    {
-        id: "black_dog_costume",
-        name: "黒い犬の着ぐるみ",
-        price: 120
-    },
+    { id: "mountainparker_tops", name: "山風のマウンテンパーカー", price: 30, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/mountainparker_tops.PNG" } },
 
-    {
-        id: "kyudo_uniform",
-        name: "静心の弓道着",
-        price: 180,
-        wearable: true,
-        layers: {
-            bottoms: "assets/characters/player/clothes/bottoms/kyudo_bottoms.PNG",
-            tops: "assets/characters/player/clothes/tops/kyudo_tops.PNG",
-            shoes: "assets/characters/player/clothes/shoes/kyudo_shoes.PNG"
-        }
-    },
+    { id: "cycling_tops", name: "風走りのサイクルトップス", price: 22, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/cycling_tops.PNG" } },
 
-    {
-        id: "barbarian_outfit",
-        name: "荒野の戦士装備",
-        price: 300
-    }
+    { id: "tennis_tops", name: "白庭のテニストップス", price: 22, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/tennis_tops.PNG" } },
 
+    { id: "doctor_tops", name: "癒やし手の白衣トップス", price: 25, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/doctor_tops.PNG" } },
+
+    { id: "schooluniform_tops", name: "学び舎の冬制服トップス", price: 24, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/schooluniform_tops.PNG" } },
+
+    { id: "schooluniformsummer_tops", name: "学び舎の夏制服トップス", price: 20, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/schooluniformsummer_tops.PNG" } },
+
+    { id: "battle_tops", name: "荒野の戦士トップス", price: 35, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/battle_tops.PNG" } },
+
+    { id: "bluejeans_bottoms", name: "青空のブルージーンズ", price: 16, wearable: true,
+      category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/bluejeans_bottoms.PNG" } },
+
+    { id: "longskirtgrey_bottoms", name: "灰色のロングスカート", price: 16, wearable: true,
+      category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/longskirtgrey_bottoms.PNG" } },
+
+    { id: "stripe_bottoms", name: "冒険者のストライプパンツ", price: 18, wearable: true,
+      category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/stripe_bottoms.PNG" } },
+
+    { id: "cycling_bottoms", name: "風走りのサイクルパンツ", price: 20, wearable: true,
+      category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/cycling_bottoms.PNG" } },
+
+    { id: "tennis_bottoms", name: "白庭のテニスボトムス", price: 20, wearable: true,
+      category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/tennis_bottoms.PNG" } },
+
+    { id: "doctor_bottoms", name: "癒やし手の白衣パンツ", price: 22, wearable: true,
+      category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/doctor_bottoms.PNG" } },
+
+    { id: "schooluniform_bottoms", name: "学び舎の制服ボトムス", price: 22, wearable: true,
+      category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/schooluniform_bottoms.PNG" } },
+
+    { id: "battle_bottoms", name: "荒野の戦士ボトムス", price: 35, wearable: true,
+      category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/battle_bottoms.PNG" } },
+
+    { id: "doctor_shoes", name: "癒やし手の白い靴", price: 14, wearable: true,
+      category: "shoes", layers: { shoes: "assets/characters/player/clothes/shoes/doctor_shoes.PNG" } },
+
+    { id: "schooluniform_shoes", name: "学び舎のローファー", price: 14, wearable: true,
+      category: "shoes", layers: { shoes: "assets/characters/player/clothes/shoes/schooluniform_shoes.PNG" } },
+
+    { id: "glasses_head", name: "知恵のメガネ", price: 10, wearable: true,
+      category: "head", layers: { head: "assets/characters/player/head/glasses_head.PNG" } },
+
+    { id: "google_head", name: "冒険家のゴーグル", price: 15, wearable: true,
+      category: "head", layers: { head: "assets/characters/player/head/google_head.PNG" } },
+
+    /* 既存の一式商品。購入済みデータとの互換性を保つためIDを維持。 */
+    { id: "kyudo_uniform", name: "静心の弓道着", price: 180, wearable: true,
+      category: "set", layers: {
+          bottoms: "assets/characters/player/clothes/bottoms/kyudo_bottoms.PNG",
+          tops: "assets/characters/player/clothes/tops/kyudo_tops.PNG",
+          shoes: "assets/characters/player/clothes/shoes/kyudo_shoes.PNG"
+      } },
+
+    /* 画像未実装の商品は、将来用の既存IDとして保持。 */
+    { id: "black_dog_costume", name: "黒い犬の着ぐるみ", price: 120 }
 ];
