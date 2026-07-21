@@ -1,11 +1,12 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.5.0
+   夏休みギルド Ver0.5.1
    shop.js
 
    ギルドショップ画面
    商品一覧・購入確認・購入済み表示
+   ゲーム内ダイアログ
    ========================================================= */
 
 function renderGuildShop() {
@@ -155,7 +156,8 @@ function handleGuildShopItemClick(event) {
     if (!item) {
 
         showGuildShopMessage(
-            "商品情報を確認できませんでした。"
+            "商品情報を確認できませんでした。",
+            "お知らせ"
         );
 
         return;
@@ -169,7 +171,8 @@ function handleGuildShopItemClick(event) {
     ) {
 
         showGuildShopMessage(
-            `${item.name}は購入済みです。`
+            `${item.name}は購入済みです。`,
+            "購入済み"
         );
 
         return;
@@ -177,20 +180,10 @@ function handleGuildShopItemClick(event) {
     }
 
 
-    const confirmed =
-        window.confirm(
-            `${item.name}\n${item.price} GP\n\n購入しますか？`
-        );
-
-
-    if (!confirmed) {
-
-        return;
-
-    }
-
-
-    purchaseGuildShopItem(item);
+    showGuildShopConfirm(
+        item,
+        () => purchaseGuildShopItem(item)
+    );
 
 }
 
@@ -202,7 +195,8 @@ function purchaseGuildShopItem(item) {
     ) {
 
         showGuildShopMessage(
-            "購入機能を利用できません。"
+            "購入機能を利用できません。",
+            "お知らせ"
         );
 
         return false;
@@ -224,8 +218,17 @@ function purchaseGuildShopItem(item) {
             && result.reason === "not-enough-gp"
         ) {
 
+            const shortage =
+                Math.max(
+                    0,
+                    getSafeShopPrice(item.price)
+                    - getSafeShopPrice(result.totalGp)
+                );
+
+
             showGuildShopMessage(
-                `GPが足りません。\n必要：${item.price} GP\n所持：${result.totalGp} GP`
+                `あと ${shortage} GP 必要です。\n所持GP：${result.totalGp}`,
+                "GPが足りません"
             );
 
         } else if (
@@ -234,13 +237,15 @@ function purchaseGuildShopItem(item) {
         ) {
 
             showGuildShopMessage(
-                `${item.name}は購入済みです。`
+                `${item.name}は購入済みです。`,
+                "購入済み"
             );
 
         } else {
 
             showGuildShopMessage(
-                "購入できませんでした。"
+                "購入できませんでした。",
+                "お知らせ"
             );
 
         }
@@ -253,12 +258,14 @@ function purchaseGuildShopItem(item) {
     }
 
 
+    renderGuildShop();
+
+
     showGuildShopMessage(
-        `${item.name}を購入しました！\n残り ${result.totalGp} GP`
+        `${item.name}を手に入れました！\n残り ${result.totalGp} GP`,
+        "購入しました"
     );
 
-
-    renderGuildShop();
 
     return true;
 
@@ -312,11 +319,300 @@ function updateGuildShopGpDisplay() {
 }
 
 
-function showGuildShopMessage(message) {
+/* =========================================================
+   ゲーム内ダイアログ
+   ========================================================= */
 
-    window.alert(
-        String(message || "")
+function ensureGuildShopDialog() {
+
+    let overlay =
+        document.getElementById(
+            "guildShopDialogOverlay"
+        );
+
+
+    if (overlay) {
+
+        return overlay;
+
+    }
+
+
+    overlay =
+        document.createElement("div");
+
+    overlay.id =
+        "guildShopDialogOverlay";
+
+    overlay.className =
+        "guildshop-dialog-overlay";
+
+    overlay.hidden = true;
+
+    overlay.setAttribute(
+        "aria-hidden",
+        "true"
     );
+
+
+    overlay.innerHTML = `
+        <section
+            class="guildshop-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="guildShopDialogTitle"
+            aria-describedby="guildShopDialogMessage">
+
+            <p class="guildshop-dialog-label">
+                GUILD SHOP
+            </p>
+
+            <h3 id="guildShopDialogTitle">
+                お知らせ
+            </h3>
+
+            <p
+                id="guildShopDialogMessage"
+                class="guildshop-dialog-message">
+            </p>
+
+            <div class="guildshop-dialog-actions">
+
+                <button
+                    id="guildShopDialogCancel"
+                    class="guildshop-dialog-cancel"
+                    type="button">
+                    やめる
+                </button>
+
+                <button
+                    id="guildShopDialogConfirm"
+                    class="guildshop-dialog-confirm"
+                    type="button">
+                    購入する
+                </button>
+
+            </div>
+
+        </section>
+    `;
+
+
+    document.body.appendChild(overlay);
+
+
+    overlay.addEventListener(
+        "click",
+        (event) => {
+
+            if (event.target === overlay) {
+
+                closeGuildShopDialog();
+
+            }
+
+        }
+    );
+
+
+    return overlay;
+
+}
+
+
+function openGuildShopDialog(options = {}) {
+
+    const overlay =
+        ensureGuildShopDialog();
+
+    const title =
+        document.getElementById(
+            "guildShopDialogTitle"
+        );
+
+    const message =
+        document.getElementById(
+            "guildShopDialogMessage"
+        );
+
+    const cancelButton =
+        document.getElementById(
+            "guildShopDialogCancel"
+        );
+
+    const confirmButton =
+        document.getElementById(
+            "guildShopDialogConfirm"
+        );
+
+
+    if (
+        !overlay
+        || !title
+        || !message
+        || !cancelButton
+        || !confirmButton
+    ) {
+
+        return false;
+
+    }
+
+
+    title.textContent =
+        String(options.title || "お知らせ");
+
+    message.textContent =
+        String(options.message || "");
+
+
+    const isConfirm =
+        typeof options.onConfirm === "function";
+
+
+    cancelButton.hidden =
+        !isConfirm;
+
+    cancelButton.textContent =
+        String(options.cancelLabel || "やめる");
+
+    confirmButton.textContent =
+        String(
+            options.confirmLabel
+            || (isConfirm ? "購入する" : "閉じる")
+        );
+
+
+    cancelButton.onclick =
+        closeGuildShopDialog;
+
+    confirmButton.onclick = () => {
+
+        closeGuildShopDialog();
+
+
+        if (isConfirm) {
+
+            options.onConfirm();
+
+        }
+
+    };
+
+
+    overlay.hidden = false;
+
+    overlay.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    document.body.classList.add(
+        "guildshop-dialog-open"
+    );
+
+
+    window.requestAnimationFrame(
+        () => {
+
+            overlay.classList.add("is-open");
+
+            confirmButton.focus();
+
+        }
+    );
+
+
+    return true;
+
+}
+
+
+function closeGuildShopDialog() {
+
+    const overlay =
+        document.getElementById(
+            "guildShopDialogOverlay"
+        );
+
+
+    if (!overlay || overlay.hidden) {
+
+        return false;
+
+    }
+
+
+    overlay.classList.remove("is-open");
+
+    overlay.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.classList.remove(
+        "guildshop-dialog-open"
+    );
+
+
+    window.setTimeout(
+        () => {
+
+            if (
+                !overlay.classList.contains(
+                    "is-open"
+                )
+            ) {
+
+                overlay.hidden = true;
+
+            }
+
+        },
+        220
+    );
+
+
+    return true;
+
+}
+
+
+function showGuildShopConfirm(item, onConfirm) {
+
+    openGuildShopDialog({
+
+        title:
+            getSafeShopText(item.name),
+
+        message:
+            `${getSafeShopPrice(item.price)} GP\n\nこの品を購入しますか？`,
+
+        confirmLabel:
+            "購入する",
+
+        cancelLabel:
+            "やめる",
+
+        onConfirm
+
+    });
+
+}
+
+
+function showGuildShopMessage(
+    message,
+    title = "お知らせ"
+) {
+
+    openGuildShopDialog({
+
+        title,
+        message,
+        confirmLabel: "閉じる"
+
+    });
 
 }
 
