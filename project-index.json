@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T12:55:24.950725+00:00",
-    "commit": "7d5883a",
+    "atUtc": "2026-07-21T12:55:50.325689+00:00",
+    "commit": "8c5d0d4",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 55,
     "imageCount": 36,
     "javascriptApiFileCount": 12,
-    "totalBytes": 62362850,
+    "totalBytes": 62363492,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1124,9 +1124,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 20391,
-      "sha1": "62d83875bc",
-      "lineCount": 1323
+      "sizeBytes": 21033,
+      "sha1": "76180da4e1",
+      "lineCount": 1367
     },
     {
       "path": "js/components/.gitkeep",
@@ -1825,6 +1825,7 @@
       ],
       "classes": [],
       "windowExports": [
+        "initMusicShop",
         "openWardrobe",
         "closeWardrobe",
         "renderGuildShop",
@@ -2215,9 +2216,9 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "data/shop/music.js"
+        "js/app.js"
       ]
     }
   ],
