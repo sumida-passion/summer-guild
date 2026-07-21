@@ -192,6 +192,50 @@ function bindButtons() {
 
 
     /*
+      部屋
+      ↓
+      着せ替え
+    */
+
+    bindActionButton(
+        [
+            "openWardrobe"
+        ],
+        () => {
+
+            if (
+                typeof window.openWardrobe
+                === "function"
+            ) {
+
+                window.openWardrobe();
+
+            }
+
+        }
+    );
+
+
+    bindActionButton(
+        [
+            "closeWardrobe"
+        ],
+        () => {
+
+            if (
+                typeof window.closeWardrobe
+                === "function"
+            ) {
+
+                window.closeWardrobe();
+
+            }
+
+        }
+    );
+
+
+    /*
       ギルドホール
       ↓
       部屋

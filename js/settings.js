@@ -44,7 +44,33 @@ const DEFAULT_SETTINGS = {
 
         rotation: 0,
 
-        visible: true
+        visible: true,
+
+        /*
+          着せ替えレイヤー。
+          すべてbase.pngと同じキャンバス・座標で重ねる。
+        */
+        equipment: {
+
+            capes: "",
+
+            bottoms:
+                "assets/characters/player/clothes/bottoms/default_bottoms.png",
+
+            tops:
+                "assets/characters/player/clothes/tops/default_tops.png",
+
+            shoes: "",
+
+            outer: "",
+
+            gloves: "",
+
+            head: "",
+
+            accessories: ""
+
+        }
 
     },
 
@@ -226,6 +252,44 @@ function mergeSettings(
             merged.player,
             savedSettings.player
         );
+
+
+        const savedEquipment =
+            savedSettings.player.equipment;
+
+
+        merged.player.equipment =
+            cloneSettings(
+                DEFAULT_SETTINGS.player.equipment
+            );
+
+
+        if (
+            savedEquipment
+            && typeof savedEquipment === "object"
+            && !Array.isArray(savedEquipment)
+        ) {
+
+            for (
+                const layerName
+                of Object.keys(
+                    merged.player.equipment
+                )
+            ) {
+
+                if (
+                    typeof savedEquipment[layerName]
+                    === "string"
+                ) {
+
+                    merged.player.equipment[layerName] =
+                        savedEquipment[layerName];
+
+                }
+
+            }
+
+        }
 
     }
 
@@ -717,6 +781,241 @@ function applyPlayerSettings() {
 function applyAllSettings() {
 
     applyPlayerSettings();
+
+    applyPlayerEquipment();
+
+}
+
+
+/* =========================================================
+   16. 着せ替え設定
+   ========================================================= */
+
+const PLAYER_EQUIPMENT_LAYERS = [
+
+    "capes",
+    "bottoms",
+    "tops",
+    "shoes",
+    "outer",
+    "gloves",
+    "head",
+    "accessories"
+
+];
+
+
+function getPlayerEquipment() {
+
+    if (
+        !Settings.player.equipment
+        || typeof Settings.player.equipment !== "object"
+        || Array.isArray(Settings.player.equipment)
+    ) {
+
+        Settings.player.equipment =
+            cloneSettings(
+                DEFAULT_SETTINGS.player.equipment
+            );
+
+    }
+
+
+    return cloneSettings(
+        Settings.player.equipment
+    );
+
+}
+
+
+function getWearableShopItem(itemId) {
+
+    const safeItemId =
+        typeof itemId === "string"
+            ? itemId.trim()
+            : "";
+
+
+    const items =
+        Array.isArray(window.GUILD_SHOP_ITEMS)
+            ? window.GUILD_SHOP_ITEMS
+            : [];
+
+
+    return items.find(
+        (item) =>
+            item
+            && item.id === safeItemId
+            && item.wearable === true
+            && item.layers
+            && typeof item.layers === "object"
+    ) || null;
+
+}
+
+
+function equipShopItem(itemId) {
+
+    const item =
+        getWearableShopItem(itemId);
+
+
+    if (!item) {
+
+        return {
+            success: false,
+            reason: "not-wearable"
+        };
+
+    }
+
+
+    if (!isShopItemOwned(item.id)) {
+
+        return {
+            success: false,
+            reason: "not-owned"
+        };
+
+    }
+
+
+    for (
+        const layerName
+        of PLAYER_EQUIPMENT_LAYERS
+    ) {
+
+        const layerPath =
+            item.layers[layerName];
+
+
+        if (
+            typeof layerPath === "string"
+            && layerPath.trim() !== ""
+        ) {
+
+            Settings.player.equipment[layerName] =
+                layerPath.trim();
+
+        }
+
+    }
+
+
+    saveSettings();
+    applyPlayerEquipment();
+
+
+    return {
+        success: true,
+        itemId: item.id
+    };
+
+}
+
+
+function resetPlayerEquipment() {
+
+    Settings.player.equipment =
+        cloneSettings(
+            DEFAULT_SETTINGS.player.equipment
+        );
+
+
+    saveSettings();
+    applyPlayerEquipment();
+
+
+    return true;
+
+}
+
+
+function isShopItemEquipped(itemId) {
+
+    const item =
+        getWearableShopItem(itemId);
+
+
+    if (!item) {
+
+        return false;
+
+    }
+
+
+    const equipment =
+        getPlayerEquipment();
+
+
+    const layerEntries =
+        Object.entries(item.layers)
+            .filter(
+                ([layerName, layerPath]) =>
+                    PLAYER_EQUIPMENT_LAYERS.includes(layerName)
+                    && typeof layerPath === "string"
+                    && layerPath.trim() !== ""
+            );
+
+
+    if (layerEntries.length === 0) {
+
+        return false;
+
+    }
+
+
+    return layerEntries.every(
+        ([layerName, layerPath]) =>
+            equipment[layerName] === layerPath.trim()
+    );
+
+}
+
+
+function applyPlayerEquipment() {
+
+    const equipment =
+        getPlayerEquipment();
+
+
+    for (
+        const layerName
+        of PLAYER_EQUIPMENT_LAYERS
+    ) {
+
+        const image =
+            document.querySelector(
+                `[data-player-layer="${layerName}"]`
+            );
+
+
+        if (!image) {
+
+            continue;
+
+        }
+
+
+        const layerPath =
+            typeof equipment[layerName] === "string"
+                ? equipment[layerName].trim()
+                : "";
+
+
+        if (layerPath === "") {
+
+            image.hidden = true;
+            image.removeAttribute("src");
+
+        } else {
+
+            image.src = layerPath;
+            image.hidden = false;
+
+        }
+
+    }
 
 }
 
