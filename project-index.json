@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T12:56:49.952916+00:00",
-    "commit": "d21dffe",
-    "commitSubject": "Add files via upload"
+    "atUtc": "2026-07-21T13:12:00.291398+00:00",
+    "commit": "unknown",
+    "commitSubject": "unknown"
   },
   "summary": {
     "fileCount": 131,
     "directoryCount": 55,
     "imageCount": 36,
     "javascriptApiFileCount": 14,
-    "totalBytes": 62379317,
+    "totalBytes": 62382339,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1363,9 +1363,9 @@
       "stem": "musicPlayer",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 6487,
-      "sha1": "5dd6d2e056",
-      "lineCount": 253
+      "sizeBytes": 9509,
+      "sha1": "2dcbaf9be5",
+      "lineCount": 359
     },
     {
       "path": "js/systems/questEngine.js",
@@ -2102,16 +2102,20 @@
         "getSelectedGuildMusicId",
         "saveSelectedGuildMusicId",
         "getGuildMusicAudio",
+        "getTrackUrl",
+        "isTrackLoaded",
+        "rememberSelectedPlaybackPosition",
+        "seekAudio",
+        "ensureGuildMusicTrack",
         "stopGuildMusicPreview",
-        "loadGuildMusicTrack",
         "playSelectedGuildMusic",
         "pauseGuildMusic",
         "selectGuildMusic",
         "previewGuildMusic",
         "handleGuildMusicScreenChange",
-        "initGuildMusicPlayer",
-        "seek",
-        "resumeFromTap"
+        "pauseForBackground",
+        "resumeAfterBackground",
+        "initGuildMusicPlayer"
       ],
       "classes": [],
       "windowExports": [
@@ -2283,14 +2287,7 @@
     ],
     "importantReminder": "GitHub Pagesではファイル名と拡張子の大文字・小文字を区別する。"
   },
-  "latestCommitChanges": [
-    {
-      "status": "A",
-      "paths": [
-        "js/systems/musicPlayer.js"
-      ]
-    }
-  ],
+  "latestCommitChanges": [],
   "gptHandoff": {
     "primaryGoal": "新しいスレッドでも、直前のスレッドから続いているような理解度と実装品質を維持する。",
     "firstInstruction": "最初にproject-index.jsonを最後まで読み、フォルダ階層・実ファイル名・画像拡張子・警告を確認すること。",
