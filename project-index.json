@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T07:11:36.522167+00:00",
-    "commit": "fec48c5",
+    "atUtc": "2026-07-21T07:22:57.844054+00:00",
+    "commit": "f4e62fe",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 55,
     "imageCount": 36,
     "javascriptApiFileCount": 10,
-    "totalBytes": 37387543,
+    "totalBytes": 37392674,
     "extensions": {
       ".css": 3,
       ".html": 1,
@@ -1195,9 +1195,9 @@
       "stem": "shop",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 5973,
-      "sha1": "66f7e40760",
-      "lineCount": 377
+      "sizeBytes": 11104,
+      "sha1": "b6a085ab16",
+      "lineCount": 673
     },
     {
       "path": "js/settings.js",
@@ -1840,6 +1840,10 @@
         "purchaseGuildShopItem",
         "findGuildShopItem",
         "updateGuildShopGpDisplay",
+        "ensureGuildShopDialog",
+        "openGuildShopDialog",
+        "closeGuildShopDialog",
+        "showGuildShopConfirm",
         "showGuildShopMessage",
         "getSafeShopText",
         "getSafeShopPrice",
@@ -2043,9 +2047,9 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG"
+        "js/screens/shop.js"
       ]
     }
   ],
