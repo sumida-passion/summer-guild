@@ -13,21 +13,22 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T10:27:41.844476+00:00",
-    "commit": "2aaf5c0",
+    "atUtc": "2026-07-21T11:55:42.690897+00:00",
+    "commit": "7c4cefc",
     "commitSubject": "Add files via upload"
   },
   "summary": {
-    "fileCount": 120,
+    "fileCount": 128,
     "directoryCount": 55,
     "imageCount": 36,
     "javascriptApiFileCount": 11,
-    "totalBytes": 37424220,
+    "totalBytes": 62356299,
     "extensions": {
       ".css": 4,
       ".html": 1,
       ".js": 22,
       ".md": 4,
+      ".mp3": 8,
       ".png": 36,
       ".webmanifest": 1,
       ".yml": 1,
@@ -92,7 +93,7 @@
       "tests",
       "tools"
     ],
-    "treeText": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   └── .gitkeep\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   └── .gitkeep\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   └── .gitkeep\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_bottoms.PNG\n│   │       │   │   ├── cycling_bottoms.PNG\n│   │       │   │   ├── default_bottoms.png\n│   │       │   │   ├── doctor_bottoms.PNG\n│   │       │   │   ├── kyudo_bottoms.PNG\n│   │       │   │   ├── longskirtgrey_bottoms.PNG\n│   │       │   │   ├── schooluniform_bottoms.PNG\n│   │       │   │   ├── stripe_bottoms.PNG\n│   │       │   │   └── tennis_bottoms.PNG\n│   │       │   ├── capes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── kokugoguild_capes.PNG\n│   │       │   │   └── rikaguild_capes.PNG\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   └── cloudstrife_outerset.PNG\n│   │       │   ├── shoes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── doctor_shoes.PNG\n│   │       │   │   ├── kyudo_shoes.PNG\n│   │       │   │   └── schooluniform_shoes.PNG\n│   │       │   ├── tops/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── border_tops.PNG\n│   │       │   │   ├── cycling_tops.PNG\n│   │       │   │   ├── default_tops.png\n│   │       │   │   ├── foody_tops.PNG\n│   │       │   │   ├── kyudo_tops.PNG\n│   │       │   │   ├── lightning_tops.PNG\n│   │       │   │   └── tennis_tops.PNG\n│   │       │   └── .gitkeep\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   ├── .gitkeep\n│   │       │   └── google_head.PNG\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       └── .gitkeep\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button.png\n│       │   ├── wood_button_pressed.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   └── common.css\n│   ├── common.css\n│   ├── developer.css\n│   └── layout.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   ├── .gitkeep\n│   │   └── items.js\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       └── .gitkeep\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   └── game-rules.md\n├── js/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── shop.js\n│   │   └── wardrobe.js\n│   ├── systems/\n│   │   ├── .gitkeep\n│   │   └── questEngine.js\n│   ├── app.js\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── settings.js\n│   └── storage.js\n├── saves/\n│   └── .gitkeep\n├── tests/\n│   └── .gitkeep\n├── tools/\n│   └── generateProjectState.js\n├── index.html\n├── manifest.webmanifest\n├── README.md\n└── service-worker.js"
+    "treeText": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Afternoon in the Academy.mp3\n│   │   │   ├── Bloom in the Garden.mp3\n│   │   │   ├── Candlelit Banquet.mp3\n│   │   │   ├── Harbor Breeze.mp3\n│   │   │   ├── Morning Light in the Guild.mp3\n│   │   │   ├── Sunlight Through Leaves.mp3\n│   │   │   ├── The Quiet Court.mp3\n│   │   │   └── Thunder in the Hall.mp3\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   └── .gitkeep\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   └── .gitkeep\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_bottoms.PNG\n│   │       │   │   ├── cycling_bottoms.PNG\n│   │       │   │   ├── default_bottoms.png\n│   │       │   │   ├── doctor_bottoms.PNG\n│   │       │   │   ├── kyudo_bottoms.PNG\n│   │       │   │   ├── longskirtgrey_bottoms.PNG\n│   │       │   │   ├── schooluniform_bottoms.PNG\n│   │       │   │   ├── stripe_bottoms.PNG\n│   │       │   │   └── tennis_bottoms.PNG\n│   │       │   ├── capes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── kokugoguild_capes.PNG\n│   │       │   │   └── rikaguild_capes.PNG\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   └── cloudstrife_outerset.PNG\n│   │       │   ├── shoes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── doctor_shoes.PNG\n│   │       │   │   ├── kyudo_shoes.PNG\n│   │       │   │   └── schooluniform_shoes.PNG\n│   │       │   ├── tops/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── border_tops.PNG\n│   │       │   │   ├── cycling_tops.PNG\n│   │       │   │   ├── default_tops.png\n│   │       │   │   ├── foody_tops.PNG\n│   │       │   │   ├── kyudo_tops.PNG\n│   │       │   │   ├── lightning_tops.PNG\n│   │       │   │   └── tennis_tops.PNG\n│   │       │   └── .gitkeep\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   ├── .gitkeep\n│   │       │   └── google_head.PNG\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       └── .gitkeep\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button.png\n│       │   ├── wood_button_pressed.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   └── common.css\n│   ├── common.css\n│   ├── developer.css\n│   └── layout.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   ├── .gitkeep\n│   │   └── items.js\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       └── .gitkeep\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   └── game-rules.md\n├── js/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── shop.js\n│   │   └── wardrobe.js\n│   ├── systems/\n│   │   ├── .gitkeep\n│   │   └── questEngine.js\n│   ├── app.js\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── settings.js\n│   └── storage.js\n├── saves/\n│   └── .gitkeep\n├── tests/\n│   └── .gitkeep\n├── tools/\n│   └── generateProjectState.js\n├── index.html\n├── manifest.webmanifest\n├── README.md\n└── service-worker.js"
   },
   "files": [
     {
@@ -165,6 +166,86 @@
       "extensionNormalized": null,
       "sizeBytes": 0,
       "sha1": "da39a3ee5e"
+    },
+    {
+      "path": "assets/audio/bgm/Afternoon in the Academy.mp3",
+      "directory": "assets/audio/bgm",
+      "name": "Afternoon in the Academy.mp3",
+      "stem": "Afternoon in the Academy",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 4143088,
+      "sha1": "97fbd7c4b9"
+    },
+    {
+      "path": "assets/audio/bgm/Bloom in the Garden.mp3",
+      "directory": "assets/audio/bgm",
+      "name": "Bloom in the Garden.mp3",
+      "stem": "Bloom in the Garden",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 2647874,
+      "sha1": "fd40b38b74"
+    },
+    {
+      "path": "assets/audio/bgm/Candlelit Banquet.mp3",
+      "directory": "assets/audio/bgm",
+      "name": "Candlelit Banquet.mp3",
+      "stem": "Candlelit Banquet",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 3269573,
+      "sha1": "e209bb0a0f"
+    },
+    {
+      "path": "assets/audio/bgm/Harbor Breeze.mp3",
+      "directory": "assets/audio/bgm",
+      "name": "Harbor Breeze.mp3",
+      "stem": "Harbor Breeze",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 2681101,
+      "sha1": "12aa83a0bb"
+    },
+    {
+      "path": "assets/audio/bgm/Morning Light in the Guild.mp3",
+      "directory": "assets/audio/bgm",
+      "name": "Morning Light in the Guild.mp3",
+      "stem": "Morning Light in the Guild",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 3496377,
+      "sha1": "9cc1769819"
+    },
+    {
+      "path": "assets/audio/bgm/Sunlight Through Leaves.mp3",
+      "directory": "assets/audio/bgm",
+      "name": "Sunlight Through Leaves.mp3",
+      "stem": "Sunlight Through Leaves",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 4220098,
+      "sha1": "da6eeb2a72"
+    },
+    {
+      "path": "assets/audio/bgm/The Quiet Court.mp3",
+      "directory": "assets/audio/bgm",
+      "name": "The Quiet Court.mp3",
+      "stem": "The Quiet Court",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 3039504,
+      "sha1": "ddfb5a6581"
+    },
+    {
+      "path": "assets/audio/bgm/Thunder in the Hall.mp3",
+      "directory": "assets/audio/bgm",
+      "name": "Thunder in the Hall.mp3",
+      "stem": "Thunder in the Hall",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 1434464,
+      "sha1": "6b37d70576"
     },
     {
       "path": "assets/audio/sfx/.gitkeep",
@@ -2105,9 +2186,51 @@
   },
   "latestCommitChanges": [
     {
-      "status": "M",
+      "status": "A",
       "paths": [
-        "css/common.css"
+        "assets/audio/bgm/Afternoon in the Academy.mp3"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "assets/audio/bgm/Bloom in the Garden.mp3"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "assets/audio/bgm/Candlelit Banquet.mp3"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "assets/audio/bgm/Harbor Breeze.mp3"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "assets/audio/bgm/Morning Light in the Guild.mp3"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "assets/audio/bgm/Sunlight Through Leaves.mp3"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "assets/audio/bgm/The Quiet Court.mp3"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "assets/audio/bgm/Thunder in the Hall.mp3"
       ]
     }
   ],
