@@ -1328,51 +1328,158 @@ function wait(
 
 function registerServiceWorker() {
 
-    if (
-        !(
-            "serviceWorker"
-            in navigator
-        )
-    ) {
-
-        console.warn(
-            "このブラウザはService Workerに対応していません。"
-        );
-
+    if (!("serviceWorker" in navigator)) {
+        console.warn("このブラウザはService Workerに対応していません。");
+        setupManualUpdateButton(null);
         return;
-
     }
 
+    const BUILD_VERSION = "2026.07.21-1";
+    const RELOAD_KEY = `summerGuildSwReloaded:${BUILD_VERSION}`;
+
+    const reloadOnceForNewWorker = () => {
+        if (sessionStorage.getItem(RELOAD_KEY) === "1") {
+            return;
+        }
+
+        sessionStorage.setItem(RELOAD_KEY, "1");
+        window.location.reload();
+    };
+
+    navigator.serviceWorker.addEventListener(
+        "controllerchange",
+        reloadOnceForNewWorker
+    );
+
+    navigator.serviceWorker.addEventListener(
+        "message",
+        (event) => {
+            if (event.data?.type === "SUMMER_GUILD_SW_ACTIVATED") {
+                reloadOnceForNewWorker();
+            }
+        }
+    );
 
     window.addEventListener(
         "load",
         async () => {
-
             try {
-
-                const registration =
-                    await navigator
-                        .serviceWorker
-                        .register(
-                            "./service-worker.js"
-                        );
-
+                const registration = await navigator.serviceWorker.register(
+                    "./service-worker.js",
+                    {
+                        updateViaCache: "none"
+                    }
+                );
 
                 console.log(
                     "Service Worker登録成功:",
                     registration.scope
                 );
 
+                setupManualUpdateButton(registration);
+                watchForServiceWorkerUpdate(registration);
+
+                await registration.update();
+
+                if (registration.waiting) {
+                    registration.waiting.postMessage({
+                        type: "SKIP_WAITING"
+                    });
+                }
             } catch (error) {
+                console.error("Service Worker登録失敗:", error);
+                setupManualUpdateButton(null);
+            }
+        },
+        { once: true }
+    );
+}
 
-                console.error(
-                    "Service Worker登録失敗:",
-                    error
-                );
 
+function watchForServiceWorkerUpdate(registration) {
+
+    registration.addEventListener(
+        "updatefound",
+        () => {
+            const worker = registration.installing;
+
+            if (!worker) {
+                return;
             }
 
+            setUpdateStatus("最新版を準備しています…");
+
+            worker.addEventListener(
+                "statechange",
+                () => {
+                    if (
+                        worker.state === "installed"
+                        && navigator.serviceWorker.controller
+                    ) {
+                        setUpdateStatus("最新版へ切り替えます…");
+                        worker.postMessage({ type: "SKIP_WAITING" });
+                    }
+                }
+            );
         }
     );
-
 }
+
+
+function setupManualUpdateButton(registration) {
+
+    const button = document.getElementById("checkUpdateButton");
+
+    if (!button || button.dataset.bound === "true") {
+        return;
+    }
+
+    button.dataset.bound = "true";
+
+    button.addEventListener(
+        "click",
+        async () => {
+            if (!registration) {
+                setUpdateStatus("更新確認を利用できません");
+                return;
+            }
+
+            button.disabled = true;
+            setUpdateStatus("最新版を確認しています…");
+
+            try {
+                await registration.update();
+
+                if (registration.waiting) {
+                    setUpdateStatus("最新版へ切り替えます…");
+                    registration.waiting.postMessage({
+                        type: "SKIP_WAITING"
+                    });
+                    return;
+                }
+
+                setUpdateStatus("最新版です");
+            } catch (error) {
+                console.error("更新確認に失敗:", error);
+                setUpdateStatus("通信後にもう一度お試しください");
+            } finally {
+                window.setTimeout(() => {
+                    button.disabled = false;
+                }, 1200);
+            }
+        }
+    );
+}
+
+
+function setUpdateStatus(message) {
+
+    const status = document.getElementById("updateStatusText");
+
+    if (!status) {
+        return;
+    }
+
+    status.textContent = message;
+}
+
