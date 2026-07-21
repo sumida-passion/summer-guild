@@ -139,6 +139,27 @@ function initGame() {
     }
 
 
+    if (
+        window.GuildMusicPlayer
+        && typeof window.GuildMusicPlayer.init
+            === "function"
+    ) {
+
+        window.GuildMusicPlayer.init();
+
+    }
+
+
+    if (
+        typeof window.initMusicShop
+        === "function"
+    ) {
+
+        window.initMusicShop();
+
+    }
+
+
     bindButtons();
 
 
@@ -478,6 +499,16 @@ async function openGuildShop() {
     ) {
 
         window.renderGuildShop();
+
+    }
+
+
+    if (
+        typeof window.initMusicShop
+        === "function"
+    ) {
+
+        window.initMusicShop();
 
     }
 
@@ -1188,6 +1219,19 @@ function activateScreen(
 
     currentScreenName =
         screenName;
+
+
+    if (
+        window.GuildMusicPlayer
+        && typeof window.GuildMusicPlayer.handleScreenChange
+            === "function"
+    ) {
+
+        window.GuildMusicPlayer.handleScreenChange(
+            screenName
+        );
+
+    }
 
 
     return true;
