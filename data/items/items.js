@@ -18,7 +18,11 @@ window.GUILD_SHOP_ITEMS = [
     {
         id: "lightning_tshirt",
         name: "稲妻のTシャツ",
-        price: 30
+        price: 30,
+        wearable: true,
+        layers: {
+            tops: "assets/characters/player/clothes/tops/lightning_tops.PNG"
+        }
     },
 
     {
@@ -36,7 +40,13 @@ window.GUILD_SHOP_ITEMS = [
     {
         id: "kyudo_uniform",
         name: "静心の弓道着",
-        price: 180
+        price: 180,
+        wearable: true,
+        layers: {
+            bottoms: "assets/characters/player/clothes/bottoms/kyudo_bottoms.PNG",
+            tops: "assets/characters/player/clothes/tops/kyudo_tops.PNG",
+            shoes: "assets/characters/player/clothes/shoes/kyudo_shoes.PNG"
+        }
     },
 
     {
