@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T09:43:04.437947+00:00",
-    "commit": "df94c1f",
+    "atUtc": "2026-07-21T09:43:29.297909+00:00",
+    "commit": "af45340",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 55,
     "imageCount": 36,
     "javascriptApiFileCount": 11,
-    "totalBytes": 37402709,
+    "totalBytes": 37405067,
     "extensions": {
       ".css": 3,
       ".html": 1,
@@ -1010,9 +1010,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 8739,
-      "sha1": "aa5c6b97a3",
-      "lineCount": 448
+      "sizeBytes": 11097,
+      "sha1": "bb0f30fa55",
+      "lineCount": 554
     },
     {
       "path": "js/app.js",
@@ -1655,6 +1655,7 @@
           "js/quests/daily.js",
           "js/quests/hyakumasu.js",
           "js/screens/shop.js",
+          "js/screens/wardrobe.js",
           "js/settings.js",
           "js/systems/questEngine.js"
         ],
@@ -2078,9 +2079,9 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "js/screens/wardrobe.js"
+        "index.html"
       ]
     }
   ],
