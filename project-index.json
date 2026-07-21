@@ -13,9 +13,9 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T13:12:00.291398+00:00",
-    "commit": "unknown",
-    "commitSubject": "unknown"
+    "atUtc": "2026-07-21T13:14:47.403111+00:00",
+    "commit": "b8061fe",
+    "commitSubject": "Add files via upload"
   },
   "summary": {
     "fileCount": 131,
@@ -2115,7 +2115,8 @@
         "handleGuildMusicScreenChange",
         "pauseForBackground",
         "resumeAfterBackground",
-        "initGuildMusicPlayer"
+        "initGuildMusicPlayer",
+        "seek"
       ],
       "classes": [],
       "windowExports": [
@@ -2287,7 +2288,14 @@
     ],
     "importantReminder": "GitHub Pagesではファイル名と拡張子の大文字・小文字を区別する。"
   },
-  "latestCommitChanges": [],
+  "latestCommitChanges": [
+    {
+      "status": "M",
+      "paths": [
+        "js/systems/musicPlayer.js"
+      ]
+    }
+  ],
   "gptHandoff": {
     "primaryGoal": "新しいスレッドでも、直前のスレッドから続いているような理解度と実装品質を維持する。",
     "firstInstruction": "最初にproject-index.jsonを最後まで読み、フォルダ階層・実ファイル名・画像拡張子・警告を確認すること。",
