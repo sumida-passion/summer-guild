@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T09:44:41.714523+00:00",
-    "commit": "c9070f6",
+    "atUtc": "2026-07-21T09:45:13.907105+00:00",
+    "commit": "0a599b6",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 55,
     "imageCount": 36,
     "javascriptApiFileCount": 11,
-    "totalBytes": 37409337,
+    "totalBytes": 37414948,
     "extensions": {
       ".css": 3,
       ".html": 1,
@@ -1021,9 +1021,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 19793,
-      "sha1": "4d86acbc90",
-      "lineCount": 1279
+      "sizeBytes": 20391,
+      "sha1": "62d83875bc",
+      "lineCount": 1323
     },
     {
       "path": "js/components/.gitkeep",
@@ -1217,9 +1217,9 @@
       "stem": "settings",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 39025,
-      "sha1": "4c31014ad1",
-      "lineCount": 2433
+      "sizeBytes": 44038,
+      "sha1": "5e28a6971a",
+      "lineCount": 2732
     },
     {
       "path": "js/storage.js",
@@ -1711,6 +1711,8 @@
       ],
       "classes": [],
       "windowExports": [
+        "openWardrobe",
+        "closeWardrobe",
         "renderGuildShop",
         "startHyakumasu",
         "cancelHyakumasu"
@@ -1902,6 +1904,12 @@
         "updatePlayerSettings",
         "applyPlayerSettings",
         "applyAllSettings",
+        "getPlayerEquipment",
+        "getWearableShopItem",
+        "equipShopItem",
+        "resetPlayerEquipment",
+        "isShopItemEquipped",
+        "applyPlayerEquipment",
         "getGp",
         "addGp",
         "spendGp",
@@ -2081,7 +2089,13 @@
     {
       "status": "M",
       "paths": [
-        "data/items/items.js"
+        "js/app.js"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "js/settings.js"
       ]
     }
   ],
