@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T11:55:42.690897+00:00",
-    "commit": "7c4cefc",
+    "atUtc": "2026-07-21T12:54:06.535872+00:00",
+    "commit": "e701151",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 55,
     "imageCount": 36,
     "javascriptApiFileCount": 11,
-    "totalBytes": 62356299,
+    "totalBytes": 62357598,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1102,9 +1102,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 11097,
-      "sha1": "bb0f30fa55",
-      "lineCount": 554
+      "sizeBytes": 12396,
+      "sha1": "607e2252bc",
+      "lineCount": 605
     },
     {
       "path": "js/app.js",
@@ -1741,14 +1741,17 @@
         "path": "index.html",
         "scripts": [
           "data/items/items.js",
+          "data/shop/music.js",
           "js/app.js",
           "js/developer.js",
           "js/numberpad.js",
           "js/quests/daily.js",
           "js/quests/hyakumasu.js",
+          "js/screens/musicShop.js",
           "js/screens/shop.js",
           "js/screens/wardrobe.js",
           "js/settings.js",
+          "js/systems/musicPlayer.js",
           "js/systems/questEngine.js"
         ],
         "stylesheetsAndLinks": [
@@ -2186,51 +2189,9 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/audio/bgm/Afternoon in the Academy.mp3"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "assets/audio/bgm/Bloom in the Garden.mp3"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "assets/audio/bgm/Candlelit Banquet.mp3"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "assets/audio/bgm/Harbor Breeze.mp3"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "assets/audio/bgm/Morning Light in the Guild.mp3"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "assets/audio/bgm/Sunlight Through Leaves.mp3"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "assets/audio/bgm/The Quiet Court.mp3"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "assets/audio/bgm/Thunder in the Hall.mp3"
+        "index.html"
       ]
     }
   ],
