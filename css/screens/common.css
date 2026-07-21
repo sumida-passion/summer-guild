@@ -1,0 +1,516 @@
+/* =========================================================
+   夏休みギルド Ver0.2
+   common.css
+
+   ゲーム全体で共通して使う基本設定
+   ========================================================= */
+
+
+/* =========================================================
+   1. 基本リセット
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow: hidden;
+    background: #120c08;
+    -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
+}
+
+body {
+    position: relative;
+    overflow: hidden;
+
+    font-family:
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        "Meiryo",
+        sans-serif;
+
+    color: #ffffff;
+    background: #120c08;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   2. 画像の共通設定
+   ========================================================= */
+
+img {
+    display: block;
+    max-width: 100%;
+
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   3. ゲーム全体
+   ========================================================= */
+
+.screen {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.65s ease,
+        visibility 0s linear 0.65s;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transition:
+        opacity 0.65s ease,
+        visibility 0s linear 0s;
+}
+
+
+/* 画面切り替え中に使用する補助クラス */
+
+.screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.screen.fade-in {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   4. 背景画像
+   ========================================================= */
+
+.background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    transform: scale(1.002);
+}
+
+
+/* 背景を少し暗くしたい場面用 */
+
+.background::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.05),
+            rgba(0, 0, 0, 0.13)
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   5. ボタン共通
+   ========================================================= */
+
+button {
+    position: relative;
+    z-index: 20;
+
+    min-width: 180px;
+    min-height: 52px;
+
+    padding: 12px 28px;
+
+    border: 2px solid rgba(255, 232, 180, 0.85);
+    border-radius: 14px;
+
+    color: #fff8df;
+
+    font-family: inherit;
+    font-size: clamp(15px, 2vw, 21px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+
+    text-shadow:
+        0 2px 2px rgba(0, 0, 0, 0.8);
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(113, 72, 37, 0.96),
+            rgba(55, 31, 16, 0.98)
+        );
+
+    box-shadow:
+        0 5px 0 rgba(35, 19, 10, 0.95),
+        0 9px 18px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.14s ease,
+        filter 0.14s ease,
+        box-shadow 0.14s ease;
+}
+
+button::before {
+    content: "";
+
+    position: absolute;
+    inset: 4px;
+
+    border: 1px solid rgba(255, 226, 160, 0.23);
+    border-radius: 9px;
+
+    pointer-events: none;
+}
+
+button:hover {
+    filter: brightness(1.08);
+}
+
+button:active {
+    transform: translateY(4px);
+
+    box-shadow:
+        0 1px 0 rgba(35, 19, 10, 0.95),
+        0 4px 9px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+button:focus-visible {
+    outline: 3px solid rgba(255, 225, 145, 0.95);
+    outline-offset: 4px;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    filter: grayscale(0.5);
+}
+
+
+/* =========================================================
+   6. 主人公のPNGレイヤー
+   ========================================================= */
+
+#player {
+    position: absolute;
+    z-index: 10;
+
+    /*
+      主人公画像の比率を維持するため、
+      widthのみを指定する。
+
+      実際の位置と大きさはlayout.cssで調整する。
+    */
+    width: min(30vw, 360px);
+
+    aspect-ratio: 1 / 1;
+
+    pointer-events: none;
+}
+
+#player img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+    outline: 0;
+    object-fit: contain;
+}
+
+/*
+  Safari対策：未装備レイヤーの空imgを完全に非表示にする。
+  srcがないimgが画像枠として描画され、主人公の周囲に
+  薄い四角が見える現象を防ぐ。
+*/
+#player img[hidden],
+#player img:not([src]),
+#player img[src=""] {
+    display: none !important;
+}
+
+
+/*
+  主人公の重なり順
+
+  数字が大きいほど前面に表示される。
+*/
+
+#player-capes {
+    z-index: 1;
+}
+
+#player-base {
+    z-index: 2;
+}
+
+#player-bottom {
+    z-index: 3;
+}
+
+#player-top {
+    z-index: 4;
+}
+
+#player-shoes {
+    z-index: 5;
+}
+
+#player-outer {
+    z-index: 6;
+}
+
+#player-gloves {
+    z-index: 7;
+}
+
+#player-head {
+    z-index: 8;
+}
+
+#player-accessories {
+    z-index: 9;
+}
+
+
+/*
+  今後の装備レイヤー用
+
+  index.htmlに画像を追加した際、
+  このクラスを設定することで重なり順を管理できる。
+*/
+
+.player-layer-back {
+    z-index: 0;
+}
+
+.player-layer-base {
+    z-index: 1;
+}
+
+.player-layer-shoes {
+    z-index: 2;
+}
+
+.player-layer-bottom {
+    z-index: 3;
+}
+
+.player-layer-top {
+    z-index: 4;
+}
+
+.player-layer-outer {
+    z-index: 5;
+}
+
+.player-layer-cape {
+    z-index: 6;
+}
+
+.player-layer-head {
+    z-index: 7;
+}
+
+.player-layer-face {
+    z-index: 8;
+}
+
+.player-layer-hands {
+    z-index: 9;
+}
+
+.player-layer-effect {
+    z-index: 10;
+}
+
+
+/* =========================================================
+   7. タイトル文字の共通設定
+   ========================================================= */
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 0.2em;
+
+    font-size: clamp(35px, 6vw, 78px);
+    line-height: 1.2;
+    letter-spacing: 0.12em;
+
+    color: #fff6d5;
+
+    text-shadow:
+        0 3px 0 rgba(75, 42, 19, 0.95),
+        0 6px 10px rgba(0, 0, 0, 0.75);
+}
+
+.subtitle {
+    margin-bottom: 1.7em;
+
+    font-size: clamp(15px, 2.4vw, 28px);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+
+    color: #f7e4b5;
+
+    text-shadow:
+        0 2px 3px rgba(0, 0, 0, 0.85);
+}
+
+
+/* =========================================================
+   8. 表示アニメーション
+   ========================================================= */
+
+@keyframes gentleAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gentleFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes softPulse {
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.08);
+    }
+}
+
+.appear {
+    animation: gentleAppear 0.8s ease both;
+}
+
+.float {
+    animation: gentleFloat 3.5s ease-in-out infinite;
+}
+
+.soft-pulse {
+    animation: softPulse 2.6s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   9. 横画面への案内
+   ========================================================= */
+
+.orientation-message {
+    display: none;
+}
+
+
+/*
+  縦画面になった場合は、
+  ゲーム画面の上に案内を表示できる。
+*/
+
+@media screen and (orientation: portrait) {
+    .orientation-message {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 30px;
+
+        text-align: center;
+        font-size: 18px;
+        line-height: 1.8;
+
+        color: #fff3d2;
+        background: #17100b;
+    }
+}
+
+
+/* =========================================================
+   10. 動きを抑える設定への対応
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
