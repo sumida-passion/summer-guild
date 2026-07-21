@@ -2,15 +2,23 @@
 
 /* =========================================================
    夏休みギルド ギルドホールBGM再生管理
+
+   方針
+   ・部屋／ギルドホール／ギルドショップでは同じ曲を流し続ける
+   ・画面タップや画面切り替えでは再生位置を先頭へ戻さない
+   ・アプリが背景へ移動した時点で必ず一時停止する
+   ・試聴後は、選択中BGMの元の再生位置へ戻る
    ========================================================= */
 
 const GUILD_MUSIC_STORAGE_KEY = "summerGuildMusicSelection";
 const DEFAULT_GUILD_MUSIC_ID = "music_beginning_hall";
-const GUILD_MUSIC_SCREENS = new Set(["guildhall", "guildshop"]);
+const GUILD_MUSIC_SCREENS = new Set(["room", "guildhall", "guildshop"]);
 
 let guildMusicCurrentScreen = "title";
 let guildMusicPreviewTimer = null;
 let guildMusicPreviewing = false;
+let selectedPlaybackPosition = 0;
+let resumeWhenVisible = false;
 
 function getGuildMusicTracks() {
     return Array.isArray(window.GUILD_MUSIC_TRACKS)
@@ -65,37 +73,33 @@ function getGuildMusicAudio() {
     return document.getElementById("guildMusicAudio");
 }
 
-function stopGuildMusicPreview() {
-    if (guildMusicPreviewTimer) {
-        window.clearTimeout(guildMusicPreviewTimer);
-        guildMusicPreviewTimer = null;
+function getTrackUrl(track) {
+    return track ? new URL(track.file, document.baseURI).href : "";
+}
+
+function isTrackLoaded(audio, track) {
+    return Boolean(audio && track && audio.src === getTrackUrl(track));
+}
+
+function rememberSelectedPlaybackPosition() {
+    const audio = getGuildMusicAudio();
+    const selectedTrack = findGuildMusicTrack(getSelectedGuildMusicId());
+
+    if (!audio || !selectedTrack || guildMusicPreviewing || !isTrackLoaded(audio, selectedTrack)) {
+        return;
     }
 
-    guildMusicPreviewing = false;
-
-    const audio = getGuildMusicAudio();
-    if (audio) {
-        audio.pause();
+    if (Number.isFinite(audio.currentTime)) {
+        selectedPlaybackPosition = Math.max(0, audio.currentTime);
     }
 }
 
-function loadGuildMusicTrack(track, startTime = 0) {
-    const audio = getGuildMusicAudio();
-
-    if (!audio || !track) {
-        return false;
-    }
-
-    const expected = new URL(track.file, document.baseURI).href;
-
-    if (audio.src !== expected) {
-        audio.src = track.file;
-        audio.load();
-    }
+function seekAudio(audio, startTime) {
+    const targetTime = Math.max(0, Number(startTime) || 0);
 
     const seek = () => {
         try {
-            audio.currentTime = Math.max(0, Number(startTime) || 0);
+            audio.currentTime = targetTime;
         } catch (error) {
             console.warn("BGMの再生位置を設定できませんでした。", error);
         }
@@ -106,12 +110,56 @@ function loadGuildMusicTrack(track, startTime = 0) {
     } else {
         audio.addEventListener("loadedmetadata", seek, { once: true });
     }
-
-    return true;
 }
 
-async function playSelectedGuildMusic() {
+/*
+ * 曲が変わる時だけsrcを差し替える。
+ * 同じ曲ならcurrentTimeへ触れないため、画面タップで先頭に戻らない。
+ */
+function ensureGuildMusicTrack(track, startTime = 0) {
+    const audio = getGuildMusicAudio();
+
+    if (!audio || !track) {
+        return false;
+    }
+
+    if (!isTrackLoaded(audio, track)) {
+        audio.src = track.file;
+        audio.load();
+        seekAudio(audio, startTime);
+        return true;
+    }
+
+    return false;
+}
+
+function stopGuildMusicPreview(options = {}) {
+    const shouldResume = options.resume === true;
+
+    if (guildMusicPreviewTimer) {
+        window.clearTimeout(guildMusicPreviewTimer);
+        guildMusicPreviewTimer = null;
+    }
+
+    const wasPreviewing = guildMusicPreviewing;
+    guildMusicPreviewing = false;
+
+    const audio = getGuildMusicAudio();
+    if (audio && wasPreviewing) {
+        audio.pause();
+    }
+
+    if (shouldResume && wasPreviewing && GUILD_MUSIC_SCREENS.has(guildMusicCurrentScreen)) {
+        playSelectedGuildMusic();
+    }
+}
+
+async function playSelectedGuildMusic(options = {}) {
     if (!GUILD_MUSIC_SCREENS.has(guildMusicCurrentScreen) || guildMusicPreviewing) {
+        return false;
+    }
+
+    if (document.visibilityState === "hidden") {
         return false;
     }
 
@@ -122,20 +170,36 @@ async function playSelectedGuildMusic() {
         return false;
     }
 
-    loadGuildMusicTrack(track, 0);
+    const forceRestart = options.restart === true;
+    const loadedNow = ensureGuildMusicTrack(
+        track,
+        forceRestart ? 0 : selectedPlaybackPosition
+    );
+
+    if (forceRestart && !loadedNow) {
+        seekAudio(audio, 0);
+        selectedPlaybackPosition = 0;
+    }
+
     audio.loop = true;
     audio.volume = 0.55;
+
+    if (!audio.paused) {
+        return true;
+    }
 
     try {
         await audio.play();
         return true;
     } catch (error) {
-        /* iPad Safariの自動再生制限時は、次のタップで再試行する。 */
+        /* iPad Safariの自動再生制限時は、次の操作で再試行する。 */
         return false;
     }
 }
 
 function pauseGuildMusic() {
+    rememberSelectedPlaybackPosition();
+
     const audio = getGuildMusicAudio();
     if (audio) {
         audio.pause();
@@ -151,9 +215,17 @@ async function selectGuildMusic(trackId) {
 
     stopGuildMusicPreview();
     saveSelectedGuildMusicId(track.id);
+    selectedPlaybackPosition = 0;
+
+    const audio = getGuildMusicAudio();
+    if (audio) {
+        audio.pause();
+        audio.removeAttribute("src");
+        audio.load();
+    }
 
     if (GUILD_MUSIC_SCREENS.has(guildMusicCurrentScreen)) {
-        await playSelectedGuildMusic();
+        await playSelectedGuildMusic({ restart: true });
     }
 
     document.dispatchEvent(new CustomEvent("guildmusicchange", {
@@ -171,10 +243,14 @@ async function previewGuildMusic(trackId) {
         return false;
     }
 
+    rememberSelectedPlaybackPosition();
     stopGuildMusicPreview();
     guildMusicPreviewing = true;
 
-    loadGuildMusicTrack(track, track.previewStart || 0);
+    audio.pause();
+    audio.src = track.file;
+    audio.load();
+    seekAudio(audio, track.previewStart || 0);
     audio.loop = false;
     audio.volume = 0.72;
 
@@ -185,13 +261,13 @@ async function previewGuildMusic(trackId) {
         return false;
     }
 
-    guildMusicPreviewTimer = window.setTimeout(async () => {
+    guildMusicPreviewTimer = window.setTimeout(() => {
         guildMusicPreviewTimer = null;
         guildMusicPreviewing = false;
         audio.pause();
 
         if (GUILD_MUSIC_SCREENS.has(guildMusicCurrentScreen)) {
-            await playSelectedGuildMusic();
+            playSelectedGuildMusic();
         }
 
         document.dispatchEvent(new CustomEvent("guildmusicpreviewend"));
@@ -211,30 +287,59 @@ function handleGuildMusicScreenChange(screenName) {
     }
 }
 
+function pauseForBackground() {
+    const audio = getGuildMusicAudio();
+    resumeWhenVisible = Boolean(
+        audio
+        && !audio.paused
+        && GUILD_MUSIC_SCREENS.has(guildMusicCurrentScreen)
+    );
+
+    stopGuildMusicPreview();
+    pauseGuildMusic();
+}
+
+function resumeAfterBackground() {
+    if (!resumeWhenVisible) {
+        return;
+    }
+
+    resumeWhenVisible = false;
+
+    if (GUILD_MUSIC_SCREENS.has(guildMusicCurrentScreen)) {
+        playSelectedGuildMusic();
+    }
+}
+
 function initGuildMusicPlayer() {
-    const resumeFromTap = () => {
+    const audio = getGuildMusicAudio();
+
+    if (audio && audio.dataset.guildMusicBound !== "true") {
+        audio.addEventListener("timeupdate", rememberSelectedPlaybackPosition);
+        audio.dataset.guildMusicBound = "true";
+    }
+
+    /*
+     * iPadのホーム画面アプリ／Safariが背景へ移った瞬間に停止する。
+     * これにより、アプリを閉じた後も延々と再生される状態を防ぐ。
+     */
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+            pauseForBackground();
+        } else {
+            resumeAfterBackground();
+        }
+    });
+
+    window.addEventListener("pagehide", pauseForBackground);
+
+    /*
+     * 自動再生制限で開始できなかった時だけ、次のタップで再試行する。
+     * 同じ曲を再読み込みしないため、再生位置は先頭へ戻らない。
+     */
+    document.addEventListener("pointerdown", () => {
         if (GUILD_MUSIC_SCREENS.has(guildMusicCurrentScreen) && !guildMusicPreviewing) {
             playSelectedGuildMusic();
-        }
-    };
-
-    document.addEventListener("pointerdown", (event) => {
-        const target = event.target instanceof Element
-            ? event.target.closest("#gotoGuildHall, #gotoGuildShop, #backGuildHallFromShop")
-            : null;
-
-        if (target) {
-            const track = findGuildMusicTrack(getSelectedGuildMusicId());
-            const audio = getGuildMusicAudio();
-
-            if (track && audio && !guildMusicPreviewing) {
-                loadGuildMusicTrack(track, 0);
-                audio.loop = true;
-                audio.volume = 0.55;
-                audio.play().catch(() => {});
-            }
-        } else {
-            resumeFromTap();
         }
     }, { passive: true });
 }
@@ -248,6 +353,7 @@ window.GuildMusicPlayer = {
     getSelectedId: getSelectedGuildMusicId,
     select: selectGuildMusic,
     preview: previewGuildMusic,
-    stopPreview: stopGuildMusicPreview,
-    resume: playSelectedGuildMusic
+    stopPreview: () => stopGuildMusicPreview(),
+    resume: playSelectedGuildMusic,
+    pause: pauseGuildMusic
 };
