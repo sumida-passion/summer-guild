@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T15:46:08.926310+00:00",
-    "commit": "24927e3",
-    "commitSubject": "Add files via upload"
+    "atUtc": "2026-07-21T15:55:33.498849+00:00",
+    "commit": "local-shop-update",
+    "commitSubject": "Register clothing assets as individual shop items"
   },
   "summary": {
-    "fileCount": 141,
+    "fileCount": 140,
     "directoryCount": 56,
     "imageCount": 43,
     "javascriptApiFileCount": 16,
-    "totalBytes": 67139567,
+    "totalBytes": 67211507,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -2496,9 +2496,27 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/characters/player/head/glasses_head.PNG"
+        "data/items/items.js"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "project-index.json"
       ]
     }
   ],
@@ -2528,7 +2546,11 @@
       "iPad Safariとタッチ操作を前提にする。",
       "ソフトウェアキーボードを出したくない入力では共通NumberPadを優先する。",
       "透過レイヤー画像は基準画像とキャンバスサイズ・座標基準を揃える。",
-      "レベル・経験値・強さを中心にせず、認定・思い出・世界の成長を重視する。"
+      "レベル・経験値・強さを中心にせず、認定・思い出・世界の成長を重視する。",
+      "通常衣装はトップス・ボトムス・靴・頭などを単品商品として登録し、自由なコーディネート遊びを優先する。",
+      "国語・理科などのギルドマントはショップ販売せず、ギルドクエストの認定報酬として扱う。",
+      "cloudstrife_outerset.PNGは全身固定画像であり、排他的な全身装備制御を実装するまでショップ登録しない。",
+      "ショップに並ぶのはdata/items/items.jsへ明示登録された商品のみ。画像の存在だけで自動販売しない。"
     ],
     "deliveryRules": [
       "大きなJS・CSS・HTMLは部分パッチではなく完成ファイルを優先する。",
