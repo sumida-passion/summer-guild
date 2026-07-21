@@ -151,6 +151,17 @@ function initGame() {
 
 
     if (
+        window.QuestMusicPlayer
+        && typeof window.QuestMusicPlayer.init
+            === "function"
+    ) {
+
+        window.QuestMusicPlayer.init();
+
+    }
+
+
+    if (
         typeof window.initMusicShop
         === "function"
     ) {
