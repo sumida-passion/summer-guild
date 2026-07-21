@@ -1292,3 +1292,163 @@ PNGが変わっても
     }
 
 }
+
+/* =========================================================
+   夏休みギルド Ver0.5.1
+   ギルドショップ・ゲーム内ダイアログ
+   ========================================================= */
+
+.guildshop-dialog-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1200;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: clamp(18px, 4vw, 48px);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(17, 10, 6, 0.34),
+            rgba(8, 5, 3, 0.78)
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.2s ease;
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+.guildshop-dialog-overlay[hidden] {
+    display: none;
+}
+
+.guildshop-dialog-overlay.is-open {
+    opacity: 1;
+}
+
+.guildshop-dialog {
+    position: relative;
+
+    width: min(82vw, 560px);
+
+    padding:
+        clamp(24px, 3.5vw, 38px)
+        clamp(24px, 4vw, 46px);
+
+    text-align: center;
+
+    border: 3px solid rgba(255, 225, 155, 0.9);
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(78, 45, 25, 0.98),
+            rgba(30, 17, 10, 0.99)
+        );
+
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 0 34px rgba(219, 154, 68, 0.08);
+
+    transform: translateY(18px) scale(0.97);
+
+    transition: transform 0.22s ease;
+}
+
+.guildshop-dialog::before,
+.guildshop-dialog::after {
+    content: "◆";
+
+    position: absolute;
+    top: 18px;
+
+    color: rgba(231, 192, 108, 0.78);
+    font-size: 12px;
+}
+
+.guildshop-dialog::before {
+    left: 20px;
+}
+
+.guildshop-dialog::after {
+    right: 20px;
+}
+
+.guildshop-dialog-overlay.is-open .guildshop-dialog {
+    transform: translateY(0) scale(1);
+}
+
+.guildshop-dialog-label {
+    margin: 0 0 6px;
+
+    color: #d9b86f;
+
+    font-size: clamp(11px, 1.25vw, 14px);
+    font-weight: 700;
+    letter-spacing: 0.24em;
+}
+
+.guildshop-dialog h3 {
+    margin: 0;
+
+    color: #fff0c7;
+
+    font-size: clamp(24px, 3vw, 36px);
+    line-height: 1.3;
+}
+
+.guildshop-dialog-message {
+    margin:
+        clamp(20px, 3vh, 30px)
+        0;
+
+    color: #f5e4bd;
+
+    font-size: clamp(17px, 2vw, 23px);
+    font-weight: 600;
+    line-height: 1.75;
+
+    white-space: pre-line;
+}
+
+.guildshop-dialog-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 2vw, 20px);
+}
+
+.guildshop-dialog-actions button {
+    min-width: clamp(120px, 17vw, 180px);
+}
+
+.guildshop-dialog-cancel {
+    opacity: 0.82;
+}
+
+body.guildshop-dialog-open {
+    overflow: hidden;
+}
+
+@media (max-height: 600px) {
+
+    .guildshop-dialog {
+        width: min(78vw, 520px);
+        padding: 18px 28px;
+    }
+
+    .guildshop-dialog-message {
+        margin: 14px 0 18px;
+        line-height: 1.5;
+    }
+
+}
