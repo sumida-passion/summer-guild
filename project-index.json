@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T14:29:26.325746+00:00",
-    "commit": "193bcd8",
+    "atUtc": "2026-07-21T14:29:58.103670+00:00",
+    "commit": "130c7e9",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 36,
     "javascriptApiFileCount": 16,
-    "totalBytes": 65411598,
+    "totalBytes": 65414875,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1145,9 +1145,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 21206,
-      "sha1": "c80ed33531",
-      "lineCount": 1378
+      "sizeBytes": 24483,
+      "sha1": "f80fadde0d",
+      "lineCount": 1485
     },
     {
       "path": "js/components/.gitkeep",
@@ -1876,7 +1876,11 @@
         "activateScreen",
         "showScreenImmediately",
         "wait",
-        "registerServiceWorker"
+        "registerServiceWorker",
+        "watchForServiceWorkerUpdate",
+        "setupManualUpdateButton",
+        "setUpdateStatus",
+        "reloadOnceForNewWorker"
       ],
       "classes": [],
       "windowExports": [
@@ -2354,7 +2358,7 @@
     {
       "status": "M",
       "paths": [
-        "css/layout.css"
+        "js/app.js"
       ]
     }
   ],
