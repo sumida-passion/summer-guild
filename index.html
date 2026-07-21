@@ -130,6 +130,13 @@
         <div id="player">
 
             <img
+                id="player-capes"
+                data-player-layer="capes"
+                alt=""
+                hidden>
+
+
+            <img
                 id="player-base"
                 src="assets/characters/player/base/base.png"
                 alt="主人公">
@@ -137,16 +144,60 @@
 
             <img
                 id="player-bottom"
+                data-player-layer="bottoms"
                 src="assets/characters/player/clothes/bottoms/default_bottoms.png"
                 alt="">
 
 
             <img
                 id="player-top"
+                data-player-layer="tops"
                 src="assets/characters/player/clothes/tops/default_tops.png"
                 alt="">
 
+
+            <img
+                id="player-shoes"
+                data-player-layer="shoes"
+                alt=""
+                hidden>
+
+
+            <img
+                id="player-outer"
+                data-player-layer="outer"
+                alt=""
+                hidden>
+
+
+            <img
+                id="player-gloves"
+                data-player-layer="gloves"
+                alt=""
+                hidden>
+
+
+            <img
+                id="player-head"
+                data-player-layer="head"
+                alt=""
+                hidden>
+
+
+            <img
+                id="player-accessories"
+                data-player-layer="accessories"
+                alt=""
+                hidden>
+
         </div>
+
+
+        <button
+            id="openWardrobe"
+            type="button">
+            着せ替える
+        </button>
 
 
         <button
@@ -154,6 +205,59 @@
             type="button">
             ギルドホールへ
         </button>
+
+
+        <div
+            id="wardrobeOverlay"
+            class="wardrobe-overlay"
+            hidden
+            aria-hidden="true">
+
+            <section
+                class="wardrobe-window"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="wardrobeTitle">
+
+                <header class="wardrobe-header">
+
+                    <p class="wardrobe-label">
+                        WARDROBE
+                    </p>
+
+                    <h2 id="wardrobeTitle">
+                        着せ替え
+                    </h2>
+
+                    <p class="wardrobe-help">
+                        購入した服を選んでください
+                    </p>
+
+                </header>
+
+
+                <div
+                    id="wardrobeItemList"
+                    class="wardrobe-item-list">
+                </div>
+
+
+                <p
+                    id="wardrobeStatus"
+                    class="wardrobe-status"
+                    aria-live="polite">
+                </p>
+
+
+                <button
+                    id="closeWardrobe"
+                    type="button">
+                    閉じる
+                </button>
+
+            </section>
+
+        </div>
 
     </section>
 
@@ -429,6 +533,8 @@
     <script src="data/items/items.js"></script>
 
     <script src="js/screens/shop.js"></script>
+
+    <script src="js/screens/wardrobe.js"></script>
 
     <script src="js/systems/questEngine.js"></script>
 
