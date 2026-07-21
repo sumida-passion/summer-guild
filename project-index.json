@@ -13,18 +13,19 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T06:37:55.457960+00:00",
-    "commit": "41fb262",
-    "commitSubject": "Delete index.html"
+    "atUtc": "2026-07-21T06:38:29.073768+00:00",
+    "commit": "a9c9c9d",
+    "commitSubject": "Add files via upload"
   },
   "summary": {
-    "fileCount": 94,
+    "fileCount": 95,
     "directoryCount": 55,
     "imageCount": 15,
     "javascriptApiFileCount": 8,
-    "totalBytes": 32606883,
+    "totalBytes": 32615622,
     "extensions": {
       ".css": 3,
+      ".html": 1,
       ".js": 19,
       ".md": 4,
       ".png": 15,
@@ -91,7 +92,7 @@
       "tests",
       "tools"
     ],
-    "treeText": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   └── .gitkeep\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   └── .gitkeep\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   └── .gitkeep\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   └── default_bottoms.png\n│   │       │   ├── capes/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── shoes/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── tops/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   └── default_tops.png\n│   │       │   └── .gitkeep\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   └── .gitkeep\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       └── .gitkeep\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button.png\n│       │   ├── wood_button_pressed.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── screens/\n│   │   └── .gitkeep\n│   ├── common.css\n│   ├── developer.css\n│   └── layout.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   └── .gitkeep\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       └── .gitkeep\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   └── game-rules.md\n├── js/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   └── .gitkeep\n│   ├── systems/\n│   │   ├── .gitkeep\n│   │   └── questEngine.js\n│   ├── app.js\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── settings.js\n│   └── storage.js\n├── saves/\n│   └── .gitkeep\n├── tests/\n│   └── .gitkeep\n├── tools/\n│   └── generateProjectState.js\n├── manifest.webmanifest\n├── README.md\n└── service-worker.js"
+    "treeText": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   └── .gitkeep\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   └── .gitkeep\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   └── .gitkeep\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   └── default_bottoms.png\n│   │       │   ├── capes/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── shoes/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── tops/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   └── default_tops.png\n│   │       │   └── .gitkeep\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   └── .gitkeep\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       └── .gitkeep\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button.png\n│       │   ├── wood_button_pressed.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── screens/\n│   │   └── .gitkeep\n│   ├── common.css\n│   ├── developer.css\n│   └── layout.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   └── .gitkeep\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       └── .gitkeep\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   └── game-rules.md\n├── js/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   └── .gitkeep\n│   ├── systems/\n│   │   ├── .gitkeep\n│   │   └── questEngine.js\n│   ├── app.js\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── settings.js\n│   └── storage.js\n├── saves/\n│   └── .gitkeep\n├── tests/\n│   └── .gitkeep\n├── tools/\n│   └── generateProjectState.js\n├── index.html\n├── manifest.webmanifest\n├── README.md\n└── service-worker.js"
   },
   "files": [
     {
@@ -782,6 +783,17 @@
       "lineCount": 1
     },
     {
+      "path": "index.html",
+      "directory": ".",
+      "name": "index.html",
+      "stem": "index",
+      "extension": ".html",
+      "extensionNormalized": ".html",
+      "sizeBytes": 8739,
+      "sha1": "aa5c6b97a3",
+      "lineCount": 448
+    },
+    {
       "path": "js/app.js",
       "directory": "js",
       "name": "app.js",
@@ -1200,7 +1212,34 @@
     }
   ],
   "entrypoints": {
-    "html": [],
+    "html": [
+      {
+        "path": "index.html",
+        "scripts": [
+          "data/items/items.js",
+          "js/app.js",
+          "js/developer.js",
+          "js/numberpad.js",
+          "js/quests/daily.js",
+          "js/quests/hyakumasu.js",
+          "js/screens/shop.js",
+          "js/settings.js",
+          "js/systems/questEngine.js"
+        ],
+        "stylesheetsAndLinks": [
+          "assets/app-icons/apple-touch-icon.png",
+          "css/common.css",
+          "css/developer.css",
+          "css/layout.css",
+          "manifest.webmanifest"
+        ],
+        "images": [
+          "assets/characters/player/base/base.png",
+          "assets/characters/player/clothes/bottoms/default_bottoms.png",
+          "assets/characters/player/clothes/tops/default_tops.png"
+        ]
+      }
+    ],
     "manifest": "manifest.webmanifest",
     "serviceWorker": "service-worker.js"
   },
@@ -1528,7 +1567,7 @@
   },
   "latestCommitChanges": [
     {
-      "status": "D",
+      "status": "A",
       "paths": [
         "index.html"
       ]
