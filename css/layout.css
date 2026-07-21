@@ -1452,3 +1452,208 @@ body.guildshop-dialog-open {
     }
 
 }
+
+
+/* =========================================================
+   夏休みギルド Ver0.6.0
+   部屋・着せ替え
+   ========================================================= */
+
+#openWardrobe {
+    position: absolute;
+    left: clamp(20px, 4vw, 56px);
+    bottom: clamp(20px, 4vh, 42px);
+    z-index: 30;
+}
+
+.wardrobe-overlay {
+    position: fixed !important;
+    inset: 0;
+    z-index: 1100 !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: clamp(18px, 4vw, 52px);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 5, 3, 0.8),
+            rgba(8, 5, 3, 0.46) 48%,
+            rgba(8, 5, 3, 0.18)
+        );
+
+    opacity: 0;
+    transition: opacity 0.18s ease;
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+.wardrobe-overlay[hidden] {
+    display: none;
+}
+
+.wardrobe-overlay.is-open {
+    opacity: 1;
+}
+
+.wardrobe-window {
+    width: min(42vw, 520px);
+    max-height: 82vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: clamp(20px, 3vw, 34px);
+
+    border: 3px solid rgba(255, 225, 155, 0.9);
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(78, 45, 25, 0.98),
+            rgba(30, 17, 10, 0.99)
+        );
+
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.68),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+    transform: translateX(-18px) scale(0.98);
+    transition: transform 0.2s ease;
+}
+
+.wardrobe-overlay.is-open .wardrobe-window {
+    transform: translateX(0) scale(1);
+}
+
+.wardrobe-header {
+    text-align: center;
+}
+
+.wardrobe-label {
+    margin: 0 0 4px;
+    color: #d9b86f;
+    font-size: clamp(11px, 1.25vw, 14px);
+    font-weight: 700;
+    letter-spacing: 0.24em;
+}
+
+.wardrobe-header h2 {
+    margin: 0;
+    color: #fff0c7;
+    font-size: clamp(24px, 3vw, 36px);
+}
+
+.wardrobe-help {
+    margin: 8px 0 18px;
+    color: #e2cfa4;
+    font-size: clamp(13px, 1.5vw, 17px);
+}
+
+.wardrobe-item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    min-height: 0;
+    max-height: 48vh;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.wardrobe-item-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 50px;
+    padding: 10px 16px;
+    text-align: left;
+}
+
+.wardrobe-item-button.equipped {
+    border-color: rgba(200, 231, 189, 0.9);
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(80, 103, 55, 0.96),
+            rgba(38, 61, 31, 0.98)
+        );
+}
+
+.wardrobe-item-state {
+    flex: 0 0 auto;
+    color: #ffe29a;
+    white-space: nowrap;
+}
+
+.wardrobe-item-button.equipped .wardrobe-item-state {
+    color: #d5f2cb;
+}
+
+.wardrobe-empty-message {
+    margin: 18px 4px 4px;
+    color: #ead9b4;
+    text-align: center;
+    line-height: 1.7;
+}
+
+.wardrobe-status {
+    min-height: 1.5em;
+    margin: 14px 0 10px;
+    color: #ffe29a;
+    text-align: center;
+    font-weight: 700;
+}
+
+#closeWardrobe {
+    align-self: center;
+    min-width: 150px;
+}
+
+body.wardrobe-open {
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+
+    .wardrobe-window {
+        width: min(48vw, 480px);
+    }
+
+}
+
+@media (max-height: 600px) {
+
+    .wardrobe-window {
+        max-height: 88vh;
+        padding: 14px 18px;
+    }
+
+    .wardrobe-help {
+        margin-bottom: 10px;
+    }
+
+    .wardrobe-item-list {
+        max-height: 43vh;
+        gap: 6px;
+    }
+
+    .wardrobe-item-button {
+        min-height: 44px;
+        padding: 7px 13px;
+    }
+
+    .wardrobe-status {
+        margin: 8px 0 6px;
+    }
+
+}
