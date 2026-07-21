@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-21T15:55:33.498849+00:00",
-    "commit": "local-shop-update",
-    "commitSubject": "Register clothing assets as individual shop items"
+    "atUtc": "2026-07-21T15:57:25.451323+00:00",
+    "commit": "4c95dc3",
+    "commitSubject": "Add files via upload"
   },
   "summary": {
-    "fileCount": 140,
+    "fileCount": 141,
     "directoryCount": 56,
     "imageCount": 43,
     "javascriptApiFileCount": 16,
-    "totalBytes": 67211507,
+    "totalBytes": 67139567,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1205,7 +1205,7 @@
       "extension": ".html",
       "extensionNormalized": ".html",
       "sizeBytes": 13135,
-      "sha1": "6c55d5d464",
+      "sha1": "2de690d5f4",
       "lineCount": 623
     },
     {
@@ -1519,7 +1519,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 4483,
-      "sha1": "97a18c2300",
+      "sha1": "8e30be0b0d",
       "lineCount": 177
     },
     {
@@ -2498,25 +2498,19 @@
     {
       "status": "M",
       "paths": [
-        "data/items/items.js"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
         "index.html"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "service-worker.js"
+        "project-index.json"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "project-index.json"
+        "service-worker.js"
       ]
     }
   ],
@@ -2546,11 +2540,7 @@
       "iPad Safariとタッチ操作を前提にする。",
       "ソフトウェアキーボードを出したくない入力では共通NumberPadを優先する。",
       "透過レイヤー画像は基準画像とキャンバスサイズ・座標基準を揃える。",
-      "レベル・経験値・強さを中心にせず、認定・思い出・世界の成長を重視する。",
-      "通常衣装はトップス・ボトムス・靴・頭などを単品商品として登録し、自由なコーディネート遊びを優先する。",
-      "国語・理科などのギルドマントはショップ販売せず、ギルドクエストの認定報酬として扱う。",
-      "cloudstrife_outerset.PNGは全身固定画像であり、排他的な全身装備制御を実装するまでショップ登録しない。",
-      "ショップに並ぶのはdata/items/items.jsへ明示登録された商品のみ。画像の存在だけで自動販売しない。"
+      "レベル・経験値・強さを中心にせず、認定・思い出・世界の成長を重視する。"
     ],
     "deliveryRules": [
       "大きなJS・CSS・HTMLは部分パッチではなく完成ファイルを優先する。",
