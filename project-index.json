@@ -10,19 +10,28 @@
       "PWA",
       "iPad Safari",
       "Local Storage"
-    ]
+    ],
+    "updatePolicy": {
+      "goal": "ホーム画面版を削除せず、GP・衣装・招待済み楽団などのLocalStorageを保持したまま最新版へ更新する。",
+      "serviceWorker": "service-worker.jsでHTML・JavaScript・CSSをnetwork-first（cache: no-store）にし、画像はruntime cacheを利用する。音声のRangeリクエストはiPad Safariの再生安定性を優先してService Workerで横取りしない。",
+      "activation": "新しいService WorkerはskipWaitingとclients.claimで切り替え、js/app.jsがcontrollerchangeを検知してビルドごとに一度だけ再読み込みする。",
+      "manualFallback": "タイトル画面の「最新版を確認」ボタンでregistration.update()を実行できる。",
+      "saveProtection": "更新処理ではlocalStorage.clear()、保存キー削除、ホーム画面アイコン削除を行わない。ホーム画面アイコンの削除・再登録はセーブ消失の恐れがあるため更新手順にしない。",
+      "versionRule": "更新機構を変更するリリースでは、service-worker.jsのSW_VERSION、js/app.jsのBUILD_VERSION、index.htmlの?v=値を同じ値へ更新する。"
+    }
   },
   "generated": {
-    "atUtc": "2026-07-21T13:52:44.764777+00:00",
+    "atUtc": "2026-07-21T14:20:55.443720+00:00",
     "commit": "48fe1b1",
-    "commitSubject": "Add files via upload"
+    "commitSubject": "Add files via upload",
+    "workingNote": "PWA安全更新機能を実装。Service WorkerはHTML/JS/CSSをnetwork-firstで更新し、LocalStorageには触れない。"
   },
   "summary": {
-    "fileCount": 134,
+    "fileCount": 135,
     "directoryCount": 56,
     "imageCount": 36,
     "javascriptApiFileCount": 15,
-    "totalBytes": 65405752,
+    "totalBytes": 65493273,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -957,9 +966,9 @@
       "stem": "layout",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 31304,
-      "sha1": "e0602c9c80",
-      "lineCount": 1768
+      "sizeBytes": 32002,
+      "sha1": "cbed9c0c0b",
+      "lineCount": 1799
     },
     {
       "path": "css/screens/.gitkeep",
@@ -1134,9 +1143,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 12456,
-      "sha1": "6a82d68c16",
-      "lineCount": 607
+      "sizeBytes": 13135,
+      "sha1": "6c55d5d464",
+      "lineCount": 623
     },
     {
       "path": "js/app.js",
@@ -1145,9 +1154,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 21206,
-      "sha1": "c80ed33531",
-      "lineCount": 1378
+      "sizeBytes": 24483,
+      "sha1": "f80fadde0d",
+      "lineCount": 1485
     },
     {
       "path": "js/components/.gitkeep",
@@ -1448,9 +1457,9 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 14,
-      "sha1": "344d3c6e1b",
-      "lineCount": 1
+      "sizeBytes": 4483,
+      "sha1": "97a18c2300",
+      "lineCount": 177
     },
     {
       "path": "tests/.gitkeep",
@@ -2350,7 +2359,19 @@
     {
       "status": "M",
       "paths": [
-        "project-index.json"
+        "css/layout.css"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "js/app.js"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
@@ -2380,7 +2401,10 @@
       "iPad Safariとタッチ操作を前提にする。",
       "ソフトウェアキーボードを出したくない入力では共通NumberPadを優先する。",
       "透過レイヤー画像は基準画像とキャンバスサイズ・座標基準を揃える。",
-      "レベル・経験値・強さを中心にせず、認定・思い出・世界の成長を重視する。"
+      "レベル・経験値・強さを中心にせず、認定・思い出・世界の成長を重視する。",
+      "PWA更新のためにホーム画面アイコンの削除・再登録を案内しない。LocalStorageの進行データが消える可能性がある。",
+      "service-worker.js、js/app.js、index.htmlの更新バージョンは同じ値で管理する。",
+      "Service Worker更新処理からLocalStorageを削除・初期化しない。"
     ],
     "deliveryRules": [
       "大きなJS・CSS・HTMLは部分パッチではなく完成ファイルを優先する。",
@@ -2399,6 +2423,12 @@
       "js/quests/hyakumasu.js"
     ],
     "newThreadOpeningMessage": "夏休みギルドの開発を続けます。最初にproject-index.jsonを最後まで読み、次に今回の改修対象と関連ファイルを確認してください。既存API・ファイル名・画像拡張子を推測で扱わず、iPad Safari前提で進めてください。大きな完成ファイルはZIPで渡してください。",
-    "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。"
+    "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。",
+    "pwaUpdateWorkflow": [
+      "GitHubへ変更ファイルをアップロードする。",
+      "ホーム画面版は削除せず、ネット接続中に普通に起動する。",
+      "自動更新されない場合のみ、タイトル画面の「最新版を確認」を押す。",
+      "更新時の自動再読み込みはビルドごとに一度だけ。GP・衣装などのLocalStorageは保持される。"
+    ]
   }
 }
