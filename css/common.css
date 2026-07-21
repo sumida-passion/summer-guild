@@ -262,7 +262,22 @@ button:disabled {
     width: 100%;
     height: 100%;
 
+    border: 0 !important;
+    outline: 0 !important;
     object-fit: contain;
+}
+
+/*
+  iPad Safari対策：未装備の空画像レイヤーを完全に消す。
+
+  srcを持たないimg要素は、Safariで壊れた画像の表示領域として
+  #playerと同じ大きさの細い四角枠を描くことがある。
+  hidden属性または空srcのレイヤーは描画対象から外す。
+*/
+#player img[hidden],
+#player img:not([src]),
+#player img[src=""] {
+    display: none !important;
 }
 
 
