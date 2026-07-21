@@ -272,6 +272,21 @@ function startHyakumasuQuest(
     }
 
 
+    if (
+        window.QuestMusicPlayer
+        && typeof window.QuestMusicPlayer
+            .playHyakumasu
+            === "function"
+    ) {
+
+        window.QuestMusicPlayer
+            .playHyakumasu({
+                restart: true
+            });
+
+    }
+
+
     window.requestAnimationFrame(
         () => {
 
@@ -2694,6 +2709,17 @@ async function submitHyakumasuAnswers() {
     }
 
 
+    if (
+        window.QuestMusicPlayer
+        && typeof window.QuestMusicPlayer.stop
+            === "function"
+    ) {
+
+        window.QuestMusicPlayer.stop();
+
+    }
+
+
     let correctCount =
         0;
 
@@ -3113,6 +3139,17 @@ function cancelHyakumasuQuest() {
    ========================================================= */
 
 function resetHyakumasuRuntimeOnly() {
+
+    if (
+        window.QuestMusicPlayer
+        && typeof window.QuestMusicPlayer.stop
+            === "function"
+    ) {
+
+        window.QuestMusicPlayer.stop();
+
+    }
+
 
     clearHyakumasuAdvanceTimer();
 
