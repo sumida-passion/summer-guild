@@ -341,11 +341,49 @@
 
 
             <div
+                class="guildshop-tabs"
+                role="tablist"
+                aria-label="ギルドショップの種類">
+
+                <button
+                    type="button"
+                    class="guildshop-tab active"
+                    data-guildshop-tab="items"
+                    role="tab"
+                    aria-selected="true">
+                    装備・衣装
+                </button>
+
+                <button
+                    type="button"
+                    class="guildshop-tab"
+                    data-guildshop-tab="music"
+                    role="tab"
+                    aria-selected="false">
+                    音楽家を招待
+                </button>
+
+            </div>
+
+
+            <div
                 id="guildShopItemList"
                 class="guildshop-item-list">
 
                 <p class="shop-empty-message">
                     商品を確認しています……
+                </p>
+
+            </div>
+
+
+            <div
+                id="guildMusicList"
+                class="guildshop-item-list guildmusic-item-list"
+                hidden>
+
+                <p class="shop-empty-message">
+                    演奏家を確認しています……
                 </p>
 
             </div>
@@ -523,6 +561,13 @@
 
 
 
+    <audio
+        id="guildMusicAudio"
+        preload="metadata"
+        playsinline>
+    </audio>
+
+
     <!-- ========================= -->
     <!-- JavaScript -->
     <!-- 読み込み順が重要 -->
@@ -532,7 +577,13 @@
 
     <script src="data/items/items.js"></script>
 
+    <script src="data/shop/music.js"></script>
+
+    <script src="js/systems/musicPlayer.js"></script>
+
     <script src="js/screens/shop.js"></script>
+
+    <script src="js/screens/musicShop.js"></script>
 
     <script src="js/screens/wardrobe.js"></script>
 
