@@ -272,8 +272,12 @@ button:disabled {
   数字が大きいほど前面に表示される。
 */
 
-#player-base {
+#player-capes {
     z-index: 1;
+}
+
+#player-base {
+    z-index: 2;
 }
 
 #player-bottom {
@@ -282,6 +286,26 @@ button:disabled {
 
 #player-top {
     z-index: 4;
+}
+
+#player-shoes {
+    z-index: 5;
+}
+
+#player-outer {
+    z-index: 6;
+}
+
+#player-gloves {
+    z-index: 7;
+}
+
+#player-head {
+    z-index: 8;
+}
+
+#player-accessories {
+    z-index: 9;
 }
 
 
