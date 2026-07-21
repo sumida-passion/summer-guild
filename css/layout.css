@@ -1766,3 +1766,34 @@ body.wardrobe-open {
         margin-top: 8px;
     }
 }
+
+/* =========================================================
+   アプリ更新確認
+   ========================================================= */
+
+.app-update-area {
+    margin-top: 14px;
+    min-height: 48px;
+}
+
+.app-update-button {
+    padding: 7px 14px;
+    min-width: 0;
+    border: 1px solid rgba(255, 235, 184, 0.48);
+    border-radius: 999px;
+    font-size: clamp(12px, 1.35vw, 15px);
+    color: rgba(255, 244, 215, 0.88);
+    background: rgba(18, 11, 7, 0.46);
+    box-shadow: none;
+}
+
+.app-update-button:disabled {
+    opacity: 0.58;
+}
+
+.app-update-status {
+    min-height: 1.4em;
+    margin: 6px 0 0;
+    font-size: clamp(11px, 1.15vw, 13px);
+    color: rgba(255, 244, 215, 0.74);
+}
