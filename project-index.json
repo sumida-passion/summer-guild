@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T12:45:31.966920+00:00",
-    "commit": "6c74efd",
+    "atUtc": "2026-07-22T12:45:58.407747+00:00",
+    "commit": "1bd62d1",
     "commitSubject": "Add files via upload"
   },
   "summary": {
     "fileCount": 146,
     "directoryCount": 56,
     "imageCount": 46,
-    "javascriptApiFileCount": 16,
-    "totalBytes": 67880665,
+    "javascriptApiFileCount": 17,
+    "totalBytes": 67898303,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1377,9 +1377,9 @@
       "stem": "math",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 1,
-      "sha1": "adc83b19e7",
-      "lineCount": 1
+      "sizeBytes": 17639,
+      "sha1": "3a0d723d92",
+      "lineCount": 388
     },
     {
       "path": "js/quests/music.js",
@@ -2241,6 +2241,31 @@
       ]
     },
     {
+      "path": "js/quests/math.js",
+      "functions": [
+        "q",
+        "getMathGuildProgress",
+        "saveMathGuildProgress",
+        "getMathGuildTitle",
+        "isQuestUnlocked",
+        "areAllQuestsComplete",
+        "shuffle",
+        "openMathGuild",
+        "renderMathGuildHome",
+        "startMathGuildQuest",
+        "startMathGuildTest",
+        "renderMathGuildQuestion",
+        "answerMathGuildQuestion",
+        "finishMathGuildQuest",
+        "finishMathGuildTest",
+        "formatMathGuildTime"
+      ],
+      "classes": [],
+      "windowExports": [
+        "MathGuild"
+      ]
+    },
+    {
       "path": "js/screens/musicShop.js",
       "functions": [
         "setGuildShopTab",
@@ -2593,7 +2618,7 @@
     {
       "status": "M",
       "paths": [
-        "js/app.js"
+        "js/quests/math.js"
       ]
     }
   ],
