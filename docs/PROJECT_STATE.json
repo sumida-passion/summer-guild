@@ -1,0 +1,1502 @@
+{
+  "generator": {
+    "name": "Summer Guild Project State Generator",
+    "version": "1.0.0",
+    "generatedAt": "2026-07-22T06:07:48.224Z",
+    "excludedGeneratedFiles": [
+      "docs/GPT_PROJECT_STATE.md",
+      "docs/PROJECT_STATE.json"
+    ]
+  },
+  "git": {
+    "repository": "unknown",
+    "branch": "unknown",
+    "commitHash": "unknown",
+    "shortCommitHash": "unknown",
+    "latestCommitMessage": "unknown"
+  },
+  "summary": {
+    "fileCount": 145,
+    "directoryCount": 66,
+    "imageCount": 46,
+    "audioCount": 9,
+    "videoCount": 0,
+    "javascriptCount": 26,
+    "cssCount": 4,
+    "htmlCount": 1,
+    "dataFileCount": 2
+  },
+  "directories": [
+    ".github",
+    ".github/workflows",
+    "assets",
+    "assets/app-icons",
+    "assets/audio",
+    "assets/audio/bgm",
+    "assets/audio/quests",
+    "assets/audio/sfx",
+    "assets/backgrounds",
+    "assets/backgrounds/facilities",
+    "assets/backgrounds/guild-hall",
+    "assets/backgrounds/guilds",
+    "assets/backgrounds/home",
+    "assets/backgrounds/masters",
+    "assets/backgrounds/special",
+    "assets/backgrounds/title",
+    "assets/characters",
+    "assets/characters/masters",
+    "assets/characters/masters/japanese",
+    "assets/characters/masters/math",
+    "assets/characters/masters/science",
+    "assets/characters/masters/social",
+    "assets/characters/player",
+    "assets/characters/player/accessories",
+    "assets/characters/player/base",
+    "assets/characters/player/clothes",
+    "assets/characters/player/clothes/bottoms",
+    "assets/characters/player/clothes/capes",
+    "assets/characters/player/clothes/gloves",
+    "assets/characters/player/clothes/outer",
+    "assets/characters/player/clothes/shoes",
+    "assets/characters/player/clothes/tops",
+    "assets/characters/player/face",
+    "assets/characters/player/hands",
+    "assets/characters/player/head",
+    "assets/characters/player/templates",
+    "assets/items",
+    "assets/items/consumables",
+    "assets/items/decorations",
+    "assets/items/furniture",
+    "assets/ui",
+    "assets/ui/buttons",
+    "assets/ui/effects",
+    "assets/ui/frames",
+    "assets/ui/icons",
+    "css",
+    "css/components",
+    "css/screens",
+    "data",
+    "data/achievements",
+    "data/exams",
+    "data/facilities",
+    "data/items",
+    "data/masters",
+    "data/quests",
+    "data/rewards",
+    "data/shop",
+    "docs",
+    "js",
+    "js/components",
+    "js/quests",
+    "js/screens",
+    "js/systems",
+    "saves",
+    "tests",
+    "tools"
+  ],
+  "files": [
+    ".github/workflows/.gitkeep",
+    ".github/workflows/generate-project-map.yml",
+    "assets/app-icons/.gitkeep",
+    "assets/app-icons/apple-touch-icon.png",
+    "assets/app-icons/icon-192.png",
+    "assets/app-icons/icon-512.png",
+    "assets/audio/bgm/.gitkeep",
+    "assets/audio/bgm/Afternoon in the Academy.mp3",
+    "assets/audio/bgm/Bloom in the Garden.mp3",
+    "assets/audio/bgm/Candlelit Banquet.mp3",
+    "assets/audio/bgm/Harbor Breeze.mp3",
+    "assets/audio/bgm/Morning Light in the Guild.mp3",
+    "assets/audio/bgm/Sunlight Through Leaves.mp3",
+    "assets/audio/bgm/The Quiet Court.mp3",
+    "assets/audio/bgm/Thunder in the Hall.mp3",
+    "assets/audio/quests/.gitkeep",
+    "assets/audio/quests/The Moment Before the Shot.mp3",
+    "assets/audio/sfx/.gitkeep",
+    "assets/backgrounds/facilities/.gitkeep",
+    "assets/backgrounds/guild-hall/.gitkeep",
+    "assets/backgrounds/guild-hall/guildhall.png",
+    "assets/backgrounds/guilds/.gitkeep",
+    "assets/backgrounds/guilds/guildhall.png",
+    "assets/backgrounds/guilds/guildshop_bg.png",
+    "assets/backgrounds/home/.gitkeep",
+    "assets/backgrounds/home/room.png",
+    "assets/backgrounds/masters/.gitkeep",
+    "assets/backgrounds/special/.gitkeep",
+    "assets/backgrounds/title/.gitkeep",
+    "assets/backgrounds/title/title.PNG",
+    "assets/characters/masters/japanese/.gitkeep",
+    "assets/characters/masters/math/.gitkeep",
+    "assets/characters/masters/science/.gitkeep",
+    "assets/characters/masters/social/.gitkeep",
+    "assets/characters/player/accessories/.gitkeep",
+    "assets/characters/player/accessories/neckwarmer_acc.PNG",
+    "assets/characters/player/base/.gitkeep",
+    "assets/characters/player/base/base.png",
+    "assets/characters/player/clothes/.gitkeep",
+    "assets/characters/player/clothes/bottoms/.gitkeep",
+    "assets/characters/player/clothes/bottoms/battle_bottoms.PNG",
+    "assets/characters/player/clothes/bottoms/bluejeans_bottoms.PNG",
+    "assets/characters/player/clothes/bottoms/cycling_bottoms.PNG",
+    "assets/characters/player/clothes/bottoms/default_bottoms.png",
+    "assets/characters/player/clothes/bottoms/doctor_bottoms.PNG",
+    "assets/characters/player/clothes/bottoms/kyudo_bottoms.PNG",
+    "assets/characters/player/clothes/bottoms/longskirtgrey_bottoms.PNG",
+    "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG",
+    "assets/characters/player/clothes/bottoms/schooluniform_bottoms.PNG",
+    "assets/characters/player/clothes/bottoms/stripe_bottoms.PNG",
+    "assets/characters/player/clothes/bottoms/tennis_bottoms.PNG",
+    "assets/characters/player/clothes/capes/.gitkeep",
+    "assets/characters/player/clothes/capes/kokugoguild_capes.PNG",
+    "assets/characters/player/clothes/capes/rikaguild_capes.PNG",
+    "assets/characters/player/clothes/gloves/.gitkeep",
+    "assets/characters/player/clothes/outer/.gitkeep",
+    "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG",
+    "assets/characters/player/clothes/shoes/.gitkeep",
+    "assets/characters/player/clothes/shoes/doctor_shoes.PNG",
+    "assets/characters/player/clothes/shoes/kyudo_shoes.PNG",
+    "assets/characters/player/clothes/shoes/schooluniform_shoes.PNG",
+    "assets/characters/player/clothes/tops/.gitkeep",
+    "assets/characters/player/clothes/tops/battle_tops.PNG",
+    "assets/characters/player/clothes/tops/border_tops.PNG",
+    "assets/characters/player/clothes/tops/cycling_tops.PNG",
+    "assets/characters/player/clothes/tops/default_tops.png",
+    "assets/characters/player/clothes/tops/doctor_tops.PNG",
+    "assets/characters/player/clothes/tops/foody_tops.PNG",
+    "assets/characters/player/clothes/tops/kyudo_tops.PNG",
+    "assets/characters/player/clothes/tops/lightning_tops.PNG",
+    "assets/characters/player/clothes/tops/mountainparker_tops.PNG",
+    "assets/characters/player/clothes/tops/rocknroll_tops.PNG",
+    "assets/characters/player/clothes/tops/schooluniform_tops.PNG",
+    "assets/characters/player/clothes/tops/schooluniformsummer_tops.PNG",
+    "assets/characters/player/clothes/tops/tennis_tops.PNG",
+    "assets/characters/player/face/.gitkeep",
+    "assets/characters/player/hands/.gitkeep",
+    "assets/characters/player/head/.gitkeep",
+    "assets/characters/player/head/glasses_head.PNG",
+    "assets/characters/player/head/google_head.PNG",
+    "assets/characters/player/templates/.gitkeep",
+    "assets/items/consumables/.gitkeep",
+    "assets/items/decorations/.gitkeep",
+    "assets/items/furniture/.gitkeep",
+    "assets/ui/buttons/.gitkeep",
+    "assets/ui/buttons/numberpad_bg.png",
+    "assets/ui/buttons/wood_button_pressed.png",
+    "assets/ui/buttons/wood_button.png",
+    "assets/ui/buttons/wood_panel.png",
+    "assets/ui/effects/.gitkeep",
+    "assets/ui/frames/.gitkeep",
+    "assets/ui/icons/.gitkeep",
+    "css/common.css",
+    "css/components/.gitkeep",
+    "css/developer.css",
+    "css/layout.css",
+    "css/screens/.gitkeep",
+    "css/screens/common.css",
+    "data/achievements/.gitkeep",
+    "data/exams/.gitkeep",
+    "data/facilities/.gitkeep",
+    "data/items/.gitkeep",
+    "data/items/items.js",
+    "data/masters/.gitkeep",
+    "data/quests/.gitkeep",
+    "data/rewards/.gitkeep",
+    "data/shop/.gitkeep",
+    "data/shop/music.js",
+    "docs/.gitkeep",
+    "docs/asset-guide.md",
+    "docs/development-log.md",
+    "docs/game-rules.md",
+    "index.html",
+    "js/app.js",
+    "js/components/.gitkeep",
+    "js/developer.js",
+    "js/numberpad.js",
+    "js/quests/cleaning.js",
+    "js/quests/daily.js",
+    "js/quests/engine.js",
+    "js/quests/exercise.js",
+    "js/quests/hyakumasu.js",
+    "js/quests/kanji.js",
+    "js/quests/math.js",
+    "js/quests/music.js",
+    "js/quests/reading.js",
+    "js/quests/science.js",
+    "js/quests/society.js",
+    "js/screens/.gitkeep",
+    "js/screens/musicShop.js",
+    "js/screens/shop.js",
+    "js/screens/wardrobe.js",
+    "js/settings.js",
+    "js/storage.js",
+    "js/systems/.gitkeep",
+    "js/systems/musicPlayer.js",
+    "js/systems/questEngine.js",
+    "js/systems/questMusicPlayer.js",
+    "manifest.webmanifest",
+    "project-index.json",
+    "README.md",
+    "saves/.gitkeep",
+    "service-worker.js",
+    "tests/.gitkeep",
+    "tools/generateProjectState.js"
+  ],
+  "fileDetails": [
+    {
+      "path": ".github/workflows/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 1
+    },
+    {
+      "path": ".github/workflows/generate-project-map.yml",
+      "name": "generate-project-map.yml",
+      "extension": ".yml",
+      "sizeBytes": 16575
+    },
+    {
+      "path": "assets/app-icons/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/app-icons/apple-touch-icon.png",
+      "name": "apple-touch-icon.png",
+      "extension": ".png",
+      "sizeBytes": 2762520
+    },
+    {
+      "path": "assets/app-icons/icon-192.png",
+      "name": "icon-192.png",
+      "extension": ".png",
+      "sizeBytes": 2762520
+    },
+    {
+      "path": "assets/app-icons/icon-512.png",
+      "name": "icon-512.png",
+      "extension": ".png",
+      "sizeBytes": 2762520
+    },
+    {
+      "path": "assets/audio/bgm/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/audio/bgm/Afternoon in the Academy.mp3",
+      "name": "Afternoon in the Academy.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 4143088
+    },
+    {
+      "path": "assets/audio/bgm/Bloom in the Garden.mp3",
+      "name": "Bloom in the Garden.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 2647874
+    },
+    {
+      "path": "assets/audio/bgm/Candlelit Banquet.mp3",
+      "name": "Candlelit Banquet.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 3269573
+    },
+    {
+      "path": "assets/audio/bgm/Harbor Breeze.mp3",
+      "name": "Harbor Breeze.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 2681101
+    },
+    {
+      "path": "assets/audio/bgm/Morning Light in the Guild.mp3",
+      "name": "Morning Light in the Guild.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 3496377
+    },
+    {
+      "path": "assets/audio/bgm/Sunlight Through Leaves.mp3",
+      "name": "Sunlight Through Leaves.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 4220098
+    },
+    {
+      "path": "assets/audio/bgm/The Quiet Court.mp3",
+      "name": "The Quiet Court.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 3039504
+    },
+    {
+      "path": "assets/audio/bgm/Thunder in the Hall.mp3",
+      "name": "Thunder in the Hall.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 1434464
+    },
+    {
+      "path": "assets/audio/quests/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 1
+    },
+    {
+      "path": "assets/audio/quests/The Moment Before the Shot.mp3",
+      "name": "The Moment Before the Shot.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 3017441
+    },
+    {
+      "path": "assets/audio/sfx/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/backgrounds/facilities/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/backgrounds/guild-hall/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/backgrounds/guild-hall/guildhall.png",
+      "name": "guildhall.png",
+      "extension": ".png",
+      "sizeBytes": 3070695
+    },
+    {
+      "path": "assets/backgrounds/guilds/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/backgrounds/guilds/guildhall.png",
+      "name": "guildhall.png",
+      "extension": ".png",
+      "sizeBytes": 3070695
+    },
+    {
+      "path": "assets/backgrounds/guilds/guildshop_bg.png",
+      "name": "guildshop_bg.png",
+      "extension": ".png",
+      "sizeBytes": 2250433
+    },
+    {
+      "path": "assets/backgrounds/home/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/backgrounds/home/room.png",
+      "name": "room.png",
+      "extension": ".png",
+      "sizeBytes": 2527510
+    },
+    {
+      "path": "assets/backgrounds/masters/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/backgrounds/special/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/backgrounds/title/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/backgrounds/title/title.PNG",
+      "name": "title.PNG",
+      "extension": ".png",
+      "sizeBytes": 2903329
+    },
+    {
+      "path": "assets/characters/masters/japanese/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/masters/math/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/masters/science/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/masters/social/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/player/accessories/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/player/accessories/neckwarmer_acc.PNG",
+      "name": "neckwarmer_acc.PNG",
+      "extension": ".png",
+      "sizeBytes": 120012
+    },
+    {
+      "path": "assets/characters/player/base/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/player/base/base.png",
+      "name": "base.png",
+      "extension": ".png",
+      "sizeBytes": 677164
+    },
+    {
+      "path": "assets/characters/player/clothes/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 1
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/battle_bottoms.PNG",
+      "name": "battle_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 126198
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/bluejeans_bottoms.PNG",
+      "name": "bluejeans_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 235065
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/cycling_bottoms.PNG",
+      "name": "cycling_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 113223
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/default_bottoms.png",
+      "name": "default_bottoms.png",
+      "extension": ".png",
+      "sizeBytes": 93998
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/doctor_bottoms.PNG",
+      "name": "doctor_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 164380
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/kyudo_bottoms.PNG",
+      "name": "kyudo_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 273572
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/longskirtgrey_bottoms.PNG",
+      "name": "longskirtgrey_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 182286
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG",
+      "name": "rocknroll_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 281002
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/schooluniform_bottoms.PNG",
+      "name": "schooluniform_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 153945
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/stripe_bottoms.PNG",
+      "name": "stripe_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 191936
+    },
+    {
+      "path": "assets/characters/player/clothes/bottoms/tennis_bottoms.PNG",
+      "name": "tennis_bottoms.PNG",
+      "extension": ".png",
+      "sizeBytes": 100911
+    },
+    {
+      "path": "assets/characters/player/clothes/capes/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 1
+    },
+    {
+      "path": "assets/characters/player/clothes/capes/kokugoguild_capes.PNG",
+      "name": "kokugoguild_capes.PNG",
+      "extension": ".png",
+      "sizeBytes": 563425
+    },
+    {
+      "path": "assets/characters/player/clothes/capes/rikaguild_capes.PNG",
+      "name": "rikaguild_capes.PNG",
+      "extension": ".png",
+      "sizeBytes": 440253
+    },
+    {
+      "path": "assets/characters/player/clothes/gloves/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 1
+    },
+    {
+      "path": "assets/characters/player/clothes/outer/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 1
+    },
+    {
+      "path": "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG",
+      "name": "cloudstrife_outerset.PNG",
+      "extension": ".png",
+      "sizeBytes": 653911
+    },
+    {
+      "path": "assets/characters/player/clothes/shoes/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 1
+    },
+    {
+      "path": "assets/characters/player/clothes/shoes/doctor_shoes.PNG",
+      "name": "doctor_shoes.PNG",
+      "extension": ".png",
+      "sizeBytes": 81801
+    },
+    {
+      "path": "assets/characters/player/clothes/shoes/kyudo_shoes.PNG",
+      "name": "kyudo_shoes.PNG",
+      "extension": ".png",
+      "sizeBytes": 64821
+    },
+    {
+      "path": "assets/characters/player/clothes/shoes/schooluniform_shoes.PNG",
+      "name": "schooluniform_shoes.PNG",
+      "extension": ".png",
+      "sizeBytes": 213872
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 1
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/battle_tops.PNG",
+      "name": "battle_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 217058
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/border_tops.PNG",
+      "name": "border_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 220710
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/cycling_tops.PNG",
+      "name": "cycling_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 192703
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/default_tops.png",
+      "name": "default_tops.png",
+      "extension": ".png",
+      "sizeBytes": 148876
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/doctor_tops.PNG",
+      "name": "doctor_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 355110
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/foody_tops.PNG",
+      "name": "foody_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 191507
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/kyudo_tops.PNG",
+      "name": "kyudo_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 271667
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/lightning_tops.PNG",
+      "name": "lightning_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 199244
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/mountainparker_tops.PNG",
+      "name": "mountainparker_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 248425
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/rocknroll_tops.PNG",
+      "name": "rocknroll_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 228515
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/schooluniform_tops.PNG",
+      "name": "schooluniform_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 257045
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/schooluniformsummer_tops.PNG",
+      "name": "schooluniformsummer_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 225581
+    },
+    {
+      "path": "assets/characters/player/clothes/tops/tennis_tops.PNG",
+      "name": "tennis_tops.PNG",
+      "extension": ".png",
+      "sizeBytes": 182043
+    },
+    {
+      "path": "assets/characters/player/face/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/player/hands/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/player/head/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/player/head/glasses_head.PNG",
+      "name": "glasses_head.PNG",
+      "extension": ".png",
+      "sizeBytes": 186408
+    },
+    {
+      "path": "assets/characters/player/head/google_head.PNG",
+      "name": "google_head.PNG",
+      "extension": ".png",
+      "sizeBytes": 175279
+    },
+    {
+      "path": "assets/characters/player/templates/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/items/consumables/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/items/decorations/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/items/furniture/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/ui/buttons/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/ui/buttons/numberpad_bg.png",
+      "name": "numberpad_bg.png",
+      "extension": ".png",
+      "sizeBytes": 2635279
+    },
+    {
+      "path": "assets/ui/buttons/wood_button_pressed.png",
+      "name": "wood_button_pressed.png",
+      "extension": ".png",
+      "sizeBytes": 2405205
+    },
+    {
+      "path": "assets/ui/buttons/wood_button.png",
+      "name": "wood_button.png",
+      "extension": ".png",
+      "sizeBytes": 1990592
+    },
+    {
+      "path": "assets/ui/buttons/wood_panel.png",
+      "name": "wood_panel.png",
+      "extension": ".png",
+      "sizeBytes": 2267704
+    },
+    {
+      "path": "assets/ui/effects/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/ui/frames/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "assets/ui/icons/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "css/common.css",
+      "name": "common.css",
+      "extension": ".css",
+      "sizeBytes": 8934
+    },
+    {
+      "path": "css/components/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "css/developer.css",
+      "name": "developer.css",
+      "extension": ".css",
+      "sizeBytes": 9859
+    },
+    {
+      "path": "css/layout.css",
+      "name": "layout.css",
+      "extension": ".css",
+      "sizeBytes": 35651
+    },
+    {
+      "path": "css/screens/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "css/screens/common.css",
+      "name": "common.css",
+      "extension": ".css",
+      "sizeBytes": 8803
+    },
+    {
+      "path": "data/achievements/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "data/exams/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "data/facilities/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "data/items/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "data/items/items.js",
+      "name": "items.js",
+      "extension": ".js",
+      "sizeBytes": 6999
+    },
+    {
+      "path": "data/masters/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "data/quests/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "data/rewards/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "data/shop/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "data/shop/music.js",
+      "name": "music.js",
+      "extension": ".js",
+      "sizeBytes": 3195
+    },
+    {
+      "path": "docs/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "docs/asset-guide.md",
+      "name": "asset-guide.md",
+      "extension": ".md",
+      "sizeBytes": 8
+    },
+    {
+      "path": "docs/development-log.md",
+      "name": "development-log.md",
+      "extension": ".md",
+      "sizeBytes": 608
+    },
+    {
+      "path": "docs/game-rules.md",
+      "name": "game-rules.md",
+      "extension": ".md",
+      "sizeBytes": 283
+    },
+    {
+      "path": "index.html",
+      "name": "index.html",
+      "extension": ".html",
+      "sizeBytes": 13174
+    },
+    {
+      "path": "js/app.js",
+      "name": "app.js",
+      "extension": ".js",
+      "sizeBytes": 35868
+    },
+    {
+      "path": "js/components/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "js/developer.js",
+      "name": "developer.js",
+      "extension": ".js",
+      "sizeBytes": 20523
+    },
+    {
+      "path": "js/numberpad.js",
+      "name": "numberpad.js",
+      "extension": ".js",
+      "sizeBytes": 31407
+    },
+    {
+      "path": "js/quests/cleaning.js",
+      "name": "cleaning.js",
+      "extension": ".js",
+      "sizeBytes": 1
+    },
+    {
+      "path": "js/quests/daily.js",
+      "name": "daily.js",
+      "extension": ".js",
+      "sizeBytes": 5604
+    },
+    {
+      "path": "js/quests/engine.js",
+      "name": "engine.js",
+      "extension": ".js",
+      "sizeBytes": 1
+    },
+    {
+      "path": "js/quests/exercise.js",
+      "name": "exercise.js",
+      "extension": ".js",
+      "sizeBytes": 1
+    },
+    {
+      "path": "js/quests/hyakumasu.js",
+      "name": "hyakumasu.js",
+      "extension": ".js",
+      "sizeBytes": 58804
+    },
+    {
+      "path": "js/quests/kanji.js",
+      "name": "kanji.js",
+      "extension": ".js",
+      "sizeBytes": 1
+    },
+    {
+      "path": "js/quests/math.js",
+      "name": "math.js",
+      "extension": ".js",
+      "sizeBytes": 1
+    },
+    {
+      "path": "js/quests/music.js",
+      "name": "music.js",
+      "extension": ".js",
+      "sizeBytes": 1
+    },
+    {
+      "path": "js/quests/reading.js",
+      "name": "reading.js",
+      "extension": ".js",
+      "sizeBytes": 1
+    },
+    {
+      "path": "js/quests/science.js",
+      "name": "science.js",
+      "extension": ".js",
+      "sizeBytes": 1
+    },
+    {
+      "path": "js/quests/society.js",
+      "name": "society.js",
+      "extension": ".js",
+      "sizeBytes": 1
+    },
+    {
+      "path": "js/screens/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "js/screens/musicShop.js",
+      "name": "musicShop.js",
+      "extension": ".js",
+      "sizeBytes": 9338
+    },
+    {
+      "path": "js/screens/shop.js",
+      "name": "shop.js",
+      "extension": ".js",
+      "sizeBytes": 11104
+    },
+    {
+      "path": "js/screens/wardrobe.js",
+      "name": "wardrobe.js",
+      "extension": ".js",
+      "sizeBytes": 7382
+    },
+    {
+      "path": "js/settings.js",
+      "name": "settings.js",
+      "extension": ".js",
+      "sizeBytes": 46833
+    },
+    {
+      "path": "js/storage.js",
+      "name": "storage.js",
+      "extension": ".js",
+      "sizeBytes": 10
+    },
+    {
+      "path": "js/systems/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "js/systems/musicPlayer.js",
+      "name": "musicPlayer.js",
+      "extension": ".js",
+      "sizeBytes": 9509
+    },
+    {
+      "path": "js/systems/questEngine.js",
+      "name": "questEngine.js",
+      "extension": ".js",
+      "sizeBytes": 26486
+    },
+    {
+      "path": "js/systems/questMusicPlayer.js",
+      "name": "questMusicPlayer.js",
+      "extension": ".js",
+      "sizeBytes": 5130
+    },
+    {
+      "path": "manifest.webmanifest",
+      "name": "manifest.webmanifest",
+      "extension": ".webmanifest",
+      "sizeBytes": 598
+    },
+    {
+      "path": "project-index.json",
+      "name": "project-index.json",
+      "extension": ".json",
+      "sizeBytes": 86709
+    },
+    {
+      "path": "README.md",
+      "name": "README.md",
+      "extension": ".md",
+      "sizeBytes": 28
+    },
+    {
+      "path": "saves/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "service-worker.js",
+      "name": "service-worker.js",
+      "extension": ".js",
+      "sizeBytes": 4483
+    },
+    {
+      "path": "tests/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 0
+    },
+    {
+      "path": "tools/generateProjectState.js",
+      "name": "generateProjectState.js",
+      "extension": ".js",
+      "sizeBytes": 27130
+    }
+  ],
+  "assets": {
+    "images": [
+      "assets/app-icons/apple-touch-icon.png",
+      "assets/app-icons/icon-192.png",
+      "assets/app-icons/icon-512.png",
+      "assets/backgrounds/guild-hall/guildhall.png",
+      "assets/backgrounds/guilds/guildhall.png",
+      "assets/backgrounds/guilds/guildshop_bg.png",
+      "assets/backgrounds/home/room.png",
+      "assets/backgrounds/title/title.PNG",
+      "assets/characters/player/accessories/neckwarmer_acc.PNG",
+      "assets/characters/player/base/base.png",
+      "assets/characters/player/clothes/bottoms/battle_bottoms.PNG",
+      "assets/characters/player/clothes/bottoms/bluejeans_bottoms.PNG",
+      "assets/characters/player/clothes/bottoms/cycling_bottoms.PNG",
+      "assets/characters/player/clothes/bottoms/default_bottoms.png",
+      "assets/characters/player/clothes/bottoms/doctor_bottoms.PNG",
+      "assets/characters/player/clothes/bottoms/kyudo_bottoms.PNG",
+      "assets/characters/player/clothes/bottoms/longskirtgrey_bottoms.PNG",
+      "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG",
+      "assets/characters/player/clothes/bottoms/schooluniform_bottoms.PNG",
+      "assets/characters/player/clothes/bottoms/stripe_bottoms.PNG",
+      "assets/characters/player/clothes/bottoms/tennis_bottoms.PNG",
+      "assets/characters/player/clothes/capes/kokugoguild_capes.PNG",
+      "assets/characters/player/clothes/capes/rikaguild_capes.PNG",
+      "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG",
+      "assets/characters/player/clothes/shoes/doctor_shoes.PNG",
+      "assets/characters/player/clothes/shoes/kyudo_shoes.PNG",
+      "assets/characters/player/clothes/shoes/schooluniform_shoes.PNG",
+      "assets/characters/player/clothes/tops/battle_tops.PNG",
+      "assets/characters/player/clothes/tops/border_tops.PNG",
+      "assets/characters/player/clothes/tops/cycling_tops.PNG",
+      "assets/characters/player/clothes/tops/default_tops.png",
+      "assets/characters/player/clothes/tops/doctor_tops.PNG",
+      "assets/characters/player/clothes/tops/foody_tops.PNG",
+      "assets/characters/player/clothes/tops/kyudo_tops.PNG",
+      "assets/characters/player/clothes/tops/lightning_tops.PNG",
+      "assets/characters/player/clothes/tops/mountainparker_tops.PNG",
+      "assets/characters/player/clothes/tops/rocknroll_tops.PNG",
+      "assets/characters/player/clothes/tops/schooluniform_tops.PNG",
+      "assets/characters/player/clothes/tops/schooluniformsummer_tops.PNG",
+      "assets/characters/player/clothes/tops/tennis_tops.PNG",
+      "assets/characters/player/head/glasses_head.PNG",
+      "assets/characters/player/head/google_head.PNG",
+      "assets/ui/buttons/numberpad_bg.png",
+      "assets/ui/buttons/wood_button_pressed.png",
+      "assets/ui/buttons/wood_button.png",
+      "assets/ui/buttons/wood_panel.png"
+    ],
+    "audio": [
+      "assets/audio/bgm/Afternoon in the Academy.mp3",
+      "assets/audio/bgm/Bloom in the Garden.mp3",
+      "assets/audio/bgm/Candlelit Banquet.mp3",
+      "assets/audio/bgm/Harbor Breeze.mp3",
+      "assets/audio/bgm/Morning Light in the Guild.mp3",
+      "assets/audio/bgm/Sunlight Through Leaves.mp3",
+      "assets/audio/bgm/The Quiet Court.mp3",
+      "assets/audio/bgm/Thunder in the Hall.mp3",
+      "assets/audio/quests/The Moment Before the Shot.mp3"
+    ],
+    "video": []
+  },
+  "sourceFiles": {
+    "javascript": [
+      "data/items/items.js",
+      "data/shop/music.js",
+      "js/app.js",
+      "js/developer.js",
+      "js/numberpad.js",
+      "js/quests/cleaning.js",
+      "js/quests/daily.js",
+      "js/quests/engine.js",
+      "js/quests/exercise.js",
+      "js/quests/hyakumasu.js",
+      "js/quests/kanji.js",
+      "js/quests/math.js",
+      "js/quests/music.js",
+      "js/quests/reading.js",
+      "js/quests/science.js",
+      "js/quests/society.js",
+      "js/screens/musicShop.js",
+      "js/screens/shop.js",
+      "js/screens/wardrobe.js",
+      "js/settings.js",
+      "js/storage.js",
+      "js/systems/musicPlayer.js",
+      "js/systems/questEngine.js",
+      "js/systems/questMusicPlayer.js",
+      "service-worker.js",
+      "tools/generateProjectState.js"
+    ],
+    "css": [
+      "css/common.css",
+      "css/developer.css",
+      "css/layout.css",
+      "css/screens/common.css"
+    ],
+    "html": [
+      "index.html"
+    ],
+    "data": [
+      "manifest.webmanifest",
+      "project-index.json"
+    ]
+  },
+  "indexHtml": {
+    "exists": true,
+    "stylesheets": [
+      "css/common.css?v=20260721-1",
+      "css/layout.css?v=20260722-2",
+      "css/developer.css?v=20260721-1"
+    ],
+    "scripts": [
+      "js/settings.js?v=20260722-3",
+      "data/items/items.js?v=20260722-2",
+      "data/shop/music.js?v=20260721-1",
+      "js/systems/musicPlayer.js?v=20260721-1",
+      "js/systems/questMusicPlayer.js?v=20260721-1",
+      "js/screens/shop.js?v=20260721-1",
+      "js/screens/musicShop.js?v=20260721-1",
+      "js/screens/wardrobe.js?v=20260722-2",
+      "js/systems/questEngine.js?v=20260722-3",
+      "js/quests/daily.js?v=20260721-1",
+      "js/numberpad.js?v=20260721-1",
+      "js/quests/hyakumasu.js?v=20260722-3",
+      "js/developer.js?v=20260721-1",
+      "js/app.js?v=20260722-3"
+    ],
+    "images": [
+      "assets/characters/player/base/base.png",
+      "assets/characters/player/clothes/bottoms/default_bottoms.png",
+      "assets/characters/player/clothes/tops/default_tops.png"
+    ],
+    "manifestFiles": [
+      "manifest.webmanifest?v=20260721-1"
+    ],
+    "allLocalReferences": [
+      "css/common.css",
+      "css/layout.css",
+      "css/developer.css",
+      "js/settings.js",
+      "data/items/items.js",
+      "data/shop/music.js",
+      "js/systems/musicPlayer.js",
+      "js/systems/questMusicPlayer.js",
+      "js/screens/shop.js",
+      "js/screens/musicShop.js",
+      "js/screens/wardrobe.js",
+      "js/systems/questEngine.js",
+      "js/quests/daily.js",
+      "js/numberpad.js",
+      "js/quests/hyakumasu.js",
+      "js/developer.js",
+      "js/app.js",
+      "assets/characters/player/base/base.png",
+      "assets/characters/player/clothes/bottoms/default_bottoms.png",
+      "assets/characters/player/clothes/tops/default_tops.png",
+      "manifest.webmanifest"
+    ],
+    "missingReferences": []
+  },
+  "warnings": {
+    "missingIndexReferences": [],
+    "caseCollisions": []
+  },
+  "tree": {
+    "lines": [
+      "summer-guild/",
+      "├── .github/",
+      "│   └── workflows/",
+      "│       ├── .gitkeep",
+      "│       └── generate-project-map.yml",
+      "├── assets/",
+      "│   ├── app-icons/",
+      "│   │   ├── .gitkeep",
+      "│   │   ├── apple-touch-icon.png",
+      "│   │   ├── icon-192.png",
+      "│   │   └── icon-512.png",
+      "│   ├── audio/",
+      "│   │   ├── bgm/",
+      "│   │   │   ├── .gitkeep",
+      "│   │   │   ├── Afternoon in the Academy.mp3",
+      "│   │   │   ├── Bloom in the Garden.mp3",
+      "│   │   │   ├── Candlelit Banquet.mp3",
+      "│   │   │   ├── Harbor Breeze.mp3",
+      "│   │   │   ├── Morning Light in the Guild.mp3",
+      "│   │   │   ├── Sunlight Through Leaves.mp3",
+      "│   │   │   ├── The Quiet Court.mp3",
+      "│   │   │   └── Thunder in the Hall.mp3",
+      "│   │   ├── quests/",
+      "│   │   │   ├── .gitkeep",
+      "│   │   │   └── The Moment Before the Shot.mp3",
+      "│   │   └── sfx/",
+      "│   │       └── .gitkeep",
+      "│   ├── backgrounds/",
+      "│   │   ├── facilities/",
+      "│   │   │   └── .gitkeep",
+      "│   │   ├── guild-hall/",
+      "│   │   │   ├── .gitkeep",
+      "│   │   │   └── guildhall.png",
+      "│   │   ├── guilds/",
+      "│   │   │   ├── .gitkeep",
+      "│   │   │   ├── guildhall.png",
+      "│   │   │   └── guildshop_bg.png",
+      "│   │   ├── home/",
+      "│   │   │   ├── .gitkeep",
+      "│   │   │   └── room.png",
+      "│   │   ├── masters/",
+      "│   │   │   └── .gitkeep",
+      "│   │   ├── special/",
+      "│   │   │   └── .gitkeep",
+      "│   │   └── title/",
+      "│   │       ├── .gitkeep",
+      "│   │       └── title.PNG",
+      "│   ├── characters/",
+      "│   │   ├── masters/",
+      "│   │   │   ├── japanese/",
+      "│   │   │   │   └── .gitkeep",
+      "│   │   │   ├── math/",
+      "│   │   │   │   └── .gitkeep",
+      "│   │   │   ├── science/",
+      "│   │   │   │   └── .gitkeep",
+      "│   │   │   └── social/",
+      "│   │   │       └── .gitkeep",
+      "│   │   └── player/",
+      "│   │       ├── accessories/",
+      "│   │       │   ├── .gitkeep",
+      "│   │       │   └── neckwarmer_acc.PNG",
+      "│   │       ├── base/",
+      "│   │       │   ├── .gitkeep",
+      "│   │       │   └── base.png",
+      "│   │       ├── clothes/",
+      "│   │       │   ├── .gitkeep",
+      "│   │       │   ├── bottoms/",
+      "│   │       │   │   ├── .gitkeep",
+      "│   │       │   │   ├── battle_bottoms.PNG",
+      "│   │       │   │   ├── bluejeans_bottoms.PNG",
+      "│   │       │   │   ├── cycling_bottoms.PNG",
+      "│   │       │   │   ├── default_bottoms.png",
+      "│   │       │   │   ├── doctor_bottoms.PNG",
+      "│   │       │   │   ├── kyudo_bottoms.PNG",
+      "│   │       │   │   ├── longskirtgrey_bottoms.PNG",
+      "│   │       │   │   ├── rocknroll_bottoms.PNG",
+      "│   │       │   │   ├── schooluniform_bottoms.PNG",
+      "│   │       │   │   ├── stripe_bottoms.PNG",
+      "│   │       │   │   └── tennis_bottoms.PNG",
+      "│   │       │   ├── capes/",
+      "│   │       │   │   ├── .gitkeep",
+      "│   │       │   │   ├── kokugoguild_capes.PNG",
+      "│   │       │   │   └── rikaguild_capes.PNG",
+      "│   │       │   ├── gloves/",
+      "│   │       │   │   └── .gitkeep",
+      "│   │       │   ├── outer/",
+      "│   │       │   │   ├── .gitkeep",
+      "│   │       │   │   └── cloudstrife_outerset.PNG",
+      "│   │       │   ├── shoes/",
+      "│   │       │   │   ├── .gitkeep",
+      "│   │       │   │   ├── doctor_shoes.PNG",
+      "│   │       │   │   ├── kyudo_shoes.PNG",
+      "│   │       │   │   └── schooluniform_shoes.PNG",
+      "│   │       │   └── tops/",
+      "│   │       │       ├── .gitkeep",
+      "│   │       │       ├── battle_tops.PNG",
+      "│   │       │       ├── border_tops.PNG",
+      "│   │       │       ├── cycling_tops.PNG",
+      "│   │       │       ├── default_tops.png",
+      "│   │       │       ├── doctor_tops.PNG",
+      "│   │       │       ├── foody_tops.PNG",
+      "│   │       │       ├── kyudo_tops.PNG",
+      "│   │       │       ├── lightning_tops.PNG",
+      "│   │       │       ├── mountainparker_tops.PNG",
+      "│   │       │       ├── rocknroll_tops.PNG",
+      "│   │       │       ├── schooluniform_tops.PNG",
+      "│   │       │       ├── schooluniformsummer_tops.PNG",
+      "│   │       │       └── tennis_tops.PNG",
+      "│   │       ├── face/",
+      "│   │       │   └── .gitkeep",
+      "│   │       ├── hands/",
+      "│   │       │   └── .gitkeep",
+      "│   │       ├── head/",
+      "│   │       │   ├── .gitkeep",
+      "│   │       │   ├── glasses_head.PNG",
+      "│   │       │   └── google_head.PNG",
+      "│   │       └── templates/",
+      "│   │           └── .gitkeep",
+      "│   ├── items/",
+      "│   │   ├── consumables/",
+      "│   │   │   └── .gitkeep",
+      "│   │   ├── decorations/",
+      "│   │   │   └── .gitkeep",
+      "│   │   └── furniture/",
+      "│   │       └── .gitkeep",
+      "│   └── ui/",
+      "│       ├── buttons/",
+      "│       │   ├── .gitkeep",
+      "│       │   ├── numberpad_bg.png",
+      "│       │   ├── wood_button_pressed.png",
+      "│       │   ├── wood_button.png",
+      "│       │   └── wood_panel.png",
+      "│       ├── effects/",
+      "│       │   └── .gitkeep",
+      "│       ├── frames/",
+      "│       │   └── .gitkeep",
+      "│       └── icons/",
+      "│           └── .gitkeep",
+      "├── css/",
+      "│   ├── common.css",
+      "│   ├── components/",
+      "│   │   └── .gitkeep",
+      "│   ├── developer.css",
+      "│   ├── layout.css",
+      "│   └── screens/",
+      "│       ├── .gitkeep",
+      "│       └── common.css",
+      "├── data/",
+      "│   ├── achievements/",
+      "│   │   └── .gitkeep",
+      "│   ├── exams/",
+      "│   │   └── .gitkeep",
+      "│   ├── facilities/",
+      "│   │   └── .gitkeep",
+      "│   ├── items/",
+      "│   │   ├── .gitkeep",
+      "│   │   └── items.js",
+      "│   ├── masters/",
+      "│   │   └── .gitkeep",
+      "│   ├── quests/",
+      "│   │   └── .gitkeep",
+      "│   ├── rewards/",
+      "│   │   └── .gitkeep",
+      "│   └── shop/",
+      "│       ├── .gitkeep",
+      "│       └── music.js",
+      "├── docs/",
+      "│   ├── .gitkeep",
+      "│   ├── asset-guide.md",
+      "│   ├── development-log.md",
+      "│   └── game-rules.md",
+      "├── index.html",
+      "├── js/",
+      "│   ├── app.js",
+      "│   ├── components/",
+      "│   │   └── .gitkeep",
+      "│   ├── developer.js",
+      "│   ├── numberpad.js",
+      "│   ├── quests/",
+      "│   │   ├── cleaning.js",
+      "│   │   ├── daily.js",
+      "│   │   ├── engine.js",
+      "│   │   ├── exercise.js",
+      "│   │   ├── hyakumasu.js",
+      "│   │   ├── kanji.js",
+      "│   │   ├── math.js",
+      "│   │   ├── music.js",
+      "│   │   ├── reading.js",
+      "│   │   ├── science.js",
+      "│   │   └── society.js",
+      "│   ├── screens/",
+      "│   │   ├── .gitkeep",
+      "│   │   ├── musicShop.js",
+      "│   │   ├── shop.js",
+      "│   │   └── wardrobe.js",
+      "│   ├── settings.js",
+      "│   ├── storage.js",
+      "│   └── systems/",
+      "│       ├── .gitkeep",
+      "│       ├── musicPlayer.js",
+      "│       ├── questEngine.js",
+      "│       └── questMusicPlayer.js",
+      "├── manifest.webmanifest",
+      "├── project-index.json",
+      "├── README.md",
+      "├── saves/",
+      "│   └── .gitkeep",
+      "├── service-worker.js",
+      "├── tests/",
+      "│   └── .gitkeep",
+      "└── tools/",
+      "    └── generateProjectState.js"
+    ],
+    "text": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Afternoon in the Academy.mp3\n│   │   │   ├── Bloom in the Garden.mp3\n│   │   │   ├── Candlelit Banquet.mp3\n│   │   │   ├── Harbor Breeze.mp3\n│   │   │   ├── Morning Light in the Guild.mp3\n│   │   │   ├── Sunlight Through Leaves.mp3\n│   │   │   ├── The Quiet Court.mp3\n│   │   │   └── Thunder in the Hall.mp3\n│   │   ├── quests/\n│   │   │   ├── .gitkeep\n│   │   │   └── The Moment Before the Shot.mp3\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   └── .gitkeep\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   ├── .gitkeep\n│   │       │   └── neckwarmer_acc.PNG\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── .gitkeep\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_bottoms.PNG\n│   │       │   │   ├── bluejeans_bottoms.PNG\n│   │       │   │   ├── cycling_bottoms.PNG\n│   │       │   │   ├── default_bottoms.png\n│   │       │   │   ├── doctor_bottoms.PNG\n│   │       │   │   ├── kyudo_bottoms.PNG\n│   │       │   │   ├── longskirtgrey_bottoms.PNG\n│   │       │   │   ├── rocknroll_bottoms.PNG\n│   │       │   │   ├── schooluniform_bottoms.PNG\n│   │       │   │   ├── stripe_bottoms.PNG\n│   │       │   │   └── tennis_bottoms.PNG\n│   │       │   ├── capes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── kokugoguild_capes.PNG\n│   │       │   │   └── rikaguild_capes.PNG\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   └── cloudstrife_outerset.PNG\n│   │       │   ├── shoes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── doctor_shoes.PNG\n│   │       │   │   ├── kyudo_shoes.PNG\n│   │       │   │   └── schooluniform_shoes.PNG\n│   │       │   └── tops/\n│   │       │       ├── .gitkeep\n│   │       │       ├── battle_tops.PNG\n│   │       │       ├── border_tops.PNG\n│   │       │       ├── cycling_tops.PNG\n│   │       │       ├── default_tops.png\n│   │       │       ├── doctor_tops.PNG\n│   │       │       ├── foody_tops.PNG\n│   │       │       ├── kyudo_tops.PNG\n│   │       │       ├── lightning_tops.PNG\n│   │       │       ├── mountainparker_tops.PNG\n│   │       │       ├── rocknroll_tops.PNG\n│   │       │       ├── schooluniform_tops.PNG\n│   │       │       ├── schooluniformsummer_tops.PNG\n│   │       │       └── tennis_tops.PNG\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   ├── .gitkeep\n│   │       │   ├── glasses_head.PNG\n│   │       │   └── google_head.PNG\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       └── .gitkeep\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button_pressed.png\n│       │   ├── wood_button.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── common.css\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.css\n│   ├── layout.css\n│   └── screens/\n│       ├── .gitkeep\n│       └── common.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   ├── .gitkeep\n│   │   └── items.js\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       ├── .gitkeep\n│       └── music.js\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   └── game-rules.md\n├── index.html\n├── js/\n│   ├── app.js\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── musicShop.js\n│   │   ├── shop.js\n│   │   └── wardrobe.js\n│   ├── settings.js\n│   ├── storage.js\n│   └── systems/\n│       ├── .gitkeep\n│       ├── musicPlayer.js\n│       ├── questEngine.js\n│       └── questMusicPlayer.js\n├── manifest.webmanifest\n├── project-index.json\n├── README.md\n├── saves/\n│   └── .gitkeep\n├── service-worker.js\n├── tests/\n│   └── .gitkeep\n└── tools/\n    └── generateProjectState.js"
+  },
+  "projectNotes": {
+    "exists": false,
+    "content": "まだ `docs/PROJECT_NOTES.md` は作成されていません。"
+  }
+}
