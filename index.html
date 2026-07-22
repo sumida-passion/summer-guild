@@ -23,7 +23,7 @@
 
     <link
         rel="stylesheet"
-        href="css/layout.css?v=20260722-2">
+        href="css/layout.css?v=20260722-mathguild1">
 
     <link
         rel="stylesheet"
@@ -303,6 +303,13 @@
 
 
             <button
+                id="gotoMathGuild"
+                type="button">
+                算数ギルド
+            </button>
+
+
+            <button
                 id="gotoGuildShop"
                 type="button">
                 ギルドショップ
@@ -319,6 +326,32 @@
 
     </section>
 
+
+
+    <!-- ========================= -->
+    <!-- 算数ギルド -->
+    <!-- ========================= -->
+
+    <section
+        id="mathguild-screen"
+        class="screen"
+        aria-hidden="true">
+
+        <div class="background guildhall-background"></div>
+
+        <div class="math-guild-window">
+            <header class="math-guild-header">
+                <p>MATHEMATICS GUILD</p>
+                <h2>算数ギルド</h2>
+                <span>小数のかけ算を、基礎から積み重ねよう</span>
+            </header>
+
+            <main id="mathGuildContent" class="math-guild-content"></main>
+        </div>
+
+        <button id="backGuildHallFromMath" type="button">ギルドホールへ戻る</button>
+
+    </section>
 
 
     <!-- ========================= -->
@@ -615,9 +648,11 @@
 
     <script src="js/quests/hyakumasu.js?v=20260722-3"></script>
 
+    <script src="js/quests/math.js?v=20260722-1"></script>
+
     <script src="js/developer.js?v=20260721-1"></script>
 
-    <script src="js/app.js?v=20260722-3"></script>
+    <script src="js/app.js?v=20260722-mathguild1"></script>
 
 </body>
 
