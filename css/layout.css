@@ -26,7 +26,7 @@
 
 :root {
     --player-width: min(56vw, 640px);
-    --player-scale: 1.65;
+    --player-scale: 1.2;
     --player-bottom: -7%;
 }
 
