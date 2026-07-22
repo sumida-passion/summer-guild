@@ -13,7 +13,7 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T01:53:22.223716+00:00",
+    "atUtc": "2026-07-22T06:08:08.250955+00:00",
     "commit": "3009b1a",
     "commitSubject": "Add files via upload"
   },
@@ -2623,5 +2623,32 @@
     ],
     "newThreadOpeningMessage": "夏休みギルドの開発を続けます。最初にproject-index.jsonを最後まで読み、次に今回の改修対象と関連ファイルを確認してください。既存API・ファイル名・画像拡張子を推測で扱わず、iPad Safari前提で進めてください。大きな完成ファイルはZIPで渡してください。",
     "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。"
+  },
+  "implementationNotes": {
+    "developmentFlow": "ユーザーが「仕様確定」「ZIPお願い」と明示した時点で設計を凍結し、project-index.json確認後に実装・検証・ZIP作成へ移る。",
+    "hyakumasuReward20260722": {
+      "dailyFirstRewardGp": 10,
+      "repeatFormula": "accuracyPoint * speedPoint",
+      "accuracyPoints": {
+        "60PercentOrLess": 0,
+        "61To70Percent": 1,
+        "71To99Percent": 2,
+        "100Percent": 3
+      },
+      "speedPoints": {
+        "120SecondsOrLess": 3,
+        "240SecondsOrLess": 2,
+        "Over240Seconds": 1
+      },
+      "resultSequence": [
+        "タイムとスピード表",
+        "正解率と正解率表",
+        "デイリー初回判定",
+        "掛け算査定",
+        "惜しかった表示（該当時）",
+        "合計GPと所持GPカウントアップ"
+      ]
+    },
+    "fullSetEquipment": "equipmentType: fullset は通常装備をすべて外して全身レイヤーを装着する。通常装備を着けるとfullsetを解除する。"
   }
 }
