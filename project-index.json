@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T15:17:13.893860+00:00",
-    "commit": "111386f",
+    "atUtc": "2026-07-22T15:42:32.852272+00:00",
+    "commit": "31364e3",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 17,
-    "totalBytes": 74547626,
+    "totalBytes": 74536525,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -846,8 +846,8 @@
       "stem": "schooluniform_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 257045,
-      "sha1": "e8f6f01d79"
+      "sizeBytes": 245944,
+      "sha1": "6b767ea5a9"
     },
     {
       "path": "assets/characters/player/clothes/tops/schooluniformsummer_tops.PNG",
@@ -1958,7 +1958,7 @@
       "stem": "schooluniform_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 257045
+      "sizeBytes": 245944
     },
     {
       "path": "assets/characters/player/clothes/tops/schooluniformsummer_tops.PNG",
@@ -2648,7 +2648,7 @@
     {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
+        "assets/characters/player/clothes/tops/schooluniform_tops.PNG"
       ]
     }
   ],
