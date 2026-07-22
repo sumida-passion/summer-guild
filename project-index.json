@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T01:50:43.147805+00:00",
-    "commit": "d67a636",
+    "atUtc": "2026-07-22T01:51:08.843248+00:00",
+    "commit": "4d09545",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 16,
-    "totalBytes": 67774759,
+    "totalBytes": 67776705,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1452,9 +1452,9 @@
       "stem": "settings",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 44038,
-      "sha1": "5e28a6971a",
-      "lineCount": 2732
+      "sizeBytes": 45984,
+      "sha1": "a04e1b00ff",
+      "lineCount": 2837
     },
     {
       "path": "js/storage.js",
@@ -2292,6 +2292,9 @@
         "applyAllSettings",
         "getPlayerEquipment",
         "getWearableShopItem",
+        "isFullSetShopItem",
+        "getActiveFullSetShopItem",
+        "createEmptyPlayerEquipment",
         "equipShopItem",
         "resetPlayerEquipment",
         "isShopItemEquipped",
@@ -2558,7 +2561,7 @@
     {
       "status": "M",
       "paths": [
-        "data/items/items.js"
+        "js/settings.js"
       ]
     }
   ],
