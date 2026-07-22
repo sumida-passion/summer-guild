@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T16:52:08.355110+00:00",
-    "commit": "129719c",
+    "atUtc": "2026-07-22T16:52:28.038787+00:00",
+    "commit": "7ee3829",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 17,
-    "totalBytes": 75036285,
+    "totalBytes": 75036383,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1298,9 +1298,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 14158,
-      "sha1": "77cb855f36",
-      "lineCount": 659
+      "sizeBytes": 14256,
+      "sha1": "7d0afa3650",
+      "lineCount": 663
     },
     {
       "path": "js/app.js",
@@ -1613,7 +1613,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 4499,
-      "sha1": "5f6dcbfd65",
+      "sha1": "c6de25b026",
       "lineCount": 177
     },
     {
@@ -2089,6 +2089,7 @@
           "css/common.css",
           "css/developer.css",
           "css/layout.css",
+          "css/screens/iphone-landscape.css",
           "manifest.webmanifest"
         ],
         "images": [
@@ -2679,7 +2680,13 @@
     {
       "status": "M",
       "paths": [
-        "js/quests/hyakumasu.js"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
