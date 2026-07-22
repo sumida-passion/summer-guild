@@ -1248,6 +1248,10 @@ async function playHyakumasuResultSequence(
         getHyakumasuNearMessage(
             resultData
         );
+    const incorrectAnswers =
+        Array.isArray(raw.incorrectAnswers)
+            ? raw.incorrectAnswers
+            : [];
 
 
     container.innerHTML = "";
@@ -1385,10 +1389,67 @@ async function playHyakumasuResultSequence(
         );
 
         await waitForResultStep(
-            620
+            360
         );
 
     }
+
+
+    const mistakeCard =
+        document.createElement(
+            "section"
+        );
+
+    mistakeCard.className =
+        "result-step-card mistakes";
+
+
+    if (incorrectAnswers.length === 0) {
+
+        mistakeCard.innerHTML = `
+            <span class="result-step-icon">🌟</span>
+            <div>
+                <small>まちがい</small>
+                <strong>全問正解！</strong>
+                <p>まちがえた問題はありません。</p>
+            </div>
+        `;
+
+    } else {
+
+        const mistakeRows =
+            incorrectAnswers
+                .map(
+                    (item) => `
+                        <li>
+                            <strong>${item.rowNumber}＋${item.columnNumber}</strong>
+                            <span>入力 ${item.userAnswer} → 正解 ${item.correctAnswer}</span>
+                        </li>
+                    `
+                )
+                .join("");
+
+        mistakeCard.innerHTML = `
+            <span class="result-step-icon">📝</span>
+            <div class="result-mistakes-content">
+                <small>まちがえた問題　${incorrectAnswers.length}問</small>
+                <ul class="result-mistake-list">
+                    ${mistakeRows}
+                </ul>
+            </div>
+        `;
+
+    }
+
+
+    container.appendChild(
+        mistakeCard
+    );
+
+
+    await waitForResultStep(
+        360
+    );
 
 
     if (rewardPanel) {
