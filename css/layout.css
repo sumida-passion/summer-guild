@@ -1797,3 +1797,18 @@ body.wardrobe-open {
     font-size: clamp(11px, 1.15vw, 13px);
     color: rgba(255, 244, 215, 0.74);
 }
+
+
+/* 全身固定装備ラベル */
+.wardrobe-fullset-label {
+    display: inline-block;
+    margin-left: 0.45em;
+    padding: 0.08em 0.42em;
+    border: 1px solid rgba(255, 232, 170, 0.55);
+    border-radius: 999px;
+    color: #ffe8aa;
+    font-size: 0.68em;
+    font-weight: 700;
+    line-height: 1.35;
+    vertical-align: 0.12em;
+}
