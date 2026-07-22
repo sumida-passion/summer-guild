@@ -9,7 +9,7 @@
    ・LocalStorage（GP・衣装・招待済み楽団など）には触れない
    ========================================================= */
 
-const SW_VERSION = "2026.07.22-4";
+const SW_VERSION = "2026.07.22-5";
 const CACHE_PREFIX = "summer-guild-";
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${SW_VERSION}`;
 
