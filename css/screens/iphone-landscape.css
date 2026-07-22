@@ -1,0 +1,290 @@
+/* =========================================================
+   勉強ギルド iPhone横画面補正 Ver1.0
+
+   ・iPad版の既存レイアウトには触れない
+   ・高さ520px以下の横画面だけに適用する
+   ・主にiPhone Safari / ホーム画面版を対象とする
+   ========================================================= */
+
+@media screen and (orientation: landscape) and (max-height: 520px) and (min-width: 600px) {
+
+    /* iPhoneのノッチ・ホームインジケータ領域を避ける */
+    body {
+        padding-left: env(safe-area-inset-left, 0px);
+        padding-right: env(safe-area-inset-right, 0px);
+    }
+
+    /* -----------------------------------------------------
+       自分の部屋・ギルドホールの主人公
+       横幅ではなく画面の高さを基準にする。
+       保存済みのScale値はsettings.js側でそのまま有効。
+       ----------------------------------------------------- */
+    :root {
+        --player-width: min(60vh, 320px);
+        --player-bottom: -4%;
+    }
+
+    /* 共通の画面端ボタンだけを小型化する */
+    #gotoGuildHall,
+    #backRoom,
+    #backGuildHall,
+    #backGuildHallFromShop,
+    #backGuildHallFromMusicShop,
+    #backGuildHallFromMath,
+    #backQuestBoard,
+    #resultBackQuestBoard {
+        min-width: 138px;
+        min-height: 40px;
+        padding: 7px 14px;
+        font-size: 14px;
+    }
+
+    #gotoGuildHall,
+    #backRoom,
+    #backGuildHall,
+    #backGuildHallFromShop,
+    #backGuildHallFromMusicShop,
+    #backQuestBoard {
+        bottom: max(10px, env(safe-area-inset-bottom, 0px));
+    }
+
+    /* タイトル画面 */
+    .title-panel {
+        width: min(72vw, 610px);
+        padding: 15px 22px;
+    }
+
+    .title-panel h1 {
+        margin: 4px 0 8px;
+        font-size: clamp(30px, 5.4vw, 46px);
+    }
+
+    .title-panel .subtitle {
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+    #startButton {
+        min-height: 42px;
+        padding: 8px 22px;
+    }
+
+    /* -----------------------------------------------------
+       算数ギルド
+       左下の戻るボタンの領域を確保し、窓を右へ寄せる。
+       ----------------------------------------------------- */
+    #mathguild-screen {
+        justify-content: flex-end;
+        padding: 6px max(8px, env(safe-area-inset-right, 0px)) 6px 154px;
+    }
+
+    .math-guild-window {
+        width: 100%;
+        max-width: none;
+        height: 97vh;
+        max-height: 97vh;
+        border-width: 2px;
+        border-radius: 16px;
+    }
+
+    .math-guild-header {
+        padding: 7px 16px 6px;
+    }
+
+    .math-guild-header p {
+        font-size: 9px;
+        line-height: 1;
+    }
+
+    .math-guild-header h2 {
+        margin: 2px 0;
+        font-size: 25px;
+        line-height: 1.05;
+    }
+
+    .math-guild-header span {
+        font-size: 11px;
+        line-height: 1.2;
+    }
+
+    .math-guild-content {
+        padding: 7px 13px 9px;
+    }
+
+    .math-guild-summary {
+        gap: 7px;
+        margin-bottom: 8px;
+    }
+
+    .math-guild-summary > div {
+        padding: 7px 10px;
+        border-radius: 9px;
+    }
+
+    .math-guild-card,
+    .math-guild-test-card {
+        gap: 7px;
+        padding: 8px 10px;
+        border-radius: 10px;
+    }
+
+    .math-guild-card h3,
+    .math-guild-test-card h3 {
+        font-size: 16px;
+    }
+
+    .math-guild-card p,
+    .math-guild-test-card p {
+        font-size: 11px;
+    }
+
+    .math-guild-card button,
+    .math-guild-test-card button,
+    .math-result-panel button {
+        min-width: 118px;
+        min-height: 38px;
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .math-play-panel,
+    .math-result-panel {
+        max-width: 640px;
+    }
+
+    .math-play-panel header {
+        font-size: 12px;
+    }
+
+    .math-progress-track {
+        height: 6px;
+        margin: 6px 0 7px;
+    }
+
+    .math-play-guide {
+        font-size: 11px;
+        line-height: 1.2;
+    }
+
+    .math-expression {
+        margin: 5px 0 8px;
+        font-size: 42px;
+        line-height: 1;
+    }
+
+    .math-answer-grid {
+        gap: 7px;
+    }
+
+    .math-answer-button {
+        min-height: 48px;
+        border-radius: 10px;
+        font-size: 25px;
+    }
+
+    .math-feedback {
+        min-height: 18px;
+        margin-top: 4px;
+        font-size: 12px;
+    }
+
+    .math-quit-button {
+        min-width: 0;
+        min-height: 0;
+        margin-top: 1px;
+        padding: 2px 8px;
+        font-size: 11px;
+    }
+
+    #backGuildHallFromMath {
+        left: max(8px, env(safe-area-inset-left, 0px));
+        bottom: max(9px, env(safe-area-inset-bottom, 0px));
+        width: 138px;
+    }
+
+    /* -----------------------------------------------------
+       通常クエスト・クエストボード・結果画面
+       ----------------------------------------------------- */
+    #questboard-screen,
+    #quest-screen,
+    #result-screen {
+        padding: 5px max(8px, env(safe-area-inset-right, 0px)) 5px max(8px, env(safe-area-inset-left, 0px));
+    }
+
+    .questboard-window {
+        width: 84vw;
+        max-height: 94vh;
+        margin-left: auto;
+        padding: 10px 14px;
+    }
+
+    .questboard-header {
+        margin-bottom: 7px;
+    }
+
+    .questboard-header h2 {
+        margin-bottom: 2px;
+        font-size: 24px;
+    }
+
+    .quest-card {
+        gap: 8px;
+        padding: 8px 12px;
+    }
+
+    .quest-title {
+        margin-bottom: 2px;
+        font-size: 18px;
+    }
+
+    .quest-description,
+    .quest-reward {
+        margin-bottom: 2px;
+        font-size: 12px;
+        line-height: 1.35;
+    }
+
+    .quest-start-button {
+        min-width: 112px;
+        min-height: 38px;
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .quest-container {
+        width: 82vw;
+        max-height: 96vh;
+        margin-left: auto;
+        padding: 10px 16px;
+    }
+
+    .quest-container h2 {
+        margin: 0 0 3px;
+        font-size: 25px;
+    }
+
+    .quest-instruction {
+        margin-bottom: 7px;
+        font-size: 12px;
+        line-height: 1.35;
+    }
+
+    .result-window {
+        width: min(78vw, 650px);
+        max-height: 96vh;
+        overflow-y: auto;
+        padding: 13px 20px;
+    }
+
+    .result-window h2 {
+        margin-bottom: 4px;
+        font-size: 29px;
+    }
+
+    /* ショップ系の大枠は、既存の内容を保ったまま高さだけ確保 */
+    .shop-window,
+    .music-shop-window,
+    .wardrobe-window {
+        max-height: 96vh;
+    }
+}
