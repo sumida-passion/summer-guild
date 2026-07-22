@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T14:29:39.849660+00:00",
-    "commit": "7ec7182",
+    "atUtc": "2026-07-22T14:30:04.186726+00:00",
+    "commit": "b821c4c",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 17,
-    "totalBytes": 74545878,
+    "totalBytes": 74547189,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1549,9 +1549,9 @@
       "stem": "questMusicPlayer",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 5130,
-      "sha1": "89c44758b9",
-      "lineCount": 275
+      "sizeBytes": 6441,
+      "sha1": "71ad66fd37",
+      "lineCount": 333
     },
     {
       "path": "manifest.webmanifest",
@@ -2474,6 +2474,8 @@
         "getQuestMusicUrl",
         "playQuestMusic",
         "playHyakumasuMusic",
+        "playMathGuildQuestMusic",
+        "playMathGuildTestMusic",
         "pauseQuestMusic",
         "stopQuestMusic",
         "pauseQuestMusicForBackground",
@@ -2646,7 +2648,7 @@
     {
       "status": "M",
       "paths": [
-        "js/quests/math.js"
+        "js/systems/questMusicPlayer.js"
       ]
     }
   ],
