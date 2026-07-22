@@ -2274,14 +2274,15 @@ body.wardrobe-open {
 }
 
 /* =========================================================
-   算数ギルド Ver1.1
+   算数ギルド Ver1.2
    ギルドホールの背景連動ボタン配置
    ========================================================= */
 
 /*
-  ギルドホール背景そのものを施設選択UIとして使う。
-  各ボタンは背景内の対応施設へ個別配置し、
-  将来ほかの教科ギルドを追加しても中央に密集させない。
+  背景内の施設をそのままメニューとして使う。
+  ・今日のクエスト：中央掲示板の上
+  ・算数ギルド：左端アーチ内の床際
+  ・ギルドショップ：右上、2階窓付近（遠景用に小型化）
 */
 #guildhall-screen .guildhall-menu {
     position: absolute;
@@ -2297,39 +2298,50 @@ body.wardrobe-open {
     pointer-events: auto;
 }
 
-/* 左端の算数ギルド入口内 */
+/* 左端の算数ギルド入口・床ぎりぎり */
 #guildhall-screen #gotoMathGuild {
-    left: clamp(16px, 2.2vw, 34px);
-    top: 57.5%;
+    left: clamp(28px, 2.2vw, 42px);
+    top: 69.5%;
     width: clamp(178px, 15.8vw, 228px);
 }
 
-/* 中央掲示板上 */
+/* 中央掲示板の上 */
 #guildhall-screen #gotoQuestBoard {
     left: 50%;
-    top: 57.5%;
+    top: 43.2%;
     width: clamp(188px, 16.5vw, 238px);
     transform: translateX(-50%);
 }
 
-/* ショップは今回、従来の画面下部位置を維持 */
+/* 右上の2階窓付近。遠景に合わせて小さくする */
 #guildhall-screen #gotoGuildShop {
-    left: 50%;
-    bottom: clamp(20px, 4vh, 42px);
-    width: clamp(188px, 16.5vw, 238px);
+    left: 79.2%;
+    top: 22.2%;
+    width: clamp(126px, 10.5vw, 158px);
+    min-height: clamp(38px, 4.1vw, 48px);
+    padding: clamp(7px, .75vw, 10px) clamp(12px, 1.25vw, 18px);
+    font-size: clamp(13px, 1.15vw, 17px);
+    white-space: nowrap;
     transform: translateX(-50%);
 }
 
-/* 画面がやや縦長の端末でも背景施設との対応を保つ */
+/* 画面が縦長でも、各施設との位置関係を崩さない */
 @media (orientation: portrait) {
     #guildhall-screen #gotoMathGuild {
         left: 2vw;
-        top: 58%;
+        top: 70%;
         width: min(25vw, 210px);
     }
 
     #guildhall-screen #gotoQuestBoard {
-        top: 58%;
+        top: 43%;
         width: min(28vw, 230px);
+    }
+
+    #guildhall-screen #gotoGuildShop {
+        left: 79%;
+        top: 22%;
+        width: min(18vw, 150px);
+        font-size: clamp(11px, 1.7vw, 15px);
     }
 }
