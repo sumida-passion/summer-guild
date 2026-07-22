@@ -34,6 +34,9 @@ const SCREENS = {
     questboard:
         "questboard-screen",
 
+    mathguild:
+        "mathguild-screen",
+
     quest:
         "quest-screen",
 
@@ -281,6 +284,32 @@ function bindButtons() {
     );
 
 
+
+
+    /*
+      ギルドホール
+      ↓
+      算数ギルド
+    */
+
+    bindActionButton(
+        [
+            "gotoMathGuild"
+        ],
+        () => {
+            if (window.MathGuild && typeof window.MathGuild.open === "function") {
+                window.MathGuild.open();
+            }
+        }
+    );
+
+
+    bindScreenButton(
+        [
+            "backGuildHallFromMath"
+        ],
+        "guildhall"
+    );
 
 
     /*
@@ -2195,7 +2224,7 @@ function registerServiceWorker() {
         return;
     }
 
-    const BUILD_VERSION = "2026.07.21-1";
+    const BUILD_VERSION = "2026.07.22-mathguild1";
     const RELOAD_KEY = `summerGuildSwReloaded:${BUILD_VERSION}`;
 
     const reloadOnceForNewWorker = () => {
