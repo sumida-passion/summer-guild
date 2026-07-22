@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T01:51:33.025070+00:00",
-    "commit": "a0b2a11",
+    "atUtc": "2026-07-22T01:51:54.808746+00:00",
+    "commit": "b8cfabd",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 16,
-    "totalBytes": 67776903,
+    "totalBytes": 67777238,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1057,9 +1057,9 @@
       "stem": "layout",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 32002,
-      "sha1": "cbed9c0c0b",
-      "lineCount": 1799
+      "sizeBytes": 32337,
+      "sha1": "9efe5c0143",
+      "lineCount": 1814
     },
     {
       "path": "css/screens/.gitkeep",
@@ -2561,7 +2561,7 @@
     {
       "status": "M",
       "paths": [
-        "js/screens/wardrobe.js"
+        "css/layout.css"
       ]
     }
   ],
