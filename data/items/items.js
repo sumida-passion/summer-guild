@@ -6,7 +6,7 @@
    ・ショップに並ぶのは、この配列へ登録した商品だけ。
    ・通常衣装は単品販売し、自由な上下コーディネートを楽しむ。
    ・ギルドマントは認定報酬のため、ここには登録しない。
-   ・全身固定装備は専用制御を実装するまで登録しない。
+   ・equipmentType: "fullset" は、ほかの全装備レイヤーと同時装備できない。
    ========================================================= */
 
 window.GUILD_SHOP_ITEMS = [
@@ -42,6 +42,9 @@ window.GUILD_SHOP_ITEMS = [
     { id: "battle_tops", name: "荒野の戦士トップス", price: 35, wearable: true,
       category: "tops", layers: { tops: "assets/characters/player/clothes/tops/battle_tops.PNG" } },
 
+    { id: "rocknroll_tops", name: "黒雷のロックトップス", price: 28, wearable: true,
+      category: "tops", layers: { tops: "assets/characters/player/clothes/tops/rocknroll_tops.PNG" } },
+
     { id: "bluejeans_bottoms", name: "青空のブルージーンズ", price: 16, wearable: true,
       category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/bluejeans_bottoms.PNG" } },
 
@@ -66,6 +69,9 @@ window.GUILD_SHOP_ITEMS = [
     { id: "battle_bottoms", name: "荒野の戦士ボトムス", price: 35, wearable: true,
       category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/battle_bottoms.PNG" } },
 
+    { id: "rocknroll_bottoms", name: "黒雷のロックボトムス", price: 28, wearable: true,
+      category: "bottoms", layers: { bottoms: "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG" } },
+
     { id: "doctor_shoes", name: "癒やし手の白い靴", price: 14, wearable: true,
       category: "shoes", layers: { shoes: "assets/characters/player/clothes/shoes/doctor_shoes.PNG" } },
 
@@ -78,6 +84,9 @@ window.GUILD_SHOP_ITEMS = [
     { id: "google_head", name: "冒険家のゴーグル", price: 15, wearable: true,
       category: "head", layers: { head: "assets/characters/player/head/google_head.PNG" } },
 
+    { id: "neckwarmer_acc", name: "夜風のネックウォーマー", price: 14, wearable: true,
+      category: "accessories", layers: { accessories: "assets/characters/player/accessories/neckwarmer_acc.PNG" } },
+
     /* 既存の一式商品。購入済みデータとの互換性を保つためIDを維持。 */
     { id: "kyudo_uniform", name: "静心の弓道着", price: 180, wearable: true,
       category: "set", layers: {
@@ -86,6 +95,19 @@ window.GUILD_SHOP_ITEMS = [
           shoes: "assets/characters/player/clothes/shoes/kyudo_shoes.PNG"
       } },
 
-    /* 画像未実装の商品は、将来用の既存IDとして保持。 */
-    { id: "black_dog_costume", name: "黒い犬の着ぐるみ", price: 120 }
+    /*
+      全身固定装備。装備時は通常の全レイヤーを外し、
+      ほかの装備を選ぶと全身固定装備が解除される。
+    */
+    { id: "meteor_swordsman_fullset", name: "流星の剣士装備", price: 300, wearable: true,
+      category: "fullset", equipmentType: "fullset", layers: {
+          outer: "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG"
+      } },
+
+    /*
+      黒犬の画像ファイルはこのZIP内にまだ存在しないため、
+      既存商品IDとfullset指定だけを保持する。画像追加後にwearable/layersを設定する。
+    */
+    { id: "black_dog_costume", name: "黒い犬の着ぐるみ", price: 120,
+      category: "fullset", equipmentType: "fullset", wearable: false, pendingAsset: true }
 ];
