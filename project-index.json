@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T14:28:59.176709+00:00",
-    "commit": "9d45cc6",
+    "atUtc": "2026-07-22T14:29:39.849660+00:00",
+    "commit": "7ec7182",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 17,
-    "totalBytes": 74545121,
+    "totalBytes": 74545878,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1397,9 +1397,9 @@
       "stem": "math",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 26240,
-      "sha1": "e8a0e6b78f",
-      "lineCount": 562
+      "sizeBytes": 26997,
+      "sha1": "9e85c70262",
+      "lineCount": 594
     },
     {
       "path": "js/quests/music.js",
@@ -2280,6 +2280,8 @@
         "startMathGuildQuest",
         "startMathGuildTest",
         "renderMathGuildQuestion",
+        "playMathGuildMusic",
+        "stopMathGuildMusic",
         "escapeAttribute",
         "answerMathGuildQuestion",
         "finishMathGuildQuest",
@@ -2644,7 +2646,7 @@
     {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
+        "js/quests/math.js"
       ]
     }
   ],
