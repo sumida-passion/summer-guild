@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T12:44:24.391171+00:00",
-    "commit": "4a74713",
+    "atUtc": "2026-07-22T12:44:43.031274+00:00",
+    "commit": "60d260d",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 16,
-    "totalBytes": 67874024,
+    "totalBytes": 67880188,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1058,9 +1058,9 @@
       "stem": "layout",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 39994,
-      "sha1": "4bea5f7ec2",
-      "lineCount": 2166
+      "sizeBytes": 46158,
+      "sha1": "a80527f3ca",
+      "lineCount": 2274
     },
     {
       "path": "css/screens/.gitkeep",
@@ -2593,13 +2593,7 @@
     {
       "status": "M",
       "paths": [
-        "index.html"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "service-worker.js"
+        "css/layout.css"
       ]
     }
   ],
