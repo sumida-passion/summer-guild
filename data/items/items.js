@@ -10,8 +10,6 @@
    ========================================================= */
 
 window.GUILD_SHOP_ITEMS = [
-    { id: "green_tshirt", name: "森風の緑Tシャツ", price: 20 },
-
     { id: "lightning_tshirt", name: "稲妻のTシャツ", price: 30, wearable: true,
       category: "tops", layers: { tops: "assets/characters/player/clothes/tops/lightning_tops.PNG" } },
 
@@ -104,10 +102,8 @@ window.GUILD_SHOP_ITEMS = [
           outer: "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG"
       } },
 
-    /*
-      黒犬の画像ファイルはこのZIP内にまだ存在しないため、
-      既存商品IDとfullset指定だけを保持する。画像追加後にwearable/layersを設定する。
-    */
-    { id: "black_dog_costume", name: "黒い犬の着ぐるみ", price: 120,
-      category: "fullset", equipmentType: "fullset", wearable: false, pendingAsset: true }
+    { id: "black_dog_costume", name: "黒い犬の着ぐるみ", price: 120, wearable: true,
+      category: "fullset", equipmentType: "fullset", layers: {
+          outer: "assets/characters/player/clothes/outer/blackdog_fullset.PNG"
+      } }
 ];
