@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T15:42:32.852272+00:00",
-    "commit": "31364e3",
+    "atUtc": "2026-07-22T16:10:49.683001+00:00",
+    "commit": "77aea11",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 17,
-    "totalBytes": 74536525,
+    "totalBytes": 74527630,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -906,8 +906,8 @@
       "stem": "glasses_head",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 186408,
-      "sha1": "b25e520155"
+      "sizeBytes": 177513,
+      "sha1": "91d9b2183b"
     },
     {
       "path": "assets/characters/player/head/google_head.PNG",
@@ -1985,7 +1985,7 @@
       "stem": "glasses_head",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 186408
+      "sizeBytes": 177513
     },
     {
       "path": "assets/characters/player/head/google_head.PNG",
@@ -2648,7 +2648,7 @@
     {
       "status": "M",
       "paths": [
-        "assets/characters/player/clothes/tops/schooluniform_tops.PNG"
+        "assets/characters/player/head/glasses_head.PNG"
       ]
     }
   ],
