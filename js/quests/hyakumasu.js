@@ -15,7 +15,9 @@
    ・0～18の入力
    ・iPad Safari対応
    ・最初の入力から採点までを計測
-   ・120秒以内20GP／200秒以内7GP／それ以降1GP
+   ・正解率ポイント×スピードポイントで反復報酬を計算
+   ・今日初回は10GPを追加
+   ・結果画面でタイム、正解率、判定表、掛け算、合計を順番に表示
    ・採点後に間違えた式と正解を表示
    ・挑戦回数保存
    ========================================================= */
@@ -40,13 +42,13 @@ const HYAKUMASU_QUEST = {
         10,
 
     repeatReward:
-        1,
+        0,
 
     perfectReward:
-        1,
+        0,
 
     firstPerfectBonus:
-        2
+        0
 
 };
 
@@ -2877,12 +2879,37 @@ async function submitHyakumasuAnswers() {
             : 0;
 
 
-    const timeReward =
+    const accuracyPercent =
+        Math.round(
+            (
+                correctCount
+                / HYAKUMASU_CELL_COUNT
+            )
+            * 100
+        );
+
+
+    const accuracyPoint =
+        accuracyPercent <= 60
+            ? 0
+            : accuracyPercent <= 70
+                ? 1
+                : accuracyPercent < 100
+                    ? 2
+                    : 3;
+
+
+    const speedPoint =
         elapsedSeconds <= 120
-            ? 20
-            : elapsedSeconds <= 200
-                ? 7
+            ? 3
+            : elapsedSeconds <= 240
+                ? 2
                 : 1;
+
+
+    const performanceReward =
+        accuracyPoint
+        * speedPoint;
 
 
     const minutes =
@@ -2907,9 +2934,9 @@ async function submitHyakumasuAnswers() {
 
         `${correctCount}問／${HYAKUMASU_CELL_COUNT}問正解`,
 
-        `タイム：${formattedTime}`,
+        `正解率：${accuracyPercent}％`,
 
-        `タイム報酬：${timeReward}GP`
+        `タイム：${formattedTime}`
 
     ];
 
@@ -2998,8 +3025,18 @@ async function submitHyakumasuAnswers() {
 
             elapsedSeconds,
 
-            rewardOverride:
-                timeReward,
+            performanceRewardOverride:
+                performanceReward,
+
+            accuracyPercent,
+
+            accuracyPoint,
+
+            speedPoint,
+
+            performanceReward,
+
+            formattedTime,
 
             message:
                 resultLines.join(
