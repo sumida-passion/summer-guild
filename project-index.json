@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T16:12:29.809335+00:00",
-    "commit": "44cb9c1",
+    "atUtc": "2026-07-22T16:17:28.604407+00:00",
+    "commit": "4f3d02f",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 17,
-    "totalBytes": 75034735,
+    "totalBytes": 75026196,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -596,8 +596,8 @@
       "stem": "rocknroll_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 281002,
-      "sha1": "e21ad2380a"
+      "sizeBytes": 272463,
+      "sha1": "62fc220bbb"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/schooluniform_bottoms.PNG",
@@ -1788,7 +1788,7 @@
       "stem": "rocknroll_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 281002
+      "sizeBytes": 272463
     },
     {
       "path": "assets/characters/player/clothes/bottoms/schooluniform_bottoms.PNG",
@@ -2666,9 +2666,9 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/characters/player/clothes/outer/blackdog_fullset.PNG"
+        "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG"
       ]
     }
   ],
