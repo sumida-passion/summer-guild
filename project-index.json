@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T06:12:16.715308+00:00",
-    "commit": "74b1550",
+    "atUtc": "2026-07-22T06:12:52.257822+00:00",
+    "commit": "fd4b6b9",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 16,
-    "totalBytes": 67849841,
+    "totalBytes": 67862075,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1268,9 +1268,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 24483,
-      "sha1": "f80fadde0d",
-      "lineCount": 1485
+      "sizeBytes": 35868,
+      "sha1": "fac253376d",
+      "lineCount": 2045
     },
     {
       "path": "js/components/.gitkeep",
@@ -1475,9 +1475,9 @@
       "stem": "settings",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 45984,
-      "sha1": "a04e1b00ff",
-      "lineCount": 2837
+      "sizeBytes": 46833,
+      "sha1": "266b9e5e49",
+      "lineCount": 2869
     },
     {
       "path": "js/storage.js",
@@ -2081,6 +2081,12 @@
         "cancelCurrentQuest",
         "showQuestResult",
         "updateResultScreen",
+        "waitForResultStep",
+        "formatHyakumasuResultTime",
+        "createResultPointTable",
+        "getHyakumasuNearMessage",
+        "playHyakumasuResultSequence",
+        "updateCount",
         "returnToQuestBoard",
         "retryCurrentQuest",
         "refreshGameDisplays",
@@ -2582,27 +2588,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "docs/GPT_PROJECT_STATE.md"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "docs/PROJECT_STATE.json"
+        "js/app.js"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/game-rules.md"
+        "js/settings.js"
       ]
     }
   ],
