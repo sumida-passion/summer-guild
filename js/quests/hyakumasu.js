@@ -1480,6 +1480,131 @@ function installHyakumasuStyles() {
 
         }
 
+
+        /* iPhone横画面専用。iPadには適用しない。 */
+        @media screen and (
+            orientation: landscape
+        ) and (
+            max-height: 520px
+        ) and (
+            min-width: 600px
+        ) {
+
+            #quest-screen {
+                padding: 3px max(5px, env(safe-area-inset-right, 0px)) 3px max(5px, env(safe-area-inset-left, 0px)) !important;
+            }
+
+            #quest-screen .quest-container {
+                width: 99vw !important;
+                max-width: 99vw !important;
+                height: 98vh !important;
+                max-height: 98vh !important;
+                padding: 3px 6px !important;
+                border-width: 2px !important;
+                border-radius: 15px !important;
+            }
+
+            .hyakumasu-game {
+                grid-template-rows: auto minmax(0, 1fr) auto auto;
+            }
+
+            .hyakumasu-game-header {
+                margin-bottom: 1px;
+            }
+
+            .hyakumasu-header-main {
+                gap: 11px;
+            }
+
+            .hyakumasu-game .hyakumasu-progress {
+                font-size: 11px;
+            }
+
+            .hyakumasu-game-title {
+                font-size: 23px !important;
+            }
+
+            .hyakumasu-game-instruction {
+                font-size: 11px;
+                line-height: 1.1;
+            }
+
+            .hyakumasu-play-area {
+                grid-template-columns: minmax(0, 1fr) 180px;
+                gap: 5px;
+            }
+
+            .hyakumasu-control-area {
+                width: 180px;
+                min-width: 180px;
+                max-width: 180px;
+                gap: 3px;
+            }
+
+            .hyakumasu-current-formula {
+                min-height: 24px;
+                padding: 2px 5px;
+                border-radius: 7px;
+                font-size: 12px;
+            }
+
+            .hyakumasu-numberpad-area .study-guild-numberpad {
+                max-width: 176px;
+                padding: 7px;
+                border-radius: 13px;
+            }
+
+            .hyakumasu-numberpad-area .study-guild-numberpad__header {
+                margin-bottom: 3px;
+            }
+
+            .hyakumasu-numberpad-area .study-guild-numberpad__title {
+                font-size: 11px;
+            }
+
+            .hyakumasu-numberpad-area .study-guild-numberpad__display {
+                min-height: 27px;
+                padding: 2px 6px;
+                font-size: 18px;
+            }
+
+            .hyakumasu-numberpad-area .study-guild-numberpad__keys {
+                gap: 3px;
+            }
+
+            .hyakumasu-numberpad-area .study-guild-numberpad__key {
+                aspect-ratio: 1 / 0.58;
+                font-size: 21px;
+            }
+
+            .hyakumasu-numberpad-area .study-guild-numberpad__key--function {
+                font-size: 15px;
+            }
+
+            .hyakumasu-numberpad-area .study-guild-numberpad__key--zero {
+                min-height: 31px;
+            }
+
+            .hyakumasu-game .hyakumasu-message {
+                min-height: 1em;
+                margin: 0;
+                font-size: 10px;
+                line-height: 1;
+            }
+
+            .hyakumasu-game .hyakumasu-actions {
+                gap: 8px;
+            }
+
+            .hyakumasu-game .hyakumasu-actions button {
+                min-width: 132px;
+                min-height: 35px;
+                padding: 4px 12px;
+                font-size: 13px;
+            }
+
+        }
+
     `;
 
 
@@ -1526,8 +1651,16 @@ function fitHyakumasuToScreen() {
         HYAKUMASU_SIZE + 1;
 
 
+    const isShortPhoneLandscape =
+        window.matchMedia(
+            "(orientation: landscape) and (max-height: 520px) and (min-width: 600px)"
+        ).matches;
+
+
     const gap =
-        3;
+        isShortPhoneLandscape
+            ? 2
+            : 3;
 
 
     const horizontalGapTotal =
@@ -1584,9 +1717,15 @@ function fitHyakumasuToScreen() {
         );
 
 
+    const minimumCellSize =
+        isShortPhoneLandscape
+            ? 22
+            : HYAKUMASU_MIN_CELL_SIZE;
+
+
     const safeSize =
         Math.max(
-            HYAKUMASU_MIN_CELL_SIZE,
+            minimumCellSize,
             calculatedSize
         );
 
