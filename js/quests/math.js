@@ -300,6 +300,7 @@ function openMathGuild() {
 }
 
 function renderMathGuildHome() {
+    stopMathGuildMusic();
     const container = document.getElementById("mathGuildContent");
     if (!container) return;
     const progress = getMathGuildProgress();
@@ -379,6 +380,7 @@ function startMathGuildQuest(questId) {
         startedAt: Date.now(),
         locked: false
     };
+    playMathGuildMusic("quest");
     renderMathGuildQuestion();
 }
 
@@ -400,6 +402,7 @@ function startMathGuildTest(testNumber) {
         startedAt: Date.now(),
         locked: false
     };
+    playMathGuildMusic("test");
     renderMathGuildQuestion();
 }
 
@@ -428,6 +431,33 @@ function renderMathGuildQuestion(message = "") {
         button.addEventListener("click", () => answerMathGuildQuestion(button.dataset.mathAnswer));
     });
     document.getElementById("quitMathGuildPlay")?.addEventListener("click", renderMathGuildHome);
+}
+
+function playMathGuildMusic(mode) {
+    const player = window.QuestMusicPlayer;
+    if (!player) return;
+
+    if (
+        mode === "quest"
+        && typeof player.playMathGuildQuest === "function"
+    ) {
+        player.playMathGuildQuest({ restart: true });
+    } else if (
+        mode === "test"
+        && typeof player.playMathGuildTest === "function"
+    ) {
+        player.playMathGuildTest({ restart: true });
+    }
+}
+
+function stopMathGuildMusic() {
+    const player = window.QuestMusicPlayer;
+    if (
+        player
+        && typeof player.stop === "function"
+    ) {
+        player.stop();
+    }
 }
 
 function escapeAttribute(value) {
@@ -480,6 +510,7 @@ function answerMathGuildQuestion(selected) {
 }
 
 function finishMathGuildQuest() {
+    stopMathGuildMusic();
     const progress = getMathGuildProgress();
     progress.completedQuests[String(mathGuildState.questId)] = true;
     saveMathGuildProgress(progress);
@@ -504,6 +535,7 @@ function finishMathGuildQuest() {
 }
 
 function finishMathGuildTest() {
+    stopMathGuildMusic();
     const testNumber = mathGuildState.testNumber;
     const elapsedSeconds = Math.max(1, Math.round((Date.now() - mathGuildState.startedAt) / 1000));
     const accuracy = Math.round((mathGuildState.correctCount / mathGuildState.questions.length) * 100);
