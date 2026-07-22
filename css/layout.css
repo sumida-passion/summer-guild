@@ -2272,3 +2272,64 @@ body.wardrobe-open {
     .math-answer-grid { gap: 9px; }
     #backGuildHallFromMath { bottom: 10px; }
 }
+
+/* =========================================================
+   算数ギルド Ver1.1
+   ギルドホールの背景連動ボタン配置
+   ========================================================= */
+
+/*
+  ギルドホール背景そのものを施設選択UIとして使う。
+  各ボタンは背景内の対応施設へ個別配置し、
+  将来ほかの教科ギルドを追加しても中央に密集させない。
+*/
+#guildhall-screen .guildhall-menu {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    display: block;
+    pointer-events: none;
+}
+
+#guildhall-screen .guildhall-menu > button {
+    position: absolute;
+    margin: 0;
+    pointer-events: auto;
+}
+
+/* 左端の算数ギルド入口内 */
+#guildhall-screen #gotoMathGuild {
+    left: clamp(16px, 2.2vw, 34px);
+    top: 57.5%;
+    width: clamp(178px, 15.8vw, 228px);
+}
+
+/* 中央掲示板上 */
+#guildhall-screen #gotoQuestBoard {
+    left: 50%;
+    top: 57.5%;
+    width: clamp(188px, 16.5vw, 238px);
+    transform: translateX(-50%);
+}
+
+/* ショップは今回、従来の画面下部位置を維持 */
+#guildhall-screen #gotoGuildShop {
+    left: 50%;
+    bottom: clamp(20px, 4vh, 42px);
+    width: clamp(188px, 16.5vw, 238px);
+    transform: translateX(-50%);
+}
+
+/* 画面がやや縦長の端末でも背景施設との対応を保つ */
+@media (orientation: portrait) {
+    #guildhall-screen #gotoMathGuild {
+        left: 2vw;
+        top: 58%;
+        width: min(25vw, 210px);
+    }
+
+    #guildhall-screen #gotoQuestBoard {
+        top: 58%;
+        width: min(28vw, 230px);
+    }
+}
