@@ -1812,3 +1812,166 @@ body.wardrobe-open {
     line-height: 1.35;
     vertical-align: 0.12em;
 }
+
+
+/* =========================================================
+   百マス計算 結果査定シーケンス
+   ========================================================= */
+
+#result-screen:has(.hyakumasu-result-sequence) .result-window {
+    width: min(92vw, 860px);
+    max-height: 94vh;
+    overflow-y: auto;
+    padding: clamp(18px, 2.6vw, 30px);
+    -webkit-overflow-scrolling: touch;
+}
+
+.hyakumasu-result-sequence {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    max-height: none;
+    margin-bottom: 14px;
+    overflow: visible;
+    padding: 0;
+    text-align: left;
+}
+
+.result-step-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    min-width: 0;
+    padding: 13px 15px;
+    border: 1px solid rgba(255, 225, 148, 0.44);
+    border-radius: 15px;
+    background: rgba(32, 19, 11, 0.78);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09);
+    animation: resultStepAppear 0.38s cubic-bezier(0.2, 0.9, 0.25, 1.15) both;
+}
+
+.result-step-card.calculation,
+.result-step-card.near {
+    grid-column: 1 / -1;
+}
+
+.result-step-card small {
+    display: block;
+    margin-bottom: 4px;
+    color: #e8c982;
+    font-size: clamp(12px, 1.4vw, 16px);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.result-step-card > div > strong {
+    display: block;
+    color: #fff2c5;
+    font-size: clamp(20px, 2.6vw, 31px);
+    line-height: 1.2;
+}
+
+.result-step-card p {
+    margin-top: 5px;
+    color: #d8c59e;
+    font-size: 14px;
+}
+
+.result-step-icon {
+    font-size: clamp(25px, 3vw, 36px);
+    line-height: 1;
+}
+
+.result-point-table {
+    display: grid;
+    gap: 3px;
+    margin-top: 9px;
+}
+
+.result-point-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 8px;
+    align-items: center;
+    padding: 3px 7px;
+    border-radius: 7px;
+    color: #d9c9aa;
+    font-size: clamp(12px, 1.25vw, 15px);
+}
+
+.result-point-row.current {
+    background: rgba(255, 217, 109, 0.17);
+    color: #fff3c5;
+    outline: 1px solid rgba(255, 224, 128, 0.42);
+}
+
+.result-point-row strong {
+    color: #ffe17a;
+}
+
+.result-point-row em {
+    color: #fff5cf;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.result-step-card.near {
+    border-color: rgba(255, 235, 145, 0.72);
+    background: rgba(107, 69, 22, 0.62);
+}
+
+.reward-panel-final {
+    animation: rewardFinalAppear 0.55s cubic-bezier(0.18, 0.9, 0.28, 1.2) both;
+}
+
+.result-back-ready {
+    animation: resultStepAppear 0.35s ease both;
+}
+
+@keyframes resultStepAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes rewardFinalAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.82);
+    }
+    70% {
+        transform: scale(1.04);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 700px), (max-height: 620px) {
+    .hyakumasu-result-sequence {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .result-step-card {
+        gap: 8px;
+        padding: 9px 10px;
+    }
+
+    .result-point-row {
+        padding: 2px 4px;
+        font-size: 11px;
+    }
+
+    .result-step-icon {
+        font-size: 23px;
+    }
+}
