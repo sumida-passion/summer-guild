@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T13:24:08.138334+00:00",
-    "commit": "e49ae53",
+    "atUtc": "2026-07-22T13:37:00.729947+00:00",
+    "commit": "44e485f",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 17,
-    "totalBytes": 67902582,
+    "totalBytes": 67902578,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1571,8 +1571,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4497,
-      "sha1": "d554dcb23c",
+      "sizeBytes": 4493,
+      "sha1": "3048dc638e",
       "lineCount": 177
     },
     {
@@ -2618,7 +2618,7 @@
     {
       "status": "M",
       "paths": [
-        "css/layout.css"
+        "service-worker.js"
       ]
     }
   ],
