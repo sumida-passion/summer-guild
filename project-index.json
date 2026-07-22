@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T14:13:58.106661+00:00",
-    "commit": "be19add",
+    "atUtc": "2026-07-22T14:28:45.300498+00:00",
+    "commit": "dda3586",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 17,
-    "totalBytes": 74544507,
+    "totalBytes": 74544525,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1277,8 +1277,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 14144,
-      "sha1": "7099a43499",
+      "sizeBytes": 14158,
+      "sha1": "77cb855f36",
       "lineCount": 659
     },
     {
@@ -1591,8 +1591,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4493,
-      "sha1": "3048dc638e",
+      "sizeBytes": 4497,
+      "sha1": "d5d615354f",
       "lineCount": 177
     },
     {
@@ -2642,15 +2642,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/audio/quests/Blazing Dragoon's Charge.mp3"
+        "index.html"
       ]
     },
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/audio/quests/The Clockwork Gambit.mp3"
+        "service-worker.js"
       ]
     }
   ],
