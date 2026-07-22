@@ -824,6 +824,18 @@ async function showQuestResult(
         "result"
     );
 
+
+    if (
+        resultData
+        && resultData.questId === "hyakumasu"
+    ) {
+
+        await playHyakumasuResultSequence(
+            resultData
+        );
+
+    }
+
 }
 
 
@@ -840,6 +852,60 @@ function updateResultScreen(
         && typeof resultData === "object"
             ? resultData
             : {};
+
+
+    const resultMessageElement =
+        document.getElementById(
+            "resultMessage"
+        );
+    const rewardPanelElement =
+        document.querySelector(
+            "#result-screen .reward-panel"
+        );
+    const totalGpElement =
+        document.getElementById(
+            "totalGpText"
+        );
+    const resultBackButton =
+        document.getElementById(
+            "resultBackQuestBoard"
+        );
+
+
+    if (resultMessageElement) {
+
+        resultMessageElement.classList.remove(
+            "hyakumasu-result-sequence"
+        );
+
+    }
+
+
+    if (rewardPanelElement) {
+
+        rewardPanelElement.hidden = false;
+        rewardPanelElement.classList.remove(
+            "reward-panel-final"
+        );
+
+    }
+
+
+    if (totalGpElement) {
+
+        totalGpElement.hidden = false;
+
+    }
+
+
+    if (resultBackButton) {
+
+        resultBackButton.hidden = false;
+        resultBackButton.classList.remove(
+            "result-back-ready"
+        );
+
+    }
 
 
     setTextIfExists(
@@ -927,6 +993,500 @@ function updateResultScreen(
                 safeData
                     .totalChallengeCount
             )
+        );
+
+    }
+
+}
+
+
+
+
+/* =========================================================
+   13-2. 百マス計算 結果査定演出
+   ========================================================= */
+
+function waitForResultStep(
+    milliseconds
+) {
+
+    return new Promise(
+        (resolve) => {
+
+            window.setTimeout(
+                resolve,
+                milliseconds
+            );
+
+        }
+    );
+
+}
+
+
+function formatHyakumasuResultTime(
+    secondsValue
+) {
+
+    const totalSeconds =
+        Math.max(
+            0,
+            Math.floor(
+                Number(secondsValue) || 0
+            )
+        );
+
+
+    const minutes =
+        Math.floor(
+            totalSeconds / 60
+        );
+
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    return minutes > 0
+        ? `${minutes}分${seconds}秒`
+        : `${seconds}秒`;
+
+}
+
+
+function createResultPointTable(
+    rows,
+    currentValue
+) {
+
+    return `
+        <div class="result-point-table">
+            ${rows.map(
+                (row) => `
+                    <div class="result-point-row ${row.value === currentValue ? "current" : ""}">
+                        <span>${row.label}</span>
+                        <strong>${row.value} pt</strong>
+                        ${row.value === currentValue ? '<em>今回</em>' : ''}
+                    </div>
+                `
+            ).join("")}
+        </div>
+    `;
+
+}
+
+
+function getHyakumasuNearMessage(
+    data
+) {
+
+    const messages = [];
+    const elapsedSeconds =
+        Math.max(
+            0,
+            Math.floor(
+                Number(data.elapsedSeconds) || 0
+            )
+        );
+    const correctCount =
+        Math.max(
+            0,
+            Math.floor(
+                Number(data.correctCount) || 0
+            )
+        );
+
+
+    if (
+        elapsedSeconds > 120
+        && elapsedSeconds <= 135
+    ) {
+
+        messages.push(
+            `あと${elapsedSeconds - 120}秒でスピードポイント3！`
+        );
+
+    } else if (
+        elapsedSeconds > 240
+        && elapsedSeconds <= 270
+    ) {
+
+        messages.push(
+            `あと${elapsedSeconds - 240}秒でスピードポイント2！`
+        );
+
+    }
+
+
+    if (
+        correctCount < 100
+        && correctCount >= 95
+    ) {
+
+        messages.push(
+            `あと${100 - correctCount}問で全問正解！`
+        );
+
+    } else if (
+        correctCount <= 70
+        && correctCount >= 66
+    ) {
+
+        messages.push(
+            `あと${71 - correctCount}問で正解率ポイント2！`
+        );
+
+    } else if (
+        correctCount <= 60
+        && correctCount >= 56
+    ) {
+
+        messages.push(
+            `あと${61 - correctCount}問で正解率ポイント1！`
+        );
+
+    }
+
+
+    return messages;
+
+}
+
+
+async function playHyakumasuResultSequence(
+    resultData
+) {
+
+    const container =
+        document.getElementById(
+            "resultMessage"
+        );
+    const rewardPanel =
+        document.querySelector(
+            "#result-screen .reward-panel"
+        );
+    const totalGpText =
+        document.getElementById(
+            "totalGpText"
+        );
+    const backButton =
+        document.getElementById(
+            "resultBackQuestBoard"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    const raw =
+        resultData.rawCompletionData
+        && typeof resultData.rawCompletionData === "object"
+            ? resultData.rawCompletionData
+            : {};
+    const accuracyPoint =
+        Math.max(
+            0,
+            Math.floor(
+                Number(raw.accuracyPoint) || 0
+            )
+        );
+    const speedPoint =
+        Math.max(
+            1,
+            Math.floor(
+                Number(raw.speedPoint) || 1
+            )
+        );
+    const performanceReward =
+        accuracyPoint * speedPoint;
+    const dailyReward =
+        resultData.firstClear
+            ? Math.max(
+                0,
+                Math.floor(
+                    Number(resultData.baseReward) || 0
+                )
+            )
+            : 0;
+    const totalReward =
+        Math.max(
+            0,
+            Math.floor(
+                Number(resultData.reward) || 0
+            )
+        );
+    const totalGp =
+        Math.max(
+            0,
+            Math.floor(
+                Number(resultData.totalGp) || 0
+            )
+        );
+    const previousGp =
+        Math.max(
+            0,
+            totalGp - totalReward
+        );
+    const accuracyPercent =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                Math.floor(
+                    Number(raw.accuracyPercent)
+                    || (
+                        Number(resultData.correctCount) || 0
+                    )
+                )
+            )
+        );
+    const nearMessages =
+        getHyakumasuNearMessage(
+            resultData
+        );
+
+
+    container.innerHTML = "";
+    container.classList.add(
+        "hyakumasu-result-sequence"
+    );
+
+
+    if (rewardPanel) {
+
+        rewardPanel.hidden = true;
+
+    }
+
+
+    if (totalGpText) {
+
+        totalGpText.hidden = true;
+
+    }
+
+
+    if (backButton) {
+
+        backButton.hidden = true;
+
+    }
+
+
+    const steps = [
+        {
+            className: "time",
+            html: `
+                <span class="result-step-icon">⏱</span>
+                <div>
+                    <small>タイム</small>
+                    <strong>${formatHyakumasuResultTime(resultData.elapsedSeconds)}</strong>
+                    ${createResultPointTable(
+                        [
+                            { label: "120秒以内", value: 3 },
+                            { label: "240秒以内", value: 2 },
+                            { label: "240秒超", value: 1 }
+                        ],
+                        speedPoint
+                    )}
+                </div>
+            `
+        },
+        {
+            className: "accuracy",
+            html: `
+                <span class="result-step-icon">📖</span>
+                <div>
+                    <small>正解率</small>
+                    <strong>${accuracyPercent}％（${resultData.correctCount || 0} / ${resultData.totalQuestions || 100}）</strong>
+                    ${createResultPointTable(
+                        [
+                            { label: "100％", value: 3 },
+                            { label: "71〜99％", value: 2 },
+                            { label: "61〜70％", value: 1 },
+                            { label: "60％以下", value: 0 }
+                        ],
+                        accuracyPoint
+                    )}
+                </div>
+            `
+        },
+        {
+            className: "daily",
+            html: `
+                <span class="result-step-icon">🌞</span>
+                <div>
+                    <small>デイリー初回</small>
+                    <strong>${resultData.firstClear ? `今日初クリア　+${dailyReward}GP` : "今日は受け取り済み"}</strong>
+                </div>
+            `
+        },
+        {
+            className: "calculation",
+            html: `
+                <span class="result-step-icon">🧮</span>
+                <div>
+                    <small>ギルド査定</small>
+                    <strong>${accuracyPoint} × ${speedPoint} ＝ ${performanceReward}GP</strong>
+                    <p>正解率ポイント × スピードポイント</p>
+                </div>
+            `
+        }
+    ];
+
+
+    for (
+        const step
+        of steps
+    ) {
+
+        const card =
+            document.createElement(
+                "section"
+            );
+
+        card.className =
+            `result-step-card ${step.className}`;
+        card.innerHTML =
+            step.html;
+        container.appendChild(
+            card
+        );
+
+        await waitForResultStep(
+            560
+        );
+
+    }
+
+
+    if (nearMessages.length > 0) {
+
+        const nearCard =
+            document.createElement(
+                "section"
+            );
+
+        nearCard.className =
+            "result-step-card near";
+        nearCard.innerHTML = `
+            <span class="result-step-icon">✨</span>
+            <div>
+                <small>おしい！</small>
+                <strong>${nearMessages.join("<br>")}</strong>
+            </div>
+        `;
+        container.appendChild(
+            nearCard
+        );
+
+        await waitForResultStep(
+            620
+        );
+
+    }
+
+
+    if (rewardPanel) {
+
+        rewardPanel.hidden = false;
+        rewardPanel.classList.add(
+            "reward-panel-final"
+        );
+
+    }
+
+
+    setTextIfExists(
+        "rewardText",
+        `+${totalReward}GP`
+    );
+
+
+    if (totalGpText) {
+
+        totalGpText.hidden = false;
+        totalGpText.textContent =
+            `所持GP：${previousGp}`;
+
+    }
+
+
+    await waitForResultStep(
+        320
+    );
+
+
+    const countDuration = 760;
+    const countStartedAt =
+        performance.now();
+
+
+    await new Promise(
+        (resolve) => {
+
+            function updateCount(
+                now
+            ) {
+
+                const progress =
+                    Math.min(
+                        1,
+                        (
+                            now - countStartedAt
+                        )
+                        / countDuration
+                    );
+                const currentGp =
+                    Math.round(
+                        previousGp
+                        + (
+                            totalGp - previousGp
+                        )
+                        * progress
+                    );
+
+
+                if (totalGpText) {
+
+                    totalGpText.textContent =
+                        `所持GP：${currentGp}`;
+
+                }
+
+
+                if (progress < 1) {
+
+                    window.requestAnimationFrame(
+                        updateCount
+                    );
+
+                } else {
+
+                    resolve();
+
+                }
+
+            }
+
+
+            window.requestAnimationFrame(
+                updateCount
+            );
+
+        }
+    );
+
+
+    if (backButton) {
+
+        backButton.hidden = false;
+        backButton.classList.add(
+            "result-back-ready"
         );
 
     }

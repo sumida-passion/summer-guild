@@ -2606,12 +2606,37 @@ function completeQuestAttempt(options) {
             : 0;
 
 
+    const hasPerformanceRewardOverride =
+        Number.isFinite(
+            Number(
+                options.performanceRewardOverride
+            )
+        );
+
+
+    const performanceRewardOverride =
+        hasPerformanceRewardOverride
+            ? Math.max(
+                0,
+                Math.floor(
+                    Number(
+                        options.performanceRewardOverride
+                    )
+                )
+            )
+            : 0;
+
+
     const totalReward =
         hasRewardOverride
             ? rewardOverride
             : baseReward
-                + earnedPerfectReward
-                + earnedFirstPerfectBonus;
+                + (
+                    hasPerformanceRewardOverride
+                        ? performanceRewardOverride
+                        : earnedPerfectReward
+                            + earnedFirstPerfectBonus
+                );
 
 
     /*
@@ -2708,13 +2733,20 @@ function completeQuestAttempt(options) {
 
         perfectReward:
             hasRewardOverride
+            || hasPerformanceRewardOverride
                 ? 0
                 : earnedPerfectReward,
 
         firstPerfectBonus:
             hasRewardOverride
+            || hasPerformanceRewardOverride
                 ? 0
                 : earnedFirstPerfectBonus,
+
+        performanceReward:
+            hasPerformanceRewardOverride
+                ? performanceRewardOverride
+                : 0,
 
         reward:
             totalReward,
