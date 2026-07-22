@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T16:10:49.683001+00:00",
-    "commit": "77aea11",
+    "atUtc": "2026-07-22T16:11:44.806960+00:00",
+    "commit": "095a96b",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 17,
-    "totalBytes": 74527630,
+    "totalBytes": 74491097,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -746,8 +746,8 @@
       "stem": "battle_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 217058,
-      "sha1": "79b98eca22"
+      "sizeBytes": 206349,
+      "sha1": "6927a90913"
     },
     {
       "path": "assets/characters/player/clothes/tops/border_tops.PNG",
@@ -826,8 +826,8 @@
       "stem": "mountainparker_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 248425,
-      "sha1": "02760d98b5"
+      "sizeBytes": 241605,
+      "sha1": "ea6cb63540"
     },
     {
       "path": "assets/characters/player/clothes/tops/rocknroll_tops.PNG",
@@ -856,8 +856,8 @@
       "stem": "schooluniformsummer_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 225581,
-      "sha1": "390b90ed81"
+      "sizeBytes": 206577,
+      "sha1": "6736c4fbd8"
     },
     {
       "path": "assets/characters/player/clothes/tops/tennis_tops.PNG",
@@ -1868,7 +1868,7 @@
       "stem": "battle_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 217058
+      "sizeBytes": 206349
     },
     {
       "path": "assets/characters/player/clothes/tops/border_tops.PNG",
@@ -1940,7 +1940,7 @@
       "stem": "mountainparker_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 248425
+      "sizeBytes": 241605
     },
     {
       "path": "assets/characters/player/clothes/tops/rocknroll_tops.PNG",
@@ -1967,7 +1967,7 @@
       "stem": "schooluniformsummer_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 225581
+      "sizeBytes": 206577
     },
     {
       "path": "assets/characters/player/clothes/tops/tennis_tops.PNG",
@@ -2648,7 +2648,19 @@
     {
       "status": "M",
       "paths": [
-        "assets/characters/player/head/glasses_head.PNG"
+        "assets/characters/player/clothes/tops/battle_tops.PNG"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "assets/characters/player/clothes/tops/mountainparker_tops.PNG"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "assets/characters/player/clothes/tops/schooluniformsummer_tops.PNG"
       ]
     }
   ],
