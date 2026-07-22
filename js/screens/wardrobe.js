@@ -119,7 +119,10 @@ function renderWardrobe() {
                             type="button"
                             data-wardrobe-item-id="${escapeWardrobeHtml(item.id)}">
 
-                            <span>${escapeWardrobeHtml(item.name)}</span>
+                            <span>
+                                ${escapeWardrobeHtml(item.name)}
+                                ${item.equipmentType === "fullset" ? '<small class="wardrobe-fullset-label">全身固定</small>' : ''}
+                            </span>
 
                             <span class="wardrobe-item-state">
                                 ${equipped ? "装備中" : "着る"}
