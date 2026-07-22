@@ -854,6 +854,9 @@ function updateResultScreen(
             : {};
 
 
+    resetHyakumasuResultLayout();
+
+
     const resultMessageElement =
         document.getElementById(
             "resultMessage"
@@ -1153,6 +1156,208 @@ function getHyakumasuNearMessage(
 }
 
 
+
+function resetHyakumasuResultLayout() {
+
+    const resultWindow =
+        document.querySelector(
+            "#result-screen .result-window"
+        );
+    const rightWindow =
+        document.getElementById(
+            "hyakumasuRewardWindow"
+        );
+
+
+    if (
+        !resultWindow
+        || !rightWindow
+    ) {
+
+        return;
+
+    }
+
+
+    const label =
+        rightWindow.querySelector(
+            ".result-label"
+        );
+    const title =
+        rightWindow.querySelector(
+            "#resultTitle"
+        );
+    const rewardPanel =
+        rightWindow.querySelector(
+            ".reward-panel"
+        );
+    const totalGpText =
+        rightWindow.querySelector(
+            "#totalGpText"
+        );
+    const backButton =
+        rightWindow.querySelector(
+            "#resultBackQuestBoard"
+        );
+    const resultMessage =
+        document.getElementById(
+            "resultMessage"
+        );
+
+
+    if (label) {
+        resultWindow.insertBefore(
+            label,
+            resultMessage
+        );
+    }
+
+    if (title) {
+        resultWindow.insertBefore(
+            title,
+            resultMessage
+        );
+    }
+
+    if (rewardPanel) {
+        resultWindow.appendChild(
+            rewardPanel
+        );
+    }
+
+    if (totalGpText) {
+        resultWindow.appendChild(
+            totalGpText
+        );
+    }
+
+    if (backButton) {
+        resultWindow.appendChild(
+            backButton
+        );
+    }
+
+
+    rightWindow.remove();
+    resultWindow.classList.remove(
+        "hyakumasu-two-window"
+    );
+
+}
+
+
+function createHyakumasuTwoWindowLayout() {
+
+    resetHyakumasuResultLayout();
+
+
+    const resultWindow =
+        document.querySelector(
+            "#result-screen .result-window"
+        );
+    const resultMessage =
+        document.getElementById(
+            "resultMessage"
+        );
+
+
+    if (
+        !resultWindow
+        || !resultMessage
+    ) {
+
+        return null;
+
+    }
+
+
+    const rightWindow =
+        document.createElement(
+            "section"
+        );
+
+    rightWindow.id =
+        "hyakumasuRewardWindow";
+    rightWindow.className =
+        "hyakumasu-reward-window";
+
+
+    const movableSelectors = [
+        ".result-label",
+        "#resultTitle",
+        ".reward-panel",
+        "#totalGpText",
+        "#resultBackQuestBoard"
+    ];
+
+
+    movableSelectors.forEach(
+        (selector) => {
+
+            const element =
+                resultWindow.querySelector(
+                    `:scope > ${selector}`
+                );
+
+
+            if (element) {
+
+                rightWindow.appendChild(
+                    element
+                );
+
+            }
+
+        }
+    );
+
+
+    const summary =
+        document.createElement(
+            "div"
+        );
+
+    summary.id =
+        "hyakumasuRewardSummary";
+    summary.className =
+        "hyakumasu-reward-summary";
+
+
+    const rewardPanel =
+        rightWindow.querySelector(
+            ".reward-panel"
+        );
+
+
+    if (rewardPanel) {
+
+        rightWindow.insertBefore(
+            summary,
+            rewardPanel
+        );
+
+    } else {
+
+        rightWindow.appendChild(
+            summary
+        );
+
+    }
+
+
+    resultWindow.appendChild(
+        rightWindow
+    );
+    resultWindow.classList.add(
+        "hyakumasu-two-window"
+    );
+
+
+    return summary;
+
+}
+
+
 async function playHyakumasuResultSequence(
     resultData
 ) {
@@ -1173,6 +1378,8 @@ async function playHyakumasuResultSequence(
         document.getElementById(
             "resultBackQuestBoard"
         );
+    const rewardSummary =
+        createHyakumasuTwoWindowLayout();
 
 
     if (!container) {
@@ -1281,7 +1488,7 @@ async function playHyakumasuResultSequence(
     }
 
 
-    const steps = [
+    const leftSteps = [
         {
             className: "time",
             html: `
@@ -1318,7 +1525,11 @@ async function playHyakumasuResultSequence(
                     )}
                 </div>
             `
-        },
+        }
+    ];
+
+
+    const rightSteps = [
         {
             className: "daily",
             html: `
@@ -1345,7 +1556,7 @@ async function playHyakumasuResultSequence(
 
     for (
         const step
-        of steps
+        of leftSteps
     ) {
 
         const card =
@@ -1362,8 +1573,37 @@ async function playHyakumasuResultSequence(
         );
 
         await waitForResultStep(
-            560
+            420
         );
+
+    }
+
+
+    if (rewardSummary) {
+
+        for (
+            const step
+            of rightSteps
+        ) {
+
+            const card =
+                document.createElement(
+                    "section"
+                );
+
+            card.className =
+                `result-step-card ${step.className}`;
+            card.innerHTML =
+                step.html;
+            rewardSummary.appendChild(
+                card
+            );
+
+            await waitForResultStep(
+                360
+            );
+
+        }
 
     }
 
