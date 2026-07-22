@@ -686,7 +686,11 @@ const QuestEngine = (() => {
 
                     rewardOverride:
                         safeCompletionData
-                            .rewardOverride
+                            .rewardOverride,
+
+                    performanceRewardOverride:
+                        safeCompletionData
+                            .performanceRewardOverride
 
                 });
 
@@ -927,6 +931,13 @@ const QuestEngine = (() => {
                 getSafeInteger(
                     rewardResult
                         .firstPerfectBonus,
+                    0
+                ),
+
+            performanceReward:
+                getSafeInteger(
+                    rewardResult
+                        .performanceReward,
                     0
                 ),
 
