@@ -854,6 +854,56 @@ function getWearableShopItem(itemId) {
 }
 
 
+function isFullSetShopItem(item) {
+
+    return Boolean(
+        item
+        && item.equipmentType === "fullset"
+    );
+
+}
+
+
+function getActiveFullSetShopItem() {
+
+    const items =
+        Array.isArray(window.GUILD_SHOP_ITEMS)
+            ? window.GUILD_SHOP_ITEMS
+            : [];
+
+
+    return items.find(
+        (item) =>
+            isFullSetShopItem(item)
+            && item.wearable === true
+            && item.layers
+            && typeof item.layers === "object"
+            && isShopItemEquipped(item.id)
+    ) || null;
+
+}
+
+
+function createEmptyPlayerEquipment() {
+
+    const equipment = {};
+
+
+    for (
+        const layerName
+        of PLAYER_EQUIPMENT_LAYERS
+    ) {
+
+        equipment[layerName] = "";
+
+    }
+
+
+    return equipment;
+
+}
+
+
 function equipShopItem(itemId) {
 
     const item =
@@ -876,6 +926,29 @@ function equipShopItem(itemId) {
             success: false,
             reason: "not-owned"
         };
+
+    }
+
+
+    if (isFullSetShopItem(item)) {
+
+        /*
+          全身固定装備は、base.png以外の全装備を解除してから
+          指定された1枚の全身レイヤーだけを表示する。
+        */
+        Settings.player.equipment =
+            createEmptyPlayerEquipment();
+
+    } else if (getActiveFullSetShopItem()) {
+
+        /*
+          全身固定装備中に通常装備を選んだ場合は、
+          いつもの服へ戻してから選択した単品を重ねる。
+        */
+        Settings.player.equipment =
+            cloneSettings(
+                DEFAULT_SETTINGS.player.equipment
+            );
 
     }
 
@@ -908,7 +981,11 @@ function equipShopItem(itemId) {
 
     return {
         success: true,
-        itemId: item.id
+        itemId: item.id,
+        equipmentType:
+            isFullSetShopItem(item)
+                ? "fullset"
+                : "normal"
     };
 
 }
@@ -965,9 +1042,37 @@ function isShopItemEquipped(itemId) {
     }
 
 
-    return layerEntries.every(
-        ([layerName, layerPath]) =>
-            equipment[layerName] === layerPath.trim()
+    const ownLayersMatch =
+        layerEntries.every(
+            ([layerName, layerPath]) =>
+                equipment[layerName] === layerPath.trim()
+        );
+
+
+    if (!ownLayersMatch) {
+
+        return false;
+
+    }
+
+
+    if (!isFullSetShopItem(item)) {
+
+        return true;
+
+    }
+
+
+    const ownLayerNames =
+        new Set(
+            layerEntries.map(([layerName]) => layerName)
+        );
+
+
+    return PLAYER_EQUIPMENT_LAYERS.every(
+        (layerName) =>
+            ownLayerNames.has(layerName)
+            || !equipment[layerName]
     );
 
 }
