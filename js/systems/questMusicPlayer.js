@@ -13,6 +13,12 @@
 const HYAKUMASU_MUSIC_FILE =
     "assets/audio/quests/The Moment Before the Shot.mp3";
 
+const MATH_GUILD_QUEST_MUSIC_FILE =
+    "assets/audio/quests/The Clockwork Gambit.mp3";
+
+const MATH_GUILD_TEST_MUSIC_FILE =
+    "assets/audio/quests/Blazing Dragoon\'s Charge.mp3";
+
 let questMusicAudio = null;
 let questMusicMode = "";
 let questMusicResumeWhenVisible = false;
@@ -127,6 +133,30 @@ function playHyakumasuMusic(
 
 }
 
+function playMathGuildQuestMusic(
+    options = {}
+) {
+
+    return playQuestMusic(
+        "math-guild-quest",
+        MATH_GUILD_QUEST_MUSIC_FILE,
+        options
+    );
+
+}
+
+function playMathGuildTestMusic(
+    options = {}
+) {
+
+    return playQuestMusic(
+        "math-guild-test",
+        MATH_GUILD_TEST_MUSIC_FILE,
+        options
+    );
+
+}
+
 function pauseQuestMusic() {
 
     if (!questMusicAudio) {
@@ -193,6 +223,16 @@ function resumeQuestMusicAfterBackground() {
         === "hyakumasu"
     ) {
         playHyakumasuMusic();
+    } else if (
+        questMusicMode
+        === "math-guild-quest"
+    ) {
+        playMathGuildQuestMusic();
+    } else if (
+        questMusicMode
+        === "math-guild-test"
+    ) {
+        playMathGuildTestMusic();
     }
 
 }
@@ -240,13 +280,27 @@ function initQuestMusicPlayer() {
 
             if (
                 questMusicMode
-                === "hyakumasu"
                 && questMusicAudio
                 && questMusicAudio.paused
                 && document.visibilityState
                     !== "hidden"
             ) {
-                playHyakumasuMusic();
+                if (
+                    questMusicMode
+                    === "hyakumasu"
+                ) {
+                    playHyakumasuMusic();
+                } else if (
+                    questMusicMode
+                    === "math-guild-quest"
+                ) {
+                    playMathGuildQuestMusic();
+                } else if (
+                    questMusicMode
+                    === "math-guild-test"
+                ) {
+                    playMathGuildTestMusic();
+                }
             }
 
         },
@@ -262,6 +316,10 @@ window.QuestMusicPlayer = {
         initQuestMusicPlayer,
     playHyakumasu:
         playHyakumasuMusic,
+    playMathGuildQuest:
+        playMathGuildQuestMusic,
+    playMathGuildTest:
+        playMathGuildTestMusic,
     pause:
         pauseQuestMusic,
     stop:
