@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T14:30:04.186726+00:00",
-    "commit": "b821c4c",
+    "atUtc": "2026-07-22T15:15:50.332311+00:00",
+    "commit": "96e3ebf",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 17,
-    "totalBytes": 74547189,
+    "totalBytes": 74547195,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1591,8 +1591,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4497,
-      "sha1": "d5d615354f",
+      "sizeBytes": 4503,
+      "sha1": "29c98f3f7d",
       "lineCount": 177
     },
     {
@@ -2648,7 +2648,7 @@
     {
       "status": "M",
       "paths": [
-        "js/systems/questMusicPlayer.js"
+        "service-worker.js"
       ]
     }
   ],
