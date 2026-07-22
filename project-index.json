@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T07:04:23.563200+00:00",
-    "commit": "1865874",
+    "atUtc": "2026-07-22T07:57:37.876671+00:00",
+    "commit": "482ca08",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 16,
-    "totalBytes": 67867241,
+    "totalBytes": 67871233,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1268,9 +1268,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 37403,
-      "sha1": "851fd3f97f",
-      "lineCount": 2106
+      "sizeBytes": 41395,
+      "sha1": "aa78f610ca",
+      "lineCount": 2346
     },
     {
       "path": "js/components/.gitkeep",
@@ -2085,6 +2085,8 @@
         "formatHyakumasuResultTime",
         "createResultPointTable",
         "getHyakumasuNearMessage",
+        "resetHyakumasuResultLayout",
+        "createHyakumasuTwoWindowLayout",
         "playHyakumasuResultSequence",
         "updateCount",
         "returnToQuestBoard",
@@ -2590,7 +2592,7 @@
     {
       "status": "M",
       "paths": [
-        "service-worker.js"
+        "js/app.js"
       ]
     }
   ],
