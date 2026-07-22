@@ -1819,19 +1819,37 @@ body.wardrobe-open {
    ========================================================= */
 
 #result-screen:has(.hyakumasu-result-sequence) .result-window {
-    width: min(92vw, 860px);
-    max-height: 94vh;
-    overflow-y: auto;
-    padding: clamp(18px, 2.6vw, 30px);
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    width: min(88vw, 620px);
+    max-height: min(90vh, 820px);
+    overflow: hidden;
+    padding: clamp(16px, 2.1vw, 24px);
+}
+
+#result-screen:has(.hyakumasu-result-sequence) .result-label {
+    margin-bottom: 4px;
+    font-size: clamp(10px, 1vw, 13px);
+}
+
+#result-screen:has(.hyakumasu-result-sequence) .result-window h2 {
+    margin-bottom: 9px;
+    font-size: clamp(28px, 3.5vw, 42px);
+}
+
+#result-screen:has(.hyakumasu-result-sequence) .result-message {
+    min-height: 0;
+    margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .hyakumasu-result-sequence {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 8px;
+    min-height: 0;
     max-height: none;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     overflow: visible;
     padding: 0;
     text-align: left;
@@ -1840,64 +1858,65 @@ body.wardrobe-open {
 .result-step-card {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    gap: 12px;
+    gap: 8px;
     align-items: start;
     min-width: 0;
-    padding: 13px 15px;
+    padding: 9px 10px;
     border: 1px solid rgba(255, 225, 148, 0.44);
-    border-radius: 15px;
+    border-radius: 12px;
     background: rgba(32, 19, 11, 0.78);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09);
-    animation: resultStepAppear 0.38s cubic-bezier(0.2, 0.9, 0.25, 1.15) both;
+    animation: resultStepAppear 0.32s cubic-bezier(0.2, 0.9, 0.25, 1.15) both;
 }
 
 .result-step-card.calculation,
-.result-step-card.near {
+.result-step-card.near,
+.result-step-card.mistakes {
     grid-column: 1 / -1;
 }
 
 .result-step-card small {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     color: #e8c982;
-    font-size: clamp(12px, 1.4vw, 16px);
+    font-size: clamp(11px, 1.1vw, 14px);
     font-weight: 800;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
 }
 
 .result-step-card > div > strong {
     display: block;
     color: #fff2c5;
-    font-size: clamp(20px, 2.6vw, 31px);
+    font-size: clamp(17px, 2vw, 24px);
     line-height: 1.2;
 }
 
 .result-step-card p {
-    margin-top: 5px;
+    margin-top: 3px;
     color: #d8c59e;
-    font-size: 14px;
+    font-size: clamp(11px, 1vw, 13px);
 }
 
 .result-step-icon {
-    font-size: clamp(25px, 3vw, 36px);
+    font-size: clamp(19px, 2.2vw, 28px);
     line-height: 1;
 }
 
 .result-point-table {
     display: grid;
-    gap: 3px;
-    margin-top: 9px;
+    gap: 2px;
+    margin-top: 6px;
 }
 
 .result-point-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto auto;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
-    padding: 3px 7px;
-    border-radius: 7px;
+    padding: 2px 5px;
+    border-radius: 6px;
     color: #d9c9aa;
-    font-size: clamp(12px, 1.25vw, 15px);
+    font-size: clamp(10px, 0.95vw, 12px);
 }
 
 .result-point-row.current {
@@ -1912,7 +1931,7 @@ body.wardrobe-open {
 
 .result-point-row em {
     color: #fff5cf;
-    font-size: 11px;
+    font-size: 9px;
     font-style: normal;
     font-weight: 800;
 }
@@ -1920,6 +1939,68 @@ body.wardrobe-open {
 .result-step-card.near {
     border-color: rgba(255, 235, 145, 0.72);
     background: rgba(107, 69, 22, 0.62);
+}
+
+.result-step-card.mistakes {
+    min-height: 0;
+}
+
+.result-mistakes-content {
+    min-width: 0;
+    min-height: 0;
+}
+
+.result-mistake-list {
+    display: grid;
+    gap: 4px;
+    max-height: clamp(72px, 14vh, 125px);
+    margin: 5px 0 0;
+    padding: 0 5px 0 0;
+    overflow-y: auto;
+    list-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.result-mistake-list li {
+    display: grid;
+    grid-template-columns: minmax(72px, auto) minmax(0, 1fr);
+    gap: 8px;
+    align-items: baseline;
+    padding: 4px 7px;
+    border-radius: 7px;
+    color: #ddc9a3;
+    background: rgba(12, 8, 5, 0.32);
+    font-size: clamp(11px, 1vw, 13px);
+}
+
+.result-mistake-list li strong {
+    color: #fff0bd;
+}
+
+.result-mistake-list li span {
+    overflow-wrap: anywhere;
+}
+
+#result-screen:has(.hyakumasu-result-sequence) .reward-panel {
+    flex: 0 0 auto;
+    gap: 3px;
+    margin-bottom: 8px;
+    padding: 9px 14px;
+}
+
+#result-screen:has(.hyakumasu-result-sequence) #rewardText {
+    font-size: clamp(32px, 4.6vw, 52px);
+}
+
+#result-screen:has(.hyakumasu-result-sequence) .total-gp-text {
+    margin-bottom: 8px;
+    font-size: clamp(14px, 1.5vw, 18px);
+}
+
+#result-screen:has(.hyakumasu-result-sequence) #resultBackQuestBoard {
+    min-height: 0;
+    padding: 8px 16px;
+    font-size: clamp(13px, 1.25vw, 16px);
 }
 
 .reward-panel-final {
@@ -1933,7 +2014,7 @@ body.wardrobe-open {
 @keyframes resultStepAppear {
     from {
         opacity: 0;
-        transform: translateY(12px) scale(0.97);
+        transform: translateY(10px) scale(0.98);
     }
     to {
         opacity: 1;
@@ -1944,10 +2025,10 @@ body.wardrobe-open {
 @keyframes rewardFinalAppear {
     0% {
         opacity: 0;
-        transform: scale(0.82);
+        transform: scale(0.86);
     }
     70% {
-        transform: scale(1.04);
+        transform: scale(1.03);
     }
     100% {
         opacity: 1;
@@ -1956,22 +2037,53 @@ body.wardrobe-open {
 }
 
 @media (max-width: 700px), (max-height: 620px) {
+    #result-screen:has(.hyakumasu-result-sequence) .result-window {
+        width: min(94vw, 620px);
+        max-height: 94vh;
+        padding: 12px 14px;
+    }
+
+    #result-screen:has(.hyakumasu-result-sequence) .result-window h2 {
+        margin-bottom: 6px;
+        font-size: 28px;
+    }
+
     .hyakumasu-result-sequence {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        gap: 6px;
+        margin-bottom: 6px;
     }
 
     .result-step-card {
-        gap: 8px;
-        padding: 9px 10px;
+        gap: 6px;
+        padding: 7px 8px;
     }
 
     .result-point-row {
-        padding: 2px 4px;
-        font-size: 11px;
+        padding: 1px 3px;
+        font-size: 9px;
     }
 
     .result-step-icon {
-        font-size: 23px;
+        font-size: 19px;
+    }
+
+    .result-mistake-list {
+        max-height: 74px;
+    }
+
+    .result-mistake-list li {
+        grid-template-columns: minmax(62px, auto) minmax(0, 1fr);
+        gap: 5px;
+        padding: 3px 5px;
+        font-size: 10px;
+    }
+
+    #result-screen:has(.hyakumasu-result-sequence) .reward-panel {
+        margin-bottom: 5px;
+        padding: 6px 10px;
+    }
+
+    #result-screen:has(.hyakumasu-result-sequence) .total-gp-text {
+        margin-bottom: 5px;
     }
 }
