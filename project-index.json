@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T01:51:08.843248+00:00",
-    "commit": "4d09545",
+    "atUtc": "2026-07-22T01:51:33.025070+00:00",
+    "commit": "a0b2a11",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 16,
-    "totalBytes": 67776705,
+    "totalBytes": 67776903,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1441,9 +1441,9 @@
       "stem": "wardrobe",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 7184,
-      "sha1": "e4c175a5af",
-      "lineCount": 362
+      "sizeBytes": 7382,
+      "sha1": "2a887f3046",
+      "lineCount": 365
     },
     {
       "path": "js/settings.js",
@@ -2561,7 +2561,7 @@
     {
       "status": "M",
       "paths": [
-        "js/settings.js"
+        "js/screens/wardrobe.js"
       ]
     }
   ],
