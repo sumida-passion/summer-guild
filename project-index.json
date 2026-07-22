@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T07:58:30.651512+00:00",
-    "commit": "f1f9570",
+    "atUtc": "2026-07-22T12:44:24.391171+00:00",
+    "commit": "4a74713",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 46,
     "javascriptApiFileCount": 16,
-    "totalBytes": 67873052,
+    "totalBytes": 67874024,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1257,9 +1257,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 13174,
-      "sha1": "edfaaca7dc",
-      "lineCount": 624
+      "sizeBytes": 14137,
+      "sha1": "8038bd17da",
+      "lineCount": 659
     },
     {
       "path": "js/app.js",
@@ -1571,8 +1571,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4483,
-      "sha1": "326503a537",
+      "sizeBytes": 4492,
+      "sha1": "2863fc2153",
       "lineCount": 177
     },
     {
@@ -2025,6 +2025,7 @@
           "js/numberpad.js",
           "js/quests/daily.js",
           "js/quests/hyakumasu.js",
+          "js/quests/math.js",
           "js/screens/musicShop.js",
           "js/screens/shop.js",
           "js/screens/wardrobe.js",
@@ -2589,6 +2590,12 @@
     "importantReminder": "GitHub Pagesではファイル名と拡張子の大文字・小文字を区別する。"
   },
   "latestCommitChanges": [
+    {
+      "status": "M",
+      "paths": [
+        "index.html"
+      ]
+    },
     {
       "status": "M",
       "paths": [
