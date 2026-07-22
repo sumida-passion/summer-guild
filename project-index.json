@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T16:17:28.604407+00:00",
-    "commit": "4f3d02f",
+    "atUtc": "2026-07-22T16:28:07.467600+00:00",
+    "commit": "81a6fdc",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 17,
-    "totalBytes": 75026196,
+    "totalBytes": 75025993,
     "extensions": {
       ".css": 4,
       ".html": 1,
@@ -1160,9 +1160,9 @@
       "stem": "items",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 6999,
-      "sha1": "7988b81693",
-      "lineCount": 113
+      "sizeBytes": 6796,
+      "sha1": "96d0f27e56",
+      "lineCount": 109
     },
     {
       "path": "data/masters/.gitkeep",
@@ -2668,7 +2668,7 @@
     {
       "status": "M",
       "paths": [
-        "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG"
+        "data/items/items.js"
       ]
     }
   ],
