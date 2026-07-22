@@ -251,7 +251,7 @@ function buildDeveloperPanel() {
                             class="developer-value"
                             aria-live="polite"
                         >
-                            1.65
+                            1.20
                         </output>
 
 

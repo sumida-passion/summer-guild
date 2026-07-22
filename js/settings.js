@@ -40,7 +40,7 @@ const DEFAULT_SETTINGS = {
 
         y: -7,
 
-        scale: 1.65,
+        scale: 1.2,
 
         rotation: 0,
 
