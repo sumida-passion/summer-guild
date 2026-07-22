@@ -13,9 +13,9 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T01:42:20.810597+00:00",
-    "commit": "working-copy",
-    "commitSubject": "Fullset equipment and three shop items"
+    "atUtc": "2026-07-22T01:53:22.223716+00:00",
+    "commit": "3009b1a",
+    "commitSubject": "Add files via upload"
   },
   "summary": {
     "fileCount": 144,
@@ -2292,6 +2292,9 @@
         "applyAllSettings",
         "getPlayerEquipment",
         "getWearableShopItem",
+        "isFullSetShopItem",
+        "getActiveFullSetShopItem",
+        "createEmptyPlayerEquipment",
         "equipShopItem",
         "resetPlayerEquipment",
         "isShopItemEquipped",
@@ -2556,9 +2559,21 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "project-index.json"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
@@ -2588,11 +2603,7 @@
       "iPad Safariとタッチ操作を前提にする。",
       "ソフトウェアキーボードを出したくない入力では共通NumberPadを優先する。",
       "透過レイヤー画像は基準画像とキャンバスサイズ・座標基準を揃える。",
-      "レベル・経験値・強さを中心にせず、認定・思い出・世界の成長を重視する。",
-      "equipmentType: fullset の装備はbase.png以外の装備レイヤーをすべて解除して単独表示する。",
-      "fullset装備中に通常装備を選んだ場合は、いつもの服へ戻してから選択した単品を装備する。",
-      "黒い犬の着ぐるみはfullset扱いだが、実画像ファイルがZIP内に存在するまでwearableにしない。",
-      "ギルドマントはショップ販売せず、ギルドクエストの認定報酬として扱う。"
+      "レベル・経験値・強さを中心にせず、認定・思い出・世界の成長を重視する。"
     ],
     "deliveryRules": [
       "大きなJS・CSS・HTMLは部分パッチではなく完成ファイルを優先する。",
@@ -2611,14 +2622,6 @@
       "js/quests/hyakumasu.js"
     ],
     "newThreadOpeningMessage": "夏休みギルドの開発を続けます。最初にproject-index.jsonを最後まで読み、次に今回の改修対象と関連ファイルを確認してください。既存API・ファイル名・画像拡張子を推測で扱わず、iPad Safari前提で進めてください。大きな完成ファイルはZIPで渡してください。",
-    "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。",
-    "equipmentRules": {
-      "normal": "tops・bottoms・shoes・head・accessories等を単品で自由に組み合わせる。",
-      "fullset": "base.png以外の装備レイヤーと重複不可。装備時に全装備を解除してfullset画像のみ表示する。",
-      "fullsetExit": "fullset中に通常装備を選ぶと、デフォルト服へ戻してから通常装備を適用する。",
-      "rewardOnly": "ギルドマントはショップ非売品。ギルドクエスト報酬として付与する。",
-      "pendingAsset": "black_dog_costumeはfullset仕様のみ登録済み。画像未収録のため現在は着用不可。"
-    },
-    "latestImplementedChange": "ロックトップス、ロックボトムス、ネックウォーマーを単品商品化し、流星の剣士装備をfullset商品として実装。黒犬着ぐるみは画像待ち。"
+    "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。"
   }
 }
