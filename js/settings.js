@@ -95,8 +95,16 @@ const DEFAULT_SETTINGS = {
 
     shop: {
 
-        owned: {}
+        owned: {},
 
+        inventory: {
+            dogFood: 0
+        }
+
+    },
+
+    pet: {
+        welcomeShown: false
     },
 
 
@@ -337,6 +345,14 @@ function mergeSettings(
 
         };
 
+    }
+
+    if (savedSettings.shop && savedSettings.shop.inventory) {
+        merged.shop.inventory.dogFood = Math.max(0, Math.floor(getSafeNumber(savedSettings.shop.inventory.dogFood, 0)));
+    }
+
+    if (savedSettings.pet && typeof savedSettings.pet === "object") {
+        merged.pet.welcomeShown = Boolean(savedSettings.pet.welcomeShown);
     }
 
 
@@ -2867,3 +2883,40 @@ applyAllSettings = function () {
     updateChallengeCountDisplay();
 
 };
+
+
+/* =========================================================
+   22. 黒犬・消耗品
+   ========================================================= */
+function getDogFoodCount() {
+    return Math.max(0, Math.floor(getSafeNumber(Settings.shop?.inventory?.dogFood, 0)));
+}
+
+function addDogFood(amount = 1) {
+    if (!Settings.shop.inventory) Settings.shop.inventory = { dogFood: 0 };
+    Settings.shop.inventory.dogFood = getDogFoodCount() + Math.max(0, Math.floor(getSafeNumber(amount, 0)));
+    saveSettings();
+    return Settings.shop.inventory.dogFood;
+}
+
+function consumeDogFood() {
+    const count = getDogFoodCount();
+    if (count < 1) return false;
+    Settings.shop.inventory.dogFood = count - 1;
+    saveSettings();
+    return true;
+}
+
+function hasShownBlackDogWelcome() {
+    return Boolean(Settings.pet?.welcomeShown);
+}
+
+function markBlackDogWelcomeShown() {
+    if (!Settings.pet) Settings.pet = { welcomeShown: false };
+    Settings.pet.welcomeShown = true;
+    saveSettings();
+}
+
+function isBlackDogCostumeEquipped() {
+    return Settings.player?.equipment?.outer === "assets/characters/player/clothes/outer/blackdog_fullset.PNG";
+}
