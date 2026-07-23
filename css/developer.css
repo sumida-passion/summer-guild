@@ -717,3 +717,117 @@ body.developer-mode-active {
     }
 
 }
+
+
+/* =========================================================
+   テスト用GP
+   ========================================================= */
+
+.developer-gp-section {
+    margin-top: 14px;
+}
+
+.developer-gp-current {
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 220, 150, 0.18);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.055);
+    color: #fff4cf;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+#developerGpValue {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1.25rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.developer-gp-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+}
+
+#developerPanel .developer-gp-button,
+#developerPanel .developer-gp-set-button {
+    min-width: 0;
+    min-height: 44px;
+    margin: 0;
+    padding: 8px 6px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: 11px;
+    background: linear-gradient(to bottom, #ffe7a1, #dcb76e);
+    color: #2b1b12;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    touch-action: manipulation;
+}
+
+.developer-gp-direct {
+    margin-top: 12px;
+}
+
+.developer-gp-direct label {
+    display: block;
+    margin-bottom: 7px;
+    color: #fff4d1;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.developer-gp-input-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+}
+
+.developer-gp-input {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px 11px;
+    border: 1px solid rgba(255, 220, 150, 0.28);
+    border-radius: 11px;
+    background: rgba(0, 0, 0, 0.22);
+    color: #fff4cf;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    box-sizing: border-box;
+}
+
+.developer-gp-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.developer-gp-message {
+    min-height: 1.2em;
+    margin: 9px 0 0;
+    color: rgba(255, 255, 255, 0.65);
+    text-align: center;
+    font-size: 0.76rem;
+}
+
+.developer-gp-message[data-status="success"] {
+    color: #bde3ae;
+}
+
+.developer-gp-message[data-status="error"] {
+    color: #ffb1a8;
+}
+
+@media (max-width: 560px) {
+    .developer-gp-buttons {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .developer-gp-input-row {
+        grid-template-columns: 1fr;
+    }
+}
