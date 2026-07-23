@@ -19,6 +19,9 @@ const MATH_GUILD_QUEST_MUSIC_FILE =
 const MATH_GUILD_TEST_MUSIC_FILE =
     "assets/audio/quests/Blazing Dragoon\'s Charge.mp3";
 
+const REVIEW_TRAINING_MUSIC_FILE =
+    "assets/audio/quests/The Clockwork Gambit 2.mp3";
+
 let questMusicAudio = null;
 let questMusicMode = "";
 let questMusicResumeWhenVisible = false;
@@ -157,6 +160,18 @@ function playMathGuildTestMusic(
 
 }
 
+function playReviewTrainingMusic(
+    options = {}
+) {
+
+    return playQuestMusic(
+        "review-training",
+        REVIEW_TRAINING_MUSIC_FILE,
+        options
+    );
+
+}
+
 function pauseQuestMusic() {
 
     if (!questMusicAudio) {
@@ -233,6 +248,11 @@ function resumeQuestMusicAfterBackground() {
         === "math-guild-test"
     ) {
         playMathGuildTestMusic();
+    } else if (
+        questMusicMode
+        === "review-training"
+    ) {
+        playReviewTrainingMusic();
     }
 
 }
@@ -300,6 +320,11 @@ function initQuestMusicPlayer() {
                     === "math-guild-test"
                 ) {
                     playMathGuildTestMusic();
+                } else if (
+                    questMusicMode
+                    === "review-training"
+                ) {
+                    playReviewTrainingMusic();
                 }
             }
 
@@ -320,6 +345,8 @@ window.QuestMusicPlayer = {
         playMathGuildQuestMusic,
     playMathGuildTest:
         playMathGuildTestMusic,
+    playReviewTraining:
+        playReviewTrainingMusic,
     pause:
         pauseQuestMusic,
     stop:
