@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T04:06:08.758875+00:00",
-    "commit": "0db0f8e",
+    "atUtc": "2026-07-23T04:42:33.976322+00:00",
+    "commit": "ac0f103",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 17,
-    "totalBytes": 75041619,
+    "totalBytes": 75041620,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1310,7 +1310,7 @@
       "extension": ".html",
       "extensionNormalized": ".html",
       "sizeBytes": 14256,
-      "sha1": "7d0afa3650",
+      "sha1": "e6a06f38f0",
       "lineCount": 663
     },
     {
@@ -1623,8 +1623,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4499,
-      "sha1": "c6de25b026",
+      "sizeBytes": 4500,
+      "sha1": "da124112e8",
       "lineCount": 177
     },
     {
@@ -2689,15 +2689,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
+        "index.html"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
+        "service-worker.js"
       ]
     }
   ],
