@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T00:12:47.230298+00:00",
-    "commit": "0e7bfba",
+    "atUtc": "2026-07-23T00:13:24.334527+00:00",
+    "commit": "9b9cffc",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 17,
-    "totalBytes": 75039938,
+    "totalBytes": 75052618,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1429,9 +1429,9 @@
       "stem": "math",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 26997,
-      "sha1": "9e85c70262",
-      "lineCount": 594
+      "sizeBytes": 39677,
+      "sha1": "8b0e294fb8",
+      "lineCount": 789
     },
     {
       "path": "js/quests/music.js",
@@ -2328,7 +2328,8 @@
         "answerMathGuildQuestion",
         "finishMathGuildQuest",
         "finishMathGuildTest",
-        "formatMathGuildTime"
+        "formatMathGuildTime",
+        "questCard"
       ],
       "classes": [],
       "windowExports": [
@@ -2689,21 +2690,9 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
-      "paths": [
-        "docs/GPT_ZIP_WORKFLOW.md"
-      ]
-    },
-    {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/game-rules.md"
+        "js/quests/math.js"
       ]
     }
   ],
