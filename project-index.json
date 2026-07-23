@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T06:25:06.242835+00:00",
-    "commit": "30bf607",
+    "atUtc": "2026-07-23T06:25:29.887965+00:00",
+    "commit": "06b43ee",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 17,
-    "totalBytes": 75050387,
+    "totalBytes": 75050397,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1310,7 +1310,7 @@
       "extension": ".html",
       "extensionNormalized": ".html",
       "sizeBytes": 14263,
-      "sha1": "964e9473d2",
+      "sha1": "d37f30ef0a",
       "lineCount": 663
     },
     {
@@ -1623,8 +1623,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4493,
-      "sha1": "6a5d949fab",
+      "sizeBytes": 4503,
+      "sha1": "d2e43cef8f",
       "lineCount": 177
     },
     {
@@ -2694,7 +2694,13 @@
     {
       "status": "M",
       "paths": [
-        "js/quests/hyakumasu.js"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
