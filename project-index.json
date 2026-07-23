@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T14:05:22.542605+00:00",
-    "commit": "c04ed80",
+    "atUtc": "2026-07-23T14:05:45.503821+00:00",
+    "commit": "a67533d",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 18,
-    "totalBytes": 78631323,
+    "totalBytes": 78632175,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1472,9 +1472,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 16906,
-      "sha1": "f80da18c7d",
-      "lineCount": 119
+      "sizeBytes": 17758,
+      "sha1": "8bcbeb29c9",
+      "lineCount": 144
     },
     {
       "path": "js/quests/science.js",
@@ -2365,6 +2365,8 @@
     {
       "path": "js/quests/review.js",
       "functions": [
+        "playReviewTrainingMusic",
+        "stopReviewTrainingMusic",
         "reviewTodayKey",
         "loadJson",
         "getReviewDaily",
@@ -2749,13 +2751,7 @@
     {
       "status": "M",
       "paths": [
-        "index.html"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "service-worker.js"
+        "js/quests/review.js"
       ]
     }
   ],
