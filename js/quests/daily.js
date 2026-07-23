@@ -41,6 +41,16 @@ const DAILY_QUESTS = [
         firstPerfectBonus:
             2
 
+    },
+
+    {
+        id: "review-training",
+        title: "ふりかえりの修行",
+        description: "国語・算数・理科・社会から、今日ふりかえりたい学びを自分で選ぼう。",
+        firstReward: 0,
+        repeatReward: 0,
+        perfectReward: 0,
+        firstPerfectBonus: 0
     }
 
 ];
@@ -116,6 +126,23 @@ function renderDailyQuestList() {
 function createDailyQuestCardHtml(
     quest
 ) {
+
+    if (quest.id === "review-training") {
+        const status = typeof window.getReviewDailyBonusStatus === "function"
+            ? window.getReviewDailyBonusStatus()
+            : { basic:false, standard:false, challenge:false };
+        const remaining = [status.basic, status.standard, status.challenge].filter(done => !done).length;
+        return `
+        <article class="quest-card" data-quest-id="${quest.id}">
+            <div class="quest-card-info">
+                <h3 class="quest-title">${quest.title}</h3>
+                <p class="quest-description">${quest.description}</p>
+                <p class="quest-reward">基礎・標準・挑戦：各レベル本日初回 +2GP ＋ 成績GP</p>
+                <p class="quest-status">初回ボーナス残り ${remaining}/3</p>
+            </div>
+            <button class="game-button quest-start-button" type="button" data-open-review>選んで挑戦</button>
+        </article>`;
+    }
 
     const playCount =
         typeof getQuestChallengeCount
@@ -193,6 +220,14 @@ function createDailyQuestCardHtml(
    ========================================================= */
 
 function bindDailyQuestButtons() {
+
+    document.querySelectorAll("[data-open-review]").forEach((button) => {
+        button.addEventListener("click", () => {
+            if (typeof window.openReviewTraining === "function") {
+                window.openReviewTraining();
+            }
+        });
+    });
 
     const buttons =
         document.querySelectorAll(
