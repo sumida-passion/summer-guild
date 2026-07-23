@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T14:26:08.087014+00:00",
-    "commit": "df85859",
+    "atUtc": "2026-07-23T14:26:33.533672+00:00",
+    "commit": "4a91447",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 18,
-    "totalBytes": 78632789,
+    "totalBytes": 78635617,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1130,9 +1130,9 @@
       "stem": "iphone-landscape",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 7626,
-      "sha1": "c6ab56a896",
-      "lineCount": 348
+      "sizeBytes": 10454,
+      "sha1": "2ddb37d492",
+      "lineCount": 458
     },
     {
       "path": "data/achievements/.gitkeep",
@@ -2752,13 +2752,7 @@
     {
       "status": "M",
       "paths": [
-        "index.html"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "service-worker.js"
+        "css/screens/iphone-landscape.css"
       ]
     }
   ],
