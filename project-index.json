@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T07:00:58.019189+00:00",
-    "commit": "1d2edfa",
+    "atUtc": "2026-07-23T07:01:34.914348+00:00",
+    "commit": "a134725",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 17,
-    "totalBytes": 75050388,
+    "totalBytes": 75064565,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1429,9 +1429,9 @@
       "stem": "math",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 29301,
-      "sha1": "0808d54b38",
-      "lineCount": 645
+      "sizeBytes": 43478,
+      "sha1": "70b4e4abb6",
+      "lineCount": 856
     },
     {
       "path": "js/quests/music.js",
@@ -2694,13 +2694,7 @@
     {
       "status": "M",
       "paths": [
-        "index.html"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "service-worker.js"
+        "js/quests/math.js"
       ]
     }
   ],
