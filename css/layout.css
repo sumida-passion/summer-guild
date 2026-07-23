@@ -2444,14 +2444,14 @@ body.wardrobe-open {
     pointer-events: none;
 }
 #blackDogLayer[hidden] { display: none; }
-.blackdog-asset, #blackDogButton {
+.blackdog-asset, #blackDogHitArea {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
-#blackDogButton {
+#blackDogHitArea {
     border: 0;
     outline: 0;
     padding: 0;
@@ -2464,17 +2464,20 @@ body.wardrobe-open {
     z-index: 2;
     pointer-events: auto;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
 }
-#blackDogButton:hover,
-#blackDogButton:focus,
-#blackDogButton:focus-visible,
-#blackDogButton:active {
+#blackDogHitArea:hover,
+#blackDogHitArea:focus,
+#blackDogHitArea:focus-visible,
+#blackDogHitArea:active {
     border: 0;
     outline: 0;
     background: transparent;
     box-shadow: none;
 }
-#blackDogButton img { pointer-events: none; }
+#blackDogHitArea img { pointer-events: none; }
 .blackdog-under { z-index: 1; }
 .blackdog-over { z-index: 3; pointer-events: none; }
 @media (max-width: 700px) and (orientation: landscape) {
