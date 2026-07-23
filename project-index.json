@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T13:57:41.748903+00:00",
-    "commit": "1258a74",
+    "atUtc": "2026-07-23T14:05:22.542605+00:00",
+    "commit": "c04ed80",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -1319,8 +1319,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 14354,
-      "sha1": "0d446ba4e8",
+      "sizeBytes": 14359,
+      "sha1": "24ce0bb998",
       "lineCount": 665
     },
     {
@@ -1644,8 +1644,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4498,
-      "sha1": "b6d8a68a4b",
+      "sizeBytes": 4493,
+      "sha1": "94dd4d536a",
       "lineCount": 177
     },
     {
@@ -2747,9 +2747,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/audio/quests/The Clockwork Gambit 2.mp3"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
