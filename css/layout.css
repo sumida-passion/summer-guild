@@ -2433,3 +2433,36 @@ body.wardrobe-open {
     font-size: 12px;
     font-weight: 800;
 }
+
+/* 黒犬と犬用小物 */
+#blackDogLayer {
+    position: absolute;
+    width: clamp(150px, 25vw, 300px);
+    aspect-ratio: 370 / 320;
+    transform: translateX(-50%);
+    z-index: 18;
+    pointer-events: none;
+}
+#blackDogLayer[hidden] { display: none; }
+.blackdog-asset, #blackDogButton {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+#blackDogButton {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    z-index: 2;
+    pointer-events: auto;
+    cursor: pointer;
+}
+#blackDogButton img { pointer-events: none; }
+.blackdog-under { z-index: 1; }
+.blackdog-over { z-index: 3; pointer-events: none; }
+@media (max-width: 700px) and (orientation: landscape) {
+    #blackDogLayer { width: clamp(110px, 22vw, 180px); }
+}
