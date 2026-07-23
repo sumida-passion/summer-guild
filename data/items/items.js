@@ -10,6 +10,12 @@
    ========================================================= */
 
 window.GUILD_SHOP_ITEMS = [
+    { id: "black_dog_pet", name: "黒犬を迎える", price: 100, pet: true },
+    { id: "dog_food", name: "黒犬の餌", price: 3, repeatable: true, consumable: "dogFood" },
+    { id: "dog_blanket", name: "犬用の毛布", price: 20, petDecoration: true },
+    { id: "dog_toy_ball", name: "犬用ボール", price: 12, petDecoration: true },
+    { id: "dog_toy_bone", name: "犬用の骨", price: 12, petDecoration: true },
+    { id: "dog_toy_rope", name: "犬用ロープ", price: 12, petDecoration: true },
     { id: "lightning_tshirt", name: "稲妻のTシャツ", price: 30, wearable: true,
       category: "tops", layers: { tops: "assets/characters/player/clothes/tops/lightning_tops.PNG" } },
 
