@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T17:30:32.319116+00:00",
-    "commit": "ef3e78d",
+    "atUtc": "2026-07-23T17:30:51.589586+00:00",
+    "commit": "9b2091c",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 19,
-    "totalBytes": 78843548,
+    "totalBytes": 78844377,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1355,9 +1355,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 7909,
-      "sha1": "fb9b214139",
-      "lineCount": 115
+      "sizeBytes": 8738,
+      "sha1": "699713e71f",
+      "lineCount": 124
     },
     {
       "path": "docs/game-rules.md",
@@ -2966,7 +2966,7 @@
     {
       "status": "M",
       "paths": [
-        "js/screens/wardrobe.js"
+        "docs/development-log.md"
       ]
     }
   ],
