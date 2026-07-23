@@ -287,4 +287,62 @@
     .wardrobe-window {
         max-height: 96vh;
     }
+    /* 算数ギルド：iPhone横向きでも不正解を大きく確認 */
+    .math-mistake-panel {
+        max-width: 620px;
+        min-height: 258px;
+        padding: 8px 18px 10px;
+        border-width: 2px;
+        border-radius: 15px;
+    }
+
+    .math-mistake-panel > span {
+        font-size: 10px;
+    }
+
+    .math-mistake-mark {
+        width: 44px;
+        height: 44px;
+        margin-top: 3px;
+        font-size: 39px;
+        line-height: 39px;
+        box-shadow: 0 3px 0 #6d2119;
+    }
+
+    .math-mistake-panel h2 {
+        margin: 5px 0 5px;
+        font-size: 30px;
+    }
+
+    .math-mistake-expression {
+        margin-bottom: 6px;
+        font-size: 25px;
+        line-height: 1.05;
+    }
+
+    .math-mistake-answers {
+        max-width: 440px;
+        gap: 8px;
+    }
+
+    .math-mistake-answers > div {
+        min-height: 54px;
+        padding: 5px 8px;
+        border-radius: 9px;
+    }
+
+    .math-mistake-answers small {
+        margin-bottom: 0;
+        font-size: 10px;
+    }
+
+    .math-mistake-answers strong {
+        font-size: 23px;
+    }
+
+    .math-mistake-panel p {
+        margin-top: 6px;
+        font-size: 12px;
+    }
+
 }
