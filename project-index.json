@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T17:29:41.157137+00:00",
-    "commit": "d2846d7",
+    "atUtc": "2026-07-23T17:30:08.907503+00:00",
+    "commit": "8a4f8a1",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 19,
-    "totalBytes": 78842418,
+    "totalBytes": 78843314,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1639,9 +1639,9 @@
       "stem": "settings",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 48427,
-      "sha1": "28ae458379",
-      "lineCount": 2922
+      "sizeBytes": 49323,
+      "sha1": "ce631e5b23",
+      "lineCount": 2963
     },
     {
       "path": "js/storage.js",
@@ -2662,6 +2662,7 @@
         "isFullSetShopItem",
         "getActiveFullSetShopItem",
         "createEmptyPlayerEquipment",
+        "isRockNRollBottomsEquipped",
         "equipShopItem",
         "resetPlayerEquipment",
         "isShopItemEquipped",
@@ -2965,7 +2966,7 @@
     {
       "status": "M",
       "paths": [
-        "css/layout.css"
+        "js/settings.js"
       ]
     }
   ],
