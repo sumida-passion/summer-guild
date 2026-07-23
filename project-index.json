@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T16:18:10.298476+00:00",
-    "commit": "12a90ef",
+    "atUtc": "2026-07-23T16:18:37.546374+00:00",
+    "commit": "27c48df",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 18,
-    "totalBytes": 78840818,
+    "totalBytes": 78842413,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1639,9 +1639,9 @@
       "stem": "settings",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 46832,
-      "sha1": "ca1e6c9d92",
-      "lineCount": 2869
+      "sizeBytes": 48427,
+      "sha1": "28ae458379",
+      "lineCount": 2922
     },
     {
       "path": "js/storage.js",
@@ -2669,7 +2669,13 @@
         "getTotalChallengeCount",
         "getQuestChallengeCount",
         "completeQuestAttempt",
-        "updateChallengeCountDisplay"
+        "updateChallengeCountDisplay",
+        "getDogFoodCount",
+        "addDogFood",
+        "consumeDogFood",
+        "hasShownBlackDogWelcome",
+        "markBlackDogWelcomeShown",
+        "isBlackDogCostumeEquipped"
       ],
       "classes": [],
       "windowExports": []
@@ -2925,7 +2931,7 @@
     {
       "status": "M",
       "paths": [
-        "data/items/items.js"
+        "js/settings.js"
       ]
     }
   ],
