@@ -1,13 +1,13 @@
 "use strict";
 
 /* =========================================================
-   算数ギルド Ver2.0
-   ・ギルドクエスト1〜10（各10問・四択・一度だけ攻略）
+   算数ギルド Ver3.0
+   ・ギルドクエスト1〜20（各10問・四択・一度だけ攻略）
    ・不正解でそのクエストの1問目へ戻る
    ・再挑戦時は選択肢のみシャッフル
-   ・ギルドテスト1／2（各20問ランダム・何度でも挑戦）
+   ・ギルドテスト1〜4（各20問ランダム・何度でも挑戦）
    ・テスト1合格3回で「見習い」＆クエスト6解放
-   ・テスト2合格3回で「徒弟」
+   ・テスト2〜4も各3回合格で段階的に称号認定
    ========================================================= */
 
 const MATH_GUILD_STORAGE_KEY = "summerGuildMathGuildV1";
@@ -195,6 +195,176 @@ const MATH_GUILD_QUESTS = [
             q("47.5 ÷ 2.6（商を一の位まで。あまりも答える）", "18 あまり 0.7", ["18 あまり 7", "1 あまり 0.7", "18.2"]),
             q("16mのテープを0.35mずつ切ると、何本とれて何mあまる？", "45本、0.25m", ["45本、0.025m", "46本、0.1m", "44本、0.6m"])
         ]
+    },
+    {
+        id: 11,
+        title: "小数のわり算Ⅲ",
+        subtitle: "小数÷小数を正確に計算する",
+        questions: [
+            q("0.84 ÷ 0.7", "1.2", ["12", "0.12", "0.012"]),
+            q("3.78 ÷ 0.6", "6.3", ["63", "0.63", "5.3"]),
+            q("4.32 ÷ 0.08", "54", ["5.4", "540", "0.54"]),
+            q("15.75 ÷ 0.25", "63", ["6.3", "630", "39.375"]),
+            q("7.02 ÷ 1.8", "3.9", ["39", "0.39", "5.22"]),
+            q("12.6 ÷ 0.35", "36", ["3.6", "360", "44.1"]),
+            q("0.936 ÷ 0.12", "7.8", ["78", "0.78", "8.8"]),
+            q("36.72 ÷ 2.4", "15.3", ["153", "1.53", "34.32"]),
+            q("5.04 ÷ 0.006", "840", ["84", "8.4", "8400"]),
+            q("2.835 ÷ 0.45", "6.3", ["63", "0.63", "5.4"])
+        ]
+    },
+    {
+        id: 12,
+        title: "商を概数で表す",
+        subtitle: "四捨五入して指定された位まで求める",
+        questions: [
+            q("6.2 ÷ 1.7（100分の1の位まで）", "3.65", ["3.64", "3.6", "3.66"]),
+            q("7 ÷ 5.2（100分の1の位まで）", "1.35", ["1.34", "1.3", "1.36"]),
+            q("24.5 ÷ 9.7（上から2けた）", "2.5", ["2.6", "2.52", "25"]),
+            q("1.561 ÷ 1.98（上から2けた）", "0.79", ["0.78", "0.8", "7.9"]),
+            q("18 ÷ 4.2（10分の1の位まで）", "4.3", ["4.2", "4.28", "43"]),
+            q("9.56 ÷ 0.63（10分の1の位まで）", "15.2", ["15.1", "15.17", "152"]),
+            q("30.27 ÷ 14（100分の1の位まで）", "2.16", ["2.15", "2.17", "21.6"]),
+            q("9.1 ÷ 0.85（100分の1の位まで）", "10.71", ["10.70", "10.72", "1.071"]),
+            q("8.7 ÷ 3.6（10分の1の位まで）", "2.4", ["2.3", "2.42", "24"]),
+            q("36.7 ÷ 8.14（100分の1の位まで）", "4.51", ["4.50", "4.52", "45.1"])
+        ]
+    },
+    {
+        id: 13,
+        title: "あまりのあるわり算",
+        subtitle: "商とあまりの小数点を正しくそろえる",
+        questions: [
+            q("47.5 ÷ 2.6（商は一の位まで）", "18 あまり 0.7", ["18 あまり 7", "1 あまり 0.7", "18.2"]),
+            q("4.085 ÷ 0.93（商は10分の1の位まで）", "4.3 あまり 0.086", ["4.3 あまり 0.86", "4.4 あまり 0.086", "43 あまり 0.086"]),
+            q("3 ÷ 2.4（商は一の位まで）", "1 あまり 0.6", ["1 あまり 6", "0 あまり 3", "1.2"]),
+            q("18.6 ÷ 3.5（商は一の位まで）", "5 あまり 1.1", ["5 あまり 0.11", "5.3", "4 あまり 4.6"]),
+            q("7.05 ÷ 0.87（商は10分の1の位まで）", "8.1 あまり 0.003", ["8.1 あまり 0.03", "8 あまり 0.09", "8.2 あまり 0.003"]),
+            q("0.97 ÷ 4.3（商は10分の1の位まで）", "0.2 あまり 0.11", ["0.2 あまり 1.1", "0.22", "2 あまり 0.11"]),
+            q("7.92 ÷ 2.7（商は10分の1の位まで）", "2.9 あまり 0.09", ["2.9 あまり 0.9", "2.93", "29 あまり 0.09"]),
+            q("8.409 ÷ 5.21（商は10分の1の位まで）", "1.6 あまり 0.073", ["1.6 あまり 0.73", "1.7 あまり 0.073", "16 あまり 0.073"]),
+            q("16 ÷ 0.35（商は一の位まで）", "45 あまり 0.25", ["45 あまり 2.5", "46 あまり 0.1", "4 あまり 0.25"]),
+            q("43.5 ÷ 1.8（商は一の位まで）", "24 あまり 0.3", ["24 あまり 3", "24.1", "23 あまり 2.1"])
+        ]
+    },
+    {
+        id: 14,
+        title: "商の性質",
+        subtitle: "等しい商と商の大きさを見抜く",
+        questions: [
+            q("13.92 ÷ 0.48", "29", ["2.9", "290", "0.29"]),
+            q("1392 ÷ 4.8", "290", ["29", "2900", "2.9"]),
+            q("1.392 ÷ 0.48", "2.9", ["29", "0.29", "290"]),
+            q("16.74 ÷ 3.6 と等しい式は？", "167.4 ÷ 36", ["167.4 ÷ 0.36", "1.674 ÷ 36", "1674 ÷ 36"]),
+            q("5.28 ÷ 1.2 と等しい式は？", "52.8 ÷ 12", ["5.28 ÷ 12", "528 ÷ 12", "52.8 ÷ 1.2"]),
+            q("商が、わられる数より大きくなるのは？", "14.4 ÷ 0.8", ["14.4 ÷ 1", "14.4 ÷ 1.2", "14.4 ÷ 2"]),
+            q("商が、わられる数より小さくなるのは？", "7.5 ÷ 1.5", ["7.5 ÷ 0.5", "7.5 ÷ 0.75", "7.5 ÷ 0.1"]),
+            q("6.4 ÷ 0.8 の商は、6.4と比べて？", "大きい", ["小さい", "等しい", "比べられない"]),
+            q("3.6 ÷ 1.2 の商は、3.6と比べて？", "小さい", ["大きい", "等しい", "必ず0になる"]),
+            q("ある数を0.6でわると12。ある数は？", "7.2", ["20", "12.6", "0.72"])
+        ]
+    },
+    {
+        id: 15,
+        title: "小数のわり算・応用",
+        subtitle: "単位量・あまり・逆算の文章題",
+        questions: [
+            q("15Lの米が12.3kg。1Lの重さは？", "0.82kg", ["8.2kg", "1.22kg", "0.082kg"]),
+            q("63.15mのひもを0.94mずつ切ると？", "67本、0.17mあまり", ["67本、1.7mあまり", "68本、0.15mあまり", "66本、0.11mあまり"]),
+            q("0.75mで42gのばね。1mの重さは？", "56g", ["31.5g", "5.6g", "57g"]),
+            q("43.5Lのジュースを1.8Lずつ入れると？", "24本、0.3Lあまり", ["24本、3Lあまり", "25本、0.5Lあまり", "23本、2.1Lあまり"]),
+            q("5.8Lを1人2.6dLずつ配ると？", "22人、0.08Lあまり", ["22人、0.8Lあまり", "23人、0.02Lあまり", "20人、0.6Lあまり"]),
+            q("1kg450円の豆を3kg560g買うと？", "1602円", ["16020円", "1552円", "1800円"]),
+            q("10.6mで18.55kgの鉄管。7.2mでは？", "12.6kg", ["126kg", "1.26kg", "25.75kg"]),
+            q("ある数を2.1でわるところを1.2でわり、答えが8.4。正しい答えは？", "4.8", ["14.7", "7.2", "8.4"]),
+            q("1.8L入りのびん全体が2.55kg。0.7L使うと1.71kg。びんだけの重さは？", "0.39kg", ["0.84kg", "1.2kg", "0.54kg"]),
+            q("16mのテープを0.35mずつ切ると？", "45本、0.25mあまり", ["45本、0.025mあまり", "46本、0.1mあまり", "44本、0.6mあまり"])
+        ]
+    },
+    {
+        id: 16,
+        title: "四則計算・練成Ⅰ",
+        subtitle: "小数のかけ算とわり算を使い分ける",
+        questions: [
+            q("48 × 3.27", "156.96", ["15.696", "1569.6", "51.27"]),
+            q("521 × 0.94", "489.74", ["48.974", "4897.4", "520.06"]),
+            q("0.357 × 0.28", "0.09996", ["0.9996", "0.009996", "9.996"]),
+            q("40 ÷ 1.6", "25", ["2.5", "250", "64"]),
+            q("125 ÷ 0.25", "500", ["50", "5", "31.25"]),
+            q("21 ÷ 0.56", "37.5", ["3.75", "375", "11.76"]),
+            q("3.51 ÷ 2.7", "1.3", ["13", "0.13", "6.21"]),
+            q("35.77 ÷ 4.9", "7.3", ["73", "0.73", "30.87"]),
+            q("74.36 ÷ 10.4", "7.15", ["71.5", "0.715", "8.15"]),
+            q("12.4 × 8.65", "107.26", ["10.726", "1072.6", "21.05"])
+        ]
+    },
+    {
+        id: 17,
+        title: "式を見抜く・練成Ⅱ",
+        subtitle: "積や商の性質と逆算",
+        questions: [
+            q("3.24 × 1.53 と等しい式は？", "0.324 × 15.3", ["32.4 × 15.3", "32.4 × 0.153", "0.324 × 0.153"]),
+            q("16.74 ÷ 3.6 と等しい式は？", "167.4 ÷ 36", ["1.674 ÷ 36", "167.4 ÷ 0.36", "1674 ÷ 36"]),
+            q("198 × 35 = 6930。198 × 3.5 は？", "693", ["69.3", "6930", "69300"]),
+            q("198 × 35 = 6930。19.8 × 3.5 は？", "69.3", ["693", "6.93", "6930"]),
+            q("198 × 35 = 6930。198 × 0.035 は？", "6.93", ["69.3", "0.693", "693"]),
+            q("ある数に0.98をかけるところを0.9とかけ、4.23になった。正しい答えは？", "4.606", ["4.14", "4.23", "4.752"]),
+            q("ある数を3.6でわるところを3.6倍して68.04。ある数は？", "18.9", ["244.944", "2.1", "64.44"]),
+            q("ある数を24.8でわり、商を10分の1まで丸めると3.7。考えられる整数の最小は？", "91", ["89", "90", "92"]),
+            q("積がかけられる数より小さくなるのは？", "29.01 × 0.909", ["3.76 × 1.2", "175 × 1.001", "0.063 × 3.02"]),
+            q("商がわられる数より大きくなるのは？", "8.4 ÷ 0.7", ["8.4 ÷ 1", "8.4 ÷ 1.4", "8.4 ÷ 2.1"])
+        ]
+    },
+    {
+        id: 18,
+        title: "文章題・練成Ⅰ",
+        subtitle: "単価・重さ・面積を式にする",
+        questions: [
+            q("1kg450円の豆を3kg560g買う代金は？", "1602円", ["16020円", "1552円", "1800円"]),
+            q("1mで0.052kgの棒を7.5m使い、残りが1.06kg。初めの重さは？", "1.45kg", ["0.67kg", "1.112kg", "1.84kg"]),
+            q("1m70円のリボンを1.4m買うと？", "98円", ["49円", "70円", "140円"]),
+            q("たて1.6cm、横2.3cmの長方形の面積は？", "3.68cm²", ["3.9cm²", "36.8cm²", "7.8cm²"]),
+            q("たて7.5cm、横3.8cmの長方形の面積は？", "28.5cm²", ["2.85cm²", "285cm²", "22.6cm²"]),
+            q("1辺5.3cmの正方形の面積は？", "28.09cm²", ["10.6cm²", "2.809cm²", "280.9cm²"]),
+            q("面積10.8m²、たて3.7mの長方形。横を上から2けたの概数で？", "2.9m", ["2.8m", "2.92m", "29m"]),
+            q("1Lが1.16kgのジュース3.5Lと、0.78kgのかん。全体は？", "4.84kg", ["4.06kg", "4.45kg", "5.62kg"]),
+            q("1kgに砂糖52.4gを含む液体0.8kg。砂糖は？", "41.92g", ["419.2g", "42.4g", "65.5g"]),
+            q("1m78gの針金5.2mの重さは？", "405.6g", ["40.56g", "4056g", "83.2g"])
+        ]
+    },
+    {
+        id: 19,
+        title: "文章題・練成Ⅱ",
+        subtitle: "あまり・概数・複数の手順",
+        questions: [
+            q("重さ500gの箱に同じ品物14個。全体11kg。1個は？", "0.75kg", ["0.785kg", "7.5kg", "0.5kg"]),
+            q("63.15mのひもを0.94mずつ切ると、何本と何mあまり？", "67本、0.17m", ["67本、1.7m", "68本、0.15m", "66本、0.11m"]),
+            q("しょう油1.8L入りのびん全体2.55kg。0.7L使うと1.71kg。びんは？", "0.39kg", ["0.84kg", "1.2kg", "0.54kg"]),
+            q("10.6mで18.55kgの鉄管。7.2mの重さは？", "12.6kg", ["126kg", "1.26kg", "25.75kg"]),
+            q("ある数を2.1でわるところを1.2でわり8.4。正しくは？", "4.8", ["14.7", "7.2", "8.4"]),
+            q("6.2でわると商2.8、あまり0.07。元の数は？", "17.43", ["17.36", "17.5", "1.743"]),
+            q("17.43を3.7でわるとき、商を10分の1まで、あまりも答える", "4.7 あまり 0.04", ["4.7 あまり 0.4", "4.8 あまり 0.04", "47 あまり 0.04"]),
+            q("5.8Lを1人0.26Lずつ配ると？", "22人、0.08L", ["22人、0.8L", "23人、0.02L", "20人、0.6L"]),
+            q("16mのテープを0.35mずつ切ると？", "45本、0.25m", ["45本、0.025m", "46本、0.1m", "44本、0.6m"]),
+            q("43.5Lを1.8L入りのびんに入れると？", "24本、0.3L", ["24本、3L", "25本、0.5L", "23本、2.1L"])
+        ]
+    },
+    {
+        id: 20,
+        title: "小数計算・最終練成",
+        subtitle: "計算・性質・文章題の総まとめ",
+        questions: [
+            q("4.29 × 53", "227.37", ["22.737", "2273.7", "57.29"]),
+            q("72 × 2.05", "147.6", ["14.76", "1476", "74.05"]),
+            q("0.065 × 0.78", "0.0507", ["0.507", "0.00507", "5.07"]),
+            q("12.74 ÷ 6.125", "2.08", ["20.8", "0.208", "6.615"]),
+            q("84.6 ÷ 36", "2.35", ["23.5", "0.235", "48.6"]),
+            q("0.348 ÷ 7.25", "0.048", ["0.48", "0.0048", "4.8"]),
+            q("ある数を24.8でわり、商を10分の1まで丸めると3.7。考えられる整数の最大は？", "92", ["90", "91", "93"]),
+            q("1kg450円の豆3kg560gの代金は？", "1602円", ["1552円", "1800円", "16020円"]),
+            q("1m0.052kgの棒を7.5m切り、残り1.06kg。初めは？", "1.45kg", ["0.67kg", "1.112kg", "1.84kg"]),
+            q("面積10.8m²、たて3.7m。横を上から2けたの概数で？", "2.9m", ["2.8m", "2.92m", "29m"])
+        ]
     }
 ];
 
@@ -220,7 +390,15 @@ function getMathGuildProgress() {
         test2Passes: 0,
         test2Attempts: 0,
         test2BestTime: null,
-        test2BestAccuracy: 0
+        test2BestAccuracy: 0,
+        test3Passes: 0,
+        test3Attempts: 0,
+        test3BestTime: null,
+        test3BestAccuracy: 0,
+        test4Passes: 0,
+        test4Attempts: 0,
+        test4BestTime: null,
+        test4BestAccuracy: 0
     };
     try {
         const saved = JSON.parse(localStorage.getItem(MATH_GUILD_STORAGE_KEY) || "null");
@@ -234,7 +412,15 @@ function getMathGuildProgress() {
             test2Passes: nonNegativeInteger(saved.test2Passes),
             test2Attempts: nonNegativeInteger(saved.test2Attempts),
             test2BestTime: finiteOrNull(saved.test2BestTime),
-            test2BestAccuracy: percent(saved.test2BestAccuracy)
+            test2BestAccuracy: percent(saved.test2BestAccuracy),
+            test3Passes: nonNegativeInteger(saved.test3Passes),
+            test3Attempts: nonNegativeInteger(saved.test3Attempts),
+            test3BestTime: finiteOrNull(saved.test3BestTime),
+            test3BestAccuracy: percent(saved.test3BestAccuracy),
+            test4Passes: nonNegativeInteger(saved.test4Passes),
+            test4Attempts: nonNegativeInteger(saved.test4Attempts),
+            test4BestTime: finiteOrNull(saved.test4BestTime),
+            test4BestAccuracy: percent(saved.test4BestAccuracy)
         };
     } catch (error) {
         console.warn("算数ギルドの保存データを読み込めませんでした。", error);
@@ -260,6 +446,8 @@ function saveMathGuildProgress(progress) {
 }
 
 function getMathGuildTitle(progress = getMathGuildProgress()) {
+    if (progress.test4Passes >= MATH_GUILD_REQUIRED_PASSES) return MATH_GUILD_TITLES[4];
+    if (progress.test3Passes >= MATH_GUILD_REQUIRED_PASSES) return MATH_GUILD_TITLES[3];
     if (progress.test2Passes >= MATH_GUILD_REQUIRED_PASSES) return MATH_GUILD_TITLES[2];
     if (progress.test1Passes >= MATH_GUILD_REQUIRED_PASSES) return MATH_GUILD_TITLES[1];
     return MATH_GUILD_TITLES[0];
@@ -269,6 +457,8 @@ function isQuestUnlocked(questId, progress) {
     if (questId === 1) return true;
     if (questId <= 5) return Boolean(progress.completedQuests[String(questId - 1)]);
     if (questId === 6) return progress.test1Passes >= MATH_GUILD_REQUIRED_PASSES;
+    if (questId === 11) return progress.test2Passes >= MATH_GUILD_REQUIRED_PASSES;
+    if (questId === 16) return progress.test3Passes >= MATH_GUILD_REQUIRED_PASSES;
     return Boolean(progress.completedQuests[String(questId - 1)]);
 }
 
@@ -308,14 +498,20 @@ function renderMathGuildHome() {
     const container = document.getElementById("mathGuildContent");
     if (!container) return;
     const progress = getMathGuildProgress();
-    const test1Unlocked = areQuestRangeComplete(progress, 1, 5);
-    const test2Unlocked = areQuestRangeComplete(progress, 6, 10);
+    const testUnlocked = {
+        1: areQuestRangeComplete(progress, 1, 5),
+        2: areQuestRangeComplete(progress, 6, 10),
+        3: areQuestRangeComplete(progress, 11, 15),
+        4: areQuestRangeComplete(progress, 16, 20)
+    };
 
     const questCards = MATH_GUILD_QUESTS.map((quest) => {
         const complete = Boolean(progress.completedQuests[String(quest.id)]);
         const unlocked = isQuestUnlocked(quest.id, progress);
         let lockedText = `クエスト${quest.id - 1}クリアで解放`;
         if (quest.id === 6) lockedText = `ギルドテスト1に${MATH_GUILD_REQUIRED_PASSES}回合格で解放`;
+        if (quest.id === 11) lockedText = `ギルドテスト2に${MATH_GUILD_REQUIRED_PASSES}回合格で解放`;
+        if (quest.id === 16) lockedText = `ギルドテスト3に${MATH_GUILD_REQUIRED_PASSES}回合格で解放`;
         const status = complete ? "COMPLETE" : unlocked ? "挑戦できます" : lockedText;
         return `
             <article class="math-guild-card ${complete ? "is-complete" : ""} ${unlocked ? "" : "is-locked"}">
@@ -329,23 +525,23 @@ function renderMathGuildHome() {
             </article>`;
     }).join("");
 
-    const test1Status = test1Unlocked
-        ? `合格 ${Math.min(progress.test1Passes, MATH_GUILD_REQUIRED_PASSES)} / ${MATH_GUILD_REQUIRED_PASSES}回`
-        : "クエスト1〜5を攻略すると解放";
-    const test2Status = test2Unlocked
-        ? `合格 ${Math.min(progress.test2Passes, MATH_GUILD_REQUIRED_PASSES)} / ${MATH_GUILD_REQUIRED_PASSES}回`
-        : "クエスト6〜10を攻略すると解放";
+    const statuses = {};
+    for (let testNumber = 1; testNumber <= 4; testNumber += 1) {
+        const startQuest = (testNumber - 1) * 5 + 1;
+        const endQuest = startQuest + 4;
+        statuses[testNumber] = testUnlocked[testNumber]
+            ? `合格 ${Math.min(progress[`test${testNumber}Passes`], MATH_GUILD_REQUIRED_PASSES)} / ${MATH_GUILD_REQUIRED_PASSES}回`
+            : `クエスト${startQuest}〜${endQuest}を攻略すると解放`;
+    }
 
     container.innerHTML = `
         <div class="math-guild-summary">
             <div><span>現在の称号</span><strong>${getMathGuildTitle(progress)}</strong></div>
-            <div><span>ギルドテスト1</span><strong>${test1Status}</strong></div>
-            <div><span>ギルドテスト2</span><strong>${test2Status}</strong></div>
+            <div><span>次の認定</span><strong>${progress.test4Passes >= MATH_GUILD_REQUIRED_PASSES ? "小数マスター認定済み" : "ギルドテストを3回合格"}</strong></div>
         </div>
         <div class="math-guild-list">${questCards}</div>
-        ${renderTestCard(1, test1Unlocked, test1Status, progress.test1BestAccuracy)}
-        ${renderTestCard(2, test2Unlocked, test2Status, progress.test2BestAccuracy)}
-        ${progress.test2Passes >= MATH_GUILD_REQUIRED_PASSES ? `<div class="math-guild-rankup-note">称号「徒弟」認定済み。ギルドクエスト11は今後追加予定です。</div>` : ""}`;
+        ${[1,2,3,4].map((n) => renderTestCard(n, testUnlocked[n], statuses[n], progress[`test${n}BestAccuracy`])).join("")}
+        ${progress.test4Passes >= MATH_GUILD_REQUIRED_PASSES ? `<div class="math-guild-rankup-note">小数マスター認定済み。小数のかけ算・わり算の学習範囲をすべて攻略しました。</div>` : ""}`;
 
     container.querySelectorAll("[data-math-quest]").forEach((button) => {
         button.addEventListener("click", () => startMathGuildQuest(Number(button.dataset.mathQuest)));
@@ -356,14 +552,20 @@ function renderMathGuildHome() {
 }
 
 function renderTestCard(testNumber, unlocked, status, bestAccuracy) {
-    const ranges = testNumber === 1 ? "クエスト1〜5" : "クエスト6〜10";
-    const title = testNumber === 1 ? "小数のかけ算・総合試験" : "小数のかけ算・わり算 総合試験";
+    const startQuest = (testNumber - 1) * 5 + 1;
+    const endQuest = startQuest + 4;
+    const titles = {
+        1: "小数のかけ算・総合試験",
+        2: "小数のかけ算・わり算 総合試験",
+        3: "小数のわり算・応用試験",
+        4: "小数計算・最終試験"
+    };
     return `
         <article class="math-guild-test-card ${unlocked ? "" : "is-locked"}">
             <div>
                 <span>GUILD TEST ${testNumber}</span>
-                <h3>${title}</h3>
-                <p>${ranges}からランダムで20問。正解率90％以上で合格です。</p>
+                <h3>${titles[testNumber]}</h3>
+                <p>クエスト${startQuest}〜${endQuest}からランダムで20問。正解率90％以上で合格です。</p>
                 <small>${status}${bestAccuracy ? `／最高正解率 ${bestAccuracy}%` : ""}</small>
             </div>
             <button type="button" data-math-test="${testNumber}" ${unlocked ? "" : "disabled"}>試験を受ける</button>
@@ -391,8 +593,9 @@ function startMathGuildQuest(questId) {
 
 function startMathGuildTest(testNumber) {
     const progress = getMathGuildProgress();
-    const startId = testNumber === 1 ? 1 : 6;
-    const endId = testNumber === 1 ? 5 : 10;
+    if (![1, 2, 3, 4].includes(testNumber)) return;
+    const startId = (testNumber - 1) * 5 + 1;
+    const endId = startId + 4;
     if (!areQuestRangeComplete(progress, startId, endId)) return;
     const pool = uniqueQuestions(MATH_GUILD_QUESTS
         .filter((quest) => quest.id >= startId && quest.id <= endId)
@@ -571,6 +774,8 @@ function finishMathGuildQuest() {
     let nextText;
     if (mathGuildState.questId === 5) nextText = "ギルドテスト1が解放されました。";
     else if (mathGuildState.questId === 10) nextText = "ギルドテスト2が解放されました。";
+    else if (mathGuildState.questId === 15) nextText = "ギルドテスト3が解放されました。";
+    else if (mathGuildState.questId === 20) nextText = "ギルドテスト4が解放されました。";
     else nextText = `ギルドクエスト${mathGuildState.questId + 1}が解放されました。`;
     container.innerHTML = `
         <div class="math-result-panel is-clear">
@@ -607,9 +812,15 @@ function finishMathGuildTest() {
     saveMathGuildProgress(progress);
     const totalGp = reward > 0 && typeof addGp === "function" ? addGp(reward) : (typeof getGp === "function" ? getGp() : null);
     const rankedUp = previousPasses < MATH_GUILD_REQUIRED_PASSES && progress[passKey] >= MATH_GUILD_REQUIRED_PASSES;
-    const oldTitle = testNumber === 1 ? MATH_GUILD_TITLES[0] : MATH_GUILD_TITLES[1];
-    const newTitle = testNumber === 1 ? MATH_GUILD_TITLES[1] : MATH_GUILD_TITLES[2];
-    const unlockText = testNumber === 1 ? "ギルドクエスト6が解放されました。" : "ギルドクエスト11は今後追加予定です。";
+    const oldTitle = MATH_GUILD_TITLES[testNumber - 1];
+    const newTitle = MATH_GUILD_TITLES[testNumber];
+    const unlockTexts = {
+        1: "ギルドクエスト6が解放されました。",
+        2: "ギルドクエスト11が解放されました。",
+        3: "ギルドクエスト16が解放されました。",
+        4: "この単元をすべて攻略しました。"
+    };
+    const unlockText = unlockTexts[testNumber];
     const container = document.getElementById("mathGuildContent");
     container.innerHTML = `
         <div class="math-result-panel ${passed ? "is-clear" : "is-failed"}">
@@ -622,7 +833,7 @@ function finishMathGuildTest() {
             </div>
             <p>合格回数：${Math.min(progress[passKey], MATH_GUILD_REQUIRED_PASSES)} / ${MATH_GUILD_REQUIRED_PASSES}回</p>
             <div class="math-result-reward">獲得報酬 <strong>${reward} GP</strong><small>${passed ? (rewardEligible ? "合格＋5分以内達成" : "合格。次は5分以内を目指そう") : "合格者のみGP判定"}</small></div>
-            ${rankedUp ? `<div class="math-rankup"><small>RANK UP</small><strong>${oldTitle} → ${newTitle}</strong><p>新しい称号が認定されました。${unlockText}</p></div>` : ""}
+            ${rankedUp ? `<div class="math-rankup"><small>${testNumber === 4 ? "MASTER CERTIFICATE" : "RANK UP"}</small><strong>${oldTitle} → ${newTitle}</strong><p>${testNumber === 4 ? "小数マスター認定！ " : "新しい称号が認定されました。"}${unlockText}</p></div>` : ""}
             ${totalGp !== null ? `<small>所持GP：${totalGp}</small>` : ""}
             <button type="button" id="finishMathGuildBack">算数ギルドへ戻る</button>
         </div>`;
