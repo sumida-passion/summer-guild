@@ -73,10 +73,13 @@ function createGuildShopItemHtml(item) {
     const price =
         getSafeShopPrice(item && item.price);
 
-    const owned =
-        typeof isShopItemOwned === "function"
+    const repeatable = Boolean(item && item.repeatable);
+    const owned = !repeatable && typeof isShopItemOwned === "function"
             ? isShopItemOwned(itemId)
             : false;
+    const ownedLabel = repeatable && item.consumable === "dogFood" && typeof getDogFoodCount === "function"
+        ? `所持 ${getDogFoodCount()}個`
+        : "";
 
 
     return `
@@ -91,7 +94,7 @@ function createGuildShopItemHtml(item) {
             </span>
 
             <span class="shop-item-price">
-                ${owned ? "購入済み" : `${price} GP`}
+                ${owned ? "購入済み" : `${price} GP${ownedLabel ? `・${ownedLabel}` : ""}`}
             </span>
 
         </button>
@@ -166,7 +169,8 @@ function handleGuildShopItemClick(event) {
 
 
     if (
-        typeof isShopItemOwned === "function"
+        !item.repeatable
+        && typeof isShopItemOwned === "function"
         && isShopItemOwned(item.id)
     ) {
 
@@ -204,11 +208,18 @@ function purchaseGuildShopItem(item) {
     }
 
 
-    const result =
-        buyShopItem(
-            item.id,
-            item.price
-        );
+    let result;
+
+    if (item.repeatable && item.consumable === "dogFood") {
+        if (typeof spendGp !== "function" || !spendGp(item.price)) {
+            result = { success: false, reason: "not-enough-gp", totalGp: typeof getGp === "function" ? getGp() : 0 };
+        } else {
+            const count = typeof addDogFood === "function" ? addDogFood(1) : 0;
+            result = { success: true, totalGp: typeof getGp === "function" ? getGp() : 0, count };
+        }
+    } else {
+        result = buyShopItem(item.id, item.price);
+    }
 
 
     if (!result || result.success !== true) {
@@ -261,10 +272,15 @@ function purchaseGuildShopItem(item) {
     renderGuildShop();
 
 
-    showGuildShopMessage(
-        `${item.name}を手に入れました！\n残り ${result.totalGp} GP`,
-        "購入しました"
-    );
+    if (item.repeatable && item.consumable === "dogFood") {
+        showGuildShopMessage(`${item.name}を1個買いました。\n餌の所持数：${result.count}個\n残り ${result.totalGp} GP`, "購入しました");
+    } else {
+        showGuildShopMessage(`${item.name}を手に入れました！\n残り ${result.totalGp} GP`, "購入しました");
+    }
+
+    if (item.id === "black_dog_pet" && window.BlackDogPet) {
+        window.BlackDogPet.showWelcome();
+    }
 
 
     return true;
