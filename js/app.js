@@ -886,6 +886,23 @@ function updateResultScreen(
     resetHyakumasuResultLayout();
 
 
+    const resultWindowElement =
+        document.querySelector(
+            "#result-screen .result-window"
+        );
+
+
+    if (resultWindowElement) {
+
+        resultWindowElement.classList.toggle(
+            "review-result-window",
+            typeof safeData.questId === "string"
+                && safeData.questId.startsWith("review-")
+        );
+
+    }
+
+
     const resultMessageElement =
         document.getElementById(
             "resultMessage"
