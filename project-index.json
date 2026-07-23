@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T17:00:13.721114+00:00",
-    "commit": "272319c",
+    "atUtc": "2026-07-23T17:00:39.895912+00:00",
+    "commit": "c053027",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 19,
-    "totalBytes": 78852557,
+    "totalBytes": 78857940,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1442,9 +1442,9 @@
       "stem": "developer",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 20523,
-      "sha1": "c774b7bb69",
-      "lineCount": 1101
+      "sizeBytes": 25906,
+      "sha1": "8e8d695b23",
+      "lineCount": 1302
     },
     {
       "path": "js/numberpad.js",
@@ -2380,6 +2380,11 @@
         "buildDeveloperPanel",
         "bindDeveloperPanelButtons",
         "bindClick",
+        "sanitizeDeveloperGp",
+        "setDeveloperGp",
+        "changeDeveloperGp",
+        "applyDeveloperGpInput",
+        "showDeveloperGpMessage",
         "changePlayerSetting",
         "resetPlayerPosition",
         "updateDeveloperValues",
@@ -2960,7 +2965,7 @@
     {
       "status": "M",
       "paths": [
-        "css/developer.css"
+        "js/developer.js"
       ]
     }
   ],
