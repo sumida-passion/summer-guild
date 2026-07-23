@@ -6,12 +6,15 @@
    ・不正解でそのクエストの1問目へ戻る
    ・再挑戦時は選択肢のみシャッフル
    ・ギルドテスト1／2（各20問ランダム・何度でも挑戦）
-   ・テスト1合格5回で「見習い」＆クエスト6解放
-   ・テスト2合格5回で「徒弟」
+   ・テスト1合格3回で「見習い」＆クエスト6解放
+   ・テスト2合格3回で「徒弟」
    ========================================================= */
 
 const MATH_GUILD_STORAGE_KEY = "summerGuildMathGuildV1";
 const MATH_GUILD_PASS_ACCURACY = 90;
+const MATH_GUILD_REQUIRED_PASSES = 3;
+const MATH_GUILD_REWARD_SECONDS = 300;
+const MATH_GUILD_TEST_REWARD_GP = 2;
 
 const MATH_GUILD_TITLES = [
     "素人", "見習い", "徒弟", "下級職人", "中級職人", "上級職人",
@@ -203,7 +206,8 @@ let mathGuildState = {
     index: 0,
     correctCount: 0,
     startedAt: 0,
-    locked: false
+    locked: false,
+    lastAnswer: null
 };
 
 function getMathGuildProgress() {
@@ -256,15 +260,15 @@ function saveMathGuildProgress(progress) {
 }
 
 function getMathGuildTitle(progress = getMathGuildProgress()) {
-    if (progress.test2Passes >= 5) return MATH_GUILD_TITLES[2];
-    if (progress.test1Passes >= 5) return MATH_GUILD_TITLES[1];
+    if (progress.test2Passes >= MATH_GUILD_REQUIRED_PASSES) return MATH_GUILD_TITLES[2];
+    if (progress.test1Passes >= MATH_GUILD_REQUIRED_PASSES) return MATH_GUILD_TITLES[1];
     return MATH_GUILD_TITLES[0];
 }
 
 function isQuestUnlocked(questId, progress) {
     if (questId === 1) return true;
     if (questId <= 5) return Boolean(progress.completedQuests[String(questId - 1)]);
-    if (questId === 6) return progress.test1Passes >= 5;
+    if (questId === 6) return progress.test1Passes >= MATH_GUILD_REQUIRED_PASSES;
     return Boolean(progress.completedQuests[String(questId - 1)]);
 }
 
@@ -311,7 +315,7 @@ function renderMathGuildHome() {
         const complete = Boolean(progress.completedQuests[String(quest.id)]);
         const unlocked = isQuestUnlocked(quest.id, progress);
         let lockedText = `クエスト${quest.id - 1}クリアで解放`;
-        if (quest.id === 6) lockedText = "ギルドテスト1に5回合格で解放";
+        if (quest.id === 6) lockedText = `ギルドテスト1に${MATH_GUILD_REQUIRED_PASSES}回合格で解放`;
         const status = complete ? "COMPLETE" : unlocked ? "挑戦できます" : lockedText;
         return `
             <article class="math-guild-card ${complete ? "is-complete" : ""} ${unlocked ? "" : "is-locked"}">
@@ -326,10 +330,10 @@ function renderMathGuildHome() {
     }).join("");
 
     const test1Status = test1Unlocked
-        ? `合格 ${Math.min(progress.test1Passes, 5)} / 5回`
+        ? `合格 ${Math.min(progress.test1Passes, MATH_GUILD_REQUIRED_PASSES)} / ${MATH_GUILD_REQUIRED_PASSES}回`
         : "クエスト1〜5を攻略すると解放";
     const test2Status = test2Unlocked
-        ? `合格 ${Math.min(progress.test2Passes, 5)} / 5回`
+        ? `合格 ${Math.min(progress.test2Passes, MATH_GUILD_REQUIRED_PASSES)} / ${MATH_GUILD_REQUIRED_PASSES}回`
         : "クエスト6〜10を攻略すると解放";
 
     container.innerHTML = `
@@ -341,7 +345,7 @@ function renderMathGuildHome() {
         <div class="math-guild-list">${questCards}</div>
         ${renderTestCard(1, test1Unlocked, test1Status, progress.test1BestAccuracy)}
         ${renderTestCard(2, test2Unlocked, test2Status, progress.test2BestAccuracy)}
-        ${progress.test2Passes >= 5 ? `<div class="math-guild-rankup-note">称号「徒弟」認定済み。ギルドクエスト11は今後追加予定です。</div>` : ""}`;
+        ${progress.test2Passes >= MATH_GUILD_REQUIRED_PASSES ? `<div class="math-guild-rankup-note">称号「徒弟」認定済み。ギルドクエスト11は今後追加予定です。</div>` : ""}`;
 
     container.querySelectorAll("[data-math-quest]").forEach((button) => {
         button.addEventListener("click", () => startMathGuildQuest(Number(button.dataset.mathQuest)));
@@ -378,7 +382,8 @@ function startMathGuildQuest(questId) {
         index: 0,
         correctCount: 0,
         startedAt: Date.now(),
-        locked: false
+        locked: false,
+        lastAnswer: null
     };
     playMathGuildMusic("quest");
     renderMathGuildQuestion();
@@ -400,7 +405,8 @@ function startMathGuildTest(testNumber) {
         index: 0,
         correctCount: 0,
         startedAt: Date.now(),
-        locked: false
+        locked: false,
+        lastAnswer: null
     };
     playMathGuildMusic("test");
     renderMathGuildQuestion();
@@ -468,20 +474,52 @@ function escapeAttribute(value) {
         .replaceAll(">", "&gt;");
 }
 
+function renderMathGuildMistake(question, selected, isQuest) {
+    const container = document.getElementById("mathGuildContent");
+    if (!container) return;
+    const modeLabel = isQuest
+        ? `GUILD QUEST ${mathGuildState.questId}`
+        : `GUILD TEST ${mathGuildState.testNumber}`;
+    const heading = isQuest ? "まちがえた！！" : "ここが不正解";
+    const note = isQuest
+        ? "クエストの1問目から再挑戦します"
+        : "正解を確認して、次の問題へ進みます";
+
+    container.innerHTML = `
+        <div class="math-mistake-panel ${isQuest ? "is-quest" : "is-test"}" role="alert" aria-live="assertive">
+            <span>${modeLabel}</span>
+            <div class="math-mistake-mark">×</div>
+            <h2>${heading}</h2>
+            <div class="math-mistake-expression">${question.expression}</div>
+            <div class="math-mistake-answers">
+                <div><small>あなたの答え</small><strong>${selected}</strong></div>
+                <div><small>正しい答え</small><strong>${question.answer}</strong></div>
+            </div>
+            <p>${note}</p>
+        </div>`;
+}
+
 function answerMathGuildQuestion(selected) {
     if (mathGuildState.locked) return;
     mathGuildState.locked = true;
     const question = mathGuildState.questions[mathGuildState.index];
     const correct = String(selected) === String(question.answer);
+    mathGuildState.lastAnswer = {
+        expression: question.expression,
+        selected: String(selected),
+        answer: String(question.answer),
+        correct
+    };
 
     if (mathGuildState.mode === "quest") {
         if (!correct) {
+            renderMathGuildMistake(question, selected, true);
             mathGuildState.index = 0;
             mathGuildState.correctCount = 0;
             setTimeout(() => {
                 mathGuildState.locked = false;
-                renderMathGuildQuestion("不正解。クエストの最初から再挑戦！");
-            }, 650);
+                renderMathGuildQuestion();
+            }, 1200);
             return;
         }
         mathGuildState.correctCount += 1;
@@ -497,16 +535,30 @@ function answerMathGuildQuestion(selected) {
         return;
     }
 
-    if (correct) mathGuildState.correctCount += 1;
-    mathGuildState.index += 1;
-    if (mathGuildState.index >= mathGuildState.questions.length) {
-        finishMathGuildTest();
+    if (correct) {
+        mathGuildState.correctCount += 1;
+        mathGuildState.index += 1;
+        if (mathGuildState.index >= mathGuildState.questions.length) {
+            finishMathGuildTest();
+            return;
+        }
+        setTimeout(() => {
+            mathGuildState.locked = false;
+            renderMathGuildQuestion("正解！");
+        }, 300);
         return;
     }
+
+    renderMathGuildMistake(question, selected, false);
+    mathGuildState.index += 1;
     setTimeout(() => {
+        if (mathGuildState.index >= mathGuildState.questions.length) {
+            finishMathGuildTest();
+            return;
+        }
         mathGuildState.locked = false;
-        renderMathGuildQuestion(correct ? "正解！" : `不正解。正解は ${question.answer}`);
-    }, 300);
+        renderMathGuildQuestion();
+    }, 1050);
 }
 
 function finishMathGuildQuest() {
@@ -540,9 +592,8 @@ function finishMathGuildTest() {
     const elapsedSeconds = Math.max(1, Math.round((Date.now() - mathGuildState.startedAt) / 1000));
     const accuracy = Math.round((mathGuildState.correctCount / mathGuildState.questions.length) * 100);
     const passed = accuracy >= MATH_GUILD_PASS_ACCURACY;
-    const accuracyPoint = accuracy === 100 ? 2 : accuracy >= 90 ? 1 : 0;
-    const speedPoint = elapsedSeconds <= 180 ? 2 : elapsedSeconds <= 300 ? 1 : 0;
-    const reward = accuracyPoint * speedPoint;
+    const rewardEligible = passed && elapsedSeconds <= MATH_GUILD_REWARD_SECONDS;
+    const reward = rewardEligible ? MATH_GUILD_TEST_REWARD_GP : 0;
     const progress = getMathGuildProgress();
     const passKey = `test${testNumber}Passes`;
     const attemptKey = `test${testNumber}Attempts`;
@@ -555,7 +606,7 @@ function finishMathGuildTest() {
     if (passed && (progress[bestTimeKey] === null || elapsedSeconds < progress[bestTimeKey])) progress[bestTimeKey] = elapsedSeconds;
     saveMathGuildProgress(progress);
     const totalGp = reward > 0 && typeof addGp === "function" ? addGp(reward) : (typeof getGp === "function" ? getGp() : null);
-    const rankedUp = previousPasses < 5 && progress[passKey] >= 5;
+    const rankedUp = previousPasses < MATH_GUILD_REQUIRED_PASSES && progress[passKey] >= MATH_GUILD_REQUIRED_PASSES;
     const oldTitle = testNumber === 1 ? MATH_GUILD_TITLES[0] : MATH_GUILD_TITLES[1];
     const newTitle = testNumber === 1 ? MATH_GUILD_TITLES[1] : MATH_GUILD_TITLES[2];
     const unlockText = testNumber === 1 ? "ギルドクエスト6が解放されました。" : "ギルドクエスト11は今後追加予定です。";
@@ -569,8 +620,8 @@ function finishMathGuildTest() {
                 <div><small>正解率</small><strong>${accuracy}%</strong></div>
                 <div><small>タイム</small><strong>${formatMathGuildTime(elapsedSeconds)}</strong></div>
             </div>
-            <p>合格回数：${Math.min(progress[passKey], 5)} / 5回</p>
-            <div class="math-result-reward">獲得報酬 <strong>${reward} GP</strong></div>
+            <p>合格回数：${Math.min(progress[passKey], MATH_GUILD_REQUIRED_PASSES)} / ${MATH_GUILD_REQUIRED_PASSES}回</p>
+            <div class="math-result-reward">獲得報酬 <strong>${reward} GP</strong><small>${passed ? (rewardEligible ? "合格＋5分以内達成" : "合格。次は5分以内を目指そう") : "合格者のみGP判定"}</small></div>
             ${rankedUp ? `<div class="math-rankup"><small>RANK UP</small><strong>${oldTitle} → ${newTitle}</strong><p>新しい称号が認定されました。${unlockText}</p></div>` : ""}
             ${totalGp !== null ? `<small>所持GP：${totalGp}</small>` : ""}
             <button type="button" id="finishMathGuildBack">算数ギルドへ戻る</button>
