@@ -920,6 +920,18 @@ function createEmptyPlayerEquipment() {
 }
 
 
+function isRockNRollBottomsEquipped() {
+
+    const equipment =
+        getPlayerEquipment();
+
+
+    return equipment.bottoms
+        === "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG";
+
+}
+
+
 function equipShopItem(itemId) {
 
     const item =
@@ -946,6 +958,24 @@ function equipShopItem(itemId) {
     }
 
 
+    /*
+      黒雷のロックボトムスはブーツ込みの画像。
+      装備中は単品の靴を重ねられないようにする。
+      ボトムスも同時に変更する一式装備は対象外。
+    */
+    if (
+        item.category === "shoes"
+        && isRockNRollBottomsEquipped()
+    ) {
+
+        return {
+            success: false,
+            reason: "rocknroll-bottoms-includes-shoes"
+        };
+
+    }
+
+
     if (isFullSetShopItem(item)) {
 
         /*
@@ -965,6 +995,17 @@ function equipShopItem(itemId) {
             cloneSettings(
                 DEFAULT_SETTINGS.player.equipment
             );
+
+    }
+
+
+    /*
+      ロックボトムスを着た瞬間、現在の靴を外す。
+      元の靴は自動復元せず、外れた状態を維持する。
+    */
+    if (item.id === "rocknroll_bottoms") {
+
+        Settings.player.equipment.shoes = "";
 
     }
 
