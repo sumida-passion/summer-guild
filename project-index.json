@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T16:20:11.602024+00:00",
-    "commit": "28a050b",
+    "atUtc": "2026-07-23T16:59:59.857573+00:00",
+    "commit": "8cb09a3",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 19,
-    "totalBytes": 78850097,
+    "totalBytes": 78850113,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1410,8 +1410,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 14436,
-      "sha1": "288de3861b",
+      "sizeBytes": 14452,
+      "sha1": "25f358cada",
       "lineCount": 667
     },
     {
@@ -1747,7 +1747,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 4491,
-      "sha1": "5ac924f887",
+      "sha1": "191f1287a0",
       "lineCount": 177
     },
     {
@@ -2960,7 +2960,13 @@
     {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
