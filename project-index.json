@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T17:45:43.534283+00:00",
-    "commit": "9974d41",
+    "atUtc": "2026-07-23T17:45:59.942284+00:00",
+    "commit": "b05c2e6",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 19,
-    "totalBytes": 78844748,
+    "totalBytes": 78845301,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1355,9 +1355,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 8738,
-      "sha1": "699713e71f",
-      "lineCount": 124
+      "sizeBytes": 9291,
+      "sha1": "7a3a49088e",
+      "lineCount": 131
     },
     {
       "path": "docs/game-rules.md",
@@ -2966,7 +2966,7 @@
     {
       "status": "M",
       "paths": [
-        "js/systems/blackDogPet.js"
+        "docs/development-log.md"
       ]
     }
   ],
