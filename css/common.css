@@ -295,15 +295,15 @@ button:disabled {
     z-index: 2;
 }
 
-#player-bottom {
+#player-shoes {
     z-index: 3;
 }
 
-#player-top {
+#player-bottom {
     z-index: 4;
 }
 
-#player-shoes {
+#player-top {
     z-index: 5;
 }
 
