@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-22T16:52:28.038787+00:00",
-    "commit": "7ee3829",
+    "atUtc": "2026-07-23T00:12:06.707246+00:00",
+    "commit": "a2ba8b5",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 17,
-    "totalBytes": 75036383,
+    "totalBytes": 75036377,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1612,8 +1612,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4499,
-      "sha1": "c6de25b026",
+      "sizeBytes": 4493,
+      "sha1": "3561438382",
       "lineCount": 177
     },
     {
@@ -2680,7 +2680,7 @@
     {
       "status": "M",
       "paths": [
-        "index.html"
+        "project-index.json"
       ]
     },
     {
@@ -2699,7 +2699,6 @@
       "docs/game-rules.md",
       "docs/asset-guide.md",
       "docs/development-log.md",
-      "docs/GPT_ZIP_WORKFLOW.md",
       "今回の改修対象ファイル",
       "その依存先・関連ファイル"
     ],
@@ -2736,40 +2735,6 @@
       "js/quests/hyakumasu.js"
     ],
     "newThreadOpeningMessage": "夏休みギルドの開発を続けます。最初にproject-index.jsonを最後まで読み、次に今回の改修対象と関連ファイルを確認してください。既存API・ファイル名・画像拡張子を推測で扱わず、iPad Safari前提で進めてください。大きな完成ファイルはZIPで渡してください。",
-    "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。",
-    "zipBuildWorkflow": {
-      "requiredSequence": [
-        "ユーザーが最新版ZIPをアップロードする。",
-        "GPTはproject-index.jsonを最初に最後まで読む。",
-        "GPTはプロジェクト全体と関連ファイルを確認する。",
-        "仕様検討フェーズでは相談のみを行い、完成ZIPを作らない。",
-        "ユーザーの明確な仕様確定・ZIP作成開始の合図を受ける。",
-        "元ZIPを実際に展開し、対象ファイルを実際に編集する。",
-        "構文・依存関係・保存データ互換性を検証する。",
-        "変更ファイル一覧を作成する。",
-        "新しいZIPを実際に生成する。",
-        "生成後のZIPを再確認する。",
-        "完成ZIP、変更一覧、配置先、検証結果を渡す。"
-      ],
-      "buildTrigger": "仕様はこれで確定だね、Zip作成作業に入って（または同等の明確な合図）",
-      "defaultDelivery": "変更ファイルのみを同じ階層で収録した差分ZIP。丸ごとZIPはユーザーが明示した場合のみ。",
-      "prohibitions": [
-        "実際に編集していないのに完成したと言わない。",
-        "実際に生成していないZIPを完成版として提示しない。",
-        "元ZIPの名前だけを変えて完成版にしない。",
-        "未確認の動作を確認済みと表現しない。",
-        "仕様確定の合図より前に実装を開始しない。"
-      ],
-      "completionChecklist": [
-        "元ZIPを実際に展開した。",
-        "project-index.jsonを最初に読んだ。",
-        "仕様確定の合図を受けた。",
-        "対象ファイルを実際に編集した。",
-        "構文または実行可能な検証を行った。",
-        "新しいZIPを実際に生成した。",
-        "生成したZIPの中身を再確認した。",
-        "変更ファイル一覧とZIP内容が一致する。"
-      ]
-    }
+    "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。"
   }
 }
