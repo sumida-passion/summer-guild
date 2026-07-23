@@ -281,6 +281,116 @@
         font-size: 29px;
     }
 
+    /* -----------------------------------------------------
+       ふりかえりの修行・問題画面
+       iPhone横向きだけ、1画面内に問題・入力・テンキーを収める。
+       iPad版には適用しない。
+       ----------------------------------------------------- */
+    #quest-screen .quest-container.review-quiz-container {
+        width: calc(
+            100vw
+            - max(8px, env(safe-area-inset-left, 0px))
+            - max(8px, env(safe-area-inset-right, 0px))
+        );
+        max-width: none;
+        height: calc(100vh - 10px);
+        max-height: calc(100vh - 10px);
+        margin: 0 auto;
+        padding: 4px 8px;
+        overflow: hidden;
+        justify-content: center;
+    }
+
+    .review-quiz-container .review-wrap {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .review-quiz-container .review-panel.review-quiz {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 6px 10px;
+        border-width: 3px;
+        border-radius: 12px;
+        box-shadow: 0 4px 0 rgba(55, 30, 12, 0.3);
+    }
+
+    .review-quiz-container .review-progress {
+        margin-bottom: 3px;
+        font-size: 12px;
+        line-height: 1.1;
+    }
+
+    .review-quiz-container .review-question {
+        min-height: 0;
+        padding: 6px 10px;
+        border-width: 2px;
+        border-radius: 10px;
+        font-size: clamp(14px, 2.25vw, 18px);
+        line-height: 1.3;
+    }
+
+    .review-quiz-container .review-answer-row {
+        gap: 7px;
+        margin: 4px 0 2px;
+    }
+
+    .review-quiz-container .review-answer {
+        width: min(220px, 38vw);
+        padding: 4px 8px;
+        border-width: 2px;
+        border-radius: 9px;
+        font-size: 22px;
+        line-height: 1.15;
+    }
+
+    .review-quiz-container .review-unit {
+        font-size: 17px;
+    }
+
+    .review-quiz-container .review-hint {
+        margin: 1px 0 4px;
+        font-size: 11px;
+        line-height: 1.15;
+    }
+
+    .review-quiz-container .review-keypad {
+        width: min(100%, 330px);
+        max-width: 330px;
+        gap: 5px;
+    }
+
+    .review-quiz-container .review-keypad button {
+        min-height: 29px;
+        padding: 4px 8px;
+        border-radius: 8px;
+        font-size: 16px;
+        line-height: 1;
+        box-shadow: 0 2px 0 #3f260f;
+    }
+
+    .review-quiz-container .review-keypad button:active {
+        transform: translateY(1px);
+        box-shadow: 0 1px 0 #3f260f;
+    }
+
+    .review-quiz-container .review-actions {
+        gap: 8px;
+        margin-top: 5px;
+    }
+
+    .review-quiz-container .review-actions button {
+        min-height: 29px;
+        padding: 4px 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        line-height: 1.1;
+        box-shadow: 0 2px 0 #3f260f;
+    }
+
     /* ショップ系の大枠は、既存の内容を保ったまま高さだけ確保 */
     .shop-window,
     .music-shop-window,
