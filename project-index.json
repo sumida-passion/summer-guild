@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T00:13:24.334527+00:00",
-    "commit": "9b9cffc",
+    "atUtc": "2026-07-23T03:17:43.990516+00:00",
+    "commit": "63000a2",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 56,
     "imageCount": 47,
     "javascriptApiFileCount": 17,
-    "totalBytes": 75052618,
+    "totalBytes": 75050780,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1254,9 +1254,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 4741,
-      "sha1": "576c049701",
-      "lineCount": 75
+      "sizeBytes": 4076,
+      "sha1": "f62b79474f",
+      "lineCount": 68
     },
     {
       "path": "docs/game-rules.md",
@@ -1265,9 +1265,9 @@
       "stem": "game-rules",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 3039,
-      "sha1": "683f6a24fd",
-      "lineCount": 39
+      "sizeBytes": 1866,
+      "sha1": "a7893520b8",
+      "lineCount": 27
     },
     {
       "path": "docs/GPT_PROJECT_STATE.md",
@@ -2692,7 +2692,13 @@
     {
       "status": "M",
       "paths": [
-        "js/quests/math.js"
+        "docs/development-log.md"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "docs/game-rules.md"
       ]
     }
   ],
