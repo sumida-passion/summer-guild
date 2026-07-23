@@ -1549,6 +1549,21 @@ function installHyakumasuStyles() {
                 gap: 5px;
             }
 
+            /*
+              iPhone横画面では盤面をわずかに上へ寄せる。
+              最下段の行見出しと全セルを画面内に残し、
+              iPad版の中央配置には影響させない。
+            */
+            .hyakumasu-table-area {
+                align-items: flex-start;
+                padding-top: 0;
+            }
+
+            .hyakumasu-table {
+                transform: translateY(-3px);
+                transform-origin: top center;
+            }
+
             .hyakumasu-control-area {
                 width: 180px;
                 min-width: 180px;
@@ -1801,12 +1816,24 @@ function fitHyakumasuToScreen() {
         );
 
 
+    /*
+      iPhone横画面では最下段が端に接触しないよう、
+      高さ計算に小さな安全余白を確保する。
+      盤面を上へ寄せるCSSと組み合わせた二段構え。
+    */
+    const phoneLandscapeHeightReserve =
+        isShortPhoneLandscape
+            ? 10
+            : 0;
+
+
     const availableHeight =
         Math.max(
             0,
             tableArea.clientHeight
             - verticalGapTotal
             - 4
+            - phoneLandscapeHeightReserve
         );
 
 
@@ -1834,7 +1861,7 @@ function fitHyakumasuToScreen() {
 
     const minimumCellSize =
         isShortPhoneLandscape
-            ? 22
+            ? 20
             : HYAKUMASU_MIN_CELL_SIZE;
 
 
