@@ -1,7 +1,7 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.3.2
+   夏休みギルド Ver0.3.3
    developer.js
 
    開発者モード
@@ -42,6 +42,9 @@ const PLAYER_Y_STEP = 1;
 const PLAYER_Y_MIN = -40;
 
 const PLAYER_Y_MAX = 60;
+
+
+const TEST_GP_MAX = 999999;
 
 
 /* =========================================================
@@ -383,6 +386,85 @@ function buildDeveloperPanel() {
             </section>
 
 
+            <!-- テスト用GP -->
+
+            <section class="developer-editor-section developer-gp-section">
+
+                <div class="developer-section-heading">
+
+                    <span class="developer-section-icon">
+                        💰
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            テスト用GP
+                        </h3>
+
+                        <p>
+                            ショップ・装備・ペットの動作確認
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="developer-gp-current">
+                    現在のGP：<output id="developerGpValue">0</output>
+                </div>
+
+                <div class="developer-gp-buttons" aria-label="GPを増減する">
+                    <button id="decreaseGp100" class="developer-gp-button" type="button">−100</button>
+                    <button id="decreaseGp10" class="developer-gp-button" type="button">−10</button>
+                    <button id="increaseGp10" class="developer-gp-button" type="button">＋10</button>
+                    <button id="increaseGp100" class="developer-gp-button" type="button">＋100</button>
+                </div>
+
+                <div class="developer-gp-direct">
+                    <label for="developerGpInput">
+                        GPを直接入力
+                    </label>
+
+                    <div class="developer-gp-input-row">
+                        <input
+                            id="developerGpInput"
+                            class="developer-gp-input"
+                            type="number"
+                            inputmode="numeric"
+                            min="0"
+                            max="999999"
+                            step="1"
+                            placeholder="0"
+                        >
+
+                        <button
+                            id="setDeveloperGp"
+                            class="developer-gp-set-button"
+                            type="button"
+                        >
+                            このGPに設定
+                        </button>
+                    </div>
+                </div>
+
+                <button
+                    id="setDeveloperGp1000"
+                    class="developer-secondary-button"
+                    type="button"
+                >
+                    1000GPにする
+                </button>
+
+                <p
+                    id="developerGpMessage"
+                    class="developer-gp-message"
+                    aria-live="polite"
+                ></p>
+
+            </section>
+
+
             <!-- JSON出力 -->
 
             <section class="developer-export-section">
@@ -575,6 +657,25 @@ function bindDeveloperPanelButtons() {
     );
 
 
+    bindClick("decreaseGp100", () => changeDeveloperGp(-100));
+    bindClick("decreaseGp10", () => changeDeveloperGp(-10));
+    bindClick("increaseGp10", () => changeDeveloperGp(10));
+    bindClick("increaseGp100", () => changeDeveloperGp(100));
+    bindClick("setDeveloperGp", applyDeveloperGpInput);
+    bindClick("setDeveloperGp1000", () => setDeveloperGp(1000));
+
+    const developerGpInput = document.getElementById("developerGpInput");
+
+    if (developerGpInput) {
+        developerGpInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                applyDeveloperGpInput();
+            }
+        });
+    }
+
+
     bindClick(
         "resetPlayerPosition",
         resetPlayerPosition
@@ -623,7 +724,101 @@ function bindClick(
 
 
 /* =========================================================
-   8. プレイヤー値変更
+   8. テスト用GP
+   ========================================================= */
+
+function sanitizeDeveloperGp(value) {
+
+    const numericValue = Number(value);
+
+    if (!Number.isFinite(numericValue)) {
+        return null;
+    }
+
+    return Math.min(
+        TEST_GP_MAX,
+        Math.max(0, Math.floor(numericValue))
+    );
+
+}
+
+
+function setDeveloperGp(value) {
+
+    const nextGp = sanitizeDeveloperGp(value);
+
+    if (nextGp === null) {
+        showDeveloperGpMessage("0以上の整数を入力してください。", "error");
+        return false;
+    }
+
+    if (!Settings.game || typeof Settings.game !== "object") {
+        Settings.game = cloneSettings(DEFAULT_SETTINGS.game);
+    }
+
+    Settings.game.gp = nextGp;
+    saveSettings();
+
+    if (typeof updateGpDisplay === "function") {
+        updateGpDisplay();
+    }
+
+    updateDeveloperValues();
+    showDeveloperGpMessage(`${nextGp}GPに設定しました。`, "success");
+
+    return true;
+
+}
+
+
+function changeDeveloperGp(amount) {
+
+    const currentGp = typeof getGp === "function" ? getGp() : 0;
+
+    setDeveloperGp(currentGp + amount);
+
+}
+
+
+function applyDeveloperGpInput() {
+
+    const input = document.getElementById("developerGpInput");
+
+    if (!input) {
+        return;
+    }
+
+    if (setDeveloperGp(input.value)) {
+        input.value = "";
+        input.blur();
+    }
+
+}
+
+
+function showDeveloperGpMessage(message, status) {
+
+    const element = document.getElementById("developerGpMessage");
+
+    if (!element) {
+        return;
+    }
+
+    element.textContent = message;
+    element.dataset.status = status;
+
+    window.clearTimeout(showDeveloperGpMessage.timerId);
+
+    showDeveloperGpMessage.timerId = window.setTimeout(() => {
+        element.textContent = "";
+        delete element.dataset.status;
+    }, 2500);
+
+}
+
+
+/* =========================================================
+   9. プレイヤー値変更
    ========================================================= */
 
 function changePlayerSetting(
@@ -750,6 +945,12 @@ function updateDeveloperValues() {
         Math.round(
             Number(playerSettings.y)
         )
+    );
+
+
+    setOutputValue(
+        "developerGpValue",
+        typeof getGp === "function" ? getGp() : 0
     );
 
 }
