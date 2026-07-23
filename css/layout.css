@@ -2453,12 +2453,26 @@ body.wardrobe-open {
 }
 #blackDogButton {
     border: 0;
+    outline: 0;
     padding: 0;
     margin: 0;
     background: transparent;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
     z-index: 2;
     pointer-events: auto;
     cursor: pointer;
+}
+#blackDogButton:hover,
+#blackDogButton:focus,
+#blackDogButton:focus-visible,
+#blackDogButton:active {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    box-shadow: none;
 }
 #blackDogButton img { pointer-events: none; }
 .blackdog-under { z-index: 1; }
