@@ -173,6 +173,10 @@ function initGame() {
 
     }
 
+    if (window.BlackDogPet && typeof window.BlackDogPet.init === "function") {
+        window.BlackDogPet.init();
+    }
+
 
     bindButtons();
 
@@ -2149,6 +2153,10 @@ function activateScreen(
             screenName
         );
 
+    }
+
+    if (window.BlackDogPet && typeof window.BlackDogPet.handleScreenChange === "function") {
+        window.BlackDogPet.handleScreenChange(screenName);
     }
 
 
