@@ -2345,3 +2345,91 @@ body.wardrobe-open {
         font-size: clamp(11px, 1.7vw, 15px);
     }
 }
+
+/* =========================================================
+   算数ギルド Ver2.1
+   不正解を見逃さない確認演出
+   ========================================================= */
+.math-mistake-panel {
+    max-width: 680px;
+    min-height: 390px;
+    margin: 0 auto;
+    padding: 22px 24px;
+    border: 3px solid #7e2b20;
+    border-radius: 22px;
+    background: linear-gradient(145deg, rgba(255,249,233,.98), rgba(244,218,180,.98));
+    box-shadow: 0 14px 30px rgba(65,31,14,.24), inset 0 0 0 4px rgba(255,255,255,.34);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.math-mistake-panel > span {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: .18em;
+    color: #69401d;
+}
+.math-mistake-mark {
+    width: 72px;
+    height: 72px;
+    margin: 8px auto 0;
+    border-radius: 50%;
+    background: #a93b2c;
+    color: #fff;
+    font-size: 62px;
+    line-height: 65px;
+    font-weight: 900;
+    box-shadow: 0 5px 0 #6d2119;
+}
+.math-mistake-panel h2 {
+    margin: 11px 0 12px;
+    color: #8d291f;
+    font-size: clamp(32px, 6vw, 48px);
+    line-height: 1;
+}
+.math-mistake-expression {
+    margin-bottom: 14px;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 900;
+    color: #352112;
+}
+.math-mistake-answers {
+    width: min(100%, 500px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+.math-mistake-answers > div {
+    min-height: 88px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.78);
+    border: 2px solid rgba(105,64,29,.28);
+}
+.math-mistake-answers > div:first-child { border-color: rgba(169,59,44,.55); }
+.math-mistake-answers > div:last-child { border-color: rgba(44,123,65,.58); }
+.math-mistake-answers small {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 13px;
+    font-weight: 800;
+}
+.math-mistake-answers strong {
+    display: block;
+    font-size: clamp(25px, 4.5vw, 36px);
+    line-height: 1.15;
+}
+.math-mistake-panel p {
+    margin: 14px 0 0;
+    font-size: 16px;
+    font-weight: 900;
+    color: #69401d;
+}
+.math-result-reward small {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 800;
+}
