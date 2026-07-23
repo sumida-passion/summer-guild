@@ -255,6 +255,9 @@ function startHyakumasuQuest(
     bindHyakumasuEvents();
 
 
+    positionHyakumasuActions();
+
+
     updateHyakumasuChallengeDisplay();
 
 
@@ -496,6 +499,13 @@ function createHyakumasuHtml() {
                 class="hyakumasu-message"
                 aria-live="polite"
             ></p>
+
+
+            <span
+                id="hyakumasuActionsAnchor"
+                class="hyakumasu-actions-anchor"
+                aria-hidden="true"
+            ></span>
 
 
             <div class="hyakumasu-actions">
@@ -1336,6 +1346,11 @@ function installHyakumasuStyles() {
         }
 
 
+        .hyakumasu-actions-anchor {
+            display: none;
+        }
+
+
         .hyakumasu-game .hyakumasu-actions {
             display: flex;
             align-items: center;
@@ -1585,6 +1600,10 @@ function installHyakumasuStyles() {
                 min-height: 31px;
             }
 
+            .hyakumasu-game {
+                grid-template-rows: auto minmax(0, 1fr) auto;
+            }
+
             .hyakumasu-game .hyakumasu-message {
                 min-height: 1em;
                 margin: 0;
@@ -1592,15 +1611,32 @@ function installHyakumasuStyles() {
                 line-height: 1;
             }
 
-            .hyakumasu-game .hyakumasu-actions {
-                gap: 8px;
+            .hyakumasu-control-area {
+                justify-content: flex-start;
+                overflow: visible;
             }
 
-            .hyakumasu-game .hyakumasu-actions button {
-                min-width: 132px;
-                min-height: 35px;
-                padding: 4px 12px;
-                font-size: 13px;
+            .hyakumasu-control-area .hyakumasu-actions {
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 7px;
+                margin-top: 9px;
+            }
+
+            .hyakumasu-control-area .hyakumasu-actions button {
+                width: 100%;
+                min-width: 0;
+                min-height: 34px;
+                padding: 4px 8px;
+                font-size: 12px;
+                line-height: 1.1;
+            }
+
+            .hyakumasu-control-area .hyakumasu-cancel-button {
+                min-height: 30px;
+                font-size: 10px;
             }
 
         }
@@ -1616,7 +1652,88 @@ function installHyakumasuStyles() {
 
 
 /* =========================================================
-   10. 一画面に収まるセルサイズ計算
+   10. iPhone横画面の操作ボタン配置
+   ========================================================= */
+
+function isHyakumasuShortPhoneLandscape() {
+
+    return window.matchMedia(
+        "(orientation: landscape) and (max-height: 520px) and (min-width: 600px)"
+    ).matches;
+
+}
+
+
+function positionHyakumasuActions() {
+
+    const actions =
+        document.querySelector(
+            "#hyakumasuGame .hyakumasu-actions"
+        );
+
+
+    const controlArea =
+        document.querySelector(
+            "#hyakumasuGame .hyakumasu-control-area"
+        );
+
+
+    const anchor =
+        document.getElementById(
+            "hyakumasuActionsAnchor"
+        );
+
+
+    if (
+        !actions
+        || !controlArea
+        || !anchor
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        isHyakumasuShortPhoneLandscape()
+    ) {
+
+        if (
+            actions.parentElement
+            !== controlArea
+        ) {
+
+            controlArea.appendChild(
+                actions
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    if (
+        actions.parentElement
+        !== anchor.parentElement
+        || anchor.nextElementSibling
+            !== actions
+    ) {
+
+        anchor.parentElement.insertBefore(
+            actions,
+            anchor.nextSibling
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   11. 一画面に収まるセルサイズ計算
    ========================================================= */
 
 function fitHyakumasuToScreen() {
@@ -1652,9 +1769,7 @@ function fitHyakumasuToScreen() {
 
 
     const isShortPhoneLandscape =
-        window.matchMedia(
-            "(orientation: landscape) and (max-height: 520px) and (min-width: 600px)"
-        ).matches;
+        isHyakumasuShortPhoneLandscape();
 
 
     const gap =
@@ -2799,6 +2914,9 @@ function handleHyakumasuResize() {
 
                 hyakumasuState.resizeTimer =
                     null;
+
+
+                positionHyakumasuActions();
 
 
                 fitHyakumasuToScreen();
