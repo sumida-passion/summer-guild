@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-23T15:59:53.575082+00:00",
-    "commit": "989ef89",
+    "atUtc": "2026-07-23T16:17:19.676427+00:00",
+    "commit": "7e367f8",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 18,
-    "totalBytes": 78839443,
+    "totalBytes": 78839508,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1410,9 +1410,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 14366,
-      "sha1": "5c93953106",
-      "lineCount": 665
+      "sizeBytes": 14436,
+      "sha1": "288de3861b",
+      "lineCount": 667
     },
     {
       "path": "js/app.js",
@@ -1735,8 +1735,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4496,
-      "sha1": "53bb46be77",
+      "sizeBytes": 4491,
+      "sha1": "5ac924f887",
       "lineCount": 177
     },
     {
@@ -2276,6 +2276,7 @@
           "js/screens/shop.js",
           "js/screens/wardrobe.js",
           "js/settings.js",
+          "js/systems/blackDogPet.js",
           "js/systems/musicPlayer.js",
           "js/systems/questEngine.js",
           "js/systems/questMusicPlayer.js"
@@ -2922,27 +2923,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/characters/pet/blanket.PNG"
+        "index.html"
       ]
     },
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/characters/pet/dogtoy_ball.PNG"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "assets/characters/pet/dogtoy_bone.PNG"
-      ]
-    },
-    {
-      "status": "A",
-      "paths": [
-        "assets/characters/pet/dogtoy_rope.PNG"
+        "service-worker.js"
       ]
     }
   ],
