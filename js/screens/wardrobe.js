@@ -252,7 +252,10 @@ function bindWardrobeButtons() {
                     ) {
 
                         setWardrobeStatus(
-                            "この服には着替えられませんでした。"
+                            result
+                            && result.reason === "rocknroll-bottoms-includes-shoes"
+                                ? "ロックスタイルのボトムスには靴が含まれています。"
+                                : "この服には着替えられませんでした。"
                         );
 
                         return;
