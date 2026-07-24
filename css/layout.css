@@ -2456,7 +2456,7 @@ body.wardrobe-open {
     outline: 0;
     padding: 0;
     margin: 0;
-    background: transparent;
+    background: none;
     box-shadow: none;
     -webkit-appearance: none;
     appearance: none;
@@ -2464,9 +2464,13 @@ body.wardrobe-open {
     z-index: 2;
     pointer-events: auto;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
+    -webkit-user-select: none;
     user-select: none;
+    touch-action: manipulation;
+    color: transparent;
+    font-size: 0;
 }
 #blackDogHitArea:hover,
 #blackDogHitArea:focus,
@@ -2489,8 +2493,9 @@ body.wardrobe-open {
    ========================================================= */
 #guildhall-screen #gotoSocialGuild {
     position: absolute;
-    left: 50%;
-    top: 58%;
+    left: 91.8%;
+    top: 76.2%;
+    width: clamp(154px, 13.5vw, 194px);
     transform: translate(-50%, -50%);
 }
 #socialguild-screen .social-guild-window { border-color: rgba(54, 91, 72, .9); }
