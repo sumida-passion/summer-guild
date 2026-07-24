@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-24T13:36:35.888946+00:00",
-    "commit": "35ddb59",
+    "atUtc": "2026-07-24T13:36:55.112018+00:00",
+    "commit": "0e40dfe",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 19,
-    "totalBytes": 78850742,
+    "totalBytes": 78851704,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1410,9 +1410,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 14477,
-      "sha1": "9e00fc793b",
-      "lineCount": 667
+      "sizeBytes": 15448,
+      "sha1": "b74e397db1",
+      "lineCount": 694
     },
     {
       "path": "js/app.js",
@@ -1746,8 +1746,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4503,
-      "sha1": "c785f20127",
+      "sizeBytes": 4494,
+      "sha1": "e2e6a2ca32",
       "lineCount": 177
     },
     {
@@ -2283,6 +2283,7 @@
           "js/quests/hyakumasu.js",
           "js/quests/math.js",
           "js/quests/review.js",
+          "js/quests/society.js",
           "js/screens/musicShop.js",
           "js/screens/shop.js",
           "js/screens/wardrobe.js",
@@ -2966,13 +2967,13 @@
     {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
+        "index.html"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "docs/game-rules.md"
+        "service-worker.js"
       ]
     }
   ],
