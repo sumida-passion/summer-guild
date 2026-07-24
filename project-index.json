@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-24T13:37:13.457812+00:00",
-    "commit": "7878b2a",
+    "atUtc": "2026-07-24T13:37:36.413614+00:00",
+    "commit": "8d73e14",
     "commitSubject": "Add files via upload"
   },
   "summary": {
     "fileCount": 163,
     "directoryCount": 57,
     "imageCount": 55,
-    "javascriptApiFileCount": 19,
-    "totalBytes": 78852058,
+    "javascriptApiFileCount": 20,
+    "totalBytes": 78878118,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1563,9 +1563,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 17937,
-      "sha1": "d6c3e3ce27",
-      "lineCount": 145
+      "sizeBytes": 20869,
+      "sha1": "9ee8330fca",
+      "lineCount": 150
     },
     {
       "path": "js/quests/science.js",
@@ -1585,9 +1585,9 @@
       "stem": "society",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 1,
-      "sha1": "adc83b19e7",
-      "lineCount": 1
+      "sizeBytes": 23129,
+      "sha1": "11e1195440",
+      "lineCount": 147
     },
     {
       "path": "js/screens/.gitkeep",
@@ -2561,11 +2561,15 @@
         "createSubjectHtml",
         "bindSubjectEvents",
         "showMathUnits",
+        "showSocialUnits",
+        "getReviewUnit",
+        "getSocialReviewLevels",
         "showReviewLevels",
         "shuffledFive",
         "startReviewQuiz",
         "registerReviewQuests",
         "renderReviewQuestion",
+        "submitReviewChoice",
         "inputReviewKey",
         "submitReviewAnswer",
         "finishReviewQuiz"
@@ -2574,6 +2578,36 @@
       "windowExports": [
         "openReviewTraining",
         "getReviewDailyBonusStatus"
+      ]
+    },
+    {
+      "path": "js/quests/society.js",
+      "functions": [
+        "socialQ",
+        "takeFirst",
+        "socialShuffle",
+        "socialEscape",
+        "defaultSocialProgress",
+        "getSocialGuildProgress",
+        "saveSocialGuildProgress",
+        "socialQuestUnlocked",
+        "socialAllQuestsComplete",
+        "playSocialMusic",
+        "stopSocialMusic",
+        "openSocialGuild",
+        "renderSocialGuildHome",
+        "startSocialQuest",
+        "startSocialTest",
+        "renderSocialQuestion",
+        "renderSocialMistake",
+        "answerSocialQuestion",
+        "finishSocialQuest",
+        "finishSocialTest",
+        "formatSocialTime"
+      ],
+      "classes": [],
+      "windowExports": [
+        "SocialGuild"
       ]
     },
     {
@@ -2967,7 +3001,13 @@
     {
       "status": "M",
       "paths": [
-        "js/app.js"
+        "js/quests/review.js"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "js/quests/society.js"
       ]
     }
   ],
