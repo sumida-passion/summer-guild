@@ -41,17 +41,11 @@
         layer.hidden = true;
         layer.innerHTML = `
           <img id="blackDogBlanket" class="blackdog-asset blackdog-under" alt="" hidden>
-          <div id="blackDogHitArea" role="button" tabindex="0" aria-label="黒犬"><img id="blackDogImage" class="blackdog-asset" alt="黒犬"></div>
+          <div id="blackDogHitArea" aria-label="黒犬"><img id="blackDogImage" class="blackdog-asset" alt="黒犬" draggable="false"></div>
           <img id="blackDogToy" class="blackdog-asset blackdog-over" alt="" hidden>`;
         room.appendChild(layer);
         const hitArea = document.getElementById("blackDogHitArea");
         hitArea.addEventListener("click", handleTap);
-        hitArea.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                handleTap();
-            }
-        });
     }
     function render() {
         ensureUi();
