@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-24T14:20:33.052248+00:00",
-    "commit": "ef4388b",
+    "atUtc": "2026-07-24T14:20:53.551596+00:00",
+    "commit": "a1cfe52",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 20,
-    "totalBytes": 78878265,
+    "totalBytes": 78878971,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1355,9 +1355,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 10582,
-      "sha1": "f5fb4d62e4",
-      "lineCount": 143
+      "sizeBytes": 11288,
+      "sha1": "783a476fb2",
+      "lineCount": 153
     },
     {
       "path": "docs/game-rules.md",
@@ -3001,7 +3001,7 @@
     {
       "status": "M",
       "paths": [
-        "css/layout.css"
+        "docs/development-log.md"
       ]
     }
   ],
