@@ -23,7 +23,7 @@
 
     <link
         rel="stylesheet"
-        href="css/layout.css?v=20260724-dog-frame-rockshoe1">
+        href="css/layout.css?v=20260724-socialguild1">
 
     <link
         rel="stylesheet"
@@ -314,6 +314,13 @@
 
 
             <button
+                id="gotoSocialGuild"
+                type="button">
+                社会ギルド
+            </button>
+
+
+            <button
                 id="gotoGuildShop"
                 type="button">
                 ギルドショップ
@@ -355,6 +362,24 @@
 
         <button id="backGuildHallFromMath" type="button">ギルドホールへ戻る</button>
 
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- 社会ギルド -->
+    <!-- ========================= -->
+
+    <section id="socialguild-screen" class="screen" aria-hidden="true">
+        <div class="background guildhall-background"></div>
+        <div class="math-guild-window social-guild-window">
+            <header class="math-guild-header social-guild-header">
+                <p>SOCIAL STUDIES GUILD</p>
+                <h2>社会ギルド</h2>
+                <span>世界のすがた｜テキスト p.26〜28</span>
+            </header>
+            <main id="socialGuildContent" class="math-guild-content"></main>
+        </div>
+        <button id="backGuildHallFromSocial" type="button">ギルドホールへ戻る</button>
     </section>
 
 
@@ -656,11 +681,13 @@
 
     <script src="js/quests/math.js?v=20260723-mathguild30"></script>
 
+    <script src="js/quests/society.js?v=20260724-socialguild1"></script>
+
     <script src="js/developer.js?v=20260724-admin-gp1"></script>
 
     <script src="js/systems/blackDogPet.js?v=20260724-pet-div1"></script>
 
-    <script src="js/app.js?v=20260724-pet1"></script>
+    <script src="js/app.js?v=20260724-socialguild1"></script>
 
 </body>
 
