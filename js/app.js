@@ -37,6 +37,9 @@ const SCREENS = {
     mathguild:
         "mathguild-screen",
 
+    socialguild:
+        "socialguild-screen",
+
     quest:
         "quest-screen",
 
@@ -314,6 +317,16 @@ function bindButtons() {
         ],
         "guildhall"
     );
+
+
+    /* ギルドホール → 社会ギルド */
+    bindActionButton(["gotoSocialGuild"], () => {
+        if (window.SocialGuild && typeof window.SocialGuild.open === "function") {
+            window.SocialGuild.open();
+        }
+    });
+
+    bindScreenButton(["backGuildHallFromSocial"], "guildhall");
 
 
     /*
