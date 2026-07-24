@@ -2483,3 +2483,32 @@ body.wardrobe-open {
 @media (max-width: 700px) and (orientation: landscape) {
     #blackDogLayer { width: clamp(110px, 22vw, 180px); }
 }
+
+/* =========================================================
+   社会ギルド Ver1.0
+   ========================================================= */
+#guildhall-screen #gotoSocialGuild {
+    position: absolute;
+    left: 50%;
+    top: 58%;
+    transform: translate(-50%, -50%);
+}
+#socialguild-screen .social-guild-window { border-color: rgba(54, 91, 72, .9); }
+#socialguild-screen .social-guild-header { background: linear-gradient(135deg, rgba(35,85,65,.96), rgba(104,141,93,.95)); }
+#socialguild-screen #backGuildHallFromSocial { position:absolute; left:20px; bottom:18px; z-index:8; }
+.social-guild-card { border-left: 7px solid rgba(58,112,82,.72); }
+.social-test-card { background: linear-gradient(135deg, rgba(231,246,221,.92), rgba(177,210,160,.72)); border-color: rgba(47,99,63,.65); }
+.social-question-text { font-size: clamp(19px, 2.7vw, 28px); line-height: 1.55; }
+.social-mini-globe,.social-daynight,.social-world-grid { margin: 4px auto 14px; }
+.social-mini-globe { width:180px;height:135px;position:relative;display:grid;place-items:center; }
+.social-globe { width:112px;height:112px;border:5px solid #544d43;border-radius:50%;position:relative;overflow:hidden;background:#dfe8dc;transform:rotate(-10deg); }
+.social-globe-axis { position:absolute;width:6px;height:145px;background:#6b6257;transform:rotate(14deg);border-radius:5px; }
+.social-globe .lat { position:absolute;left:5%;width:90%;height:22px;border:2px solid #777;border-radius:50%; }
+.social-globe .l1{top:17px}.social-globe .l2{top:42px}.social-globe .l3{top:68px}
+.social-globe .lon { position:absolute;top:4%;height:92%;width:38px;border:2px solid #777;border-radius:50%; }
+.social-globe .n1{left:22px}.social-globe .n2{right:22px}.social-globe b{position:absolute;left:4px;top:48px;font-size:11px;color:#8b2d26;background:#fff8;padding:1px 3px}
+.social-daynight { width:240px;height:120px;display:flex;align-items:center;justify-content:center;gap:22px; }
+.social-daynight .sun{font-size:54px}.social-daynight .earth{width:105px;height:105px;border:4px solid #4f514a;border-radius:50%;position:relative;overflow:hidden;background:#f5d879}.social-daynight .earth i{position:absolute;right:0;top:0;width:50%;height:100%;background:#28354c}.social-daynight b,.social-daynight em{position:absolute;top:42px;font-style:normal;font-size:14px}.social-daynight b{left:14px}.social-daynight em{right:11px;color:#fff}
+.social-world-grid { width:min(520px,92%);height:210px;position:relative;border:3px solid #6d6559;background:#dce7e4;border-radius:8px;overflow:hidden;font-size:11px;font-weight:700; }
+.social-world-grid span{position:absolute;background:#b7b09b;border-radius:50%;padding:12px 8px;text-align:center}.wg-eu{left:30%;top:22%;width:30%}.wg-af{left:38%;top:48%}.wg-na{right:9%;top:25%}.wg-sa{right:16%;top:55%}.wg-au{left:65%;top:66%}.wg-an{left:28%;bottom:-8px;width:44%}.social-world-grid .equator{position:absolute;left:0;right:0;top:55%;border-top:2px dashed #a33}.social-world-grid .date-line{position:absolute;top:0;bottom:0;left:72%;border-left:2px dashed #333}
+@media(max-width:640px){#guildhall-screen #gotoSocialGuild{top:62%}.social-world-grid{height:170px}.social-world-grid span{padding:8px 5px;font-size:9px}}
