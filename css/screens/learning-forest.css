@@ -396,3 +396,215 @@
         border-radius: 5px;
     }
 }
+
+/* =========================================================
+   学びの森 Ver1.3｜第2・第3問の関係図
+   ========================================================= */
+#learningforest-screen .relation-diagram {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: clamp(8px, 1vw, 15px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(8px, 1.2vh, 15px);
+    color: #f8efd3;
+}
+
+#learningforest-screen .relation-row {
+    min-height: clamp(34px, 5.2vh, 58px);
+    display: flex;
+    align-items: center;
+    gap: clamp(5px, .65vw, 10px);
+}
+
+#learningforest-screen .relation-row > span:first-child {
+    flex: 0 0 clamp(35px, 4vw, 58px);
+    color: #f2d37e;
+    font-weight: 800;
+    text-align: right;
+}
+
+#learningforest-screen .unit-tape {
+    height: clamp(28px, 4.4vh, 48px);
+    min-width: clamp(74px, 9vw, 132px);
+    padding: 0 clamp(5px, .55vw, 9px);
+    border: 2px solid rgba(235, 221, 171, .92);
+    border-radius: 7px;
+    background: linear-gradient(180deg, rgba(60, 128, 102, .92), rgba(32, 86, 66, .96));
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    color: #fff7d8;
+    font-size: clamp(10px, .9vw, 14px);
+    font-weight: 700;
+}
+
+#learningforest-screen .unit-tape.wide {
+    min-width: clamp(140px, 18vw, 260px);
+}
+
+#learningforest-screen .unit-tape.short {
+    min-width: clamp(45px, 5.7vw, 85px);
+    opacity: .72;
+}
+
+#learningforest-screen .extra-chip,
+#learningforest-screen .missing-chip {
+    min-height: clamp(28px, 4.4vh, 48px);
+    padding: 0 clamp(7px, .8vw, 12px);
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    font-size: clamp(11px, 1vw, 15px);
+    font-weight: 900;
+}
+
+#learningforest-screen .extra-chip {
+    border: 2px solid #f1d277;
+    background: rgba(145, 104, 29, .95);
+    color: #fff4b5;
+}
+
+#learningforest-screen .missing-chip {
+    border: 2px dashed #e4a69a;
+    background: rgba(103, 48, 39, .82);
+    color: #ffd6cc;
+}
+
+#learningforest-screen .relation-row b {
+    color: #f2d37e;
+    font-size: clamp(11px, 1vw, 15px);
+}
+
+#learningforest-screen .relation-total {
+    margin: clamp(4px, .6vh, 8px) 0 0;
+    padding: clamp(6px, .7vh, 10px);
+    border-top: 1px solid rgba(235, 211, 137, .55);
+    color: #f4d986;
+    font-size: clamp(12px, 1.15vw, 17px);
+    font-weight: 800;
+    text-align: center;
+}
+
+#learningforest-screen .pop-row {
+    animation: learningRelationPop .55s ease both;
+}
+
+@keyframes learningRelationPop {
+    from { opacity: 0; transform: translateX(-18px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+#learningforest-screen .relation-compare {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1vw, 16px);
+}
+
+#learningforest-screen .relation-condition {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: clamp(7px, .8vw, 12px);
+    border: 1px solid rgba(233, 197, 111, .55);
+    border-radius: 10px;
+    background: rgba(16, 53, 40, .68);
+    color: #f8efd3;
+}
+
+#learningforest-screen .relation-condition h3 {
+    margin: 0 0 8px;
+    color: #f2d37e;
+    font-size: clamp(12px, 1.15vw, 18px);
+    text-align: center;
+}
+
+#learningforest-screen .relation-condition > div {
+    margin: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: clamp(10px, .9vw, 14px);
+}
+
+#learningforest-screen .mini-tape {
+    width: clamp(72px, 8vw, 120px);
+    height: clamp(14px, 2.2vh, 23px);
+    border: 1px solid #e8d9a7;
+    border-radius: 4px;
+    background: #33795e;
+}
+
+#learningforest-screen .mini-tape.one { width: clamp(45px, 5vw, 75px); }
+#learningforest-screen .mini-tape.three { width: clamp(135px, 15vw, 225px); }
+
+#learningforest-screen .relation-condition b {
+    color: #f4cd6e;
+}
+
+#learningforest-screen .relation-condition p {
+    margin: 8px 0 0;
+    color: #f4cd6e;
+    font-weight: 800;
+    text-align: center;
+}
+
+#learningforest-screen .relation-arrow {
+    flex: 0 0 auto;
+    color: #f2d37e;
+    font-size: clamp(11px, 1vw, 15px);
+    font-weight: 800;
+    text-align: center;
+}
+
+#learningforest-screen .relation-drag .drag-token {
+    align-self: center;
+    margin-top: clamp(6px, 1vh, 12px);
+}
+
+#learningforest-screen .return-zone {
+    border-style: dashed;
+    background: rgba(50, 85, 69, .42);
+    color: #e9dba9;
+}
+
+#learningforest-screen .return-zone.accepted {
+    border-style: solid;
+    border-color: #a7e4b7;
+    background: rgba(46, 107, 67, .96);
+    color: #efffe9;
+}
+
+#learningforest-screen .order-four .order-slots,
+#learningforest-screen .order-four .order-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#learningforest-screen .learning-summary-formulas {
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 900px), screen and (max-height: 650px) {
+    #learningforest-screen .relation-diagram {
+        gap: 5px;
+        padding: 4px;
+    }
+
+    #learningforest-screen .relation-row {
+        min-height: 28px;
+    }
+
+    #learningforest-screen .unit-tape,
+    #learningforest-screen .extra-chip,
+    #learningforest-screen .missing-chip {
+        height: 27px;
+        min-height: 27px;
+    }
+
+    #learningforest-screen .relation-condition {
+        padding: 5px;
+    }
+}
