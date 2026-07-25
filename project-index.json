@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T15:53:20.756976+00:00",
-    "commit": "7a384ba",
+    "atUtc": "2026-07-25T15:54:07.740725+00:00",
+    "commit": "df5edfa",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 84026641,
+    "totalBytes": 84031147,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1252,9 +1252,9 @@
       "stem": "learning-forest",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 5392,
-      "sha1": "67f8f95cff",
-      "lineCount": 215
+      "sizeBytes": 9898,
+      "sha1": "b2b79c91d6",
+      "lineCount": 397
     },
     {
       "path": "data/achievements/.gitkeep",
@@ -3113,13 +3113,7 @@
     {
       "status": "M",
       "paths": [
-        "index.html"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "service-worker.js"
+        "css/screens/learning-forest.css"
       ]
     }
   ],
