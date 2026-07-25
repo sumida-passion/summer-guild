@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T17:25:29.096266+00:00",
-    "commit": "f6eee01",
+    "atUtc": "2026-07-25T17:25:50.194314+00:00",
+    "commit": "5730e34",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 84074376,
+    "totalBytes": 84071881,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1637,9 +1637,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 49825,
-      "sha1": "ef3a209434",
-      "lineCount": 948
+      "sizeBytes": 47330,
+      "sha1": "9871d2a58b",
+      "lineCount": 910
     },
     {
       "path": "js/screens/musicShop.js",
@@ -2708,11 +2708,9 @@
         "renderLesson2Summary",
         "renderLesson3Problem",
         "renderLesson3Diagram",
-        "renderLesson3Choice",
         "renderLesson3Drag",
         "lesson3AlignedMarkup",
         "renderLesson3AlignedDiagram",
-        "renderLesson3TwoBlocksChoice",
         "renderLesson3Summary",
         "renderGenericChoice",
         "renderGenericDrag",
@@ -3138,13 +3136,7 @@
     {
       "status": "M",
       "paths": [
-        "index.html"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "service-worker.js"
+        "js/screens/learningForest.js"
       ]
     }
   ],
