@@ -44,6 +44,11 @@ const PLAYER_Y_MIN = -40;
 const PLAYER_Y_MAX = 60;
 
 
+const BLACK_DOG_SCALE_STEP = 0.05;
+const BLACK_DOG_SCALE_MIN = 0.25;
+const BLACK_DOG_SCALE_MAX = 2.00;
+
+
 const TEST_GP_MAX = 999999;
 
 
@@ -388,6 +393,85 @@ function buildDeveloperPanel() {
 
             <!-- テスト用GP -->
 
+            <section class="developer-editor-section">
+
+                <div class="developer-section-heading">
+
+                    <span class="developer-section-icon">
+                        🐶
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Black Dog
+                        </h3>
+
+                        <p>
+                            黒犬の表示サイズ
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="developer-control">
+
+                    <div class="developer-control-label">
+
+                        <span>
+                            犬サイズ
+                        </span>
+
+                        <span class="developer-save-status">
+                            自動保存
+                        </span>
+
+                    </div>
+
+                    <div class="developer-stepper">
+
+                        <button
+                            id="decreaseBlackDogScale"
+                            class="developer-step-button"
+                            type="button"
+                            aria-label="黒犬を小さくする"
+                        >
+                            −
+                        </button>
+
+                        <output
+                            id="blackDogScaleValue"
+                            class="developer-value"
+                            aria-live="polite"
+                        >
+                            1.00
+                        </output>
+
+                        <button
+                            id="increaseBlackDogScale"
+                            class="developer-step-button"
+                            type="button"
+                            aria-label="黒犬を大きくする"
+                        >
+                            ＋
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button
+                    id="resetBlackDogScale"
+                    class="developer-secondary-button"
+                    type="button"
+                >
+                    犬サイズを初期値へ戻す
+                </button>
+
+            </section>
+
+
             <section class="developer-editor-section developer-gp-section">
 
                 <div class="developer-section-heading">
@@ -657,6 +741,22 @@ function bindDeveloperPanelButtons() {
     );
 
 
+    bindClick(
+        "decreaseBlackDogScale",
+        () => changeBlackDogScale(-BLACK_DOG_SCALE_STEP)
+    );
+
+    bindClick(
+        "increaseBlackDogScale",
+        () => changeBlackDogScale(BLACK_DOG_SCALE_STEP)
+    );
+
+    bindClick(
+        "resetBlackDogScale",
+        resetBlackDogScale
+    );
+
+
     bindClick("decreaseGp100", () => changeDeveloperGp(-100));
     bindClick("decreaseGp10", () => changeDeveloperGp(-10));
     bindClick("increaseGp10", () => changeDeveloperGp(10));
@@ -884,6 +984,49 @@ function changePlayerSetting(
 
 
 /* =========================================================
+   8.1 黒犬サイズ変更
+   ========================================================= */
+
+function changeBlackDogScale(amount) {
+
+    const current = typeof getBlackDogDisplayScale === "function"
+        ? getBlackDogDisplayScale()
+        : 1;
+
+    const next = clampNumber(
+        current + amount,
+        BLACK_DOG_SCALE_MIN,
+        BLACK_DOG_SCALE_MAX
+    );
+
+    const rounded = Math.round(next * 100) / 100;
+
+    if (typeof updateBlackDogDisplayScale === "function") {
+        updateBlackDogDisplayScale(rounded);
+    }
+
+    updateDeveloperValues();
+
+}
+
+
+function resetBlackDogScale() {
+
+    if (typeof updateBlackDogDisplayScale === "function") {
+        updateBlackDogDisplayScale(1);
+    }
+
+    updateDeveloperValues();
+
+    showExportMessage(
+        "犬サイズを初期値へ戻しました。",
+        "success"
+    );
+
+}
+
+
+/* =========================================================
    9. Player初期化
    ========================================================= */
 
@@ -945,6 +1088,15 @@ function updateDeveloperValues() {
         Math.round(
             Number(playerSettings.y)
         )
+    );
+
+
+    setOutputValue(
+        "blackDogScaleValue",
+        (typeof getBlackDogDisplayScale === "function"
+            ? getBlackDogDisplayScale()
+            : 1
+        ).toFixed(2)
     );
 
 

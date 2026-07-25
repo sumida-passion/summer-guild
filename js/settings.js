@@ -104,7 +104,13 @@ const DEFAULT_SETTINGS = {
     },
 
     pet: {
-        welcomeShown: false
+        welcomeShown: false,
+
+        /*
+          黒犬の表示倍率。
+          管理者モードから端末ごとに調整できる。
+        */
+        displayScale: 1
     },
 
 
@@ -353,6 +359,13 @@ function mergeSettings(
 
     if (savedSettings.pet && typeof savedSettings.pet === "object") {
         merged.pet.welcomeShown = Boolean(savedSettings.pet.welcomeShown);
+        merged.pet.displayScale = Math.min(
+            2,
+            Math.max(
+                0.25,
+                getSafeNumber(savedSettings.pet.displayScale, 1)
+            )
+        );
     }
 
 
@@ -799,6 +812,57 @@ function applyAllSettings() {
     applyPlayerSettings();
 
     applyPlayerEquipment();
+
+    applyBlackDogDisplaySettings();
+
+}
+
+
+/* =========================================================
+   15.1 黒犬の表示設定
+   ========================================================= */
+
+function getBlackDogDisplayScale() {
+
+    const scale = Number(Settings?.pet?.displayScale);
+
+    return Number.isFinite(scale)
+        ? Math.min(2, Math.max(0.25, scale))
+        : DEFAULT_SETTINGS.pet.displayScale;
+
+}
+
+
+function updateBlackDogDisplayScale(value) {
+
+    const scale = Number(value);
+
+    if (!Number.isFinite(scale)) {
+        return false;
+    }
+
+    Settings.pet.displayScale = Math.min(2, Math.max(0.25, scale));
+
+    saveSettings();
+    applyBlackDogDisplaySettings();
+
+    return true;
+
+}
+
+
+function applyBlackDogDisplaySettings() {
+
+    const layer = document.getElementById("blackDogLayer");
+
+    if (!layer) {
+        return;
+    }
+
+    layer.style.setProperty(
+        "--black-dog-scale",
+        String(getBlackDogDisplayScale())
+    );
 
 }
 
