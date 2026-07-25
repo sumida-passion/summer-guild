@@ -41,11 +41,11 @@
         layer.hidden = true;
         layer.innerHTML = `
           <img id="blackDogBlanket" class="blackdog-asset blackdog-under" alt="" hidden>
-          <div id="blackDogHitArea" aria-label="黒犬"><img id="blackDogImage" class="blackdog-asset" alt="黒犬" draggable="false"></div>
+          <img id="blackDogImage" class="blackdog-asset blackdog-dog" alt="黒犬" draggable="false">
           <img id="blackDogToy" class="blackdog-asset blackdog-over" alt="" hidden>`;
         room.appendChild(layer);
-        const hitArea = document.getElementById("blackDogHitArea");
-        hitArea.addEventListener("click", handleTap);
+        const image = document.getElementById("blackDogImage");
+        image.addEventListener("click", handleTap);
     }
     function render() {
         ensureUi();
@@ -59,15 +59,27 @@
         const state = random(STATES);
         document.getElementById("blackDogImage").src = `${ASSET}blackdog_${state}.PNG`;
         const blanket = document.getElementById("blackDogBlanket");
-        blanket.hidden = !owned("dog_blanket") || Math.random() > 0.55;
-        blanket.src = `${ASSET}blanket.PNG`;
+        blanket.hidden = true;
+        blanket.style.display = "none";
+        blanket.removeAttribute("src");
+        if (owned("dog_blanket") && Math.random() <= 0.55) {
+            blanket.src = `${ASSET}blanket.PNG`;
+            blanket.style.display = "block";
+            blanket.hidden = false;
+        }
         const toys = [];
         if (owned("dog_toy_ball")) toys.push("dogtoy_ball.PNG");
         if (owned("dog_toy_bone")) toys.push("dogtoy_bone.PNG");
         if (owned("dog_toy_rope")) toys.push("dogtoy_rope.PNG");
         const toy = document.getElementById("blackDogToy");
-        toy.hidden = toys.length === 0 || Math.random() > 0.55;
-        if (!toy.hidden) toy.src = ASSET + random(toys);
+        toy.hidden = true;
+        toy.style.display = "none";
+        toy.removeAttribute("src");
+        if (toys.length > 0 && Math.random() <= 0.55) {
+            toy.src = ASSET + random(toys);
+            toy.style.display = "block";
+            toy.hidden = false;
+        }
         tapStage = 0;
     }
     function message(text, title="黒犬") {
