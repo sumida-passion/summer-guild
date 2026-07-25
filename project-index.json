@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T13:06:42.683062+00:00",
-    "commit": "8bb1d95",
+    "atUtc": "2026-07-25T13:07:01.650708+00:00",
+    "commit": "0fcb140",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 20,
-    "totalBytes": 78884687,
+    "totalBytes": 78884927,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1671,9 +1671,9 @@
       "stem": "blackDogPet",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 6086,
-      "sha1": "e57c9a43e4",
-      "lineCount": 130
+      "sizeBytes": 6326,
+      "sha1": "d4a5b2d2e4",
+      "lineCount": 136
     },
     {
       "path": "js/systems/musicPlayer.js",
@@ -3006,13 +3006,7 @@
     {
       "status": "M",
       "paths": [
-        "js/developer.js"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "js/settings.js"
+        "js/systems/blackDogPet.js"
       ]
     }
   ],
