@@ -1,15 +1,45 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver1.0
-   算数の広場・和差算の学び直し
+   学びの森 Ver1.2
+   算数の広場・全26問の学び直し入口
    ========================================================= */
 
 (() => {
     const STORAGE_KEY = "summerGuildLearningForest";
     const LESSON_ID = "math-wasa-01";
 
+    const lessonCatalog = [
+        { number: 1, group: 1, title: "兄と弟のお金", ready: true },
+        { number: 2, group: 1, title: "3人で分けたおこづかい" },
+        { number: 3, group: 1, title: "姉と妹のお金" },
+        { number: 4, group: 1, title: "3つの容器の水" },
+        { number: 5, group: 2, title: "はがきと切手" },
+        { number: 6, group: 2, title: "ケーキの買い物" },
+        { number: 7, group: 2, title: "えん筆の本数と代金" },
+        { number: 8, group: 2, title: "あめの入れ方" },
+        { number: 9, group: 3, title: "折り紙の余りと不足" },
+        { number: 10, group: 3, title: "あめを配る人数と個数" },
+        { number: 11, group: 3, title: "ノートの余りと不足" },
+        { number: 12, group: 3, title: "クッキーを分ける" },
+        { number: 13, group: 3, title: "長いすと5年生" },
+        { number: 14, group: 4, title: "あめとガム" },
+        { number: 15, group: 4, title: "シュークリームとケーキ" },
+        { number: 16, group: 4, title: "じゃんけんの得点" },
+        { number: 17, group: 4, title: "おはじきの増減" },
+        { number: 18, group: 5, title: "ジュースとお茶" },
+        { number: 19, group: 5, title: "2種類のおもり" },
+        { number: 20, group: 5, title: "コイン投げの得点" },
+        { number: 21, group: 5, title: "的当てゲーム" },
+        { number: 22, group: 6, title: "道の両側の桜" },
+        { number: 23, group: 6, title: "桜を増やして植え直す" },
+        { number: 24, group: 7, title: "電柱の最初から最後まで" },
+        { number: 25, group: 7, title: "電柱の間に木を植える" },
+        { number: 26, group: 8, title: "池のまわりの花" }
+    ];
+
     let currentStep = 0;
+    let selectedLesson = null;
     let initialized = false;
     let memoOpen = false;
     let memoStrokes = [];
@@ -91,8 +121,7 @@
         init();
         syncLearningPlayer();
         closeMemo();
-        currentStep = 0;
-        renderStep();
+        showLessonSelect();
     }
 
     function close() {
@@ -105,18 +134,29 @@
         const mark = document.getElementById("learningNextMark");
         const dialogue = document.getElementById("learningDialogue");
         const back = document.getElementById("learningBackStep");
+        const restartButton = document.getElementById("learningRestart");
+        const isFinal = currentStep === steps.length - 1;
 
         if (text) text.textContent = step.text;
-        if (mark) mark.hidden = Boolean(step.interactive);
+        if (mark) {
+            mark.hidden = Boolean(step.interactive);
+            mark.textContent = isFinal ? "問題一覧へ" : "▼";
+            mark.classList.toggle("is-finish", isFinal);
+        }
         if (dialogue) dialogue.classList.toggle("is-locked", Boolean(step.interactive));
         if (back) back.disabled = currentStep === 0;
+        if (restartButton) restartButton.disabled = false;
 
         step.board();
     }
 
     function advance() {
+        if (!selectedLesson) return;
         if (steps[currentStep].interactive) return;
-        if (currentStep >= steps.length - 1) return;
+        if (currentStep >= steps.length - 1) {
+            showLessonSelect();
+            return;
+        }
         currentStep += 1;
         renderStep();
     }
@@ -133,13 +173,17 @@
     }
 
     function goBack() {
-        if (currentStep <= 0) return;
+        if (!selectedLesson || currentStep <= 0) return;
         restoreInteractiveFlags();
         currentStep -= 1;
         renderStep();
     }
 
     function restart() {
+        if (!selectedLesson) {
+            showLessonSelect();
+            return;
+        }
         restoreInteractiveFlags();
         currentStep = 0;
         clearMemo();
@@ -149,6 +193,90 @@
     function restoreInteractiveFlags() {
         [4, 5, 6, 7, 8].forEach((index) => {
             steps[index].interactive = true;
+        });
+    }
+
+
+    function showLessonSelect() {
+        selectedLesson = null;
+        currentStep = 0;
+        restoreInteractiveFlags();
+        closeMemo();
+
+        const text = document.getElementById("learningText");
+        const mark = document.getElementById("learningNextMark");
+        const dialogue = document.getElementById("learningDialogue");
+        const back = document.getElementById("learningBackStep");
+        const restartButton = document.getElementById("learningRestart");
+
+        if (text) text.textContent = "夏期講習プリントの1〜26番から、学び直したい問題を選ぼう。まずは1番の解説から始められるぞ。";
+        if (mark) {
+            mark.hidden = true;
+            mark.textContent = "▼";
+            mark.classList.remove("is-finish");
+        }
+        if (dialogue) dialogue.classList.add("is-locked");
+        if (back) back.disabled = true;
+        if (restartButton) restartButton.disabled = true;
+
+        renderLessonSelect();
+    }
+
+    function startLesson(number) {
+        const lesson = lessonCatalog.find((item) => item.number === number);
+        if (!lesson || !lesson.ready) {
+            const text = document.getElementById("learningText");
+            if (text) text.textContent = `${number}番「${lesson?.title || "この問題"}」は、ただいま詳しい解説を準備中だ。1番から学び直してみよう。`;
+            return;
+        }
+
+        selectedLesson = lesson;
+        currentStep = 0;
+        clearMemo();
+        restoreInteractiveFlags();
+        renderStep();
+    }
+
+    function renderLessonSelect() {
+        const state = getState();
+        const completed = new Set(Array.isArray(state.completedLessons) ? state.completedLessons : []);
+        const groups = [...new Set(lessonCatalog.map((lesson) => lesson.group))];
+
+        setBoard(`
+            <section class="lesson-select" aria-label="夏期講習プリント問題一覧">
+                <header class="lesson-select-header">
+                    <span>SUMMER COURSE REVIEW</span>
+                    <h2>算数の学び直し　全26問</h2>
+                    <p>プリントと同じ番号を選んでください</p>
+                </header>
+                <div class="lesson-group-list">
+                    ${groups.map((group) => `
+                        <div class="lesson-group">
+                            <p class="lesson-group-title">大問 ${group}</p>
+                            <div class="lesson-number-grid">
+                                ${lessonCatalog.filter((lesson) => lesson.group === group).map((lesson) => {
+                                    const done = lesson.number === 1 && completed.has(LESSON_ID);
+                                    return `
+                                        <button
+                                            type="button"
+                                            class="lesson-number-button ${lesson.ready ? "is-ready" : "is-preparing"} ${done ? "is-complete" : ""}"
+                                            data-lesson-number="${lesson.number}"
+                                            aria-label="${lesson.number}番 ${lesson.title}${lesson.ready ? "" : " 準備中"}">
+                                            <strong>${lesson.number}</strong>
+                                            <span class="lesson-button-title">${lesson.title}</span>
+                                            <em>${done ? "✓" : lesson.ready ? "▶" : "…"}</em>
+                                        </button>
+                                    `;
+                                }).join("")}
+                            </div>
+                        </div>
+                    `).join("")}
+                </div>
+            </section>
+        `);
+
+        board().querySelectorAll("[data-lesson-number]").forEach((button) => {
+            button.addEventListener("click", () => startLesson(Number(button.dataset.lessonNumber)));
         });
     }
 
