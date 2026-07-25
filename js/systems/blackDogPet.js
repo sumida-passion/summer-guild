@@ -44,6 +44,9 @@
           <img id="blackDogImage" class="blackdog-asset blackdog-dog" alt="黒犬" draggable="false">
           <img id="blackDogToy" class="blackdog-asset blackdog-over" alt="" hidden>`;
         room.appendChild(layer);
+        if (typeof applyBlackDogDisplaySettings === "function") {
+            applyBlackDogDisplaySettings();
+        }
         const image = document.getElementById("blackDogImage");
         image.addEventListener("click", handleTap);
     }
@@ -53,6 +56,9 @@
         if (!layer) return;
         if (!owned("black_dog_pet")) { layer.hidden = true; return; }
         layer.hidden = false;
+        if (typeof applyBlackDogDisplaySettings === "function") {
+            applyBlackDogDisplaySettings();
+        }
         const spot = random(SPOTS);
         layer.style.left = spot.left;
         layer.style.bottom = spot.bottom;
