@@ -1,7 +1,7 @@
 "use strict";
 
 /* =========================================================
-   夏休みギルド Ver0.4.0
+   夏休みギルド Ver0.5.0
    app.js
 
    ゲーム全体の起動
@@ -39,6 +39,9 @@ const SCREENS = {
 
     socialguild:
         "socialguild-screen",
+
+    learningforest:
+        "learningforest-screen",
 
     quest:
         "quest-screen",
@@ -193,7 +196,7 @@ function initGame() {
 
 
     console.log(
-        "夏休みギルド Ver0.4.0 起動"
+        "夏休みギルド Ver0.5.0 起動"
     );
 
 }
@@ -327,6 +330,22 @@ function bindButtons() {
     });
 
     bindScreenButton(["backGuildHallFromSocial"], "guildhall");
+
+
+    /* ギルドホール → 学びの森（算数の広場） */
+    bindActionButton(["gotoLearningForest"], async () => {
+        if (window.LearningForest && typeof window.LearningForest.open === "function") {
+            window.LearningForest.open();
+        }
+        await changeScreen("learningforest");
+    });
+
+    bindActionButton(["backGuildHallFromLearning"], async () => {
+        if (window.LearningForest && typeof window.LearningForest.close === "function") {
+            window.LearningForest.close();
+        }
+        await changeScreen("guildhall");
+    });
 
 
     /*
