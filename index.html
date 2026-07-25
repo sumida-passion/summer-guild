@@ -23,7 +23,7 @@
 
     <link
         rel="stylesheet"
-        href="css/layout.css?v=20260725-pet-image-tap2">
+        href="css/layout.css?v=20260725-learning-forest1">
 
     <link
         rel="stylesheet"
@@ -321,6 +321,13 @@
 
 
             <button
+                id="gotoLearningForest"
+                type="button">
+                学びの森
+            </button>
+
+
+            <button
                 id="gotoGuildShop"
                 type="button">
                 ギルドショップ
@@ -337,6 +344,59 @@
 
     </section>
 
+
+
+
+
+    <!-- ========================= -->
+    <!-- 学びの森・算数の広場 -->
+    <!-- ========================= -->
+
+    <section
+        id="learningforest-screen"
+        class="screen"
+        aria-hidden="true">
+
+        <div class="background learningforest-background"></div>
+
+        <div id="learningBlackboard" class="learning-blackboard" aria-live="polite"></div>
+
+        <img
+            id="mathGuildMaster"
+            class="learning-master"
+            src="assets/characters/masters/math/mathGuildMaster.png"
+            alt="算数ギルドマスター">
+
+        <div id="learningPlayer" class="learning-player" aria-hidden="true"></div>
+
+        <div id="learningDialogue" class="learning-dialogue" role="button" tabindex="0">
+            <p id="learningSpeaker" class="learning-speaker">算数ギルドマスター</p>
+            <p id="learningText" class="learning-text"></p>
+            <span id="learningNextMark" class="learning-next-mark" aria-hidden="true">▼</span>
+        </div>
+
+        <div class="learning-controls">
+            <button id="learningBackStep" type="button">ひとつ戻る</button>
+            <button id="learningRestart" type="button">最初から</button>
+            <button id="learningOpenMemo" type="button">メモパッド</button>
+        </div>
+
+        <aside id="learningMemoPanel" class="learning-memo-panel" hidden aria-hidden="true">
+            <header>
+                <strong>メモパッド</strong>
+                <span>指やApple Pencilで自由に筆算できます</span>
+            </header>
+            <canvas id="learningMemoCanvas"></canvas>
+            <div class="learning-memo-actions">
+                <button id="learningMemoUndo" type="button">ひとつ戻す</button>
+                <button id="learningMemoClear" type="button">全部消す</button>
+                <button id="learningMemoClose" type="button">閉じる</button>
+            </div>
+        </aside>
+
+        <button id="backGuildHallFromLearning" type="button">ギルドホールへ戻る</button>
+
+    </section>
 
 
     <!-- ========================= -->
@@ -683,11 +743,13 @@
 
     <script src="js/quests/society.js?v=20260724-socialguild1"></script>
 
+    <script src="js/screens/learningForest.js?v=20260725-learning-forest1"></script>
+
     <script src="js/developer.js?v=20260725-dogscale1"></script>
 
     <script src="js/systems/blackDogPet.js?v=20260725-dogscale1"></script>
 
-    <script src="js/app.js?v=20260724-socialguild1"></script>
+    <script src="js/app.js?v=20260725-learning-forest1"></script>
 
 </body>
 
