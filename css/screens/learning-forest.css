@@ -814,3 +814,168 @@
         gap: 4px;
     }
 }
+
+/* =========================================================
+   学びの森 Ver1.6｜第4問「3つの容器の水」
+   ========================================================= */
+#learningforest-screen .lesson4-container-board,
+#learningforest-screen .lesson4-fraction-board {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #f8efd3;
+}
+
+#learningforest-screen .lesson4-board-caption {
+    margin: 0 0 clamp(8px, 1.2vh, 16px);
+    color: #f4d986;
+    font-size: clamp(13px, 1.25vw, 20px);
+    font-weight: 900;
+}
+
+#learningforest-screen .lesson4-container-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: clamp(22px, 4vw, 62px);
+}
+
+#learningforest-screen .lesson4-vessel-wrap {
+    display: grid;
+    justify-items: center;
+    gap: 5px;
+    min-width: clamp(80px, 10vw, 126px);
+}
+
+#learningforest-screen .lesson4-vessel-wrap > strong {
+    color: #ffd77e;
+    font-size: clamp(18px, 2vw, 30px);
+}
+
+#learningforest-screen .lesson4-vessel-wrap > span {
+    color: #f8efd3;
+    font-size: clamp(10px, 1vw, 15px);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+#learningforest-screen .lesson4-vessel {
+    position: relative;
+    width: clamp(72px, 8vw, 108px);
+    height: clamp(105px, 16vh, 174px);
+    overflow: hidden;
+    border: 4px solid #e6d8ad;
+    border-top-width: 2px;
+    border-radius: 7px 7px 18px 18px;
+    background: rgba(255,255,255,.055);
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,.15);
+}
+
+#learningforest-screen .lesson4-water {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(97, 190, 229, .92), rgba(35, 109, 180, .96));
+    transition: height .7s ease;
+}
+
+#learningforest-screen .lesson4-quarter-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 1px dashed rgba(255,255,255,.55);
+}
+#learningforest-screen .lesson4-quarter-line.q1 { bottom: 25%; }
+#learningforest-screen .lesson4-quarter-line.q2 { bottom: 50%; }
+#learningforest-screen .lesson4-quarter-line.q3 { bottom: 75%; }
+
+#learningforest-screen .lesson4-equal-signs,
+#learningforest-screen .lesson4-final-note {
+    margin-top: clamp(9px, 1.2vh, 16px);
+    color: #fff0b8;
+    font-size: clamp(12px, 1.1vw, 17px);
+    font-weight: 900;
+}
+
+#learningforest-screen .lesson4-equal-signs span {
+    margin-left: 10px;
+    color: #d8ebc2;
+}
+
+#learningforest-screen .lesson4-question-bubble {
+    margin-top: 10px;
+    padding: 7px 14px;
+    border: 2px solid rgba(244,217,134,.8);
+    border-radius: 14px;
+    background: rgba(73, 48, 30, .88);
+    color: #fff2c5;
+    font-size: clamp(11px, 1.05vw, 16px);
+    font-weight: 900;
+    text-align: center;
+}
+
+#learningforest-screen .lesson4-fraction-board {
+    gap: clamp(10px, 1.5vh, 18px);
+}
+
+#learningforest-screen .lesson4-fraction-cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 1.4vw, 22px);
+}
+
+#learningforest-screen .lesson4-fraction-cards > div {
+    min-width: clamp(82px, 9vw, 120px);
+    padding: 8px 10px;
+    border: 2px solid rgba(241,210,119,.72);
+    border-radius: 12px;
+    background: rgba(66, 52, 31, .78);
+    display: grid;
+    justify-items: center;
+    gap: 3px;
+}
+
+#learningforest-screen .lesson4-fraction-cards > span {
+    color: #f4d986;
+    font-size: clamp(22px, 2.4vw, 36px);
+    font-weight: 900;
+}
+
+#learningforest-screen .lesson4-fraction-cards b {
+    color: #ffd77e;
+    font-size: clamp(15px, 1.4vw, 22px);
+}
+
+#learningforest-screen .fraction-stack {
+    display: grid;
+    justify-items: center;
+    line-height: 1;
+    color: #fff8df;
+    font-size: clamp(20px, 2.2vw, 34px);
+}
+
+#learningforest-screen .fraction-stack i {
+    width: 1.4em;
+    border-top: 2px solid currentColor;
+    margin: 3px 0;
+}
+
+#learningforest-screen .lesson4-fraction-cards small,
+#learningforest-screen .lesson4-fraction-board > p {
+    color: #dcebc7;
+    font-size: clamp(10px, 1vw, 15px);
+    font-weight: 800;
+}
+
+@media screen and (max-width: 900px), screen and (max-height: 650px) {
+    #learningforest-screen .lesson4-container-row { gap: 20px; }
+    #learningforest-screen .lesson4-vessel { width: 62px; height: 90px; border-width: 3px; }
+    #learningforest-screen .lesson4-question-bubble { padding: 4px 9px; }
+    #learningforest-screen .lesson4-fraction-cards > div { min-width: 66px; padding: 5px 7px; }
+}
