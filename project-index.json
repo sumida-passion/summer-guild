@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T13:06:13.013740+00:00",
-    "commit": "59b6f08",
+    "atUtc": "2026-07-25T13:06:42.683062+00:00",
+    "commit": "8bb1d95",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 20,
-    "totalBytes": 78879620,
+    "totalBytes": 78884687,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1442,9 +1442,9 @@
       "stem": "developer",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 25906,
-      "sha1": "8e8d695b23",
-      "lineCount": 1302
+      "sizeBytes": 29664,
+      "sha1": "0ad9d35bf5",
+      "lineCount": 1454
     },
     {
       "path": "js/numberpad.js",
@@ -1639,9 +1639,9 @@
       "stem": "settings",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 49323,
-      "sha1": "ce631e5b23",
-      "lineCount": 2963
+      "sizeBytes": 50632,
+      "sha1": "05c0f8977c",
+      "lineCount": 3027
     },
     {
       "path": "js/storage.js",
@@ -2387,6 +2387,8 @@
         "applyDeveloperGpInput",
         "showDeveloperGpMessage",
         "changePlayerSetting",
+        "changeBlackDogScale",
+        "resetBlackDogScale",
         "resetPlayerPosition",
         "updateDeveloperValues",
         "setOutputValue",
@@ -2692,6 +2694,9 @@
         "updatePlayerSettings",
         "applyPlayerSettings",
         "applyAllSettings",
+        "getBlackDogDisplayScale",
+        "updateBlackDogDisplayScale",
+        "applyBlackDogDisplaySettings",
         "getPlayerEquipment",
         "getWearableShopItem",
         "isFullSetShopItem",
@@ -3001,7 +3006,13 @@
     {
       "status": "M",
       "paths": [
-        "css/layout.css"
+        "js/developer.js"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "js/settings.js"
       ]
     }
   ],
