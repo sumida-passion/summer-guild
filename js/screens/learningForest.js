@@ -1,8 +1,8 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver1.5
-   算数の広場・第1〜3問の詳しい学び直し
+   学びの森 Ver1.6
+   算数の広場・第1〜4問の詳しい学び直し
    ========================================================= */
 
 (() => {
@@ -12,7 +12,7 @@
         { number: 1, group: 1, title: "兄と弟のお金", ready: true, id: "math-wasa-01" },
         { number: 2, group: 1, title: "3人で分けたおこづかい", ready: true, id: "math-wasa-02" },
         { number: 3, group: 1, title: "姉と妹のお金", ready: true, id: "math-wasa-03" },
-        { number: 4, group: 1, title: "3つの容器の水" },
+        { number: 4, group: 1, title: "3つの容器の水", ready: true, id: "math-volume-04" },
         { number: 5, group: 2, title: "はがきと切手" },
         { number: 6, group: 2, title: "ケーキの買い物" },
         { number: 7, group: 2, title: "えん筆の本数と代金" },
@@ -96,10 +96,26 @@
         ];
     }
 
+    function createLesson4Steps() {
+        return [
+            makeStep("4番は、問題文の日本語を一つずつ絵に変えながら考える問題だ。まずは、問題文を原文のまま読んでみよう。", renderLesson4Problem),
+            makeStep("ギルドマスター：『同じかさだけ水が入る3つの容器』というのは、A・B・Cのどれも、満タンまで入る水の量が同じという意味だ。", () => renderLesson4Containers("equal")),
+            makeStep("主人公：『あれ？ Aがいっぱいになったあと、どうしてBは4分の1で止めて、Cにも入れたんだろう？』", () => renderLesson4Containers("question")),
+            makeStep("ギルドマスター：『いいところに気付いたね。でも、問題文には水を入れた順番は書かれていないんだ。書いてあるのは、全部移し終えたあとの状態だけだよ。』", () => renderLesson4Containers("final")),
+            makeStep("主人公：『なるほど。AにもBにもCにも、少しずつ入れたのかもしれないんだね。順番ではなく、最後の状態を見ればいいんだ。』", () => renderLesson4Containers("final")),
+            makeStep("ギルドマスター：『そう。では、満タンのAを4分の4と考えよう。Bは4分の1、Cは4分の3だ。』", renderLesson4Fractions),
+            makeStep("3つを合わせると、4分の4＋4分の1＋4分の3。分子の合計はいくつになる？", renderLesson4FractionCheck, true),
+            makeStep("4分の8は、同じ容器2個分だ。その2個分が16L。容器1個分は何Lかな？", () => renderGenericNumber({ title: "容器1個分を求めよう", formula: "16 ÷ 2 ＝", expected: "8", unit: "L", success: "容器1個には8L入る。問題文の日本語から、最後の状態を正しく絵にできたね。▽を押して続けよう。", hint: "16Lは、同じ容器2個分だったね。" }), true),
+            makeStep("最後に、文章から計算へ変えた順番を並べて確かめよう。", () => renderGenericOrder({ formulas: ["A＝4/4、B＝1/4、C＝3/4", "4/4＋1/4＋3/4＝8/4", "8/4＝容器2個分", "16÷2＝8"], success: "日本語を絵に変え、分数を容器の個数へ変えたから、答えまでつながった。▽を押して、4番の学びをまとめよう。", hint: "まず、A・B・Cの最後の状態を分数で表すところから始めよう。" }), true),
+            makeStep("よくできた。文章題では、書いてあることと書いていないことを分け、言葉を一つずつ絵に変えることが大切だ。", renderLesson4Summary)
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
-        3: createLesson3Steps
+        3: createLesson3Steps,
+        4: createLesson4Steps
     };
 
     function init() {
@@ -658,6 +674,86 @@
         });
     }
 
+
+    function renderLesson4Problem() {
+        setBoard(`
+            <article class="learning-problem-card lesson4-problem-card">
+                <p class="learning-problem-label">4番の問題（原文）</p>
+                <p>同じかさだけ水が入る3つの容器A、B、Cを用意し、バケツに入った16Lの水を全部3つの容器へ移しました。</p>
+                <p>Aは満タン、Bは容器の <strong>1/4</strong>、Cは容器の <strong>3/4</strong> まで水が入りました。</p>
+                <p>容器1つには何Lの水が入りますか。</p>
+            </article>
+        `);
+    }
+
+    function renderLesson4Containers(stage) {
+        const question = stage === "question";
+        const finalState = stage === "final" || question;
+        setBoard(`
+            <div class="lesson4-container-board ${question ? "is-question" : ""}">
+                <p class="lesson4-board-caption">${stage === "equal" ? "満タンまで入る量は、3つとも同じ" : "全部移し終えたあとの状態"}</p>
+                <div class="lesson4-container-row">
+                    ${lesson4ContainerMarkup("A", finalState ? 1 : 0, finalState ? "満タン＝4/4" : "同じ大きさ")}
+                    ${lesson4ContainerMarkup("B", finalState ? .25 : 0, finalState ? "1/4" : "同じ大きさ")}
+                    ${lesson4ContainerMarkup("C", finalState ? .75 : 0, finalState ? "3/4" : "同じ大きさ")}
+                </div>
+                ${stage === "equal" ? '<div class="lesson4-equal-signs">A ＝ B ＝ C　<span>入る水の量が同じ</span></div>' : ''}
+                ${question ? '<div class="lesson4-question-bubble">なぜBは1/4で止めたの？<br>まだ入るのに、なぜCへ？</div>' : ''}
+                ${stage === "final" ? '<p class="lesson4-final-note">順番は書かれていない。使うのは、この最後の状態。</p>' : ''}
+            </div>
+        `);
+    }
+
+    function lesson4ContainerMarkup(label, fill, note) {
+        const percent = Math.round(fill * 100);
+        return `
+            <div class="lesson4-vessel-wrap">
+                <strong>${label}</strong>
+                <div class="lesson4-vessel" aria-label="容器${label} ${note}">
+                    <div class="lesson4-water" style="height:${percent}%"></div>
+                    <div class="lesson4-quarter-line q1"></div>
+                    <div class="lesson4-quarter-line q2"></div>
+                    <div class="lesson4-quarter-line q3"></div>
+                </div>
+                <span>${note}</span>
+            </div>
+        `;
+    }
+
+    function renderLesson4Fractions() {
+        setBoard(`
+            <div class="lesson4-fraction-board">
+                <div class="lesson4-fraction-cards">
+                    <div><b>A</b><span class="fraction-stack"><strong>4</strong><i></i><strong>4</strong></span><small>満タン</small></div>
+                    <span>＋</span>
+                    <div><b>B</b><span class="fraction-stack"><strong>1</strong><i></i><strong>4</strong></span><small>4分の1</small></div>
+                    <span>＋</span>
+                    <div><b>C</b><span class="fraction-stack"><strong>3</strong><i></i><strong>4</strong></span><small>4分の3</small></div>
+                </div>
+                <p>満タンは「4つに分けたうちの4つ分」だから、4/4と表せる。</p>
+            </div>
+        `);
+    }
+
+    function renderLesson4FractionCheck() {
+        renderGenericChoice({
+            question: "4＋1＋3はいくつ？",
+            choices: [{ value: "6", label: "6" }, { value: "8", label: "8" }, { value: "12", label: "12" }],
+            correct: "8",
+            success: "そうだ。4/4＋1/4＋3/4＝8/4。これは容器2個分だ。▽を押して続けよう。",
+            hint: "分母の4はそのままにして、分子の4・1・3を足そう。"
+        });
+    }
+
+    function renderLesson4Summary() {
+        renderGenericSummary({
+            label: "4番の学び",
+            points: ["最初に問題文を原文のまま読む", "『同じかさだけ入る』を『満タンまで入る量が同じ』へ翻訳する", "順番は書かれていないので、最後の状態だけを使う", "4/4＋1/4＋3/4＝8/4＝容器2個分と考える"],
+            formulas: ["4/4＋1/4＋3/4＝8/4", "8/4＝容器2個分", "16÷2＝8"],
+            answer: "容器1つには 8L 入る"
+        });
+    }
+
     function renderGenericChoice({ question, choices, correct, success, hint }) {
         setBoard(`<div class="learning-check-card"><p>${question}</p><div class="learning-choice-grid">${choices.map((choice) => `<button type="button" data-choice="${choice.value}">${choice.label}</button>`).join("")}</div><p class="learning-feedback" aria-live="polite"></p></div>`);
         board().querySelectorAll('[data-choice]').forEach((button) => {
@@ -709,8 +805,8 @@
         });
     }
 
-    function renderGenericNumber({ title, formula, expected, success, hint }) {
-        setBoard(`<div class="number-lesson"><p>${title}</p><div class="number-formula"><span>${formula}</span><strong class="number-display">＿</strong><span>円</span></div><div class="learning-numberpad">${[1,2,3,4,5,6,7,8,9,"消す",0,"決定"].map((value) => `<button type="button" data-number="${value}">${value}</button>`).join("")}</div><p class="learning-feedback" aria-live="polite"></p></div>`);
+    function renderGenericNumber({ title, formula, expected, success, hint, unit = "円" }) {
+        setBoard(`<div class="number-lesson"><p>${title}</p><div class="number-formula"><span>${formula}</span><strong class="number-display">＿</strong><span>${unit}</span></div><div class="learning-numberpad">${[1,2,3,4,5,6,7,8,9,"消す",0,"決定"].map((value) => `<button type="button" data-number="${value}">${value}</button>`).join("")}</div><p class="learning-feedback" aria-live="polite"></p></div>`);
         let value = '';
         const display = board().querySelector('.number-display');
         const feedback = board().querySelector('.learning-feedback');
