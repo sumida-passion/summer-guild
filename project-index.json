@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T15:04:37.164868+00:00",
-    "commit": "1b845b9",
+    "atUtc": "2026-07-25T15:29:32.042069+00:00",
+    "commit": "05ce67d",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 84019727,
+    "totalBytes": 84019874,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1430,9 +1430,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 17769,
-      "sha1": "6c503ba9d7",
-      "lineCount": 756
+      "sizeBytes": 17909,
+      "sha1": "6850857f5f",
+      "lineCount": 760
     },
     {
       "path": "js/app.js",
@@ -1777,8 +1777,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4498,
-      "sha1": "2641f14850",
+      "sizeBytes": 4505,
+      "sha1": "0aa24c567a",
       "lineCount": 177
     },
     {
@@ -2349,6 +2349,7 @@
           "css/developer.css",
           "css/layout.css",
           "css/screens/iphone-landscape.css",
+          "css/screens/learning-forest.css",
           "manifest.webmanifest"
         ],
         "images": [
@@ -3099,9 +3100,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "js/screens/learningForest.js"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
