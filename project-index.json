@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T16:36:10.115122+00:00",
-    "commit": "2fae40a",
+    "atUtc": "2026-07-25T16:36:41.185991+00:00",
+    "commit": "cd79cad",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 84044266,
+    "totalBytes": 84063457,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1637,9 +1637,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 28045,
-      "sha1": "39d4b8828c",
-      "lineCount": 666
+      "sizeBytes": 47236,
+      "sha1": "46bfb376a8",
+      "lineCount": 880
     },
     {
       "path": "js/screens/musicShop.js",
@@ -2678,6 +2678,10 @@
     {
       "path": "js/screens/learningForest.js",
       "functions": [
+        "makeStep",
+        "createLesson1Steps",
+        "createLesson2Steps",
+        "createLesson3Steps",
         "init",
         "open",
         "close",
@@ -2698,6 +2702,22 @@
         "renderNumberExercise",
         "renderOrderExercise",
         "renderSummary",
+        "renderLesson2Problem",
+        "renderLesson2Diagram",
+        "renderLesson2Choice",
+        "renderLesson2Summary",
+        "renderLesson3Problem",
+        "renderLesson3Diagram",
+        "renderLesson3Choice",
+        "renderLesson3Drag",
+        "renderLesson3DifferenceChoice",
+        "renderLesson3Summary",
+        "renderGenericChoice",
+        "renderGenericDrag",
+        "setupPointerDrag",
+        "renderGenericNumber",
+        "renderGenericOrder",
+        "renderGenericSummary",
         "setBoard",
         "board",
         "syncLearningPlayer",
@@ -3116,7 +3136,7 @@
     {
       "status": "M",
       "paths": [
-        "css/screens/learning-forest.css"
+        "js/screens/learningForest.js"
       ]
     }
   ],
