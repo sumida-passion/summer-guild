@@ -213,3 +213,185 @@
         font-size: 11px;
     }
 }
+
+/* =========================================================
+   学びの森 Ver1.2｜26問一覧・人物サイズ調整
+   ========================================================= */
+
+/* プレイヤーレイヤーは元画像と同じ2:3。マスターと同幅なら見た目の身長も揃う */
+#learningforest-screen .learning-player {
+    width: clamp(118px, 13.5vw, 220px);
+    aspect-ratio: 2 / 3;
+}
+
+#learningforest-screen .learning-next-mark.is-finish {
+    min-width: 7em;
+    padding: 5px 12px;
+    border: 1px solid rgba(244, 216, 145, .8);
+    border-radius: 999px;
+    background: rgba(92, 54, 24, .92);
+    color: #fff2c4;
+    font-size: clamp(11px, 1vw, 15px);
+    line-height: 1.1;
+    text-align: center;
+}
+
+#learningforest-screen .lesson-select {
+    width: 100%;
+    height: 100%;
+    color: #f8efd3;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#learningforest-screen .lesson-select-header {
+    flex: 0 0 auto;
+    margin-bottom: clamp(4px, .7vh, 8px);
+    text-align: center;
+}
+
+#learningforest-screen .lesson-select-header span {
+    color: #e9c56f;
+    font-size: clamp(8px, .7vw, 11px);
+    letter-spacing: .14em;
+}
+
+#learningforest-screen .lesson-select-header h2 {
+    margin: 1px 0;
+    color: #f2d37e;
+    font-size: clamp(17px, 1.55vw, 25px);
+    line-height: 1.1;
+}
+
+#learningforest-screen .lesson-select-header p {
+    margin: 0;
+    font-size: clamp(9px, .8vw, 12px);
+    opacity: .88;
+}
+
+#learningforest-screen .lesson-group-list {
+    min-height: 0;
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-rows: repeat(8, minmax(0, 1fr));
+    gap: clamp(2px, .35vh, 5px);
+}
+
+#learningforest-screen .lesson-group {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: clamp(42px, 4.2vw, 62px) 1fr;
+    align-items: stretch;
+    gap: clamp(3px, .4vw, 6px);
+}
+
+#learningforest-screen .lesson-group-title {
+    margin: 0;
+    border: 1px solid rgba(229, 200, 122, .45);
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    background: rgba(27, 54, 42, .7);
+    color: #e9c56f;
+    font-size: clamp(8px, .75vw, 11px);
+    white-space: nowrap;
+}
+
+#learningforest-screen .lesson-number-grid {
+    min-width: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: clamp(3px, .35vw, 6px);
+}
+
+#learningforest-screen .lesson-number-button {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    border: 1px solid rgba(231, 215, 167, .58);
+    border-radius: 8px;
+    background: rgba(19, 45, 34, .86);
+    color: #f7edd0;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+    display: grid;
+    place-items: center;
+    touch-action: manipulation;
+}
+
+#learningforest-screen .lesson-number-button strong {
+    font-size: clamp(13px, 1.35vw, 20px);
+    line-height: 1;
+}
+
+#learningforest-screen .lesson-number-button em {
+    position: absolute;
+    right: 3px;
+    bottom: 1px;
+    color: #d9bc69;
+    font-size: clamp(7px, .6vw, 9px);
+    font-style: normal;
+}
+
+#learningforest-screen .lesson-button-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+#learningforest-screen .lesson-number-button.is-ready {
+    border-color: #f1d277;
+    background: linear-gradient(180deg, rgba(111,83,31,.96), rgba(55,55,29,.96));
+}
+
+#learningforest-screen .lesson-number-button.is-complete {
+    border-color: #a7e4b7;
+    background: linear-gradient(180deg, rgba(46,107,67,.96), rgba(28,68,48,.96));
+}
+
+#learningforest-screen .lesson-number-button.is-preparing {
+    opacity: .74;
+}
+
+#learningforest-screen .lesson-number-button:active {
+    transform: translateY(1px) scale(.98);
+}
+
+#learningforest-screen .learning-controls button:disabled {
+    opacity: .45;
+}
+
+@media screen and (max-width: 900px), screen and (max-height: 650px) {
+    #learningforest-screen .learning-player {
+        width: clamp(105px, 12.8vw, 170px);
+        aspect-ratio: 2 / 3;
+    }
+
+    #learningforest-screen .lesson-select-header {
+        margin-bottom: 3px;
+    }
+
+    #learningforest-screen .lesson-group-list {
+        gap: 2px;
+    }
+
+    #learningforest-screen .lesson-group {
+        grid-template-columns: 38px 1fr;
+        gap: 3px;
+    }
+
+    #learningforest-screen .lesson-number-grid {
+        gap: 3px;
+    }
+
+    #learningforest-screen .lesson-number-button,
+    #learningforest-screen .lesson-group-title {
+        border-radius: 5px;
+    }
+}
