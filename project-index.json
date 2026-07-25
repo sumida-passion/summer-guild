@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T14:10:27.728887+00:00",
-    "commit": "b69ac22",
+    "atUtc": "2026-07-25T14:14:47.572625+00:00",
+    "commit": "8fe9621",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 56,
     "javascriptApiFileCount": 20,
-    "totalBytes": 81354872,
+    "totalBytes": 81367805,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -457,8 +457,8 @@
       "stem": "mathGuildMaster",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2460582,
-      "sha1": "281cdc0725"
+      "sizeBytes": 2473515,
+      "sha1": "d62ad336f5"
     },
     {
       "path": "assets/characters/masters/science/.gitkeep",
@@ -1862,7 +1862,7 @@
       "stem": "mathGuildMaster",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2460582
+      "sizeBytes": 2473515
     },
     {
       "path": "assets/characters/pet/blackdog_base.PNG",
@@ -3023,7 +3023,7 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
         "assets/characters/masters/math/mathGuildMaster.png"
       ]
