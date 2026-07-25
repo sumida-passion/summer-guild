@@ -2604,7 +2604,7 @@ body.wardrobe-open {
     bottom: 10%;
     width: clamp(145px, 18vw, 300px);
     aspect-ratio: 1 / 1;
-    transform: scaleX(-1);
+    transform: none;
     transform-origin: center bottom;
     filter: drop-shadow(0 10px 14px rgba(0,0,0,.28));
     pointer-events: none;
