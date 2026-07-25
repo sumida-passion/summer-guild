@@ -608,3 +608,209 @@
         padding: 5px;
     }
 }
+
+/* =========================================================
+   学びの森 Ver1.4｜第3問「600円＝妹2本分」の上下対応
+   ========================================================= */
+#learningforest-screen .lesson3-tape-board,
+#learningforest-screen .lesson3-drag-board,
+#learningforest-screen .lesson3-aligned-wrap {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #f8efd3;
+}
+
+#learningforest-screen .lesson3-tape-board {
+    gap: clamp(12px, 1.7vh, 22px);
+}
+
+#learningforest-screen .lesson3-line {
+    width: min(96%, 720px);
+    display: grid;
+    grid-template-columns: clamp(48px, 5vw, 72px) minmax(112px, 1fr) minmax(100px, .9fr) minmax(78px, .62fr);
+    align-items: stretch;
+    gap: 0;
+}
+
+#learningforest-screen .lesson3-label,
+#learningforest-screen .lesson3-grid-label {
+    display: grid;
+    place-items: center end;
+    padding-right: clamp(7px, .8vw, 12px);
+    color: #f2d37e;
+    font-size: clamp(11px, 1vw, 16px);
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+#learningforest-screen .lesson3-red-unit,
+#learningforest-screen .lesson3-money-block {
+    min-width: 0;
+    height: clamp(34px, 5.1vh, 56px);
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    font-size: clamp(10px, .9vw, 14px);
+    font-weight: 900;
+}
+
+#learningforest-screen .lesson3-red-unit {
+    border: 2px solid rgba(255, 218, 205, .96);
+    background: linear-gradient(180deg, rgba(190, 70, 66, .98), rgba(127, 36, 38, .98));
+    color: #fff7ec;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+}
+
+#learningforest-screen .lesson3-money-block {
+    border: 2px solid #f1d277;
+    background: rgba(145, 104, 29, .96);
+    color: #fff4b5;
+}
+
+#learningforest-screen .lesson3-line > :nth-child(2) {
+    border-radius: 8px 0 0 8px;
+}
+
+#learningforest-screen .lesson3-line > :last-child:not(.lesson3-label) {
+    border-radius: 0 8px 8px 0;
+}
+
+#learningforest-screen .lesson3-money-block.is-empty,
+#learningforest-screen .lesson3-return-zone {
+    border-style: dashed;
+    background: rgba(92, 73, 34, .56);
+    color: #eadcae;
+}
+
+#learningforest-screen .lesson3-equation-note {
+    margin: 0;
+    color: #f4d986;
+    font-size: clamp(12px, 1.15vw, 18px);
+    font-weight: 900;
+}
+
+#learningforest-screen .lesson3-drag-board {
+    gap: clamp(8px, 1vh, 14px);
+}
+
+#learningforest-screen .lesson3-drag-line {
+    width: min(98%, 760px);
+}
+
+#learningforest-screen .lesson3-drag-board .drag-token {
+    margin-top: 4px;
+}
+
+#learningforest-screen .lesson3-aligned-wrap {
+    gap: clamp(7px, 1vh, 13px);
+}
+
+#learningforest-screen .lesson3-aligned-grid {
+    width: min(98%, 780px);
+    display: grid;
+    grid-template-columns: clamp(58px, 6vw, 86px) minmax(118px, 1fr) minmax(100px, .9fr) minmax(78px, .62fr);
+    grid-template-rows: auto auto auto;
+    align-items: stretch;
+    row-gap: clamp(4px, .65vh, 8px);
+}
+
+#learningforest-screen .lesson3-grid-label.top-label { grid-column: 1; grid-row: 1; }
+#learningforest-screen .lesson3-grid-label.bottom-label { grid-column: 1; grid-row: 2; }
+#learningforest-screen .lesson3-aligned-grid .grid-base { grid-column: 2; grid-row: 1; border-radius: 8px 0 0 8px; }
+#learningforest-screen .lesson3-aligned-grid .grid-500 { grid-column: 3; grid-row: 1; border-radius: 0; }
+#learningforest-screen .lesson3-aligned-grid .grid-100 { grid-column: 4; grid-row: 1; border-radius: 0 8px 8px 0; }
+
+#learningforest-screen .lesson3-base-guide {
+    grid-column: 2;
+    grid-row: 2;
+    border: 2px solid rgba(255, 255, 255, .12);
+    border-radius: 8px;
+    background: rgba(255,255,255,.025);
+}
+
+#learningforest-screen .lesson3-two-units {
+    grid-column: 3 / 5;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-width: 0;
+    animation: lesson3RevealTwo .65s ease both;
+}
+
+#learningforest-screen .lesson3-two-units .lesson3-red-unit:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+#learningforest-screen .lesson3-two-units .lesson3-red-unit:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+#learningforest-screen .lesson3-two-unit-caption {
+    grid-column: 3 / 5;
+    grid-row: 3;
+    padding-top: 1px;
+    color: #ffd98a;
+    font-size: clamp(10px, .95vw, 15px);
+    font-weight: 900;
+    text-align: center;
+    animation: lesson3CaptionIn .7s .28s ease both;
+}
+
+#learningforest-screen .lesson3-discovery {
+    margin: 0;
+    padding: clamp(5px, .65vh, 9px) clamp(12px, 1.3vw, 20px);
+    border: 1px solid rgba(242, 210, 119, .75);
+    border-radius: 999px;
+    background: rgba(92, 54, 24, .78);
+    color: #fff0b8;
+    font-size: clamp(12px, 1.1vw, 17px);
+    font-weight: 900;
+}
+
+#learningforest-screen .lesson3-inline-question {
+    width: min(92%, 620px);
+    text-align: center;
+}
+
+#learningforest-screen .lesson3-inline-question > p:first-child {
+    margin: 0 0 clamp(4px, .55vh, 7px);
+    color: #f8efd3;
+    font-size: clamp(11px, 1vw, 16px);
+    font-weight: 800;
+}
+
+@keyframes lesson3RevealTwo {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lesson3CaptionIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media screen and (max-width: 900px), screen and (max-height: 650px) {
+    #learningforest-screen .lesson3-line,
+    #learningforest-screen .lesson3-aligned-grid {
+        grid-template-columns: 45px minmax(92px, 1fr) minmax(78px, .9fr) minmax(62px, .62fr);
+    }
+
+    #learningforest-screen .lesson3-red-unit,
+    #learningforest-screen .lesson3-money-block {
+        height: 30px;
+        font-size: 9px;
+    }
+
+    #learningforest-screen .lesson3-tape-board {
+        gap: 7px;
+    }
+
+    #learningforest-screen .lesson3-aligned-wrap {
+        gap: 4px;
+    }
+}
