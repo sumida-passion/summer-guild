@@ -1,7 +1,7 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver1.3
+   学びの森 Ver1.4
    算数の広場・第1〜3問の詳しい学び直し
    ========================================================= */
 
@@ -84,17 +84,17 @@
 
     function createLesson3Steps() {
         return [
-            makeStep("3番は、二つの条件を別々に見てから、同じ図へ重ねる問題だ。", renderLesson3Problem),
-            makeStep("最初の条件は『姉は妹より500円多い』。妹1本分に、姉だけ500円が加わる。", () => renderLesson3Diagram("difference")),
-            makeStep("次の条件は『姉は妹の3倍より100円少ない』。3倍ぴったりの場所から100円だけ短いんだ。", () => renderLesson3Diagram("triple")),
-            makeStep("二つは同じ姉と妹を表している。100円を姉へ戻せば、姉は妹の3倍ぴったりになる。", () => renderLesson3Diagram("combine")),
-            makeStep("3倍ぴったりにするため、100円をどうすればよいかな？", renderLesson3Choice, true),
-            makeStep("そうだ。100円を戻そう。黄色の100円を姉のテープへ動かしてみよう。", renderLesson3Drag, true),
-            makeStep("100円を戻した後、姉と妹の差は、もとの500円に100円を足した600円になる。3本分と1本分の差は何本分かな？", renderLesson3DifferenceChoice, true),
-            makeStep("差の2本分が600円。妹の1本分はいくらになる？", () => renderGenericNumber({ title: "妹の1本分を求めよう", formula: "600 ÷ 2 ＝", expected: "300", success: "妹は300円。差の2本分から1本分を求められた。▽を押して続けよう。", hint: "600円は、3本分と1本分の差である2本分だ。" }), true),
-            makeStep("姉は妹の3倍より100円少ない。300×3−100はいくら？", () => renderGenericNumber({ title: "姉の金額を求めよう", formula: "300 × 3 − 100 ＝", expected: "800", success: "姉は800円。妹より500円多いことも確かめられる。▽を押して続けよう。", hint: "まず300円を3倍して、その後100円を引こう。" }), true),
-            makeStep("最後に、条件を整理した順番で式を並べよう。", () => renderGenericOrder({ formulas: ["500＋100＝600", "3−1＝2本分", "600÷2＝300", "300×3−100＝800"], success: "二つの条件が一つにつながった。▽を押して、3番の学びをまとめよう。", hint: "まず100円を戻したときの差600円を作ろう。" }), true),
-            makeStep("よくできた。文章題は、一度に全部考えなくていい。条件を一つずつ整理すれば、答えにたどり着ける。", renderLesson3Summary)
+            makeStep("3番は、妹の分から姉の分を組み立てて、同じ場所を見比べる問題だ。", renderLesson3Problem),
+            makeStep("妹の金額はまだ分からない。そこで、妹の金額を赤い1本分で表そう。姉は、その1本分より500円多い。", () => renderLesson3Diagram("difference")),
+            makeStep("もう一つの条件は『姉は妹の3倍より100円少ない』。姉に100円を足せば、妹の3本分ぴったりになる。", () => renderLesson3Diagram("before-add")),
+            makeStep("妹の3倍ぴったりにするには、100円をどうすればよいかな？", renderLesson3Choice, true),
+            makeStep("そうだ。100円を足そう。黄色の100円を、500円の右隣へ動かしてみよう。", renderLesson3Drag, true),
+            makeStep("上の赤い1本分は、妹そのものだ。すると、その右側に残る『500円＋100円』は、真下の赤い2本分と同じ大きさになる。", renderLesson3AlignedDiagram),
+            makeStep("500円と100円を合わせた部分は、妹の何本分かな？", renderLesson3TwoBlocksChoice, true),
+            makeStep("500＋100＝600円。その600円が妹2本分だ。妹の1本分はいくらになる？", () => renderGenericNumber({ title: "妹の1本分を求めよう", formula: "600 ÷ 2 ＝", expected: "300", success: "妹は300円。600円を2本に分けると、1本分が出た。▽を押して続けよう。", hint: "500円＋100円の600円は、赤い2本分だったね。" }), true),
+            makeStep("姉は妹より500円多い。300円に500円を足すといくら？", () => renderGenericNumber({ title: "姉の金額を求めよう", formula: "300 ＋ 500 ＝", expected: "800", success: "姉は800円。妹の3倍より100円少ないことも確かめられる。▽を押して続けよう。", hint: "妹の300円に、多い500円を足そう。" }), true),
+            makeStep("最後に、気付いた順番で式を並べよう。", () => renderGenericOrder({ formulas: ["500＋100＝600", "600円＝妹2本分", "600÷2＝300", "300＋500＝800"], success: "『600円＝妹2本分』が見つかったから、全部つながった。▽を押して、3番の学びをまとめよう。", hint: "まず500円と100円を合わせて、妹2本分を作ろう。" }), true),
+            makeStep("よくできた。分からない金額を1本分にして、同じ位置をぴったりそろえると、『600円が妹2本分』だと見つけられる。", renderLesson3Summary)
         ];
     }
 
@@ -572,14 +572,37 @@
 
     function renderLesson3Diagram(stage) {
         if (stage === "difference") {
-            setBoard(`<div class="relation-diagram"><div class="relation-row"><span>妹</span><div class="unit-tape wide">妹の1本分</div></div><div class="relation-row pop-row"><span>姉</span><div class="unit-tape wide">妹と同じ分</div><div class="extra-chip">＋500円</div></div></div>`);
+            setBoard(`
+                <div class="lesson3-tape-board is-difference">
+                    <div class="lesson3-line">
+                        <span class="lesson3-label">妹</span>
+                        <div class="lesson3-red-unit">妹の1本分</div>
+                    </div>
+                    <div class="lesson3-line pop-row">
+                        <span class="lesson3-label">姉</span>
+                        <div class="lesson3-red-unit">妹と同じ1本分</div>
+                        <div class="lesson3-money-block money-500">＋500円</div>
+                    </div>
+                </div>
+            `);
             return;
         }
-        if (stage === "triple") {
-            setBoard(`<div class="relation-diagram"><div class="relation-row"><span>妹</span><div class="unit-tape">1本分</div></div><div class="relation-row pop-row"><span>3倍</span><div class="unit-tape">1本</div><div class="unit-tape">1本</div><div class="unit-tape">1本</div></div><div class="relation-row"><span>姉</span><div class="unit-tape">1本</div><div class="unit-tape">1本</div><div class="unit-tape short">少ない</div><div class="missing-chip">−100円</div></div></div>`);
-            return;
-        }
-        setBoard(`<div class="relation-diagram relation-compare"><div class="relation-condition"><h3>500円多い</h3><div>妹 <span class="mini-tape"></span></div><div>姉 <span class="mini-tape"></span><b>＋500</b></div></div><div class="relation-arrow">＋100円を戻す<br>→</div><div class="relation-condition"><h3>3倍ぴったり</h3><div>妹 <span class="mini-tape one"></span></div><div>姉 <span class="mini-tape three"></span></div><p>差は 500＋100＝600円</p></div></div>`);
+
+        setBoard(`
+            <div class="lesson3-tape-board is-before-add">
+                <div class="lesson3-line">
+                    <span class="lesson3-label">妹</span>
+                    <div class="lesson3-red-unit">妹の1本分</div>
+                </div>
+                <div class="lesson3-line pop-row">
+                    <span class="lesson3-label">姉</span>
+                    <div class="lesson3-red-unit">妹と同じ1本分</div>
+                    <div class="lesson3-money-block money-500">＋500円</div>
+                    <div class="lesson3-money-block money-100 is-empty">ここに＋100円</div>
+                </div>
+                <p class="lesson3-equation-note">姉 ＋ 100円 ＝ 妹の3本分</p>
+            </div>
+        `);
     }
 
     function renderLesson3Choice() {
@@ -594,36 +617,81 @@
 
     function renderLesson3Drag() {
         setBoard(`
-            <div class="drag-lesson relation-drag">
-                <p class="drag-instruction">黄色の100円を、姉のテープの空いている場所へ戻そう</p>
-                <div class="relation-row"><span>姉</span><div class="unit-tape">1本</div><div class="unit-tape">1本</div><div class="unit-tape return-zone">ここへ戻す</div></div>
-                <button class="drag-token" type="button">100円</button>
+            <div class="lesson3-drag-board">
+                <p class="drag-instruction">黄色の100円を、500円の右隣へ足そう</p>
+                <div class="lesson3-line lesson3-drag-line">
+                    <span class="lesson3-label">姉</span>
+                    <div class="lesson3-red-unit">妹の1本分</div>
+                    <div class="lesson3-money-block money-500">＋500円</div>
+                    <div class="lesson3-money-block money-100 lesson3-return-zone">ここへ足す</div>
+                </div>
+                <button class="drag-token" type="button">＋100円</button>
                 <p class="learning-feedback" aria-live="polite"></p>
             </div>
         `);
-        setupPointerDrag(board().querySelector('.drag-token'), board().querySelector('.return-zone'), () => {
-            const zone = board().querySelector('.return-zone');
-            zone.textContent = '100円を戻した！';
-            zone.classList.add('accepted');
-            completeInteractiveStep("姉が3本分ぴったりになった。もとの500円の差に100円が加わり、差は600円になる。▽を押して続けよう。");
-        }, "黄色の100円を、姉の右端の枠まで運んでみよう。");
+        setupPointerDrag(board().querySelector('.drag-token'), board().querySelector('.lesson3-return-zone'), () => {
+            renderLesson3AlignedDiagram();
+            completeInteractiveStep("ぴったりそろった。500円と100円の真下に、妹の赤い2本分が現れた。▽を押して、同じ大きさを確かめよう。");
+        }, "黄色の100円を、500円のすぐ右にある点線の枠まで運んでみよう。");
     }
 
-    function renderLesson3DifferenceChoice() {
-        renderGenericChoice({
-            question: "3本分と1本分の差は、何本分？",
-            choices: [{ value: "1", label: "1本分" }, { value: "2", label: "2本分" }, { value: "3", label: "3本分" }],
-            correct: "2",
-            success: "そうだ。3本分−1本分＝2本分。その2本分が600円だ。▽を押して続けよう。",
-            hint: "姉の3本から、妹の1本と同じ部分を取り除いてみよう。"
+    function lesson3AlignedMarkup(includeChoices = false) {
+        return `
+            <div class="lesson3-aligned-wrap ${includeChoices ? 'with-choices' : ''}">
+                <div class="lesson3-aligned-grid" aria-label="500円と100円が妹2本分に対応する図">
+                    <span class="lesson3-grid-label top-label">姉＋100</span>
+                    <div class="lesson3-red-unit grid-base">妹1本分</div>
+                    <div class="lesson3-money-block money-500 grid-500">＋500円</div>
+                    <div class="lesson3-money-block money-100 grid-100">＋100円</div>
+
+                    <span class="lesson3-grid-label bottom-label">同じ長さ</span>
+                    <div class="lesson3-base-guide" aria-hidden="true"></div>
+                    <div class="lesson3-two-units">
+                        <div class="lesson3-red-unit compact">妹1本分</div>
+                        <div class="lesson3-red-unit compact">妹1本分</div>
+                    </div>
+                    <div class="lesson3-two-unit-caption">ここは 妹の2本分</div>
+                </div>
+                ${includeChoices ? `
+                    <div class="lesson3-inline-question">
+                        <p>500円＋100円は、妹の何本分？</p>
+                        <div class="learning-choice-grid">
+                            <button type="button" data-choice="1">1本分</button>
+                            <button type="button" data-choice="2">2本分</button>
+                            <button type="button" data-choice="3">3本分</button>
+                        </div>
+                        <p class="learning-feedback" aria-live="polite"></p>
+                    </div>
+                ` : '<p class="lesson3-discovery">500円＋100円 ＝ 妹の2本分</p>'}
+            </div>
+        `;
+    }
+
+    function renderLesson3AlignedDiagram() {
+        setBoard(lesson3AlignedMarkup(false));
+    }
+
+    function renderLesson3TwoBlocksChoice() {
+        setBoard(lesson3AlignedMarkup(true));
+        board().querySelectorAll('[data-choice]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const feedback = board().querySelector('.learning-feedback');
+                if (button.dataset.choice === '2') {
+                    button.classList.add('correct');
+                    completeInteractiveStep("そうだ。500円＋100円＝600円が、妹の2本分。だから600÷2で妹の1本分が出る。▽を押して続けよう。");
+                } else {
+                    button.classList.add('wrong');
+                    if (feedback) feedback.textContent = "上の赤い1本分は妹そのもの。500円＋100円の真下にある赤いブロックだけを数えてみよう。";
+                }
+            });
         });
     }
 
     function renderLesson3Summary() {
         renderGenericSummary({
             label: "3番の学び",
-            points: ["少なかった100円を戻して、3倍ぴったりにする", "差は500＋100＝600円、テープでは2本分", "2本分から妹を求め、姉の条件へ戻す"],
-            formulas: ["500＋100＝600", "3−1＝2本分", "600÷2＝300", "300×3−100＝800"],
+            points: ["妹の分を赤い1本で表す", "500円＋100円の真下に、同じ大きさの妹2本分をそろえる", "600円を2で割って妹を求め、500円を足して姉を求める"],
+            formulas: ["500＋100＝600", "600円＝妹2本分", "600÷2＝300", "300＋500＝800"],
             answer: "姉 800円　妹 300円"
         });
     }
