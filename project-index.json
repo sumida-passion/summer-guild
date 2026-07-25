@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T14:31:09.659189+00:00",
-    "commit": "f931509",
+    "atUtc": "2026-07-25T15:02:47.179832+00:00",
+    "commit": "b4e7ecc",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 20,
-    "totalBytes": 83982911,
+    "totalBytes": 83985235,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1430,9 +1430,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 15451,
-      "sha1": "ce216e0b80",
-      "lineCount": 694
+      "sizeBytes": 17769,
+      "sha1": "6c503ba9d7",
+      "lineCount": 756
     },
     {
       "path": "js/app.js",
@@ -1766,8 +1766,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4492,
-      "sha1": "7549c98f99",
+      "sizeBytes": 4498,
+      "sha1": "2641f14850",
       "lineCount": 177
     },
     {
@@ -2322,6 +2322,7 @@
           "js/quests/math.js",
           "js/quests/review.js",
           "js/quests/society.js",
+          "js/screens/learningForest.js",
           "js/screens/musicShop.js",
           "js/screens/shop.js",
           "js/screens/wardrobe.js",
@@ -2340,6 +2341,7 @@
           "manifest.webmanifest"
         ],
         "images": [
+          "assets/characters/masters/math/mathGuildMaster.png",
           "assets/characters/player/base/base.png",
           "assets/characters/player/clothes/bottoms/default_bottoms.png",
           "assets/characters/player/clothes/tops/default_tops.png"
@@ -3042,9 +3044,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/backgrounds/special/mathGuildForest.png"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
