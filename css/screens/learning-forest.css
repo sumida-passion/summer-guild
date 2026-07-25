@@ -1,0 +1,215 @@
+/* =========================================================
+   学びの森 Ver1.1｜iPad基準レイアウト修正
+
+   目的：
+   ・黒板中央を教材専用領域として空ける
+   ・ギルドマスターと主人公を画面下の左右端へ配置する
+   ・主人公は通常向きのまま表示し、反転処理を行わない
+   ・会話欄を画面下の横長ウィンドウへ固定する
+   ・操作ボタンを右上に横並びで表示する
+   ========================================================= */
+
+#learningforest-screen {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+#learningforest-screen .learningforest-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* 背景画像に描かれた黒板の内側だけを授業領域にする */
+#learningforest-screen .learning-blackboard {
+    position: absolute !important;
+    z-index: 8;
+    left: 26.2%;
+    top: 17.8%;
+    width: 58.2%;
+    height: 46.4%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: clamp(10px, 1.55vw, 24px);
+    overflow: hidden;
+}
+
+/* マスターは左下・黒板の外。教材を隠さないサイズに固定 */
+#learningforest-screen .learning-master {
+    position: absolute !important;
+    z-index: 12;
+    left: 0.4%;
+    bottom: 16.5%;
+    width: clamp(118px, 13.5vw, 220px);
+    height: auto;
+    max-height: 48vh;
+    margin: 0;
+    object-fit: contain;
+    object-position: left bottom;
+    pointer-events: none;
+}
+
+/* 主人公は既存画像の通常向きのまま。右下からマスターを見る */
+#learningforest-screen .learning-player {
+    position: absolute !important;
+    z-index: 11;
+    right: 0.8%;
+    bottom: 16.5%;
+    left: auto;
+    width: clamp(112px, 13.2vw, 214px);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 0;
+    transform: none !important;
+    transform-origin: center bottom;
+    pointer-events: none;
+}
+
+#learningforest-screen .learning-player img {
+    position: absolute !important;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: contain;
+}
+
+/* 会話は右側パネルにせず、画面下の横長RPGウィンドウにする */
+#learningforest-screen .learning-dialogue {
+    position: absolute !important;
+    z-index: 25;
+    left: 1.5%;
+    right: 1.5%;
+    top: auto;
+    bottom: 1.4%;
+    width: auto;
+    height: 15.2%;
+    min-height: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: clamp(10px, 1.2vw, 18px) clamp(22px, 2.5vw, 38px);
+    display: block;
+    overflow: hidden;
+}
+
+#learningforest-screen .learning-speaker {
+    margin: 0 0 clamp(2px, .45vh, 6px);
+    font-size: clamp(12px, 1.25vw, 18px);
+    line-height: 1.15;
+}
+
+#learningforest-screen .learning-text {
+    margin: 0;
+    max-width: calc(100% - 34px);
+    font-size: clamp(14px, 1.55vw, 22px);
+    line-height: 1.45;
+}
+
+#learningforest-screen .learning-next-mark {
+    right: clamp(14px, 1.6vw, 24px);
+    bottom: clamp(7px, .9vh, 13px);
+}
+
+/* 上部操作は必ず横書き・横並び */
+#learningforest-screen .learning-controls {
+    position: absolute !important;
+    z-index: 30;
+    top: 2.1%;
+    right: 1.5%;
+    left: auto;
+    bottom: auto;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(5px, .65vw, 10px);
+    margin: 0;
+}
+
+#learningforest-screen .learning-controls button {
+    width: auto;
+    min-width: max-content;
+    min-height: 38px;
+    padding: 7px clamp(10px, 1vw, 15px);
+    white-space: nowrap;
+    writing-mode: horizontal-tb;
+    word-break: keep-all;
+    line-height: 1.15;
+}
+
+#learningforest-screen #backGuildHallFromLearning {
+    position: absolute !important;
+    z-index: 31;
+    left: 1.5%;
+    top: 2.1%;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    white-space: nowrap;
+    writing-mode: horizontal-tb;
+}
+
+/* メモを開いた時だけ右側へ重ねる。閉じた通常画面の幅は奪わない */
+#learningforest-screen .learning-memo-panel {
+    position: absolute !important;
+    z-index: 70;
+    top: 7.5%;
+    right: 1.5%;
+    bottom: 18.2%;
+    width: min(36vw, 500px);
+    height: auto;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 900px), screen and (max-height: 650px) {
+    #learningforest-screen .learning-blackboard {
+        left: 26.2%;
+        top: 17.8%;
+        width: 58.2%;
+        height: 46.4%;
+        padding: 8px;
+    }
+
+    #learningforest-screen .learning-master {
+        left: 0.2%;
+        bottom: 17%;
+        width: clamp(105px, 12.8vw, 170px);
+        max-height: 43vh;
+    }
+
+    #learningforest-screen .learning-player {
+        right: 0.4%;
+        bottom: 17%;
+        width: clamp(102px, 12.5vw, 165px);
+    }
+
+    #learningforest-screen .learning-dialogue {
+        left: 1.2%;
+        right: 1.2%;
+        bottom: 1.2%;
+        height: 15.2%;
+        padding: 8px 18px;
+    }
+
+    #learningforest-screen .learning-text {
+        font-size: clamp(12px, 1.45vw, 17px);
+        line-height: 1.35;
+    }
+
+    #learningforest-screen .learning-controls {
+        right: 1.2%;
+        gap: 4px;
+    }
+
+    #learningforest-screen .learning-controls button,
+    #learningforest-screen #backGuildHallFromLearning {
+        min-height: 34px;
+        padding: 6px 9px;
+        font-size: 11px;
+    }
+}
