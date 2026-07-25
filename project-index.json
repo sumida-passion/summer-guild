@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T13:07:01.650708+00:00",
-    "commit": "0fcb140",
+    "atUtc": "2026-07-25T13:25:27.971696+00:00",
+    "commit": "547e7be",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 20,
-    "totalBytes": 78884927,
+    "totalBytes": 78894290,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1355,9 +1355,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 11817,
-      "sha1": "740bbd7b09",
-      "lineCount": 161
+      "sizeBytes": 13427,
+      "sha1": "0c7c9df037",
+      "lineCount": 175
     },
     {
       "path": "docs/game-rules.md",
@@ -1377,9 +1377,9 @@
       "stem": "GPT_HANDOFF",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 5537,
-      "sha1": "b27f7dda6e",
-      "lineCount": 102
+      "sizeBytes": 13290,
+      "sha1": "824b194d0c",
+      "lineCount": 257
     },
     {
       "path": "docs/GPT_PROJECT_STATE.md",
@@ -3006,7 +3006,13 @@
     {
       "status": "M",
       "paths": [
-        "js/systems/blackDogPet.js"
+        "docs/GPT_HANDOFF.md"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "docs/development-log.md"
       ]
     }
   ],
