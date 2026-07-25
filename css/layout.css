@@ -2439,7 +2439,8 @@ body.wardrobe-open {
     position: absolute;
     width: clamp(150px, 25vw, 300px);
     aspect-ratio: 370 / 320;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(var(--black-dog-scale, 1));
+    transform-origin: center bottom;
     z-index: 18;
     pointer-events: none;
 }
