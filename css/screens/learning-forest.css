@@ -34,6 +34,7 @@
     margin: 0;
     padding: clamp(10px, 1.55vw, 24px);
     overflow: hidden;
+    transform: translate(-60px, -20px);
 }
 
 /* マスターは左下・黒板の外。教材を隠さないサイズに固定 */
