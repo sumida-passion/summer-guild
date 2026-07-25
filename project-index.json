@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T08:38:39.011428+00:00",
-    "commit": "522ea5b",
+    "atUtc": "2026-07-25T13:05:50.742853+00:00",
+    "commit": "ecaecce",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 55,
     "javascriptApiFileCount": 20,
-    "totalBytes": 78879248,
+    "totalBytes": 78879550,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1410,8 +1410,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 15456,
-      "sha1": "b99a780305",
+      "sizeBytes": 15451,
+      "sha1": "ce216e0b80",
       "lineCount": 694
     },
     {
@@ -1671,9 +1671,9 @@
       "stem": "blackDogPet",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 5775,
-      "sha1": "9ead88473e",
-      "lineCount": 118
+      "sizeBytes": 6086,
+      "sha1": "e57c9a43e4",
+      "lineCount": 130
     },
     {
       "path": "js/systems/musicPlayer.js",
@@ -1746,8 +1746,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4496,
-      "sha1": "7398c0192c",
+      "sizeBytes": 4492,
+      "sha1": "7549c98f99",
       "lineCount": 177
     },
     {
@@ -3001,7 +3001,13 @@
     {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
