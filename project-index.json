@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-25T15:29:32.042069+00:00",
-    "commit": "05ce67d",
+    "atUtc": "2026-07-25T15:30:00.944082+00:00",
+    "commit": "c0fa3b7",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 84019874,
+    "totalBytes": 84019868,
     "extensions": {
       ".css": 5,
       ".html": 1,
@@ -1209,8 +1209,8 @@
       "stem": "layout",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 64526,
-      "sha1": "fcefb7a48b",
+      "sizeBytes": 64520,
+      "sha1": "57f1a6d603",
       "lineCount": 2787
     },
     {
@@ -3102,13 +3102,7 @@
     {
       "status": "M",
       "paths": [
-        "index.html"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "service-worker.js"
+        "css/layout.css"
       ]
     }
   ],
