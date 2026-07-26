@@ -7,7 +7,7 @@
 
 | 項目 | 内容 |
 |---|---|
-| 生成日時（UTC） | 2026-07-26T04:18:12.585Z |
+| 生成日時（UTC） | 2026-07-26T07:18:48.819Z |
 | リポジトリ | unknown |
 | ブランチ | `unknown` |
 | コミット | `unknown` |
@@ -17,12 +17,12 @@
 
 | 種類 | 数 |
 |---|---:|
-| 全ファイル | 179 |
+| 全ファイル | 181 |
 | フォルダ | 67 |
 | 画像 | 66 |
 | 音声 | 15 |
 | 動画 | 0 |
-| JavaScript | 30 |
+| JavaScript | 32 |
 | CSS | 6 |
 | HTML | 1 |
 
@@ -262,8 +262,10 @@ summer-guild/
 │   └── systems/
 │       ├── .gitkeep
 │       ├── blackDogPet.js
+│       ├── dailyDashboard.js
 │       ├── furnitureSystem.js
 │       ├── musicPlayer.js
+│       ├── owlMessenger.js
 │       ├── questEngine.js
 │       └── questMusicPlayer.js
 ├── manifest.webmanifest
@@ -288,33 +290,35 @@ summer-guild/
 ### CSS
 
 1. `css/common.css?v=20260723-layer-order-v1`
-2. `css/layout.css?v=20260726-furniture-v1`
+2. `css/layout.css?v=20260726-guildhall-daily-v1-1`
 3. `css/screens/iphone-landscape.css?v=20260723-review-iphone1`
 4. `css/screens/learning-forest.css?v=20260726-learning-forest-lesson8-bgm-v1`
-5. `css/developer.css?v=20260726-furniture-v1`
+5. `css/developer.css?v=20260726-furniture-render-fix1`
 
 ### JavaScript
 
 1. `js/settings.js?v=20260725-dogscale1`
-2. `js/systems/furnitureSystem.js?v=20260726-furniture-v1`
-3. `data/items/items.js?v=20260726-furniture-v1`
-4. `data/shop/music.js?v=20260721-1`
-5. `js/systems/musicPlayer.js?v=20260721-1`
-6. `js/systems/questMusicPlayer.js?v=20260726-learning-forest-bgm-v1`
-7. `js/screens/shop.js?v=20260726-furniture-v1`
-8. `js/screens/musicShop.js?v=20260721-1`
-9. `js/screens/wardrobe.js?v=20260724-rockshoe1`
-10. `js/systems/questEngine.js?v=20260722-3`
-11. `js/quests/daily.js?v=20260723-review1`
-12. `js/numberpad.js?v=20260721-1`
-13. `js/quests/hyakumasu.js?v=20260723-5`
-14. `js/quests/review.js?v=20260723-review-iphone1`
-15. `js/quests/math.js?v=20260723-mathguild30`
-16. `js/quests/society.js?v=20260724-socialguild1`
-17. `js/screens/learningForest.js?v=20260726-learning-forest-lesson8-bgm-v1`
-18. `js/developer.js?v=20260726-furniture-v1`
-19. `js/systems/blackDogPet.js?v=20260725-dogscale1`
-20. `js/app.js?v=20260726-furniture-v1`
+2. `js/systems/owlMessenger.js?v=20260726-guildhall-daily-v1`
+3. `js/systems/furnitureSystem.js?v=20260726-guildhall-daily-v1`
+4. `data/items/items.js?v=20260726-furniture-render-fix1`
+5. `data/shop/music.js?v=20260721-1`
+6. `js/systems/musicPlayer.js?v=20260721-1`
+7. `js/systems/questMusicPlayer.js?v=20260726-learning-forest-bgm-v1`
+8. `js/screens/shop.js?v=20260726-furniture-render-fix1`
+9. `js/screens/musicShop.js?v=20260721-1`
+10. `js/screens/wardrobe.js?v=20260724-rockshoe1`
+11. `js/systems/questEngine.js?v=20260722-3`
+12. `js/quests/daily.js?v=20260726-guildhall-daily-v1`
+13. `js/numberpad.js?v=20260721-1`
+14. `js/quests/hyakumasu.js?v=20260723-5`
+15. `js/quests/review.js?v=20260726-guildhall-daily-v1`
+16. `js/systems/dailyDashboard.js?v=20260726-guildhall-daily-v1-1`
+17. `js/quests/math.js?v=20260723-mathguild30`
+18. `js/quests/society.js?v=20260724-socialguild1`
+19. `js/screens/learningForest.js?v=20260726-learning-forest-daily-gp-v1-1`
+20. `js/developer.js?v=20260726-furniture-render-fix1`
+21. `js/systems/blackDogPet.js?v=20260725-dogscale1`
+22. `js/app.js?v=20260726-guildhall-daily-v1`
 
 ### 画像参照
 
@@ -353,8 +357,10 @@ summer-guild/
 - `js/settings.js`
 - `js/storage.js`
 - `js/systems/blackDogPet.js`
+- `js/systems/dailyDashboard.js`
 - `js/systems/furnitureSystem.js`
 - `js/systems/musicPlayer.js`
+- `js/systems/owlMessenger.js`
 - `js/systems/questEngine.js`
 - `js/systems/questMusicPlayer.js`
 - `service-worker.js`
