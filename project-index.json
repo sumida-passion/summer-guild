@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T06:48:44.182257+00:00",
-    "commit": "bee26fa",
+    "atUtc": "2026-07-26T06:49:06.686628+00:00",
+    "commit": "441679f",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 24,
-    "totalBytes": 96049715,
+    "totalBytes": 96054076,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1506,9 +1506,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 33472,
-      "sha1": "bbe0173e61",
-      "lineCount": 363
+      "sizeBytes": 35240,
+      "sha1": "bfd6727c6d",
+      "lineCount": 378
     },
     {
       "path": "docs/game-rules.md",
@@ -1517,9 +1517,9 @@
       "stem": "game-rules",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 4734,
-      "sha1": "2fc0352da5",
-      "lineCount": 60
+      "sizeBytes": 5480,
+      "sha1": "2817271bd4",
+      "lineCount": 70
     },
     {
       "path": "docs/GPT_HANDOFF.md",
@@ -1528,9 +1528,9 @@
       "stem": "GPT_HANDOFF",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 16197,
-      "sha1": "78bd38cbc9",
-      "lineCount": 291
+      "sizeBytes": 18044,
+      "sha1": "8314ad9db8",
+      "lineCount": 315
     },
     {
       "path": "docs/GPT_PROJECT_STATE.md",
@@ -3487,21 +3487,21 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "js/systems/dailyDashboard.js"
+        "docs/GPT_HANDOFF.md"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "js/systems/furnitureSystem.js"
+        "docs/development-log.md"
       ]
     },
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "js/systems/owlMessenger.js"
+        "docs/game-rules.md"
       ]
     }
   ],
