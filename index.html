@@ -23,7 +23,7 @@
 
     <link
         rel="stylesheet"
-        href="css/layout.css?v=20260726-furniture-render-fix1">
+        href="css/layout.css?v=20260726-guildhall-daily-v1">
 
     <link
         rel="stylesheet"
@@ -218,6 +218,17 @@
 
 
         <button
+            id="owlMessenger"
+            class="owl-messenger"
+            type="button"
+            hidden
+            aria-label="ギルド本部からの手紙を読む">
+            <span class="owl-messenger-icon" aria-hidden="true">🦉</span>
+            <span class="owl-messenger-letter" aria-hidden="true">✉️</span>
+        </button>
+
+
+        <button
             id="openWardrobe"
             type="button">
             着せ替える
@@ -308,6 +319,18 @@
                 type="button">
                 今日のクエスト
             </button>
+
+
+            <section id="guildhallDailyBoard" class="guildhall-daily-board" aria-labelledby="guildhallDailyTitle">
+                <header class="guildhall-daily-header">
+                    <div>
+                        <p class="guildhall-daily-kicker">DAILY QUEST</p>
+                        <h2 id="guildhallDailyTitle">今日のデイリー</h2>
+                    </div>
+                    <p id="guildhallDailyProgress" class="guildhall-daily-progress">0 / 0</p>
+                </header>
+                <div id="guildhallDailyList" class="guildhall-daily-list"></div>
+            </section>
 
 
             <button
@@ -718,7 +741,9 @@
 
     <script src="js/settings.js?v=20260725-dogscale1"></script>
 
-    <script src="js/systems/furnitureSystem.js?v=20260726-furniture-render-fix1"></script>
+    <script src="js/systems/owlMessenger.js?v=20260726-guildhall-daily-v1"></script>
+
+    <script src="js/systems/furnitureSystem.js?v=20260726-guildhall-daily-v1"></script>
 
     <script src="data/items/items.js?v=20260726-furniture-render-fix1"></script>
 
@@ -736,14 +761,16 @@
 
     <script src="js/systems/questEngine.js?v=20260722-3"></script>
 
-    <script src="js/quests/daily.js?v=20260723-review1"></script>
+    <script src="js/quests/daily.js?v=20260726-guildhall-daily-v1"></script>
 
     <!-- 共通数字入力パッド -->
     <script src="js/numberpad.js?v=20260721-1"></script>
 
     <script src="js/quests/hyakumasu.js?v=20260723-5"></script>
 
-    <script src="js/quests/review.js?v=20260726-review-gp-balance-v1"></script>
+    <script src="js/quests/review.js?v=20260726-guildhall-daily-v1"></script>
+
+    <script src="js/systems/dailyDashboard.js?v=20260726-guildhall-daily-v1"></script>
 
     <script src="js/quests/math.js?v=20260723-mathguild30"></script>
 
@@ -755,7 +782,7 @@
 
     <script src="js/systems/blackDogPet.js?v=20260725-dogscale1"></script>
 
-    <script src="js/app.js?v=20260726-furniture-render-fix1"></script>
+    <script src="js/app.js?v=20260726-guildhall-daily-v1"></script>
 
 </body>
 
