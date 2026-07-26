@@ -1089,6 +1089,12 @@
     font-weight: 900;
 }
 
+/* 30円のまとまりを数える場面だけ、黒板中央へ少し下げる。
+   他の第5問画面や共通教材位置には影響させない。 */
+#learningforest-screen .lesson5-count-board {
+    transform: translateY(clamp(20px, 2.5vh, 30px));
+}
+
 #learningforest-screen .lesson5-count-board p { margin: 0; color: #dcebc7; font-weight: 850; }
 #learningforest-screen .lesson5-count-board > strong { font-size: clamp(28px, 3vw, 44px); color: #fff4b7; }
 
