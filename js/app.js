@@ -943,6 +943,10 @@ function updateResultScreen(
     }
 
 
+    const isReviewResult =
+        typeof safeData.questId === "string"
+        && safeData.questId.startsWith("review-");
+
     const resultMessageElement =
         document.getElementById(
             "resultMessage"
@@ -959,6 +963,15 @@ function updateResultScreen(
         document.getElementById(
             "resultBackQuestBoard"
         );
+
+    if (resultBackButton) {
+        resultBackButton.textContent = isReviewResult
+            ? "ギルドホールへ戻る"
+            : "クエストボードへ戻る";
+        resultBackButton.dataset.resultDestination = isReviewResult
+            ? "guildhall"
+            : "questboard";
+    }
 
 
     if (resultMessageElement) {
@@ -1889,11 +1902,17 @@ async function returnToQuestBoard() {
 
     refreshGameDisplays();
 
-    renderQuestBoardIfAvailable();
+    const button = document.getElementById("resultBackQuestBoard");
+    const destination = button?.dataset?.resultDestination === "guildhall"
+        ? "guildhall"
+        : "questboard";
 
+    if (destination === "questboard") {
+        renderQuestBoardIfAvailable();
+    }
 
     await changeScreen(
-        "questboard"
+        destination
     );
 
 }
