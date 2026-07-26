@@ -27,15 +27,25 @@
         { id: "furniture_table_clock", name: "時詠みの置時計", price: 450, image: "assets/items/furniture/GuildTableClock.PNG", layer: 44, description: "時を読む魔法使いが大切に使っていた置時計。今日も静かに時を刻み、学ぶ者を見守る。" }
     ];
 
+    function getSettingsRoot() {
+        // settings.js の Settings は let 宣言のため window.Settings にはならない。
+        // 同じ classic script のグローバル lexical binding を直接参照する。
+        if (typeof Settings !== "undefined" && Settings && typeof Settings === "object") {
+            return Settings;
+        }
+        return null;
+    }
+
     function ensureData() {
-        if (!window.Settings || typeof window.Settings !== "object") return null;
-        if (!Settings.furniture || typeof Settings.furniture !== "object" || Array.isArray(Settings.furniture)) {
-            Settings.furniture = { items: {}, deliveryNoticeDate: "" };
+        const settings = getSettingsRoot();
+        if (!settings) return null;
+        if (!settings.furniture || typeof settings.furniture !== "object" || Array.isArray(settings.furniture)) {
+            settings.furniture = { items: {}, deliveryNoticeDate: "" };
         }
-        if (!Settings.furniture.items || typeof Settings.furniture.items !== "object" || Array.isArray(Settings.furniture.items)) {
-            Settings.furniture.items = {};
+        if (!settings.furniture.items || typeof settings.furniture.items !== "object" || Array.isArray(settings.furniture.items)) {
+            settings.furniture.items = {};
         }
-        return Settings.furniture;
+        return settings.furniture;
     }
 
     function getItem(id) { return FURNITURE.find((item) => item.id === id) || null; }
@@ -69,7 +79,12 @@
         if (typeof spendGp !== "function" || !spendGp(item.price)) {
             return { success: false, reason: "not-enough-gp", totalGp: typeof getGp === "function" ? getGp() : 0 };
         }
-        setState(item.id, STATUS.PENDING, typeof getLocalDateKey === "function" ? getLocalDateKey() : localDateKey());
+        const saved = setState(item.id, STATUS.PENDING, typeof getLocalDateKey === "function" ? getLocalDateKey() : localDateKey());
+        if (!saved) {
+            // 保存できなかった場合はGPを戻し、「GPだけ減る」状態を防ぐ。
+            if (typeof addGp === "function") addGp(item.price);
+            return { success: false, reason: "save-failed", totalGp: typeof getGp === "function" ? getGp() : 0 };
+        }
         return { success: true, status: STATUS.PENDING, totalGp: typeof getGp === "function" ? getGp() : 0 };
     }
 
