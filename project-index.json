@@ -13,20 +13,20 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T04:28:22.613172+00:00",
-    "commit": "9bcd0b8",
+    "atUtc": "2026-07-26T04:29:01.475387+00:00",
+    "commit": "28e1dcc",
     "commitSubject": "Add files via upload"
   },
   "summary": {
-    "fileCount": 179,
+    "fileCount": 180,
     "directoryCount": 57,
     "imageCount": 66,
-    "javascriptApiFileCount": 21,
-    "totalBytes": 96019770,
+    "javascriptApiFileCount": 22,
+    "totalBytes": 96028982,
     "extensions": {
       ".css": 6,
       ".html": 1,
-      ".js": 29,
+      ".js": 30,
       ".json": 1,
       ".md": 6,
       ".mp3": 15,
@@ -96,7 +96,7 @@
       "tests",
       "tools"
     ],
-    "treeText": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Afternoon in the Academy.mp3\n│   │   │   ├── Bloom in the Garden.mp3\n│   │   │   ├── Candlelit Banquet.mp3\n│   │   │   ├── Harbor Breeze.mp3\n│   │   │   ├── Morning Light in the Guild.mp3\n│   │   │   ├── Sunlight Through Leaves.mp3\n│   │   │   ├── The Quiet Court.mp3\n│   │   │   └── Thunder in the Hall.mp3\n│   │   ├── quests/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Blazing Dragoon's Charge.mp3\n│   │   │   ├── learningForest.mp3\n│   │   │   ├── The Clockwork Gambit 2.mp3\n│   │   │   ├── The Clockwork Gambit.mp3\n│   │   │   ├── The Moment Before the Shot.mp3\n│   │   │   ├── vsMathGuildMaster_final.mp3\n│   │   │   └── vsMathGuildMaster_start.mp3\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   ├── .gitkeep\n│   │   │   └── mathGuildForest.png\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   ├── .gitkeep\n│   │   │   │   └── mathGuildMaster.png\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   ├── pet/\n│   │   │   ├── .gitkeep\n│   │   │   ├── blackdog_base.PNG\n│   │   │   ├── blackdog_calm.PNG\n│   │   │   ├── blackdog_joy.PNG\n│   │   │   ├── blackdog_sleep.PNG\n│   │   │   ├── blanket.PNG\n│   │   │   ├── dogtoy_ball.PNG\n│   │   │   ├── dogtoy_bone.PNG\n│   │   │   └── dogtoy_rope.PNG\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   ├── .gitkeep\n│   │       │   └── neckwarmer_acc.PNG\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_bottoms.PNG\n│   │       │   │   ├── bluejeans_bottoms.PNG\n│   │       │   │   ├── cycling_bottoms.PNG\n│   │       │   │   ├── default_bottoms.png\n│   │       │   │   ├── doctor_bottoms.PNG\n│   │       │   │   ├── kyudo_bottoms.PNG\n│   │       │   │   ├── longskirtgrey_bottoms.PNG\n│   │       │   │   ├── rocknroll_bottoms.PNG\n│   │       │   │   ├── schooluniform_bottoms.PNG\n│   │       │   │   ├── stripe_bottoms.PNG\n│   │       │   │   └── tennis_bottoms.PNG\n│   │       │   ├── capes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── kokugoguild_capes.PNG\n│   │       │   │   └── rikaguild_capes.PNG\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── blackdog_fullset.PNG\n│   │       │   │   └── cloudstrife_outerset.PNG\n│   │       │   ├── shoes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── doctor_shoes.PNG\n│   │       │   │   ├── kyudo_shoes.PNG\n│   │       │   │   └── schooluniform_shoes.PNG\n│   │       │   ├── tops/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_tops.PNG\n│   │       │   │   ├── border_tops.PNG\n│   │       │   │   ├── cycling_tops.PNG\n│   │       │   │   ├── default_tops.png\n│   │       │   │   ├── doctor_tops.PNG\n│   │       │   │   ├── foody_tops.PNG\n│   │       │   │   ├── kyudo_tops.PNG\n│   │       │   │   ├── lightning_tops.PNG\n│   │       │   │   ├── mountainparker_tops.PNG\n│   │       │   │   ├── rocknroll_tops.PNG\n│   │       │   │   ├── schooluniform_tops.PNG\n│   │       │   │   ├── schooluniformsummer_tops.PNG\n│   │       │   │   └── tennis_tops.PNG\n│   │       │   └── .gitkeep\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   ├── .gitkeep\n│   │       │   ├── glasses_head.PNG\n│   │       │   └── google_head.PNG\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       ├── .gitkeep\n│   │       ├── bookshelf.PNG\n│   │       ├── chair.PNG\n│   │       ├── GuildTableClock.PNG\n│   │       ├── magicBroom.PNG\n│   │       ├── magicCircle.PNG\n│   │       ├── magicCrystal.PNG\n│   │       ├── staffofLightning.PNG\n│   │       ├── starGlobe.PNG\n│   │       └── wisemenDesk.PNG\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button.png\n│       │   ├── wood_button_pressed.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── common.css\n│   │   ├── iphone-landscape.css\n│   │   └── learning-forest.css\n│   ├── common.css\n│   ├── developer.css\n│   └── layout.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   ├── .gitkeep\n│   │   └── items.js\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       ├── .gitkeep\n│       └── music.js\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   ├── game-rules.md\n│   ├── GPT_HANDOFF.md\n│   ├── GPT_PROJECT_STATE.md\n│   └── PROJECT_STATE.json\n├── js/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── review.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── learningForest.js\n│   │   ├── musicShop.js\n│   │   ├── shop.js\n│   │   └── wardrobe.js\n│   ├── systems/\n│   │   ├── .gitkeep\n│   │   ├── blackDogPet.js\n│   │   ├── musicPlayer.js\n│   │   ├── questEngine.js\n│   │   └── questMusicPlayer.js\n│   ├── app.js\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── settings.js\n│   └── storage.js\n├── saves/\n│   └── .gitkeep\n├── tests/\n│   └── .gitkeep\n├── tools/\n│   └── generateProjectState.js\n├── index.html\n├── manifest.webmanifest\n├── README.md\n└── service-worker.js"
+    "treeText": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Afternoon in the Academy.mp3\n│   │   │   ├── Bloom in the Garden.mp3\n│   │   │   ├── Candlelit Banquet.mp3\n│   │   │   ├── Harbor Breeze.mp3\n│   │   │   ├── Morning Light in the Guild.mp3\n│   │   │   ├── Sunlight Through Leaves.mp3\n│   │   │   ├── The Quiet Court.mp3\n│   │   │   └── Thunder in the Hall.mp3\n│   │   ├── quests/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Blazing Dragoon's Charge.mp3\n│   │   │   ├── learningForest.mp3\n│   │   │   ├── The Clockwork Gambit 2.mp3\n│   │   │   ├── The Clockwork Gambit.mp3\n│   │   │   ├── The Moment Before the Shot.mp3\n│   │   │   ├── vsMathGuildMaster_final.mp3\n│   │   │   └── vsMathGuildMaster_start.mp3\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   ├── .gitkeep\n│   │   │   └── mathGuildForest.png\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   ├── .gitkeep\n│   │   │   │   └── mathGuildMaster.png\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   ├── pet/\n│   │   │   ├── .gitkeep\n│   │   │   ├── blackdog_base.PNG\n│   │   │   ├── blackdog_calm.PNG\n│   │   │   ├── blackdog_joy.PNG\n│   │   │   ├── blackdog_sleep.PNG\n│   │   │   ├── blanket.PNG\n│   │   │   ├── dogtoy_ball.PNG\n│   │   │   ├── dogtoy_bone.PNG\n│   │   │   └── dogtoy_rope.PNG\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   ├── .gitkeep\n│   │       │   └── neckwarmer_acc.PNG\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_bottoms.PNG\n│   │       │   │   ├── bluejeans_bottoms.PNG\n│   │       │   │   ├── cycling_bottoms.PNG\n│   │       │   │   ├── default_bottoms.png\n│   │       │   │   ├── doctor_bottoms.PNG\n│   │       │   │   ├── kyudo_bottoms.PNG\n│   │       │   │   ├── longskirtgrey_bottoms.PNG\n│   │       │   │   ├── rocknroll_bottoms.PNG\n│   │       │   │   ├── schooluniform_bottoms.PNG\n│   │       │   │   ├── stripe_bottoms.PNG\n│   │       │   │   └── tennis_bottoms.PNG\n│   │       │   ├── capes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── kokugoguild_capes.PNG\n│   │       │   │   └── rikaguild_capes.PNG\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── blackdog_fullset.PNG\n│   │       │   │   └── cloudstrife_outerset.PNG\n│   │       │   ├── shoes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── doctor_shoes.PNG\n│   │       │   │   ├── kyudo_shoes.PNG\n│   │       │   │   └── schooluniform_shoes.PNG\n│   │       │   ├── tops/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_tops.PNG\n│   │       │   │   ├── border_tops.PNG\n│   │       │   │   ├── cycling_tops.PNG\n│   │       │   │   ├── default_tops.png\n│   │       │   │   ├── doctor_tops.PNG\n│   │       │   │   ├── foody_tops.PNG\n│   │       │   │   ├── kyudo_tops.PNG\n│   │       │   │   ├── lightning_tops.PNG\n│   │       │   │   ├── mountainparker_tops.PNG\n│   │       │   │   ├── rocknroll_tops.PNG\n│   │       │   │   ├── schooluniform_tops.PNG\n│   │       │   │   ├── schooluniformsummer_tops.PNG\n│   │       │   │   └── tennis_tops.PNG\n│   │       │   └── .gitkeep\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   ├── .gitkeep\n│   │       │   ├── glasses_head.PNG\n│   │       │   └── google_head.PNG\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       ├── .gitkeep\n│   │       ├── bookshelf.PNG\n│   │       ├── chair.PNG\n│   │       ├── GuildTableClock.PNG\n│   │       ├── magicBroom.PNG\n│   │       ├── magicCircle.PNG\n│   │       ├── magicCrystal.PNG\n│   │       ├── staffofLightning.PNG\n│   │       ├── starGlobe.PNG\n│   │       └── wisemenDesk.PNG\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button.png\n│       │   ├── wood_button_pressed.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── common.css\n│   │   ├── iphone-landscape.css\n│   │   └── learning-forest.css\n│   ├── common.css\n│   ├── developer.css\n│   └── layout.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   ├── .gitkeep\n│   │   └── items.js\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       ├── .gitkeep\n│       └── music.js\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   ├── game-rules.md\n│   ├── GPT_HANDOFF.md\n│   ├── GPT_PROJECT_STATE.md\n│   └── PROJECT_STATE.json\n├── js/\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── review.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── learningForest.js\n│   │   ├── musicShop.js\n│   │   ├── shop.js\n│   │   └── wardrobe.js\n│   ├── systems/\n│   │   ├── .gitkeep\n│   │   ├── blackDogPet.js\n│   │   ├── furnitureSystem.js\n│   │   ├── musicPlayer.js\n│   │   ├── questEngine.js\n│   │   └── questMusicPlayer.js\n│   ├── app.js\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── settings.js\n│   └── storage.js\n├── saves/\n│   └── .gitkeep\n├── tests/\n│   └── .gitkeep\n├── tools/\n│   └── generateProjectState.js\n├── index.html\n├── manifest.webmanifest\n├── README.md\n└── service-worker.js"
   },
   "files": [
     {
@@ -1838,6 +1838,17 @@
       "lineCount": 136
     },
     {
+      "path": "js/systems/furnitureSystem.js",
+      "directory": "js/systems",
+      "name": "furnitureSystem.js",
+      "stem": "furnitureSystem",
+      "extension": ".js",
+      "extensionNormalized": ".js",
+      "sizeBytes": 9212,
+      "sha1": "2d0e94d2ac",
+      "lineCount": 171
+    },
+    {
       "path": "js/systems/musicPlayer.js",
       "directory": "js/systems",
       "name": "musicPlayer.js",
@@ -3131,6 +3142,32 @@
       ]
     },
     {
+      "path": "js/systems/furnitureSystem.js",
+      "functions": [
+        "ensureData",
+        "getItem",
+        "getState",
+        "setState",
+        "isFurnitureItem",
+        "isOwned",
+        "purchase",
+        "localDateKey",
+        "processDeliveries",
+        "ensureLayer",
+        "renderRoom",
+        "statusLabel",
+        "developerSet",
+        "developerSetAll",
+        "handleScreenChange",
+        "init"
+      ],
+      "classes": [],
+      "windowExports": [
+        "FURNITURE_SHOP_ITEMS",
+        "FurnitureSystem"
+      ]
+    },
+    {
       "path": "js/systems/musicPlayer.js",
       "functions": [
         "getGuildMusicTracks",
@@ -3389,9 +3426,9 @@
   },
   "latestCommitChanges": [
     {
-      "status": "M",
+      "status": "A",
       "paths": [
-        "js/screens/shop.js"
+        "js/systems/furnitureSystem.js"
       ]
     }
   ],
