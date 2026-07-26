@@ -7,6 +7,7 @@
 
 (() => {
     const STORAGE_KEY = "summerGuildLearningForest";
+    const DAILY_BONUS_GP = 3;
 
     const lessonCatalog = [
         { number: 1, group: 1, title: "兄と弟のお金", ready: true, id: "math-wasa-01" },
@@ -581,8 +582,10 @@
                     const feedback = board().querySelector(".learning-feedback");
                     if (good) {
                         slots.forEach((item) => item.classList.add("correct"));
-                        saveCompletion();
-                        completeInteractiveStep("全部つながった。▽を押して、今日の学びをまとめよう。");
+                        const dailyBonus = saveCompletion();
+                        completeInteractiveStep(dailyBonus
+                            ? `全部つながった。学びの森デイリーボーナス ${dailyBonus}GPを獲得！ ▽を押して、今日の学びをまとめよう。`
+                            : "全部つながった。▽を押して、今日の学びをまとめよう。");
                     } else {
                         if (feedback) feedback.textContent = "順番をもう一度考えよう。まず『違う180円』を外すところからだ。";
                         window.setTimeout(() => renderOrderExercise(), 900);
@@ -1276,7 +1279,7 @@
             if (selected.length === formulas.length) {
                 const good = selected.every((value, index) => value === index);
                 const feedback = board().querySelector('.learning-feedback');
-                if (good) { slots.forEach((item) => item.classList.add('correct')); saveCompletion(); completeInteractiveStep(success); }
+                if (good) { slots.forEach((item) => item.classList.add('correct')); const dailyBonus = saveCompletion(); completeInteractiveStep(dailyBonus ? `${success} 学びの森デイリーボーナス ${dailyBonus}GPを獲得！` : success); }
                 else { if (feedback) feedback.textContent = hint; window.setTimeout(() => renderGenericOrder({ formulas, success, hint }), 900); }
             }
         }));
@@ -1419,14 +1422,31 @@
         redrawMemo();
     }
 
+    function todayKey() {
+        const now = new Date();
+        return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    }
+
     function saveCompletion() {
-        if (!selectedLesson?.id) return;
+        if (!selectedLesson?.id) return 0;
         const state = getState();
         const list = Array.isArray(state.completedLessons) ? state.completedLessons : [];
         if (!list.includes(selectedLesson.id)) list.push(selectedLesson.id);
         state.completedLessons = list;
         state.lastCompletedAt = new Date().toISOString();
+
+        let dailyBonus = 0;
+        const today = todayKey();
+        if (state.dailyBonusDate !== today && typeof addGp === "function") {
+            dailyBonus = DAILY_BONUS_GP;
+            addGp(dailyBonus);
+            state.dailyBonusDate = today;
+            state.dailyBonusClaimedAt = new Date().toISOString();
+            if (typeof refreshGameDisplays === "function") refreshGameDisplays();
+        }
+
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        return dailyBonus;
     }
 
     function getState() {
