@@ -14,7 +14,7 @@
   function items(){
     const r=reviewStatus();
     const list=[
-      {id:"hyakumasu",label:"百ます計算",gp:"初回10GP＋加点",done:hyakumasuDone(),go:()=>typeof startQuest==="function"&&startQuest("hyakumasu")},
+      {id:"hyakumasu",label:"百ます計算",gp:"10〜16GP",done:hyakumasuDone(),go:()=>typeof startQuest==="function"&&startQuest("hyakumasu")},
       {id:"learning-forest",label:"学びの森",gp:"3GP",done:learningForestDone(),go:()=>typeof changeScreen==="function"&&changeScreen("learningforest")}
     ];
     [["math","算数"],["social","社会"]].forEach(([subject,name])=>{
