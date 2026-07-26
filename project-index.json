@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T13:41:02.615877+00:00",
-    "commit": "unknown",
-    "commitSubject": "unknown"
+    "atUtc": "2026-07-26T14:17:37.808949+00:00",
+    "commit": "a06a1fd",
+    "commitSubject": "Add files via upload"
   },
   "summary": {
     "fileCount": 185,
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 24,
-    "totalBytes": 97047838,
+    "totalBytes": 97025645,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1350,9 +1350,9 @@
       "stem": "layout",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 73741,
-      "sha1": "c331944d5b",
-      "lineCount": 2982
+      "sizeBytes": 72019,
+      "sha1": "f2a55129e9",
+      "lineCount": 2936
     },
     {
       "path": "css/screens/.gitkeep",
@@ -1527,9 +1527,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 39062,
-      "sha1": "00b6cb887b",
-      "lineCount": 416
+      "sizeBytes": 37441,
+      "sha1": "88c7189a9e",
+      "lineCount": 401
     },
     {
       "path": "docs/game-rules.md",
@@ -1549,9 +1549,9 @@
       "stem": "GPT_HANDOFF",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 21293,
-      "sha1": "c3d8a670e8",
-      "lineCount": 371
+      "sizeBytes": 19728,
+      "sha1": "66228e1042",
+      "lineCount": 345
     },
     {
       "path": "docs/GPT_PROJECT_STATE.md",
@@ -1560,9 +1560,9 @@
       "stem": "GPT_PROJECT_STATE",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 18481,
-      "sha1": "be41b2bd38",
-      "lineCount": 501
+      "sizeBytes": 18063,
+      "sha1": "55123dd1ce",
+      "lineCount": 496
     },
     {
       "path": "docs/PROJECT_STATE.json",
@@ -1571,9 +1571,9 @@
       "stem": "PROJECT_STATE",
       "extension": ".json",
       "extensionNormalized": ".json",
-      "sizeBytes": 69158,
-      "sha1": "d9a56509b8",
-      "lineCount": 1874
+      "sizeBytes": 68026,
+      "sha1": "47c12c89dd",
+      "lineCount": 1848
     },
     {
       "path": "index.html",
@@ -1735,9 +1735,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 42619,
-      "sha1": "ab305d6a64",
-      "lineCount": 302
+      "sizeBytes": 26884,
+      "sha1": "c40e38b052",
+      "lineCount": 251
     },
     {
       "path": "js/quests/science.js",
@@ -2901,10 +2901,6 @@
     {
       "path": "js/quests/review.js",
       "functions": [
-        "socialMapVisual",
-        "riceWorkCalendarVisual",
-        "ricePrefectureChartVisual",
-        "riceTrendChartVisual",
         "playReviewTrainingMusic",
         "stopReviewTrainingMusic",
         "reviewTodayKey",
@@ -3549,7 +3545,32 @@
     ],
     "importantReminder": "GitHub Pagesではファイル名と拡張子の大文字・小文字を区別する。"
   },
-  "latestCommitChanges": [],
+  "latestCommitChanges": [
+    {
+      "status": "M",
+      "paths": [
+        "UPLOAD_FILES.txt"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "project-index.json"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
+      ]
+    }
+  ],
   "gptHandoff": {
     "primaryGoal": "新しいスレッドでも、直前のスレッドから続いているような理解度と実装品質を維持する。",
     "firstInstruction": "最初にproject-index.jsonを最後まで読み、フォルダ階層・実ファイル名・画像拡張子・警告を確認すること。",
