@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T02:01:50.152959+00:00",
-    "commit": "620762b",
+    "atUtc": "2026-07-26T02:29:17.749675+00:00",
+    "commit": "956b4c4",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 94701239,
+    "totalBytes": 94701263,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1471,8 +1471,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 17917,
-      "sha1": "58696bc12e",
+      "sizeBytes": 17937,
+      "sha1": "f3777ff29f",
       "lineCount": 760
     },
     {
@@ -1818,8 +1818,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4506,
-      "sha1": "e332b5fdd7",
+      "sizeBytes": 4510,
+      "sha1": "0ed20538dd",
       "lineCount": 177
     },
     {
@@ -3196,9 +3196,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/audio/quests/learningForest.mp3"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
