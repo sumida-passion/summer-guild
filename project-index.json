@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T05:48:40.958371+00:00",
-    "commit": "cfb7bf7",
+    "atUtc": "2026-07-26T06:47:18.004926+00:00",
+    "commit": "cba2b62",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 22,
-    "totalBytes": 96038128,
+    "totalBytes": 96039271,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1561,9 +1561,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 18084,
-      "sha1": "ca967ec495",
-      "lineCount": 762
+      "sizeBytes": 19229,
+      "sha1": "a359b483d9",
+      "lineCount": 789
     },
     {
       "path": "js/app.js",
@@ -1919,8 +1919,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4500,
-      "sha1": "68b62ea770",
+      "sizeBytes": 4498,
+      "sha1": "12f257f826",
       "lineCount": 177
     },
     {
@@ -2562,8 +2562,10 @@
           "js/screens/wardrobe.js",
           "js/settings.js",
           "js/systems/blackDogPet.js",
+          "js/systems/dailyDashboard.js",
           "js/systems/furnitureSystem.js",
           "js/systems/musicPlayer.js",
+          "js/systems/owlMessenger.js",
           "js/systems/questEngine.js",
           "js/systems/questMusicPlayer.js"
         ],
@@ -3430,19 +3432,13 @@
     {
       "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
+        "index.html"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/game-rules.md"
+        "service-worker.js"
       ]
     }
   ],
