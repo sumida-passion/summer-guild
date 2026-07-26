@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T12:19:40.511704+00:00",
-    "commit": "65320e9",
+    "atUtc": "2026-07-26T12:20:02.020503+00:00",
+    "commit": "bea9f1c",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 24,
-    "totalBytes": 96067890,
+    "totalBytes": 96069942,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1845,9 +1845,9 @@
       "stem": "dailyDashboard",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 2763,
-      "sha1": "672305b989",
-      "lineCount": 40
+      "sizeBytes": 4815,
+      "sha1": "5b5bb418f7",
+      "lineCount": 95
     },
     {
       "path": "js/systems/furnitureSystem.js",
@@ -1857,7 +1857,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 10681,
-      "sha1": "4e5ae0d437",
+      "sha1": "4a5649bac0",
       "lineCount": 202
     },
     {
@@ -3194,6 +3194,9 @@
         "hyakumasuDone",
         "reviewStatus",
         "items",
+        "loadComplete",
+        "showCompletePopup",
+        "claimCompleteIfNeeded",
         "render",
         "handleScreenChange"
       ],
@@ -3506,7 +3509,13 @@
     {
       "status": "M",
       "paths": [
-        "js/quests/review.js"
+        "js/systems/dailyDashboard.js"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "js/systems/furnitureSystem.js"
       ]
     }
   ],
