@@ -278,7 +278,12 @@ function purchaseGuildShopItem(item) {
     renderGuildShop();
 
 
-    if (item.repeatable && item.consumable === "dogFood") {
+    if (item.furniture) {
+        showGuildShopMessage(
+            `${item.name}を購入しました。\n残り ${result.totalGp} GP\n\nギルド商人：明日お届けします。`,
+            "ご注文を承りました"
+        );
+    } else if (item.repeatable && item.consumable === "dogFood") {
         showGuildShopMessage(`${item.name}を1個買いました。\n餌の所持数：${result.count}個\n残り ${result.totalGp} GP`, "購入しました");
     } else {
         showGuildShopMessage(`${item.name}を手に入れました！\n残り ${result.totalGp} GP`, "購入しました");
