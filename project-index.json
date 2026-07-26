@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T00:06:20.461982+00:00",
-    "commit": "45c23d2",
+    "atUtc": "2026-07-26T00:06:44.816637+00:00",
+    "commit": "c02acd0",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 84089464,
+    "totalBytes": 84095655,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1637,9 +1637,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 54601,
-      "sha1": "537f1f7a84",
-      "lineCount": 1006
+      "sizeBytes": 60792,
+      "sha1": "5a0fb99fee",
+      "lineCount": 1100
     },
     {
       "path": "js/screens/musicShop.js",
@@ -2683,6 +2683,7 @@
         "createLesson2Steps",
         "createLesson3Steps",
         "createLesson4Steps",
+        "createLesson5Steps",
         "init",
         "open",
         "close",
@@ -2719,6 +2720,12 @@
         "renderLesson4Fractions",
         "renderLesson4FractionCheck",
         "renderLesson4Summary",
+        "renderLesson5Problem",
+        "renderLesson5Keywords",
+        "renderLesson5PriceChoice",
+        "renderLesson5DifferenceGrowth",
+        "renderLesson5UnknownCount",
+        "renderLesson5Summary",
         "renderGenericChoice",
         "renderGenericDrag",
         "setupPointerDrag",
@@ -3143,7 +3150,7 @@
     {
       "status": "M",
       "paths": [
-        "css/screens/learning-forest.css"
+        "js/screens/learningForest.js"
       ]
     }
   ],
