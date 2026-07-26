@@ -48,6 +48,7 @@ const REVIEW_QUESTIONS = {
 };
 
 let reviewState = null;
+let reviewMemo = { open:false, strokes:[], active:null, context:null };
 
 function playReviewTrainingMusic(options = {}) {
   const player = window.QuestMusicPlayer;
@@ -121,7 +122,17 @@ function installReviewStyles() {
   #result-screen .result-window.review-result-window{width:min(88vw,820px);max-height:min(92vh,900px);padding:clamp(22px,3vw,38px)}
   #result-screen .review-result-window .result-message{max-height:min(48vh,470px);margin-bottom:14px;padding:0 12px;line-height:1.65}
   #result-screen .review-result-window .reward-panel{margin-bottom:12px;padding:14px}
+  #result-screen .review-result-window{display:flex;flex-direction:column;overflow:hidden}
+  #result-screen .review-result-window .result-message{min-height:0;overflow-y:auto;white-space:pre-wrap;-webkit-overflow-scrolling:touch}
+  #result-screen .review-result-window #resultBackQuestBoard{flex:0 0 auto;position:sticky;bottom:0;z-index:3}
   #result-screen .review-result-window #rewardText{font-size:clamp(34px,5vw,58px)}
+  .review-quiz{position:relative}
+  .review-memo-open{position:absolute;right:12px;top:8px;z-index:4;padding:7px 11px!important}
+  .review-memo-panel{position:fixed;z-index:9000;right:2vw;top:8vh;width:min(38vw,500px);height:min(76vh,650px);padding:10px;border:4px solid #6e421f;border-radius:15px;background:#f6f1df;box-shadow:0 10px 30px rgba(0,0,0,.4);display:flex;flex-direction:column}
+  .review-memo-panel[hidden]{display:none}.review-memo-panel header{display:flex;flex-direction:column;gap:2px;margin-bottom:7px}.review-memo-panel header span{font-size:12px;color:#66594a}
+  .review-memo-panel canvas{min-height:0;flex:1 1 auto;width:100%;border:2px solid #9b7048;border-radius:9px;background:#fff;touch-action:none}
+  .review-memo-actions{display:flex;gap:6px;margin-top:7px}.review-memo-actions button{flex:1 1 0;padding:8px;border:0;border-radius:8px;background:#70441f;color:#fff;font-weight:700}
+  @media(max-width:900px),(max-height:650px){.review-memo-panel{right:1vw;top:3vh;width:min(43vw,420px);height:88vh}.review-memo-open{right:7px;top:5px}}
   @media(max-width:640px){.review-grid,.review-levels,.review-choice-grid{grid-template-columns:1fr}.review-wrap{padding:8px}.review-panel{padding:12px}.review-question{min-height:auto}}
   `; document.head.appendChild(s);
 }
@@ -170,7 +181,28 @@ function showReviewLevels(unitId){
 function shuffledFive(items){return [...items].sort(()=>Math.random()-.5).slice(0,5);}
 function startReviewQuiz(unitId,level){playReviewTrainingMusic(); const unit=getReviewUnit(unitId); reviewState={unitId,level,questions:shuffledFive(unit.questions[level]),index:0,answers:[],input:"",startedAt:Date.now(),context:null}; if(!window.QuestEngine?.start)return false; return window.QuestEngine.start(`review-${level}`);}
 function registerReviewQuests(){Object.keys(REVIEW_LEVELS).forEach(level=>window.QuestEngine?.register({id:`review-${level}`,title:`ふりかえりの修行・${REVIEW_LEVELS[level].label}`,firstReward:0,repeatReward:0,start(ctx){reviewState.context=ctx; renderReviewQuestion(); return true;},cancel(){reviewState=null;},reset(){}}));}
-function renderReviewQuestion(){const s=reviewState,q=s.questions[s.index],c=s.context?.getContainer?.(); if(!c)return; c.classList.add("review-quiz-container"); const unit=getReviewUnit(s.unitId); const isChoice=Array.isArray(q.choices); c.innerHTML=`<div class="review-wrap"><section class="review-panel review-quiz"><div class="review-progress">${unit.title}・${REVIEW_LEVELS[s.level].label}　${s.index+1}/5</div>${q.visual||""}<div class="review-question">${q.q}</div>${isChoice?`<div class="review-choice-grid">${[...q.choices].sort(()=>Math.random()-.5).map(v=>`<button type="button" data-review-choice="${String(v).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}">${v}</button>`).join("")}</div>`:`<div class="review-answer-row"><div class="review-answer" id="reviewAnswerDisplay">${s.input||"　"}</div><span class="review-unit">${q.unit}</span></div><p class="review-hint">数字だけを入力してください</p><div class="review-keypad">${[1,2,3,4,5,6,7,8,9,".",0,"⌫"].map(v=>`<button type="button" data-review-key="${v}">${v}</button>`).join("")}</div>`}<div class="review-actions"><button type="button" data-review-cancel>やめる</button>${isChoice?"":`<button type="button" class="primary" data-review-next>${s.index===4?"採点する":"次の問題"}</button>`}</div></section></div>`; c.querySelectorAll("[data-review-key]").forEach(b=>b.addEventListener("click",()=>inputReviewKey(b.dataset.reviewKey))); c.querySelector("[data-review-next]")?.addEventListener("click",submitReviewAnswer); c.querySelectorAll("[data-review-choice]").forEach(b=>b.addEventListener("click",()=>submitReviewChoice(b.dataset.reviewChoice))); c.querySelector("[data-review-cancel]").addEventListener("click",()=>{window.QuestEngine.cancel(); openReviewTraining({ restart:false });});}
+function renderReviewQuestion(){const s=reviewState,q=s.questions[s.index],c=s.context?.getContainer?.(); if(!c)return; c.classList.add("review-quiz-container"); const unit=getReviewUnit(s.unitId); const isChoice=Array.isArray(q.choices); c.innerHTML=`<div class="review-wrap"><section class="review-panel review-quiz"><button type="button" class="review-memo-open" data-review-memo-open>メモパッド</button><aside class="review-memo-panel" data-review-memo-panel hidden aria-hidden="true"><header><strong>メモパッド</strong><span>指やApple Pencilで自由に筆算できます</span></header><canvas data-review-memo-canvas></canvas><div class="review-memo-actions"><button type="button" data-review-memo-undo>ひとつ戻す</button><button type="button" data-review-memo-clear>全部消す</button><button type="button" data-review-memo-close>閉じる</button></div></aside><div class="review-progress">${unit.title}・${REVIEW_LEVELS[s.level].label}　${s.index+1}/5</div>${q.visual||""}<div class="review-question">${q.q}</div>${isChoice?`<div class="review-choice-grid">${[...q.choices].sort(()=>Math.random()-.5).map(v=>`<button type="button" data-review-choice="${String(v).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}">${v}</button>`).join("")}</div>`:`<div class="review-answer-row"><div class="review-answer" id="reviewAnswerDisplay">${s.input||"　"}</div><span class="review-unit">${q.unit}</span></div><p class="review-hint">数字だけを入力してください</p><div class="review-keypad">${[1,2,3,4,5,6,7,8,9,".",0,"⌫"].map(v=>`<button type="button" data-review-key="${v}">${v}</button>`).join("")}</div>`}<div class="review-actions"><button type="button" data-review-cancel>やめる</button>${isChoice?"":`<button type="button" class="primary" data-review-next>${s.index===4?"採点する":"次の問題"}</button>`}</div></section></div>`; c.querySelectorAll("[data-review-key]").forEach(b=>b.addEventListener("click",()=>inputReviewKey(b.dataset.reviewKey))); c.querySelector("[data-review-next]")?.addEventListener("click",submitReviewAnswer); c.querySelectorAll("[data-review-choice]").forEach(b=>b.addEventListener("click",()=>submitReviewChoice(b.dataset.reviewChoice))); c.querySelector("[data-review-cancel]").addEventListener("click",()=>{window.QuestEngine.cancel(); openReviewTraining({ restart:false });});} bindReviewMemo(c);
+
+function bindReviewMemo(container){
+  const panel=container.querySelector("[data-review-memo-panel]");
+  const canvas=container.querySelector("[data-review-memo-canvas]");
+  if(!panel||!canvas)return;
+  reviewMemo.open=false; reviewMemo.active=null; reviewMemo.context=canvas.getContext("2d",{alpha:true});
+  const resize=()=>{const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height)return;const ratio=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(rect.width*ratio);canvas.height=Math.round(rect.height*ratio);redrawReviewMemo(canvas);};
+  container.querySelector("[data-review-memo-open]")?.addEventListener("click",()=>{reviewMemo.open=true;panel.hidden=false;panel.setAttribute("aria-hidden","false");requestAnimationFrame(resize);});
+  container.querySelector("[data-review-memo-close]")?.addEventListener("click",()=>{reviewMemo.open=false;panel.hidden=true;panel.setAttribute("aria-hidden","true");});
+  container.querySelector("[data-review-memo-undo]")?.addEventListener("click",()=>{reviewMemo.strokes.pop();redrawReviewMemo(canvas);});
+  container.querySelector("[data-review-memo-clear]")?.addEventListener("click",()=>{reviewMemo.strokes=[];reviewMemo.active=null;redrawReviewMemo(canvas);});
+  canvas.addEventListener("pointerdown",(e)=>{if(!reviewMemo.open)return;canvas.setPointerCapture(e.pointerId);reviewMemo.active=[reviewMemoPoint(canvas,e)];reviewMemo.strokes.push(reviewMemo.active);redrawReviewMemo(canvas);});
+  canvas.addEventListener("pointermove",(e)=>{if(!reviewMemo.active)return;reviewMemo.active.push(reviewMemoPoint(canvas,e));redrawReviewMemo(canvas);});
+  const end=(e)=>{if(!reviewMemo.active)return;try{canvas.releasePointerCapture(e.pointerId);}catch(_){}reviewMemo.active=null;};
+  canvas.addEventListener("pointerup",end);canvas.addEventListener("pointercancel",end);
+}
+function reviewMemoPoint(canvas,event){const r=canvas.getBoundingClientRect();return{x:(event.clientX-r.left)/r.width,y:(event.clientY-r.top)/r.height};}
+function redrawReviewMemo(canvas){
+  const ctx=reviewMemo.context;if(!ctx||!canvas)return;ctx.clearRect(0,0,canvas.width,canvas.height);ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="#2e342f";ctx.lineWidth=Math.max(2,canvas.width/360);
+  reviewMemo.strokes.forEach(stroke=>{if(!stroke.length)return;ctx.beginPath();stroke.forEach((p,i)=>{const x=p.x*canvas.width,y=p.y*canvas.height;i?ctx.lineTo(x,y):ctx.moveTo(x,y);});if(stroke.length===1){const p=stroke[0];ctx.lineTo(p.x*canvas.width+.1,p.y*canvas.height+.1);}ctx.stroke();});
+}
 function submitReviewChoice(value){const q=reviewState.questions[reviewState.index];reviewState.answers.push({q:q.q,user:value,correct:q.a,unit:"",why:q.why,ok:value===q.a});if(reviewState.index<4){reviewState.index++;renderReviewQuestion();return;}finishReviewQuiz();}
 function inputReviewKey(k){if(k==="⌫") reviewState.input=reviewState.input.slice(0,-1); else if(k==="."){if(!reviewState.input.includes("."))reviewState.input+=(reviewState.input?".":"0.");} else if(reviewState.input.length<8)reviewState.input+=k; const d=document.getElementById("reviewAnswerDisplay");if(d)d.textContent=reviewState.input||"　";}
 async function submitReviewAnswer(){if(reviewState.input==="")return; const q=reviewState.questions[reviewState.index], value=Number(reviewState.input); reviewState.answers.push({q:q.q,user:value,correct:q.a,unit:q.unit,why:q.why,ok:Math.abs(value-q.a)<0.0001}); reviewState.input=""; if(reviewState.index<4){reviewState.index++;renderReviewQuestion();return;} await finishReviewQuiz();}
