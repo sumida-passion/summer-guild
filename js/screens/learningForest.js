@@ -1,8 +1,8 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver1.7
-   算数の広場・第1〜5問の詳しい学び直し
+   学びの森 Ver1.8
+   算数の広場・第1〜6問の詳しい学び直し
    ========================================================= */
 
 (() => {
@@ -14,7 +14,7 @@
         { number: 3, group: 1, title: "姉と妹のお金", ready: true, id: "math-wasa-03" },
         { number: 4, group: 1, title: "3つの容器の水", ready: true, id: "math-volume-04" },
         { number: 5, group: 2, title: "はがきと切手", ready: true, id: "math-difference-05" },
-        { number: 6, group: 2, title: "ケーキの買い物" },
+        { number: 6, group: 2, title: "ケーキの買い物", ready: true, id: "math-savings-06" },
         { number: 7, group: 2, title: "えん筆の本数と代金" },
         { number: 8, group: 2, title: "あめの入れ方" },
         { number: 9, group: 3, title: "折り紙の余りと不足" },
@@ -125,12 +125,30 @@
         ];
     }
 
+    function createLesson6Steps() {
+        return [
+            makeStep("6番も、まずは問題文を原文のまま読んでみよう。分からない『いくつか』より、数と金額がはっきり分かるところを探すんだ。", renderLesson6Problem),
+            makeStep("主人公：『代金は予定と同じ金額……。ここが同じってことは、300円でいくつか買う予定の金額と、250円で実際にいくつか買った金額が一緒ってことだね。』", () => renderLesson6SameTotal(false)),
+            makeStep("ギルドマスター：『そうだね、そこがポイントだ。予定と実際では、個数は違っても、使った代金の合計は同じなんだ。』", () => renderLesson6SameTotal(true)),
+            makeStep("主人公：『でも、“いくつか”ばっかりじゃ、どこから考えたらいいか分からないや……。』", renderLesson6Unknowns),
+            makeStep("ギルドマスター：『でも、数と金額がはっきり分かるところがあるよ。“250円のケーキが、2個多く買えた”ってところだ。』", renderLesson6TwoExtra),
+            makeStep("主人公：『あ、そしたら500円って数字が出るね。』2個多く買うために必要な金額を求めよう。", () => renderGenericNumber({ title: "多く買えた2個分を求めよう", formula: "250 × 2 ＝", expected: "500", success: "そうだね。2個多く買うには500円の余裕が必要だ。▽を押して続けよう。", hint: "250円のケーキ2個分だから、250×2だね。" }), true),
+            makeStep("主人公：『予定では300円のケーキを買うつもりだった。でも250円のを買ったら、全部で500円の余裕ができたってことだ。』", renderLesson6SavingBridge),
+            makeStep("ギルドマスター：『そそ！ それがポイントだ。1個につき、いくら安く買えたのかな？』", renderLesson6UnitDifferenceChoice, true),
+            makeStep("主人公：『1個につき50円安かったのを積み重ねていったら、500円の余裕ができたってことだ！』", renderLesson6SavingsStack),
+            makeStep("主人公：『ということは……50円が何回分集まったら500円になるかを考えればいいんだ！』", () => renderGenericNumber({ title: "最初に買う予定だった個数を求めよう", formula: "500 ÷ 50 ＝", expected: "10", unit: "個", success: "10個。最初は300円のケーキを10個買うつもりだったんだ。▽を押して続けよう。", hint: "500円の中に、1個ごとの50円の差が何回あるか考えよう。" }), true),
+            makeStep("最後に、分かる数字から考えた順番を並べて確かめよう。", () => renderGenericOrder({ formulas: ["250×2＝500（2個分の余裕）", "300−250＝50（1個ごとの余裕）", "500円＝50円が何回分か", "500÷50＝10"], success: "『いくつか』は後回しにして、はっきり分かる2個分の500円から考えたから、答えまでつながった。▽を押して、6番の学びをまとめよう。", hint: "まず、実際に2個多く買えたことで必要になった金額を求めよう。" }), true),
+            makeStep("よくできた。分からない『いくつか』からではなく、数と金額がはっきりしているところから考える。1個ごとの50円の差が積み重なって500円になったんだ。", renderLesson6Summary)
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
         3: createLesson3Steps,
         4: createLesson4Steps,
-        5: createLesson5Steps
+        5: createLesson5Steps,
+        6: createLesson6Steps
     };
 
     function init() {
@@ -845,6 +863,98 @@
             ],
             formulas: ["80−50＝30", "420÷30＝14"],
             answer: "はがきは 14枚 買った"
+        });
+    }
+
+    function renderLesson6Problem() {
+        setBoard(`
+            <article class="learning-problem-card lesson6-problem-card">
+                <p class="learning-problem-label">6番の問題（原文）</p>
+                <p>1個300円のケーキを何個か買うつもりでお店に行きましたが、実際には1個250円のケーキを何個か買いました。</p>
+                <p>代金は予定と同じ金額で、予定していた個数よりも2個多く買えました。</p>
+                <p>はじめ、300円のケーキを何個買うつもりでお店に行きましたか。</p>
+            </article>
+        `);
+    }
+
+    function renderLesson6SameTotal(reveal) {
+        setBoard(`
+            <div class="lesson6-same-total ${reveal ? "is-revealed" : ""}">
+                <div class="lesson6-plan-box"><small>予定</small><b>300円 × いくつか</b></div>
+                <span class="lesson6-equals">＝</span>
+                <div class="lesson6-plan-box"><small>実際</small><b>250円 × いくつか</b></div>
+                <p>${reveal ? "個数は違っても、代金の合計は同じ" : "『代金は予定と同じ金額』を絵にすると……"}</p>
+            </div>
+        `);
+    }
+
+    function renderLesson6Unknowns() {
+        setBoard(`
+            <div class="lesson6-unknown-board">
+                <span>300円 × <b>いくつか</b></span>
+                <span>250円 × <b>いくつか</b></span>
+                <p>分からない数から、無理に考え始めなくていい</p>
+            </div>
+        `);
+    }
+
+    function renderLesson6TwoExtra() {
+        setBoard(`
+            <div class="lesson6-two-extra">
+                <p>はっきり分かるところ</p>
+                <div class="lesson6-cakes"><span>250円</span><span>250円</span></div>
+                <strong>予定より 2個 多く買えた</strong>
+                <small>この2個分なら、金額を出せる</small>
+            </div>
+        `);
+    }
+
+    function renderLesson6SavingBridge() {
+        setBoard(`
+            <div class="lesson6-saving-bridge">
+                <div><small>予定の1個</small><b>300円</b></div>
+                <span>→</span>
+                <div><small>実際の1個</small><b>250円</b></div>
+                <p>安く買った分を全部集めると <strong>500円</strong> の余裕</p>
+            </div>
+        `);
+    }
+
+    function renderLesson6UnitDifferenceChoice() {
+        renderGenericChoice({
+            question: "ケーキ1個につき、いくら安く買えた？",
+            choices: [
+                { value: "50", label: "300−250＝50円" },
+                { value: "250", label: "250円" },
+                { value: "550", label: "300＋250＝550円" }
+            ],
+            correct: "50",
+            success: "そう。1個買うたびに50円ずつ余裕ができる。▽を押して続けよう。",
+            hint: "予定の300円と、実際の250円の差を求めよう。"
+        });
+    }
+
+    function renderLesson6SavingsStack() {
+        setBoard(`
+            <div class="lesson6-savings-stack">
+                <div class="lesson6-saving-chips"><span>50円</span><span>50円</span><span>50円</span><span>…</span><span>50円</span></div>
+                <div class="lesson6-saving-total">積み重なった余裕 ＝ 500円</div>
+                <p>1個につき50円安い × 最初に買う予定だった個数</p>
+            </div>
+        `);
+    }
+
+    function renderLesson6Summary() {
+        renderGenericSummary({
+            label: "6番の学び",
+            points: [
+                "問題文は最初に原文のまま読む",
+                "『代金は予定と同じ』から、予定と実際の合計金額が等しいと読む",
+                "分からない『いくつか』は後回しにし、はっきり分かる2個分から考える",
+                "1個ごとの50円の余裕が何回集まって500円になったかを考える"
+            ],
+            formulas: ["250×2＝500", "300−250＝50", "500÷50＝10"],
+            answer: "はじめは 10個 買うつもりだった"
         });
     }
 
