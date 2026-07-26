@@ -1,8 +1,8 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver1.8
-   算数の広場・第1〜6問の詳しい学び直し
+   学びの森 Ver1.9
+   算数の広場・第1〜7問の詳しい学び直し
    ========================================================= */
 
 (() => {
@@ -15,7 +15,7 @@
         { number: 4, group: 1, title: "3つの容器の水", ready: true, id: "math-volume-04" },
         { number: 5, group: 2, title: "はがきと切手", ready: true, id: "math-difference-05" },
         { number: 6, group: 2, title: "ケーキの買い物", ready: true, id: "math-savings-06" },
-        { number: 7, group: 2, title: "えん筆の本数と代金" },
+        { number: 7, group: 2, title: "えん筆の本数と代金", ready: true, id: "math-difference-07" },
         { number: 8, group: 2, title: "あめの入れ方" },
         { number: 9, group: 3, title: "折り紙の余りと不足" },
         { number: 10, group: 3, title: "あめを配る人数と個数" },
@@ -142,13 +142,35 @@
         ];
     }
 
+    function createLesson7Steps() {
+        return [
+            makeStep("7番も、まずは問題文を原文のまま読んでみよう。今回は『1本ごとの差』『9本多い』『代金は220円高い』を、順番に絵へ変えていくよ。", renderLesson7Problem),
+            makeStep("主人公：『100円と80円だから、2人が1本ずつ買うたびに、あきらくんの代金が20円ずつ多くなるね。』", renderLesson7UnitDifference),
+            makeStep("ギルドマスター：『そう。まずは9本の違いをいったん置いて、2人が同じ本数買ったときだけを考えよう。220円の差は、20円の差が何回積み重なったものかな？』", () => renderGenericNumber({ title: "220円の差ができる回数", formula: "220 ÷ 20 ＝", expected: "11", unit: "回", success: "11回。2人が11本ずつなら、あきらくんの代金が220円高くなる。▽を押して続けよう。", hint: "1回ごとの差は20円。220円の中に20円が何回あるか考えよう。" }), true),
+            makeStep("まず2人とも11本ずつ買った場面を置こう。この時点では、あきらくんの代金が220円高い。", () => renderLesson7CountState("equal")),
+            makeStep("でも問題文には『ゆかさんのほうが9本多い』と書いてある。ゆかさんだけに9本を足すと、その9本分はいくらになる？", () => renderGenericNumber({ title: "ゆかさんの多い9本分", formula: "80 × 9 ＝", expected: "720", unit: "円", success: "720円。ゆかさんだけに720円分が加わる。▽を押して続けよう。", hint: "ゆかさんのえん筆は1本80円。それが9本だね。" }), true),
+            makeStep("11本ずつのときは、あきらくんが220円高かった。そこへゆかさんだけ720円分を足すと、今度はゆかさんが500円高くなる。", () => renderLesson7CountState("yuka-ahead")),
+            makeStep("ギルドマスター：『ここから2人とも同じ本数ずつ増やせば、9本差は変わらないね。』1回増えるたび、あきらくんは20円ずつ追いつく。", renderLesson7KeepGap),
+            makeStep("主人公：『ゆかさんが500円高いところから、最後はあきらくんが220円高くなるんだ。だから、差を全部で720円ひっくり返せばいいんだね。』", renderLesson7Turnaround),
+            makeStep("720円分の差を、1回20円ずつひっくり返すには、あと何回必要かな？", () => renderGenericNumber({ title: "追加で一緒に買う回数", formula: "720 ÷ 20 ＝", expected: "36", unit: "回", success: "36回。9本差を保ったまま、2人とも36本ずつ増やせばよい。▽を押して続けよう。", hint: "ひっくり返す差は720円。1回ごとに20円ずつ変わるよ。" }), true),
+            makeStep("最初の11本に、あとから一緒に増やした36本を足す。あきらくんは何本買ったかな？", () => renderGenericNumber({ title: "あきらくんの本数", formula: "11 ＋ 36 ＝", expected: "47", unit: "本", success: "47本。ゆっくり考える道筋で答えまでたどり着いた。▽を押して、近道も見てみよう。", hint: "最初に同じ本数として置いた11本と、追加した36本を合わせよう。" }), true),
+            makeStep("ギルドマスター：『ここまで分かったら、同じことを短くまとめる近道も使えるよ。』", renderLesson7ShortcutIntro),
+            makeStep("ゆかさんのほうが9本多いということは、80×9＝720円分、ゆかさんが多いということだね。", () => renderLesson7Shortcut("extra")),
+            makeStep("720円多いところから、最後はあきらくんが220円多く終わった。つまり、720円分をひっくり返し、さらに220円進んだんだ。", () => renderLesson7Shortcut("turn")),
+            makeStep("だから、あきらくんが作った差は720＋220＝940円。1回の差が20円なので、940円分を20円で割れば買った回数が出る。", () => renderLesson7Shortcut("formula")),
+            makeStep("近道の式を、意味がつながる順番に並べてみよう。", () => renderGenericOrder({ formulas: ["80×9＝720（ゆかさんが多い分）", "720＋220＝940（ひっくり返してさらに進む差）", "100−80＝20（1本ごとの差）", "940÷20＝47"], success: "47本。さっきゆっくり考えたことを、一気にまとめた式になっているね。▽を押して、7番の学びをまとめよう。", hint: "まず9本分を金額にし、次に最後の220円を足そう。" }), true),
+            makeStep("主人公：『なるほど！ さっきゆっくり考えたことを、一気に計算しただけなんだ！』 ギルドマスター：『その通り。近道は、理解してから使うと、一番力になる。』", renderLesson7Summary)
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
         3: createLesson3Steps,
         4: createLesson4Steps,
         5: createLesson5Steps,
-        6: createLesson6Steps
+        6: createLesson6Steps,
+        7: createLesson7Steps
     };
 
     function init() {
@@ -955,6 +977,107 @@
             ],
             formulas: ["250×2＝500", "300−250＝50", "500÷50＝10"],
             answer: "はじめは 10個 買うつもりだった"
+        });
+    }
+
+    function renderLesson7Problem() {
+        setBoard(`
+            <article class="learning-problem-card lesson7-problem-card">
+                <h3>問題</h3>
+                <p>あきらくんは1本100円のえん筆を何本か、ゆかさんは1本80円のえん筆を何本か買いました。</p>
+                <p>あきらくんは、ゆかさんより9本少なく買いましたが、代金はゆかさんより220円高くなりました。</p>
+                <p>あきらくんは、えん筆を何本買いましたか。</p>
+            </article>
+        `);
+    }
+
+    function renderLesson7UnitDifference() {
+        setBoard(`
+            <div class="lesson7-unit-board">
+                <div><small>あきら</small><b>1本 100円</b></div>
+                <span>−</span>
+                <div><small>ゆか</small><b>1本 80円</b></div>
+                <strong>＝ 20円</strong>
+                <p>2人が1本ずつ買うたびに、あきらくんの代金が20円ずつ多くなる</p>
+            </div>
+        `);
+    }
+
+    function renderLesson7CountState(mode) {
+        const yukaAhead = mode === "yuka-ahead";
+        setBoard(`
+            <div class="lesson7-state-board ${yukaAhead ? "is-yuka-ahead" : ""}">
+                <div class="lesson7-person-row">
+                    <b>あきら</b><span class="lesson7-pencil-count">11本</span><strong>1100円</strong>
+                </div>
+                <div class="lesson7-person-row">
+                    <b>ゆか</b><span class="lesson7-pencil-count">${yukaAhead ? "20本" : "11本"}</span><strong>${yukaAhead ? "1600円" : "880円"}</strong>
+                </div>
+                ${yukaAhead ? `<div class="lesson7-nine-extra">ゆかさんだけ ＋9本（720円）</div><p>1600−1100＝500円<br><b>今は、ゆかさんが500円高い</b></p>` : `<p>1100−880＝220円<br><b>あきらくんが220円高い</b></p>`}
+            </div>
+        `);
+    }
+
+    function renderLesson7KeepGap() {
+        setBoard(`
+            <div class="lesson7-gap-board">
+                <div class="lesson7-gap-pair"><span>あきら 11本</span><span>ゆか 20本</span><b>9本差</b></div>
+                <div class="lesson7-down-arrow">↓ 2人とも1本ずつ増やす</div>
+                <div class="lesson7-gap-pair"><span>あきら 12本</span><span>ゆか 21本</span><b>9本差のまま</b></div>
+                <p>本数の差は変わらず、代金の差だけが1回につき20円ずつ動く</p>
+            </div>
+        `);
+    }
+
+    function renderLesson7Turnaround() {
+        setBoard(`
+            <div class="lesson7-turn-board">
+                <div class="lesson7-side yuka">ゆかが高い<br><b>500円</b></div>
+                <div class="lesson7-turn-line"><span>500円</span><i></i><span>220円</span></div>
+                <div class="lesson7-side akira">あきらが高い<br><b>220円</b></div>
+                <strong>500 ＋ 220 ＝ 720円</strong>
+                <p>720円分の差を、20円ずつひっくり返す</p>
+            </div>
+        `);
+    }
+
+    function renderLesson7ShortcutIntro() {
+        setBoard(`
+            <div class="lesson7-shortcut-title">
+                <small>第2段階</small>
+                <h3>早く解ける方法</h3>
+                <p>ゆっくり理解した道筋を、短い式にまとめてみよう</p>
+            </div>
+        `);
+    }
+
+    function renderLesson7Shortcut(stage) {
+        const extra = stage === "extra" || stage === "turn" || stage === "formula";
+        const turn = stage === "turn" || stage === "formula";
+        const formula = stage === "formula";
+        setBoard(`
+            <div class="lesson7-shortcut-board">
+                <div class="lesson7-shortcut-step ${extra ? "is-active" : ""}"><span>ゆかさんのほうが9本多い</span><b>80 × 9 ＝ 720円</b><small>ゆかさんが多い分</small></div>
+                <div class="lesson7-shortcut-arrow">↓</div>
+                <div class="lesson7-shortcut-step ${turn ? "is-active" : ""}"><span>720円分をひっくり返し、さらに220円進む</span><b>720 ＋ 220 ＝ 940円</b><small>あきらくんが作った差</small></div>
+                <div class="lesson7-shortcut-arrow">↓</div>
+                <div class="lesson7-shortcut-step ${formula ? "is-active" : ""}"><span>1回の差は20円</span><b>940 ÷ 20 ＝ 47</b><small>答え 47本</small></div>
+            </div>
+        `);
+    }
+
+    function renderLesson7Summary() {
+        renderGenericSummary({
+            label: "7番の学び",
+            points: [
+                "まず原文を読み、『1本ごとの差』『9本多い』『220円高い』に反応する",
+                "じっくり考えるときは、220÷20＝11から場面を一つずつ動かす",
+                "2人とも同じ本数ずつ増やせば、9本差は変わらない",
+                "近道は、ゆかさんの多い720円分と最後の220円を合わせて考える",
+                "近道は、理解してから使うと一番力になる"
+            ],
+            formulas: ["220÷20＝11", "80×9＝720", "720÷20＝36", "11＋36＝47", "近道：940÷20＝47"],
+            answer: "あきらくんは 47本 買った"
         });
     }
 
