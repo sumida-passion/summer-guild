@@ -2785,3 +2785,44 @@ body.wardrobe-open {
     .tape { height: 38px; }
     .learning-controls { gap: 4px; }
 }
+
+
+/* =========================================================
+   家具設置企画 Ver1.0
+   ========================================================= */
+.furniture-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+}
+.room-furniture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border: 0;
+    box-shadow: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+#player { z-index: 60; }
+#blackDogLayer { z-index: 50; }
+.shop-item-copy {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+}
+.shop-item-description {
+    display: block;
+    overflow: hidden;
+    color: #e7d8b8;
+    font-size: clamp(10px, 1.05vw, 13px);
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

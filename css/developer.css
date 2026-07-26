@@ -831,3 +831,13 @@ body.developer-mode-active {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* 家具デバッグ */
+.developer-furniture-bulk { display:grid; gap:8px; margin-bottom:12px; }
+.developer-furniture-list { display:flex; flex-direction:column; gap:9px; }
+.developer-furniture-row { padding:10px; border:1px solid rgba(255,231,171,.28); border-radius:10px; background:rgba(20,12,8,.34); }
+.developer-furniture-name { display:flex; justify-content:space-between; gap:8px; margin-bottom:7px; font-weight:700; }
+.developer-furniture-name small { color:#d9c597; font-weight:500; }
+.developer-furniture-actions { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; }
+.developer-furniture-actions button { min-width:0; padding:7px 4px; font-size:11px; }
