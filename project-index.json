@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T00:35:50.671302+00:00",
-    "commit": "8269cd7",
+    "atUtc": "2026-07-26T00:49:52.353724+00:00",
+    "commit": "87f96f2",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 91458186,
+    "totalBytes": 91458204,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1461,8 +1461,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 17917,
-      "sha1": "7f8fa25dd2",
+      "sizeBytes": 17926,
+      "sha1": "2542440420",
       "lineCount": 760
     },
     {
@@ -1808,8 +1808,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4506,
-      "sha1": "24c106d928",
+      "sizeBytes": 4515,
+      "sha1": "95644cbb73",
       "lineCount": 177
     },
     {
@@ -3168,15 +3168,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/audio/quests/vsMathGuildMaster_final.mp3"
+        "index.html"
       ]
     },
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "assets/audio/quests/vsMathGuildMaster_start.mp3"
+        "service-worker.js"
       ]
     }
   ],
