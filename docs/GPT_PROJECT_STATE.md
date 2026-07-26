@@ -7,7 +7,7 @@
 
 | 項目 | 内容 |
 |---|---|
-| 生成日時（UTC） | 2026-07-22T06:07:48.224Z |
+| 生成日時（UTC） | 2026-07-26T04:18:12.585Z |
 | リポジトリ | unknown |
 | ブランチ | `unknown` |
 | コミット | `unknown` |
@@ -17,13 +17,13 @@
 
 | 種類 | 数 |
 |---|---:|
-| 全ファイル | 145 |
-| フォルダ | 66 |
-| 画像 | 46 |
-| 音声 | 9 |
+| 全ファイル | 179 |
+| フォルダ | 67 |
+| 画像 | 66 |
+| 音声 | 15 |
 | 動画 | 0 |
-| JavaScript | 26 |
-| CSS | 4 |
+| JavaScript | 30 |
+| CSS | 6 |
 | HTML | 1 |
 
 ## 3. 全体フォルダ構造
@@ -53,7 +53,13 @@ summer-guild/
 │   │   │   └── Thunder in the Hall.mp3
 │   │   ├── quests/
 │   │   │   ├── .gitkeep
-│   │   │   └── The Moment Before the Shot.mp3
+│   │   │   ├── Blazing Dragoon's Charge.mp3
+│   │   │   ├── learningForest.mp3
+│   │   │   ├── The Clockwork Gambit 2.mp3
+│   │   │   ├── The Clockwork Gambit.mp3
+│   │   │   ├── The Moment Before the Shot.mp3
+│   │   │   ├── vsMathGuildMaster_final.mp3
+│   │   │   └── vsMathGuildMaster_start.mp3
 │   │   └── sfx/
 │   │       └── .gitkeep
 │   ├── backgrounds/
@@ -72,7 +78,8 @@ summer-guild/
 │   │   ├── masters/
 │   │   │   └── .gitkeep
 │   │   ├── special/
-│   │   │   └── .gitkeep
+│   │   │   ├── .gitkeep
+│   │   │   └── mathGuildForest.png
 │   │   └── title/
 │   │       ├── .gitkeep
 │   │       └── title.PNG
@@ -81,11 +88,22 @@ summer-guild/
 │   │   │   ├── japanese/
 │   │   │   │   └── .gitkeep
 │   │   │   ├── math/
-│   │   │   │   └── .gitkeep
+│   │   │   │   ├── .gitkeep
+│   │   │   │   └── mathGuildMaster.png
 │   │   │   ├── science/
 │   │   │   │   └── .gitkeep
 │   │   │   └── social/
 │   │   │       └── .gitkeep
+│   │   ├── pet/
+│   │   │   ├── .gitkeep
+│   │   │   ├── blackdog_base.PNG
+│   │   │   ├── blackdog_calm.PNG
+│   │   │   ├── blackdog_joy.PNG
+│   │   │   ├── blackdog_sleep.PNG
+│   │   │   ├── blanket.PNG
+│   │   │   ├── dogtoy_ball.PNG
+│   │   │   ├── dogtoy_bone.PNG
+│   │   │   └── dogtoy_rope.PNG
 │   │   └── player/
 │   │       ├── accessories/
 │   │       │   ├── .gitkeep
@@ -116,6 +134,7 @@ summer-guild/
 │   │       │   │   └── .gitkeep
 │   │       │   ├── outer/
 │   │       │   │   ├── .gitkeep
+│   │       │   │   ├── blackdog_fullset.PNG
 │   │       │   │   └── cloudstrife_outerset.PNG
 │   │       │   ├── shoes/
 │   │       │   │   ├── .gitkeep
@@ -153,7 +172,16 @@ summer-guild/
 │   │   ├── decorations/
 │   │   │   └── .gitkeep
 │   │   └── furniture/
-│   │       └── .gitkeep
+│   │       ├── .gitkeep
+│   │       ├── bookshelf.PNG
+│   │       ├── chair.PNG
+│   │       ├── GuildTableClock.PNG
+│   │       ├── magicBroom.PNG
+│   │       ├── magicCircle.PNG
+│   │       ├── magicCrystal.PNG
+│   │       ├── staffofLightning.PNG
+│   │       ├── starGlobe.PNG
+│   │       └── wisemenDesk.PNG
 │   └── ui/
 │       ├── buttons/
 │       │   ├── .gitkeep
@@ -175,7 +203,9 @@ summer-guild/
 │   ├── layout.css
 │   └── screens/
 │       ├── .gitkeep
-│       └── common.css
+│       ├── common.css
+│       ├── iphone-landscape.css
+│       └── learning-forest.css
 ├── data/
 │   ├── achievements/
 │   │   └── .gitkeep
@@ -199,7 +229,8 @@ summer-guild/
 │   ├── .gitkeep
 │   ├── asset-guide.md
 │   ├── development-log.md
-│   └── game-rules.md
+│   ├── game-rules.md
+│   └── GPT_HANDOFF.md
 ├── index.html
 ├── js/
 │   ├── app.js
@@ -217,10 +248,12 @@ summer-guild/
 │   │   ├── math.js
 │   │   ├── music.js
 │   │   ├── reading.js
+│   │   ├── review.js
 │   │   ├── science.js
 │   │   └── society.js
 │   ├── screens/
 │   │   ├── .gitkeep
+│   │   ├── learningForest.js
 │   │   ├── musicShop.js
 │   │   ├── shop.js
 │   │   └── wardrobe.js
@@ -228,6 +261,8 @@ summer-guild/
 │   ├── storage.js
 │   └── systems/
 │       ├── .gitkeep
+│       ├── blackDogPet.js
+│       ├── furnitureSystem.js
 │       ├── musicPlayer.js
 │       ├── questEngine.js
 │       └── questMusicPlayer.js
@@ -252,32 +287,41 @@ summer-guild/
 
 ### CSS
 
-1. `css/common.css?v=20260721-1`
-2. `css/layout.css?v=20260722-2`
-3. `css/developer.css?v=20260721-1`
+1. `css/common.css?v=20260723-layer-order-v1`
+2. `css/layout.css?v=20260726-furniture-v1`
+3. `css/screens/iphone-landscape.css?v=20260723-review-iphone1`
+4. `css/screens/learning-forest.css?v=20260726-learning-forest-lesson8-bgm-v1`
+5. `css/developer.css?v=20260726-furniture-v1`
 
 ### JavaScript
 
-1. `js/settings.js?v=20260722-3`
-2. `data/items/items.js?v=20260722-2`
-3. `data/shop/music.js?v=20260721-1`
-4. `js/systems/musicPlayer.js?v=20260721-1`
-5. `js/systems/questMusicPlayer.js?v=20260721-1`
-6. `js/screens/shop.js?v=20260721-1`
-7. `js/screens/musicShop.js?v=20260721-1`
-8. `js/screens/wardrobe.js?v=20260722-2`
-9. `js/systems/questEngine.js?v=20260722-3`
-10. `js/quests/daily.js?v=20260721-1`
-11. `js/numberpad.js?v=20260721-1`
-12. `js/quests/hyakumasu.js?v=20260722-3`
-13. `js/developer.js?v=20260721-1`
-14. `js/app.js?v=20260722-3`
+1. `js/settings.js?v=20260725-dogscale1`
+2. `js/systems/furnitureSystem.js?v=20260726-furniture-v1`
+3. `data/items/items.js?v=20260726-furniture-v1`
+4. `data/shop/music.js?v=20260721-1`
+5. `js/systems/musicPlayer.js?v=20260721-1`
+6. `js/systems/questMusicPlayer.js?v=20260726-learning-forest-bgm-v1`
+7. `js/screens/shop.js?v=20260726-furniture-v1`
+8. `js/screens/musicShop.js?v=20260721-1`
+9. `js/screens/wardrobe.js?v=20260724-rockshoe1`
+10. `js/systems/questEngine.js?v=20260722-3`
+11. `js/quests/daily.js?v=20260723-review1`
+12. `js/numberpad.js?v=20260721-1`
+13. `js/quests/hyakumasu.js?v=20260723-5`
+14. `js/quests/review.js?v=20260723-review-iphone1`
+15. `js/quests/math.js?v=20260723-mathguild30`
+16. `js/quests/society.js?v=20260724-socialguild1`
+17. `js/screens/learningForest.js?v=20260726-learning-forest-lesson8-bgm-v1`
+18. `js/developer.js?v=20260726-furniture-v1`
+19. `js/systems/blackDogPet.js?v=20260725-dogscale1`
+20. `js/app.js?v=20260726-furniture-v1`
 
 ### 画像参照
 
 1. `assets/characters/player/base/base.png`
 2. `assets/characters/player/clothes/bottoms/default_bottoms.png`
 3. `assets/characters/player/clothes/tops/default_tops.png`
+4. `assets/characters/masters/math/mathGuildMaster.png`
 
 ### Manifest
 
@@ -299,13 +343,17 @@ summer-guild/
 - `js/quests/math.js`
 - `js/quests/music.js`
 - `js/quests/reading.js`
+- `js/quests/review.js`
 - `js/quests/science.js`
 - `js/quests/society.js`
+- `js/screens/learningForest.js`
 - `js/screens/musicShop.js`
 - `js/screens/shop.js`
 - `js/screens/wardrobe.js`
 - `js/settings.js`
 - `js/storage.js`
+- `js/systems/blackDogPet.js`
+- `js/systems/furnitureSystem.js`
 - `js/systems/musicPlayer.js`
 - `js/systems/questEngine.js`
 - `js/systems/questMusicPlayer.js`
@@ -318,6 +366,8 @@ summer-guild/
 - `css/developer.css`
 - `css/layout.css`
 - `css/screens/common.css`
+- `css/screens/iphone-landscape.css`
+- `css/screens/learning-forest.css`
 
 ## 7. HTML・データファイル一覧
 
@@ -339,7 +389,17 @@ summer-guild/
 - `assets/backgrounds/guilds/guildhall.png`
 - `assets/backgrounds/guilds/guildshop_bg.png`
 - `assets/backgrounds/home/room.png`
+- `assets/backgrounds/special/mathGuildForest.png`
 - `assets/backgrounds/title/title.PNG`
+- `assets/characters/masters/math/mathGuildMaster.png`
+- `assets/characters/pet/blackdog_base.PNG`
+- `assets/characters/pet/blackdog_calm.PNG`
+- `assets/characters/pet/blackdog_joy.PNG`
+- `assets/characters/pet/blackdog_sleep.PNG`
+- `assets/characters/pet/blanket.PNG`
+- `assets/characters/pet/dogtoy_ball.PNG`
+- `assets/characters/pet/dogtoy_bone.PNG`
+- `assets/characters/pet/dogtoy_rope.PNG`
 - `assets/characters/player/accessories/neckwarmer_acc.PNG`
 - `assets/characters/player/base/base.png`
 - `assets/characters/player/clothes/bottoms/battle_bottoms.PNG`
@@ -355,6 +415,7 @@ summer-guild/
 - `assets/characters/player/clothes/bottoms/tennis_bottoms.PNG`
 - `assets/characters/player/clothes/capes/kokugoguild_capes.PNG`
 - `assets/characters/player/clothes/capes/rikaguild_capes.PNG`
+- `assets/characters/player/clothes/outer/blackdog_fullset.PNG`
 - `assets/characters/player/clothes/outer/cloudstrife_outerset.PNG`
 - `assets/characters/player/clothes/shoes/doctor_shoes.PNG`
 - `assets/characters/player/clothes/shoes/kyudo_shoes.PNG`
@@ -374,6 +435,15 @@ summer-guild/
 - `assets/characters/player/clothes/tops/tennis_tops.PNG`
 - `assets/characters/player/head/glasses_head.PNG`
 - `assets/characters/player/head/google_head.PNG`
+- `assets/items/furniture/bookshelf.PNG`
+- `assets/items/furniture/chair.PNG`
+- `assets/items/furniture/GuildTableClock.PNG`
+- `assets/items/furniture/magicBroom.PNG`
+- `assets/items/furniture/magicCircle.PNG`
+- `assets/items/furniture/magicCrystal.PNG`
+- `assets/items/furniture/staffofLightning.PNG`
+- `assets/items/furniture/starGlobe.PNG`
+- `assets/items/furniture/wisemenDesk.PNG`
 - `assets/ui/buttons/numberpad_bg.png`
 - `assets/ui/buttons/wood_button_pressed.png`
 - `assets/ui/buttons/wood_button.png`
@@ -389,7 +459,13 @@ summer-guild/
 - `assets/audio/bgm/Sunlight Through Leaves.mp3`
 - `assets/audio/bgm/The Quiet Court.mp3`
 - `assets/audio/bgm/Thunder in the Hall.mp3`
+- `assets/audio/quests/Blazing Dragoon's Charge.mp3`
+- `assets/audio/quests/learningForest.mp3`
+- `assets/audio/quests/The Clockwork Gambit 2.mp3`
+- `assets/audio/quests/The Clockwork Gambit.mp3`
 - `assets/audio/quests/The Moment Before the Shot.mp3`
+- `assets/audio/quests/vsMathGuildMaster_final.mp3`
+- `assets/audio/quests/vsMathGuildMaster_start.mp3`
 
 ## 10. 動画アセット一覧
 

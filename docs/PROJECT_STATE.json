@@ -2,7 +2,7 @@
   "generator": {
     "name": "Summer Guild Project State Generator",
     "version": "1.0.0",
-    "generatedAt": "2026-07-22T06:07:48.224Z",
+    "generatedAt": "2026-07-26T04:18:12.585Z",
     "excludedGeneratedFiles": [
       "docs/GPT_PROJECT_STATE.md",
       "docs/PROJECT_STATE.json"
@@ -16,13 +16,13 @@
     "latestCommitMessage": "unknown"
   },
   "summary": {
-    "fileCount": 145,
-    "directoryCount": 66,
-    "imageCount": 46,
-    "audioCount": 9,
+    "fileCount": 179,
+    "directoryCount": 67,
+    "imageCount": 66,
+    "audioCount": 15,
     "videoCount": 0,
-    "javascriptCount": 26,
-    "cssCount": 4,
+    "javascriptCount": 30,
+    "cssCount": 6,
     "htmlCount": 1,
     "dataFileCount": 2
   },
@@ -49,6 +49,7 @@
     "assets/characters/masters/math",
     "assets/characters/masters/science",
     "assets/characters/masters/social",
+    "assets/characters/pet",
     "assets/characters/player",
     "assets/characters/player/accessories",
     "assets/characters/player/base",
@@ -111,7 +112,13 @@
     "assets/audio/bgm/The Quiet Court.mp3",
     "assets/audio/bgm/Thunder in the Hall.mp3",
     "assets/audio/quests/.gitkeep",
+    "assets/audio/quests/Blazing Dragoon's Charge.mp3",
+    "assets/audio/quests/learningForest.mp3",
+    "assets/audio/quests/The Clockwork Gambit 2.mp3",
+    "assets/audio/quests/The Clockwork Gambit.mp3",
     "assets/audio/quests/The Moment Before the Shot.mp3",
+    "assets/audio/quests/vsMathGuildMaster_final.mp3",
+    "assets/audio/quests/vsMathGuildMaster_start.mp3",
     "assets/audio/sfx/.gitkeep",
     "assets/backgrounds/facilities/.gitkeep",
     "assets/backgrounds/guild-hall/.gitkeep",
@@ -123,12 +130,23 @@
     "assets/backgrounds/home/room.png",
     "assets/backgrounds/masters/.gitkeep",
     "assets/backgrounds/special/.gitkeep",
+    "assets/backgrounds/special/mathGuildForest.png",
     "assets/backgrounds/title/.gitkeep",
     "assets/backgrounds/title/title.PNG",
     "assets/characters/masters/japanese/.gitkeep",
     "assets/characters/masters/math/.gitkeep",
+    "assets/characters/masters/math/mathGuildMaster.png",
     "assets/characters/masters/science/.gitkeep",
     "assets/characters/masters/social/.gitkeep",
+    "assets/characters/pet/.gitkeep",
+    "assets/characters/pet/blackdog_base.PNG",
+    "assets/characters/pet/blackdog_calm.PNG",
+    "assets/characters/pet/blackdog_joy.PNG",
+    "assets/characters/pet/blackdog_sleep.PNG",
+    "assets/characters/pet/blanket.PNG",
+    "assets/characters/pet/dogtoy_ball.PNG",
+    "assets/characters/pet/dogtoy_bone.PNG",
+    "assets/characters/pet/dogtoy_rope.PNG",
     "assets/characters/player/accessories/.gitkeep",
     "assets/characters/player/accessories/neckwarmer_acc.PNG",
     "assets/characters/player/base/.gitkeep",
@@ -151,6 +169,7 @@
     "assets/characters/player/clothes/capes/rikaguild_capes.PNG",
     "assets/characters/player/clothes/gloves/.gitkeep",
     "assets/characters/player/clothes/outer/.gitkeep",
+    "assets/characters/player/clothes/outer/blackdog_fullset.PNG",
     "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG",
     "assets/characters/player/clothes/shoes/.gitkeep",
     "assets/characters/player/clothes/shoes/doctor_shoes.PNG",
@@ -179,6 +198,15 @@
     "assets/items/consumables/.gitkeep",
     "assets/items/decorations/.gitkeep",
     "assets/items/furniture/.gitkeep",
+    "assets/items/furniture/bookshelf.PNG",
+    "assets/items/furniture/chair.PNG",
+    "assets/items/furniture/GuildTableClock.PNG",
+    "assets/items/furniture/magicBroom.PNG",
+    "assets/items/furniture/magicCircle.PNG",
+    "assets/items/furniture/magicCrystal.PNG",
+    "assets/items/furniture/staffofLightning.PNG",
+    "assets/items/furniture/starGlobe.PNG",
+    "assets/items/furniture/wisemenDesk.PNG",
     "assets/ui/buttons/.gitkeep",
     "assets/ui/buttons/numberpad_bg.png",
     "assets/ui/buttons/wood_button_pressed.png",
@@ -193,6 +221,8 @@
     "css/layout.css",
     "css/screens/.gitkeep",
     "css/screens/common.css",
+    "css/screens/iphone-landscape.css",
+    "css/screens/learning-forest.css",
     "data/achievements/.gitkeep",
     "data/exams/.gitkeep",
     "data/facilities/.gitkeep",
@@ -207,6 +237,7 @@
     "docs/asset-guide.md",
     "docs/development-log.md",
     "docs/game-rules.md",
+    "docs/GPT_HANDOFF.md",
     "index.html",
     "js/app.js",
     "js/components/.gitkeep",
@@ -221,15 +252,19 @@
     "js/quests/math.js",
     "js/quests/music.js",
     "js/quests/reading.js",
+    "js/quests/review.js",
     "js/quests/science.js",
     "js/quests/society.js",
     "js/screens/.gitkeep",
+    "js/screens/learningForest.js",
     "js/screens/musicShop.js",
     "js/screens/shop.js",
     "js/screens/wardrobe.js",
     "js/settings.js",
     "js/storage.js",
     "js/systems/.gitkeep",
+    "js/systems/blackDogPet.js",
+    "js/systems/furnitureSystem.js",
     "js/systems/musicPlayer.js",
     "js/systems/questEngine.js",
     "js/systems/questMusicPlayer.js",
@@ -339,10 +374,46 @@
       "sizeBytes": 1
     },
     {
+      "path": "assets/audio/quests/Blazing Dragoon's Charge.mp3",
+      "name": "Blazing Dragoon's Charge.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 3252371
+    },
+    {
+      "path": "assets/audio/quests/learningForest.mp3",
+      "name": "learningForest.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 3209645
+    },
+    {
+      "path": "assets/audio/quests/The Clockwork Gambit 2.mp3",
+      "name": "The Clockwork Gambit 2.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 3545126
+    },
+    {
+      "path": "assets/audio/quests/The Clockwork Gambit.mp3",
+      "name": "The Clockwork Gambit.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 3379268
+    },
+    {
       "path": "assets/audio/quests/The Moment Before the Shot.mp3",
       "name": "The Moment Before the Shot.mp3",
       "extension": ".mp3",
       "sizeBytes": 3017441
+    },
+    {
+      "path": "assets/audio/quests/vsMathGuildMaster_final.mp3",
+      "name": "vsMathGuildMaster_final.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 4288595
+    },
+    {
+      "path": "assets/audio/quests/vsMathGuildMaster_start.mp3",
+      "name": "vsMathGuildMaster_start.mp3",
+      "extension": ".mp3",
+      "sizeBytes": 3072615
     },
     {
       "path": "assets/audio/sfx/.gitkeep",
@@ -411,6 +482,12 @@
       "sizeBytes": 0
     },
     {
+      "path": "assets/backgrounds/special/mathGuildForest.png",
+      "name": "mathGuildForest.png",
+      "extension": ".png",
+      "sizeBytes": 2615106
+    },
+    {
       "path": "assets/backgrounds/title/.gitkeep",
       "name": ".gitkeep",
       "extension": "",
@@ -435,6 +512,12 @@
       "sizeBytes": 0
     },
     {
+      "path": "assets/characters/masters/math/mathGuildMaster.png",
+      "name": "mathGuildMaster.png",
+      "extension": ".png",
+      "sizeBytes": 2473515
+    },
+    {
       "path": "assets/characters/masters/science/.gitkeep",
       "name": ".gitkeep",
       "extension": "",
@@ -445,6 +528,60 @@
       "name": ".gitkeep",
       "extension": "",
       "sizeBytes": 0
+    },
+    {
+      "path": "assets/characters/pet/.gitkeep",
+      "name": ".gitkeep",
+      "extension": "",
+      "sizeBytes": 1
+    },
+    {
+      "path": "assets/characters/pet/blackdog_base.PNG",
+      "name": "blackdog_base.PNG",
+      "extension": ".png",
+      "sizeBytes": 44211
+    },
+    {
+      "path": "assets/characters/pet/blackdog_calm.PNG",
+      "name": "blackdog_calm.PNG",
+      "extension": ".png",
+      "sizeBytes": 27889
+    },
+    {
+      "path": "assets/characters/pet/blackdog_joy.PNG",
+      "name": "blackdog_joy.PNG",
+      "extension": ".png",
+      "sizeBytes": 30497
+    },
+    {
+      "path": "assets/characters/pet/blackdog_sleep.PNG",
+      "name": "blackdog_sleep.PNG",
+      "extension": ".png",
+      "sizeBytes": 28820
+    },
+    {
+      "path": "assets/characters/pet/blanket.PNG",
+      "name": "blanket.PNG",
+      "extension": ".png",
+      "sizeBytes": 33143
+    },
+    {
+      "path": "assets/characters/pet/dogtoy_ball.PNG",
+      "name": "dogtoy_ball.PNG",
+      "extension": ".png",
+      "sizeBytes": 10233
+    },
+    {
+      "path": "assets/characters/pet/dogtoy_bone.PNG",
+      "name": "dogtoy_bone.PNG",
+      "extension": ".png",
+      "sizeBytes": 10923
+    },
+    {
+      "path": "assets/characters/pet/dogtoy_rope.PNG",
+      "name": "dogtoy_rope.PNG",
+      "extension": ".png",
+      "sizeBytes": 17116
     },
     {
       "path": "assets/characters/player/accessories/.gitkeep",
@@ -528,7 +665,7 @@
       "path": "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG",
       "name": "rocknroll_bottoms.PNG",
       "extension": ".png",
-      "sizeBytes": 281002
+      "sizeBytes": 272463
     },
     {
       "path": "assets/characters/player/clothes/bottoms/schooluniform_bottoms.PNG",
@@ -579,6 +716,12 @@
       "sizeBytes": 1
     },
     {
+      "path": "assets/characters/player/clothes/outer/blackdog_fullset.PNG",
+      "name": "blackdog_fullset.PNG",
+      "extension": ".png",
+      "sizeBytes": 543638
+    },
+    {
       "path": "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG",
       "name": "cloudstrife_outerset.PNG",
       "extension": ".png",
@@ -618,7 +761,7 @@
       "path": "assets/characters/player/clothes/tops/battle_tops.PNG",
       "name": "battle_tops.PNG",
       "extension": ".png",
-      "sizeBytes": 217058
+      "sizeBytes": 206349
     },
     {
       "path": "assets/characters/player/clothes/tops/border_tops.PNG",
@@ -666,7 +809,7 @@
       "path": "assets/characters/player/clothes/tops/mountainparker_tops.PNG",
       "name": "mountainparker_tops.PNG",
       "extension": ".png",
-      "sizeBytes": 248425
+      "sizeBytes": 241605
     },
     {
       "path": "assets/characters/player/clothes/tops/rocknroll_tops.PNG",
@@ -678,13 +821,13 @@
       "path": "assets/characters/player/clothes/tops/schooluniform_tops.PNG",
       "name": "schooluniform_tops.PNG",
       "extension": ".png",
-      "sizeBytes": 257045
+      "sizeBytes": 245944
     },
     {
       "path": "assets/characters/player/clothes/tops/schooluniformsummer_tops.PNG",
       "name": "schooluniformsummer_tops.PNG",
       "extension": ".png",
-      "sizeBytes": 225581
+      "sizeBytes": 190726
     },
     {
       "path": "assets/characters/player/clothes/tops/tennis_tops.PNG",
@@ -714,7 +857,7 @@
       "path": "assets/characters/player/head/glasses_head.PNG",
       "name": "glasses_head.PNG",
       "extension": ".png",
-      "sizeBytes": 186408
+      "sizeBytes": 177513
     },
     {
       "path": "assets/characters/player/head/google_head.PNG",
@@ -745,6 +888,60 @@
       "name": ".gitkeep",
       "extension": "",
       "sizeBytes": 0
+    },
+    {
+      "path": "assets/items/furniture/bookshelf.PNG",
+      "name": "bookshelf.PNG",
+      "extension": ".png",
+      "sizeBytes": 106656
+    },
+    {
+      "path": "assets/items/furniture/chair.PNG",
+      "name": "chair.PNG",
+      "extension": ".png",
+      "sizeBytes": 261271
+    },
+    {
+      "path": "assets/items/furniture/GuildTableClock.PNG",
+      "name": "GuildTableClock.PNG",
+      "extension": ".png",
+      "sizeBytes": 78168
+    },
+    {
+      "path": "assets/items/furniture/magicBroom.PNG",
+      "name": "magicBroom.PNG",
+      "extension": ".png",
+      "sizeBytes": 75140
+    },
+    {
+      "path": "assets/items/furniture/magicCircle.PNG",
+      "name": "magicCircle.PNG",
+      "extension": ".png",
+      "sizeBytes": 124238
+    },
+    {
+      "path": "assets/items/furniture/magicCrystal.PNG",
+      "name": "magicCrystal.PNG",
+      "extension": ".png",
+      "sizeBytes": 65478
+    },
+    {
+      "path": "assets/items/furniture/staffofLightning.PNG",
+      "name": "staffofLightning.PNG",
+      "extension": ".png",
+      "sizeBytes": 103574
+    },
+    {
+      "path": "assets/items/furniture/starGlobe.PNG",
+      "name": "starGlobe.PNG",
+      "extension": ".png",
+      "sizeBytes": 96816
+    },
+    {
+      "path": "assets/items/furniture/wisemenDesk.PNG",
+      "name": "wisemenDesk.PNG",
+      "extension": ".png",
+      "sizeBytes": 364866
     },
     {
       "path": "assets/ui/buttons/.gitkeep",
@@ -810,13 +1007,13 @@
       "path": "css/developer.css",
       "name": "developer.css",
       "extension": ".css",
-      "sizeBytes": 9859
+      "sizeBytes": 12979
     },
     {
       "path": "css/layout.css",
       "name": "layout.css",
       "extension": ".css",
-      "sizeBytes": 35651
+      "sizeBytes": 65390
     },
     {
       "path": "css/screens/.gitkeep",
@@ -829,6 +1026,18 @@
       "name": "common.css",
       "extension": ".css",
       "sizeBytes": 8803
+    },
+    {
+      "path": "css/screens/iphone-landscape.css",
+      "name": "iphone-landscape.css",
+      "extension": ".css",
+      "sizeBytes": 10454
+    },
+    {
+      "path": "css/screens/learning-forest.css",
+      "name": "learning-forest.css",
+      "extension": ".css",
+      "sizeBytes": 46432
     },
     {
       "path": "data/achievements/.gitkeep",
@@ -858,7 +1067,7 @@
       "path": "data/items/items.js",
       "name": "items.js",
       "extension": ".js",
-      "sizeBytes": 6999
+      "sizeBytes": 7397
     },
     {
       "path": "data/masters/.gitkeep",
@@ -906,25 +1115,31 @@
       "path": "docs/development-log.md",
       "name": "development-log.md",
       "extension": ".md",
-      "sizeBytes": 608
+      "sizeBytes": 30508
     },
     {
       "path": "docs/game-rules.md",
       "name": "game-rules.md",
       "extension": ".md",
-      "sizeBytes": 283
+      "sizeBytes": 3943
+    },
+    {
+      "path": "docs/GPT_HANDOFF.md",
+      "name": "GPT_HANDOFF.md",
+      "extension": ".md",
+      "sizeBytes": 14070
     },
     {
       "path": "index.html",
       "name": "index.html",
       "extension": ".html",
-      "sizeBytes": 13174
+      "sizeBytes": 18018
     },
     {
       "path": "js/app.js",
       "name": "app.js",
       "extension": ".js",
-      "sizeBytes": 35868
+      "sizeBytes": 43808
     },
     {
       "path": "js/components/.gitkeep",
@@ -936,7 +1151,7 @@
       "path": "js/developer.js",
       "name": "developer.js",
       "extension": ".js",
-      "sizeBytes": 20523
+      "sizeBytes": 33006
     },
     {
       "path": "js/numberpad.js",
@@ -954,7 +1169,7 @@
       "path": "js/quests/daily.js",
       "name": "daily.js",
       "extension": ".js",
-      "sizeBytes": 5604
+      "sizeBytes": 7143
     },
     {
       "path": "js/quests/engine.js",
@@ -972,7 +1187,7 @@
       "path": "js/quests/hyakumasu.js",
       "name": "hyakumasu.js",
       "extension": ".js",
-      "sizeBytes": 58804
+      "sizeBytes": 65712
     },
     {
       "path": "js/quests/kanji.js",
@@ -984,7 +1199,7 @@
       "path": "js/quests/math.js",
       "name": "math.js",
       "extension": ".js",
-      "sizeBytes": 1
+      "sizeBytes": 43478
     },
     {
       "path": "js/quests/music.js",
@@ -999,6 +1214,12 @@
       "sizeBytes": 1
     },
     {
+      "path": "js/quests/review.js",
+      "name": "review.js",
+      "extension": ".js",
+      "sizeBytes": 20869
+    },
+    {
       "path": "js/quests/science.js",
       "name": "science.js",
       "extension": ".js",
@@ -1008,13 +1229,19 @@
       "path": "js/quests/society.js",
       "name": "society.js",
       "extension": ".js",
-      "sizeBytes": 1
+      "sizeBytes": 23129
     },
     {
       "path": "js/screens/.gitkeep",
       "name": ".gitkeep",
       "extension": "",
       "sizeBytes": 0
+    },
+    {
+      "path": "js/screens/learningForest.js",
+      "name": "learningForest.js",
+      "extension": ".js",
+      "sizeBytes": 87806
     },
     {
       "path": "js/screens/musicShop.js",
@@ -1026,19 +1253,19 @@
       "path": "js/screens/shop.js",
       "name": "shop.js",
       "extension": ".js",
-      "sizeBytes": 11104
+      "sizeBytes": 12879
     },
     {
       "path": "js/screens/wardrobe.js",
       "name": "wardrobe.js",
       "extension": ".js",
-      "sizeBytes": 7382
+      "sizeBytes": 7616
     },
     {
       "path": "js/settings.js",
       "name": "settings.js",
       "extension": ".js",
-      "sizeBytes": 46833
+      "sizeBytes": 51210
     },
     {
       "path": "js/storage.js",
@@ -1051,6 +1278,18 @@
       "name": ".gitkeep",
       "extension": "",
       "sizeBytes": 0
+    },
+    {
+      "path": "js/systems/blackDogPet.js",
+      "name": "blackDogPet.js",
+      "extension": ".js",
+      "sizeBytes": 6326
+    },
+    {
+      "path": "js/systems/furnitureSystem.js",
+      "name": "furnitureSystem.js",
+      "extension": ".js",
+      "sizeBytes": 9212
     },
     {
       "path": "js/systems/musicPlayer.js",
@@ -1068,7 +1307,7 @@
       "path": "js/systems/questMusicPlayer.js",
       "name": "questMusicPlayer.js",
       "extension": ".js",
-      "sizeBytes": 5130
+      "sizeBytes": 7641
     },
     {
       "path": "manifest.webmanifest",
@@ -1080,7 +1319,7 @@
       "path": "project-index.json",
       "name": "project-index.json",
       "extension": ".json",
-      "sizeBytes": 86709
+      "sizeBytes": 112617
     },
     {
       "path": "README.md",
@@ -1098,7 +1337,7 @@
       "path": "service-worker.js",
       "name": "service-worker.js",
       "extension": ".js",
-      "sizeBytes": 4483
+      "sizeBytes": 4492
     },
     {
       "path": "tests/.gitkeep",
@@ -1122,7 +1361,17 @@
       "assets/backgrounds/guilds/guildhall.png",
       "assets/backgrounds/guilds/guildshop_bg.png",
       "assets/backgrounds/home/room.png",
+      "assets/backgrounds/special/mathGuildForest.png",
       "assets/backgrounds/title/title.PNG",
+      "assets/characters/masters/math/mathGuildMaster.png",
+      "assets/characters/pet/blackdog_base.PNG",
+      "assets/characters/pet/blackdog_calm.PNG",
+      "assets/characters/pet/blackdog_joy.PNG",
+      "assets/characters/pet/blackdog_sleep.PNG",
+      "assets/characters/pet/blanket.PNG",
+      "assets/characters/pet/dogtoy_ball.PNG",
+      "assets/characters/pet/dogtoy_bone.PNG",
+      "assets/characters/pet/dogtoy_rope.PNG",
       "assets/characters/player/accessories/neckwarmer_acc.PNG",
       "assets/characters/player/base/base.png",
       "assets/characters/player/clothes/bottoms/battle_bottoms.PNG",
@@ -1138,6 +1387,7 @@
       "assets/characters/player/clothes/bottoms/tennis_bottoms.PNG",
       "assets/characters/player/clothes/capes/kokugoguild_capes.PNG",
       "assets/characters/player/clothes/capes/rikaguild_capes.PNG",
+      "assets/characters/player/clothes/outer/blackdog_fullset.PNG",
       "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG",
       "assets/characters/player/clothes/shoes/doctor_shoes.PNG",
       "assets/characters/player/clothes/shoes/kyudo_shoes.PNG",
@@ -1157,6 +1407,15 @@
       "assets/characters/player/clothes/tops/tennis_tops.PNG",
       "assets/characters/player/head/glasses_head.PNG",
       "assets/characters/player/head/google_head.PNG",
+      "assets/items/furniture/bookshelf.PNG",
+      "assets/items/furniture/chair.PNG",
+      "assets/items/furniture/GuildTableClock.PNG",
+      "assets/items/furniture/magicBroom.PNG",
+      "assets/items/furniture/magicCircle.PNG",
+      "assets/items/furniture/magicCrystal.PNG",
+      "assets/items/furniture/staffofLightning.PNG",
+      "assets/items/furniture/starGlobe.PNG",
+      "assets/items/furniture/wisemenDesk.PNG",
       "assets/ui/buttons/numberpad_bg.png",
       "assets/ui/buttons/wood_button_pressed.png",
       "assets/ui/buttons/wood_button.png",
@@ -1171,7 +1430,13 @@
       "assets/audio/bgm/Sunlight Through Leaves.mp3",
       "assets/audio/bgm/The Quiet Court.mp3",
       "assets/audio/bgm/Thunder in the Hall.mp3",
-      "assets/audio/quests/The Moment Before the Shot.mp3"
+      "assets/audio/quests/Blazing Dragoon's Charge.mp3",
+      "assets/audio/quests/learningForest.mp3",
+      "assets/audio/quests/The Clockwork Gambit 2.mp3",
+      "assets/audio/quests/The Clockwork Gambit.mp3",
+      "assets/audio/quests/The Moment Before the Shot.mp3",
+      "assets/audio/quests/vsMathGuildMaster_final.mp3",
+      "assets/audio/quests/vsMathGuildMaster_start.mp3"
     ],
     "video": []
   },
@@ -1191,13 +1456,17 @@
       "js/quests/math.js",
       "js/quests/music.js",
       "js/quests/reading.js",
+      "js/quests/review.js",
       "js/quests/science.js",
       "js/quests/society.js",
+      "js/screens/learningForest.js",
       "js/screens/musicShop.js",
       "js/screens/shop.js",
       "js/screens/wardrobe.js",
       "js/settings.js",
       "js/storage.js",
+      "js/systems/blackDogPet.js",
+      "js/systems/furnitureSystem.js",
       "js/systems/musicPlayer.js",
       "js/systems/questEngine.js",
       "js/systems/questMusicPlayer.js",
@@ -1208,7 +1477,9 @@
       "css/common.css",
       "css/developer.css",
       "css/layout.css",
-      "css/screens/common.css"
+      "css/screens/common.css",
+      "css/screens/iphone-landscape.css",
+      "css/screens/learning-forest.css"
     ],
     "html": [
       "index.html"
@@ -1221,30 +1492,39 @@
   "indexHtml": {
     "exists": true,
     "stylesheets": [
-      "css/common.css?v=20260721-1",
-      "css/layout.css?v=20260722-2",
-      "css/developer.css?v=20260721-1"
+      "css/common.css?v=20260723-layer-order-v1",
+      "css/layout.css?v=20260726-furniture-v1",
+      "css/screens/iphone-landscape.css?v=20260723-review-iphone1",
+      "css/screens/learning-forest.css?v=20260726-learning-forest-lesson8-bgm-v1",
+      "css/developer.css?v=20260726-furniture-v1"
     ],
     "scripts": [
-      "js/settings.js?v=20260722-3",
-      "data/items/items.js?v=20260722-2",
+      "js/settings.js?v=20260725-dogscale1",
+      "js/systems/furnitureSystem.js?v=20260726-furniture-v1",
+      "data/items/items.js?v=20260726-furniture-v1",
       "data/shop/music.js?v=20260721-1",
       "js/systems/musicPlayer.js?v=20260721-1",
-      "js/systems/questMusicPlayer.js?v=20260721-1",
-      "js/screens/shop.js?v=20260721-1",
+      "js/systems/questMusicPlayer.js?v=20260726-learning-forest-bgm-v1",
+      "js/screens/shop.js?v=20260726-furniture-v1",
       "js/screens/musicShop.js?v=20260721-1",
-      "js/screens/wardrobe.js?v=20260722-2",
+      "js/screens/wardrobe.js?v=20260724-rockshoe1",
       "js/systems/questEngine.js?v=20260722-3",
-      "js/quests/daily.js?v=20260721-1",
+      "js/quests/daily.js?v=20260723-review1",
       "js/numberpad.js?v=20260721-1",
-      "js/quests/hyakumasu.js?v=20260722-3",
-      "js/developer.js?v=20260721-1",
-      "js/app.js?v=20260722-3"
+      "js/quests/hyakumasu.js?v=20260723-5",
+      "js/quests/review.js?v=20260723-review-iphone1",
+      "js/quests/math.js?v=20260723-mathguild30",
+      "js/quests/society.js?v=20260724-socialguild1",
+      "js/screens/learningForest.js?v=20260726-learning-forest-lesson8-bgm-v1",
+      "js/developer.js?v=20260726-furniture-v1",
+      "js/systems/blackDogPet.js?v=20260725-dogscale1",
+      "js/app.js?v=20260726-furniture-v1"
     ],
     "images": [
       "assets/characters/player/base/base.png",
       "assets/characters/player/clothes/bottoms/default_bottoms.png",
-      "assets/characters/player/clothes/tops/default_tops.png"
+      "assets/characters/player/clothes/tops/default_tops.png",
+      "assets/characters/masters/math/mathGuildMaster.png"
     ],
     "manifestFiles": [
       "manifest.webmanifest?v=20260721-1"
@@ -1252,8 +1532,11 @@
     "allLocalReferences": [
       "css/common.css",
       "css/layout.css",
+      "css/screens/iphone-landscape.css",
+      "css/screens/learning-forest.css",
       "css/developer.css",
       "js/settings.js",
+      "js/systems/furnitureSystem.js",
       "data/items/items.js",
       "data/shop/music.js",
       "js/systems/musicPlayer.js",
@@ -1265,11 +1548,17 @@
       "js/quests/daily.js",
       "js/numberpad.js",
       "js/quests/hyakumasu.js",
+      "js/quests/review.js",
+      "js/quests/math.js",
+      "js/quests/society.js",
+      "js/screens/learningForest.js",
       "js/developer.js",
+      "js/systems/blackDogPet.js",
       "js/app.js",
       "assets/characters/player/base/base.png",
       "assets/characters/player/clothes/bottoms/default_bottoms.png",
       "assets/characters/player/clothes/tops/default_tops.png",
+      "assets/characters/masters/math/mathGuildMaster.png",
       "manifest.webmanifest"
     ],
     "missingReferences": []
@@ -1304,7 +1593,13 @@
       "│   │   │   └── Thunder in the Hall.mp3",
       "│   │   ├── quests/",
       "│   │   │   ├── .gitkeep",
-      "│   │   │   └── The Moment Before the Shot.mp3",
+      "│   │   │   ├── Blazing Dragoon's Charge.mp3",
+      "│   │   │   ├── learningForest.mp3",
+      "│   │   │   ├── The Clockwork Gambit 2.mp3",
+      "│   │   │   ├── The Clockwork Gambit.mp3",
+      "│   │   │   ├── The Moment Before the Shot.mp3",
+      "│   │   │   ├── vsMathGuildMaster_final.mp3",
+      "│   │   │   └── vsMathGuildMaster_start.mp3",
       "│   │   └── sfx/",
       "│   │       └── .gitkeep",
       "│   ├── backgrounds/",
@@ -1323,7 +1618,8 @@
       "│   │   ├── masters/",
       "│   │   │   └── .gitkeep",
       "│   │   ├── special/",
-      "│   │   │   └── .gitkeep",
+      "│   │   │   ├── .gitkeep",
+      "│   │   │   └── mathGuildForest.png",
       "│   │   └── title/",
       "│   │       ├── .gitkeep",
       "│   │       └── title.PNG",
@@ -1332,11 +1628,22 @@
       "│   │   │   ├── japanese/",
       "│   │   │   │   └── .gitkeep",
       "│   │   │   ├── math/",
-      "│   │   │   │   └── .gitkeep",
+      "│   │   │   │   ├── .gitkeep",
+      "│   │   │   │   └── mathGuildMaster.png",
       "│   │   │   ├── science/",
       "│   │   │   │   └── .gitkeep",
       "│   │   │   └── social/",
       "│   │   │       └── .gitkeep",
+      "│   │   ├── pet/",
+      "│   │   │   ├── .gitkeep",
+      "│   │   │   ├── blackdog_base.PNG",
+      "│   │   │   ├── blackdog_calm.PNG",
+      "│   │   │   ├── blackdog_joy.PNG",
+      "│   │   │   ├── blackdog_sleep.PNG",
+      "│   │   │   ├── blanket.PNG",
+      "│   │   │   ├── dogtoy_ball.PNG",
+      "│   │   │   ├── dogtoy_bone.PNG",
+      "│   │   │   └── dogtoy_rope.PNG",
       "│   │   └── player/",
       "│   │       ├── accessories/",
       "│   │       │   ├── .gitkeep",
@@ -1367,6 +1674,7 @@
       "│   │       │   │   └── .gitkeep",
       "│   │       │   ├── outer/",
       "│   │       │   │   ├── .gitkeep",
+      "│   │       │   │   ├── blackdog_fullset.PNG",
       "│   │       │   │   └── cloudstrife_outerset.PNG",
       "│   │       │   ├── shoes/",
       "│   │       │   │   ├── .gitkeep",
@@ -1404,7 +1712,16 @@
       "│   │   ├── decorations/",
       "│   │   │   └── .gitkeep",
       "│   │   └── furniture/",
-      "│   │       └── .gitkeep",
+      "│   │       ├── .gitkeep",
+      "│   │       ├── bookshelf.PNG",
+      "│   │       ├── chair.PNG",
+      "│   │       ├── GuildTableClock.PNG",
+      "│   │       ├── magicBroom.PNG",
+      "│   │       ├── magicCircle.PNG",
+      "│   │       ├── magicCrystal.PNG",
+      "│   │       ├── staffofLightning.PNG",
+      "│   │       ├── starGlobe.PNG",
+      "│   │       └── wisemenDesk.PNG",
       "│   └── ui/",
       "│       ├── buttons/",
       "│       │   ├── .gitkeep",
@@ -1426,7 +1743,9 @@
       "│   ├── layout.css",
       "│   └── screens/",
       "│       ├── .gitkeep",
-      "│       └── common.css",
+      "│       ├── common.css",
+      "│       ├── iphone-landscape.css",
+      "│       └── learning-forest.css",
       "├── data/",
       "│   ├── achievements/",
       "│   │   └── .gitkeep",
@@ -1450,7 +1769,8 @@
       "│   ├── .gitkeep",
       "│   ├── asset-guide.md",
       "│   ├── development-log.md",
-      "│   └── game-rules.md",
+      "│   ├── game-rules.md",
+      "│   └── GPT_HANDOFF.md",
       "├── index.html",
       "├── js/",
       "│   ├── app.js",
@@ -1468,10 +1788,12 @@
       "│   │   ├── math.js",
       "│   │   ├── music.js",
       "│   │   ├── reading.js",
+      "│   │   ├── review.js",
       "│   │   ├── science.js",
       "│   │   └── society.js",
       "│   ├── screens/",
       "│   │   ├── .gitkeep",
+      "│   │   ├── learningForest.js",
       "│   │   ├── musicShop.js",
       "│   │   ├── shop.js",
       "│   │   └── wardrobe.js",
@@ -1479,6 +1801,8 @@
       "│   ├── storage.js",
       "│   └── systems/",
       "│       ├── .gitkeep",
+      "│       ├── blackDogPet.js",
+      "│       ├── furnitureSystem.js",
       "│       ├── musicPlayer.js",
       "│       ├── questEngine.js",
       "│       └── questMusicPlayer.js",
@@ -1493,7 +1817,7 @@
       "└── tools/",
       "    └── generateProjectState.js"
     ],
-    "text": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Afternoon in the Academy.mp3\n│   │   │   ├── Bloom in the Garden.mp3\n│   │   │   ├── Candlelit Banquet.mp3\n│   │   │   ├── Harbor Breeze.mp3\n│   │   │   ├── Morning Light in the Guild.mp3\n│   │   │   ├── Sunlight Through Leaves.mp3\n│   │   │   ├── The Quiet Court.mp3\n│   │   │   └── Thunder in the Hall.mp3\n│   │   ├── quests/\n│   │   │   ├── .gitkeep\n│   │   │   └── The Moment Before the Shot.mp3\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   └── .gitkeep\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   ├── .gitkeep\n│   │       │   └── neckwarmer_acc.PNG\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── .gitkeep\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_bottoms.PNG\n│   │       │   │   ├── bluejeans_bottoms.PNG\n│   │       │   │   ├── cycling_bottoms.PNG\n│   │       │   │   ├── default_bottoms.png\n│   │       │   │   ├── doctor_bottoms.PNG\n│   │       │   │   ├── kyudo_bottoms.PNG\n│   │       │   │   ├── longskirtgrey_bottoms.PNG\n│   │       │   │   ├── rocknroll_bottoms.PNG\n│   │       │   │   ├── schooluniform_bottoms.PNG\n│   │       │   │   ├── stripe_bottoms.PNG\n│   │       │   │   └── tennis_bottoms.PNG\n│   │       │   ├── capes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── kokugoguild_capes.PNG\n│   │       │   │   └── rikaguild_capes.PNG\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   └── cloudstrife_outerset.PNG\n│   │       │   ├── shoes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── doctor_shoes.PNG\n│   │       │   │   ├── kyudo_shoes.PNG\n│   │       │   │   └── schooluniform_shoes.PNG\n│   │       │   └── tops/\n│   │       │       ├── .gitkeep\n│   │       │       ├── battle_tops.PNG\n│   │       │       ├── border_tops.PNG\n│   │       │       ├── cycling_tops.PNG\n│   │       │       ├── default_tops.png\n│   │       │       ├── doctor_tops.PNG\n│   │       │       ├── foody_tops.PNG\n│   │       │       ├── kyudo_tops.PNG\n│   │       │       ├── lightning_tops.PNG\n│   │       │       ├── mountainparker_tops.PNG\n│   │       │       ├── rocknroll_tops.PNG\n│   │       │       ├── schooluniform_tops.PNG\n│   │       │       ├── schooluniformsummer_tops.PNG\n│   │       │       └── tennis_tops.PNG\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   ├── .gitkeep\n│   │       │   ├── glasses_head.PNG\n│   │       │   └── google_head.PNG\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       └── .gitkeep\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button_pressed.png\n│       │   ├── wood_button.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── common.css\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.css\n│   ├── layout.css\n│   └── screens/\n│       ├── .gitkeep\n│       └── common.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   ├── .gitkeep\n│   │   └── items.js\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       ├── .gitkeep\n│       └── music.js\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   └── game-rules.md\n├── index.html\n├── js/\n│   ├── app.js\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── musicShop.js\n│   │   ├── shop.js\n│   │   └── wardrobe.js\n│   ├── settings.js\n│   ├── storage.js\n│   └── systems/\n│       ├── .gitkeep\n│       ├── musicPlayer.js\n│       ├── questEngine.js\n│       └── questMusicPlayer.js\n├── manifest.webmanifest\n├── project-index.json\n├── README.md\n├── saves/\n│   └── .gitkeep\n├── service-worker.js\n├── tests/\n│   └── .gitkeep\n└── tools/\n    └── generateProjectState.js"
+    "text": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Afternoon in the Academy.mp3\n│   │   │   ├── Bloom in the Garden.mp3\n│   │   │   ├── Candlelit Banquet.mp3\n│   │   │   ├── Harbor Breeze.mp3\n│   │   │   ├── Morning Light in the Guild.mp3\n│   │   │   ├── Sunlight Through Leaves.mp3\n│   │   │   ├── The Quiet Court.mp3\n│   │   │   └── Thunder in the Hall.mp3\n│   │   ├── quests/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Blazing Dragoon's Charge.mp3\n│   │   │   ├── learningForest.mp3\n│   │   │   ├── The Clockwork Gambit 2.mp3\n│   │   │   ├── The Clockwork Gambit.mp3\n│   │   │   ├── The Moment Before the Shot.mp3\n│   │   │   ├── vsMathGuildMaster_final.mp3\n│   │   │   └── vsMathGuildMaster_start.mp3\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   ├── .gitkeep\n│   │   │   └── mathGuildForest.png\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   ├── .gitkeep\n│   │   │   │   └── mathGuildMaster.png\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   ├── pet/\n│   │   │   ├── .gitkeep\n│   │   │   ├── blackdog_base.PNG\n│   │   │   ├── blackdog_calm.PNG\n│   │   │   ├── blackdog_joy.PNG\n│   │   │   ├── blackdog_sleep.PNG\n│   │   │   ├── blanket.PNG\n│   │   │   ├── dogtoy_ball.PNG\n│   │   │   ├── dogtoy_bone.PNG\n│   │   │   └── dogtoy_rope.PNG\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   ├── .gitkeep\n│   │       │   └── neckwarmer_acc.PNG\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── .gitkeep\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_bottoms.PNG\n│   │       │   │   ├── bluejeans_bottoms.PNG\n│   │       │   │   ├── cycling_bottoms.PNG\n│   │       │   │   ├── default_bottoms.png\n│   │       │   │   ├── doctor_bottoms.PNG\n│   │       │   │   ├── kyudo_bottoms.PNG\n│   │       │   │   ├── longskirtgrey_bottoms.PNG\n│   │       │   │   ├── rocknroll_bottoms.PNG\n│   │       │   │   ├── schooluniform_bottoms.PNG\n│   │       │   │   ├── stripe_bottoms.PNG\n│   │       │   │   └── tennis_bottoms.PNG\n│   │       │   ├── capes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── kokugoguild_capes.PNG\n│   │       │   │   └── rikaguild_capes.PNG\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── blackdog_fullset.PNG\n│   │       │   │   └── cloudstrife_outerset.PNG\n│   │       │   ├── shoes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── doctor_shoes.PNG\n│   │       │   │   ├── kyudo_shoes.PNG\n│   │       │   │   └── schooluniform_shoes.PNG\n│   │       │   └── tops/\n│   │       │       ├── .gitkeep\n│   │       │       ├── battle_tops.PNG\n│   │       │       ├── border_tops.PNG\n│   │       │       ├── cycling_tops.PNG\n│   │       │       ├── default_tops.png\n│   │       │       ├── doctor_tops.PNG\n│   │       │       ├── foody_tops.PNG\n│   │       │       ├── kyudo_tops.PNG\n│   │       │       ├── lightning_tops.PNG\n│   │       │       ├── mountainparker_tops.PNG\n│   │       │       ├── rocknroll_tops.PNG\n│   │       │       ├── schooluniform_tops.PNG\n│   │       │       ├── schooluniformsummer_tops.PNG\n│   │       │       └── tennis_tops.PNG\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   ├── .gitkeep\n│   │       │   ├── glasses_head.PNG\n│   │       │   └── google_head.PNG\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       ├── .gitkeep\n│   │       ├── bookshelf.PNG\n│   │       ├── chair.PNG\n│   │       ├── GuildTableClock.PNG\n│   │       ├── magicBroom.PNG\n│   │       ├── magicCircle.PNG\n│   │       ├── magicCrystal.PNG\n│   │       ├── staffofLightning.PNG\n│   │       ├── starGlobe.PNG\n│   │       └── wisemenDesk.PNG\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button_pressed.png\n│       │   ├── wood_button.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── common.css\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.css\n│   ├── layout.css\n│   └── screens/\n│       ├── .gitkeep\n│       ├── common.css\n│       ├── iphone-landscape.css\n│       └── learning-forest.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   ├── .gitkeep\n│   │   └── items.js\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       ├── .gitkeep\n│       └── music.js\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   ├── game-rules.md\n│   └── GPT_HANDOFF.md\n├── index.html\n├── js/\n│   ├── app.js\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── review.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── learningForest.js\n│   │   ├── musicShop.js\n│   │   ├── shop.js\n│   │   └── wardrobe.js\n│   ├── settings.js\n│   ├── storage.js\n│   └── systems/\n│       ├── .gitkeep\n│       ├── blackDogPet.js\n│       ├── furnitureSystem.js\n│       ├── musicPlayer.js\n│       ├── questEngine.js\n│       └── questMusicPlayer.js\n├── manifest.webmanifest\n├── project-index.json\n├── README.md\n├── saves/\n│   └── .gitkeep\n├── service-worker.js\n├── tests/\n│   └── .gitkeep\n└── tools/\n    └── generateProjectState.js"
   },
   "projectNotes": {
     "exists": false,
