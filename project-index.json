@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T02:30:19.098853+00:00",
-    "commit": "03368f4",
+    "atUtc": "2026-07-26T02:30:51.250642+00:00",
+    "commit": "7c497cd",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 94710659,
+    "totalBytes": 94716660,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1282,9 +1282,9 @@
       "stem": "learning-forest",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 40431,
-      "sha1": "0bf4ab8358",
-      "lineCount": 1302
+      "sizeBytes": 46432,
+      "sha1": "144e722802",
+      "lineCount": 1425
     },
     {
       "path": "data/achievements/.gitkeep",
@@ -3207,7 +3207,7 @@
     {
       "status": "M",
       "paths": [
-        "js/systems/questMusicPlayer.js"
+        "css/screens/learning-forest.css"
       ]
     }
   ],
