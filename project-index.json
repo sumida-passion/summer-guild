@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T12:18:56.056318+00:00",
-    "commit": "85edef3",
+    "atUtc": "2026-07-26T12:19:23.022368+00:00",
+    "commit": "523e660",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 24,
-    "totalBytes": 96062620,
+    "totalBytes": 96063285,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1573,9 +1573,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 44138,
-      "sha1": "204209d4ce",
-      "lineCount": 2448
+      "sizeBytes": 44803,
+      "sha1": "e6d050e091",
+      "lineCount": 2467
     },
     {
       "path": "js/components/.gitkeep",
@@ -3501,13 +3501,7 @@
     {
       "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
+        "js/app.js"
       ]
     }
   ],
