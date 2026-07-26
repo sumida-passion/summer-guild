@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T04:11:12.710610+00:00",
-    "commit": "7c7dbe7",
-    "commitSubject": "Rename tukue.PNG to wisemenDesk.PNG"
+    "atUtc": "2026-07-26T04:26:25.230430+00:00",
+    "commit": "9aaf851",
+    "commitSubject": "Add files via upload"
   },
   "summary": {
     "fileCount": 179,
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 21,
-    "totalBytes": 95994402,
+    "totalBytes": 95994465,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1561,9 +1561,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 17937,
-      "sha1": "f3777ff29f",
-      "lineCount": 760
+      "sizeBytes": 18018,
+      "sha1": "29694fb2ab",
+      "lineCount": 762
     },
     {
       "path": "js/app.js",
@@ -1908,8 +1908,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4510,
-      "sha1": "0ed20538dd",
+      "sizeBytes": 4492,
+      "sha1": "ee31f404bd",
       "lineCount": 177
     },
     {
@@ -2551,6 +2551,7 @@
           "js/screens/wardrobe.js",
           "js/settings.js",
           "js/systems/blackDogPet.js",
+          "js/systems/furnitureSystem.js",
           "js/systems/musicPlayer.js",
           "js/systems/questEngine.js",
           "js/systems/questMusicPlayer.js"
@@ -3385,10 +3386,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "R100",
+      "status": "M",
       "paths": [
-        "assets/items/furniture/tukue.PNG",
-        "assets/items/furniture/wisemenDesk.PNG"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
