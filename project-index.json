@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T12:19:23.022368+00:00",
-    "commit": "523e660",
+    "atUtc": "2026-07-26T12:19:40.511704+00:00",
+    "commit": "65320e9",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 24,
-    "totalBytes": 96063285,
+    "totalBytes": 96067890,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1715,9 +1715,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 22279,
-      "sha1": "86a073ce77",
-      "lineCount": 219
+      "sizeBytes": 26884,
+      "sha1": "c40e38b052",
+      "lineCount": 251
     },
     {
       "path": "js/quests/science.js",
@@ -2888,10 +2888,15 @@
         "startReviewQuiz",
         "registerReviewQuests",
         "renderReviewQuestion",
+        "bindReviewMemo",
+        "reviewMemoPoint",
+        "redrawReviewMemo",
         "submitReviewChoice",
         "inputReviewKey",
         "submitReviewAnswer",
-        "finishReviewQuiz"
+        "finishReviewQuiz",
+        "resize",
+        "end"
       ],
       "classes": [],
       "windowExports": [
@@ -3501,7 +3506,7 @@
     {
       "status": "M",
       "paths": [
-        "js/app.js"
+        "js/quests/review.js"
       ]
     }
   ],
