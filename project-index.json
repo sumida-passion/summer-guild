@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T02:29:45.808704+00:00",
-    "commit": "1b8fa56",
+    "atUtc": "2026-07-26T02:30:19.098853+00:00",
+    "commit": "03368f4",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 57,
     "javascriptApiFileCount": 21,
-    "totalBytes": 94710063,
+    "totalBytes": 94710659,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1776,9 +1776,9 @@
       "stem": "questMusicPlayer",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 7045,
-      "sha1": "1abe2e0bb3",
-      "lineCount": 360
+      "sizeBytes": 7641,
+      "sha1": "01399d9594",
+      "lineCount": 387
     },
     {
       "path": "manifest.webmanifest",
@@ -3024,6 +3024,7 @@
         "playMathGuildQuestMusic",
         "playMathGuildTestMusic",
         "playReviewTrainingMusic",
+        "playLearningForestMusic",
         "pauseQuestMusic",
         "stopQuestMusic",
         "pauseQuestMusicForBackground",
@@ -3206,7 +3207,7 @@
     {
       "status": "M",
       "paths": [
-        "js/screens/learningForest.js"
+        "js/systems/questMusicPlayer.js"
       ]
     }
   ],
