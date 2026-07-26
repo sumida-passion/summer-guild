@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T04:58:43.938603+00:00",
-    "commit": "aea6211",
+    "atUtc": "2026-07-26T04:59:11.329443+00:00",
+    "commit": "9b8eede",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 22,
-    "totalBytes": 96031058,
+    "totalBytes": 96031636,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1844,9 +1844,9 @@
       "stem": "furnitureSystem",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 9917,
-      "sha1": "8b93a9b122",
-      "lineCount": 186
+      "sizeBytes": 10495,
+      "sha1": "9ff8f6caba",
+      "lineCount": 200
     },
     {
       "path": "js/systems/musicPlayer.js",
@@ -3429,7 +3429,7 @@
     {
       "status": "M",
       "paths": [
-        "css/layout.css"
+        "js/systems/furnitureSystem.js"
       ]
     }
   ],
