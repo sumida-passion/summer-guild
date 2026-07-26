@@ -3,12 +3,10 @@
 /* ふりかえりの修行：教科→単元→難易度を自由に選ぶデイリー復習 */
 const REVIEW_DAILY_KEY = "summerGuildReviewDailyV1";
 const REVIEW_HISTORY_KEY = "summerGuildReviewHistoryV1";
-const REVIEW_FIRST_BONUS = 2;
-
 const REVIEW_LEVELS = {
-  basic: { label: "基礎", speed: [120, 240] },
-  standard: { label: "標準", speed: [180, 360] },
-  challenge: { label: "挑戦", speed: [240, 480] }
+  basic: { label: "基本", reward: 2, firstBonus: 1 },
+  standard: { label: "標準", reward: 3, firstBonus: 2 },
+  challenge: { label: "挑戦", reward: 4, firstBonus: 3 }
 };
 
 const REVIEW_QUESTIONS = {
@@ -81,7 +79,7 @@ function getReviewDaily() {
 }
 function saveReviewDaily(data) { localStorage.setItem(REVIEW_DAILY_KEY, JSON.stringify(data)); }
 function hasReviewBonus(level) { return !getReviewDaily().bonuses[level]; }
-function claimReviewBonus(level) { const d=getReviewDaily(); const earned=!d.bonuses[level]; d.bonuses[level]=true; saveReviewDaily(d); return earned ? REVIEW_FIRST_BONUS : 0; }
+function claimReviewBonus(level) { const d=getReviewDaily(); const earned=!d.bonuses[level]; d.bonuses[level]=true; saveReviewDaily(d); return earned ? (REVIEW_LEVELS[level]?.firstBonus || 0) : 0; }
 function saveReviewHistory(unitId, level) {
   const h=loadJson(REVIEW_HISTORY_KEY, {}); h[unitId]=h[unitId]||{}; h[unitId][level]={ lastCompletedAt:new Date().toISOString(), count:(h[unitId][level]?.count||0)+1 }; localStorage.setItem(REVIEW_HISTORY_KEY,JSON.stringify(h));
 }
@@ -98,7 +96,7 @@ function installReviewStyles() {
   .review-head{text-align:center;margin-bottom:16px}.review-head h2{margin:4px 0;font-size:clamp(24px,4vw,38px);color:#7a4b19;text-shadow:0 1px 0 rgba(255,255,255,.9)}.review-sub{margin:0;color:#6a5846}.review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .review-card,.review-level{border:3px solid #9b7048;border-radius:14px;background:#fffaf0;padding:15px;text-align:left}.review-card button,.review-level button,.review-actions button,.review-keypad button{font:inherit}
   .review-card.available,.review-level{cursor:pointer}.review-card.preparing{opacity:.55}.review-card h3,.review-level h3{margin:0 0 7px}.review-badge{display:inline-block;border-radius:999px;padding:3px 9px;background:#e8d4ae;font-weight:700;font-size:13px}.review-badge.done{background:#cfe7c5}
-  .review-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.review-level{text-align:center}.review-level p{min-height:42px}.review-quiz{max-width:760px;margin:auto}.review-progress{font-weight:700;text-align:center;margin-bottom:10px}.review-question{font-size:clamp(20px,3.4vw,30px);line-height:1.55;background:#fff;border:3px solid #9b7048;border-radius:14px;padding:20px;min-height:130px}
+  .review-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.review-level{text-align:center}.review-level p{min-height:42px}.review-level.is-preparing{opacity:.55;cursor:not-allowed}.review-quiz{max-width:760px;margin:auto}.review-progress{font-weight:700;text-align:center;margin-bottom:10px}.review-question{font-size:clamp(20px,3.4vw,30px);line-height:1.55;background:#fff;border:3px solid #9b7048;border-radius:14px;padding:20px;min-height:130px}
   .review-answer-row{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0}.review-answer{width:min(280px,60vw);font-size:30px;text-align:center;border:3px solid #6e421f;border-radius:12px;padding:10px;background:#fff}.review-unit{font-size:22px;font-weight:700}.review-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:380px;margin:auto}.review-keypad button,.review-actions button,.review-back{border:0;border-radius:11px;background:#70441f;color:#fff;padding:12px;font-weight:700;box-shadow:0 4px 0 #3f260f}.review-keypad button:active,.review-actions button:active,.review-back:active{transform:translateY(3px);box-shadow:0 1px 0 #3f260f}.review-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0}.review-choice-grid button{border:3px solid #9b7048;border-radius:12px;background:#fffaf0;padding:15px;font-size:17px;font-weight:700;color:#2d241b}.review-choice-grid button:active{transform:translateY(2px)}.review-actions{display:flex;gap:10px;justify-content:center;margin-top:14px}.review-actions .primary{background:#9b3f2d}.review-back{margin-top:16px}.review-hint{text-align:center;color:#6a5846;font-size:14px}.review-current{font-weight:700;text-align:center;margin:6px 0 14px}
   #result-screen .result-window.review-result-window{width:min(88vw,820px);max-height:min(92vh,900px);padding:clamp(22px,3vw,38px)}
   #result-screen .review-result-window .result-message{max-height:min(48vh,470px);margin-bottom:14px;padding:0 12px;line-height:1.65}
@@ -126,8 +124,29 @@ function showMathUnits(){const c=document.getElementById("questContainer"); c.cl
 
 function showSocialUnits(){const c=document.getElementById("questContainer"); c.classList.remove("review-quiz-container"); c.innerHTML=`<div class="review-wrap"><section class="review-panel"><header class="review-head"><p class="review-badge">社会</p><h2>単元を選ぶ</h2><p class="review-sub">社会ギルドで一度出会った問題と、別の場所でもう一度再会します。</p></header><div class="review-grid"><article class="review-card available" data-review-unit="social_world"><h3>世界のすがた</h3><p>テキスト p.26〜28／地球・位置・時刻・大陸・国々</p><span class="review-badge">${historyText("social_world")}</span></article></div><button class="review-back" data-review-subjects>教科選択へ戻る</button></section></div>`; document.querySelector("[data-review-unit]")?.addEventListener("click",()=>showReviewLevels("social_world")); document.querySelector("[data-review-subjects]")?.addEventListener("click",()=>openReviewTraining({ restart:false }));}
 function getReviewUnit(unitId){if(unitId!=="social_world")return REVIEW_QUESTIONS[unitId];return {title:"世界のすがた",questions:getSocialReviewLevels()};}
-function getSocialReviewLevels(){const pools=window.SocialGuild?.reviewPools||{};const byQuest=id=>(pools[id]||[]).map(x=>({q:x.prompt,a:x.answer,choices:x.choices,visual:x.visual||"",why:"社会ギルドで学んだ内容です。"}));return {basic:[...byQuest(1),...byQuest(2)],standard:[...byQuest(2),...byQuest(3),...byQuest(4)],challenge:[...byQuest(3),...byQuest(4),...byQuest(5)]};}
-function showReviewLevels(unitId){const unit=getReviewUnit(unitId), daily=getReviewDaily(); const c=document.getElementById("questContainer"); c.classList.remove("review-quiz-container"); c.innerHTML=`<div class="review-wrap"><section class="review-panel"><header class="review-head"><p class="review-badge">${unitId==="social_world"?"社会":"算数"}</p><h2>${unit.title}</h2><p class="review-sub">どの難易度からでも、何度でも挑戦できます。</p></header><div class="review-levels">${Object.entries(REVIEW_LEVELS).map(([id,l])=>`<article class="review-level" data-review-level="${id}"><h3>${l.label}</h3><p>5問・正確性×時間で加点</p><span class="review-badge ${daily.bonuses[id]?"done":""}">${daily.bonuses[id]?"本日ボーナス獲得済み":"本日初回 +2GP"}</span></article>`).join("")}</div><button class="review-back" data-review-units>単元選択へ戻る</button></section></div>`; document.querySelectorAll("[data-review-level]").forEach(el=>el.addEventListener("click",()=>startReviewQuiz(unitId,el.dataset.reviewLevel))); document.querySelector("[data-review-units]")?.addEventListener("click",()=>unitId==="social_world"?showSocialUnits():showMathUnits());}
+function getSocialReviewLevels(){
+  const pools=window.SocialGuild?.reviewPools||{};
+  const byQuest=id=>(pools[id]||[]).map(x=>({q:x.prompt,a:x.answer,choices:x.choices,visual:x.visual||"",why:"社会ギルドで学んだ内容です。"}));
+  return {
+    // 2026-07-26再編：旧「標準」を新「基本」へ、旧「挑戦」を新「標準」へ移行。
+    basic:[...byQuest(2),...byQuest(3),...byQuest(4)],
+    standard:[...byQuest(3),...byQuest(4),...byQuest(5)],
+    // 塾プリント追加フェーズで新しい挑戦問題を収録する。
+    challenge:[]
+  };
+}
+function showReviewLevels(unitId){
+  const unit=getReviewUnit(unitId), daily=getReviewDaily();
+  const c=document.getElementById("questContainer");
+  c.classList.remove("review-quiz-container");
+  c.innerHTML=`<div class="review-wrap"><section class="review-panel"><header class="review-head"><p class="review-badge">${unitId==="social_world"?"社会":"算数"}</p><h2>${unit.title}</h2><p class="review-sub">どの難易度からでも、何度でも挑戦できます。</p></header><div class="review-levels">${Object.entries(REVIEW_LEVELS).map(([id,l])=>{
+    const available=(unit.questions[id]||[]).length>=5;
+    const bonusText=daily.bonuses[id]?"本日ボーナス獲得済み":`本日初回 +${l.firstBonus}GP`;
+    return `<article class="review-level ${available?"":"is-preparing"}" ${available?`data-review-level="${id}"`:""}><h3>${l.label}</h3><p>${available?`5問・毎回 ${l.reward}GP`:`新しい問題を準備中`}</p><span class="review-badge ${daily.bonuses[id]?"done":""}">${available?bonusText:"COMING SOON"}</span></article>`;
+  }).join("")}</div><button class="review-back" data-review-units>単元選択へ戻る</button></section></div>`;
+  document.querySelectorAll("[data-review-level]").forEach(el=>el.addEventListener("click",()=>startReviewQuiz(unitId,el.dataset.reviewLevel)));
+  document.querySelector("[data-review-units]")?.addEventListener("click",()=>unitId==="social_world"?showSocialUnits():showMathUnits());
+}
 function shuffledFive(items){return [...items].sort(()=>Math.random()-.5).slice(0,5);}
 function startReviewQuiz(unitId,level){playReviewTrainingMusic(); const unit=getReviewUnit(unitId); reviewState={unitId,level,questions:shuffledFive(unit.questions[level]),index:0,answers:[],input:"",startedAt:Date.now(),context:null}; if(!window.QuestEngine?.start)return false; return window.QuestEngine.start(`review-${level}`);}
 function registerReviewQuests(){Object.keys(REVIEW_LEVELS).forEach(level=>window.QuestEngine?.register({id:`review-${level}`,title:`ふりかえりの修行・${REVIEW_LEVELS[level].label}`,firstReward:0,repeatReward:0,start(ctx){reviewState.context=ctx; renderReviewQuestion(); return true;},cancel(){reviewState=null;},reset(){}}));}
@@ -135,7 +154,26 @@ function renderReviewQuestion(){const s=reviewState,q=s.questions[s.index],c=s.c
 function submitReviewChoice(value){const q=reviewState.questions[reviewState.index];reviewState.answers.push({q:q.q,user:value,correct:q.a,unit:"",why:q.why,ok:value===q.a});if(reviewState.index<4){reviewState.index++;renderReviewQuestion();return;}finishReviewQuiz();}
 function inputReviewKey(k){if(k==="⌫") reviewState.input=reviewState.input.slice(0,-1); else if(k==="."){if(!reviewState.input.includes("."))reviewState.input+=(reviewState.input?".":"0.");} else if(reviewState.input.length<8)reviewState.input+=k; const d=document.getElementById("reviewAnswerDisplay");if(d)d.textContent=reviewState.input||"　";}
 async function submitReviewAnswer(){if(reviewState.input==="")return; const q=reviewState.questions[reviewState.index], value=Number(reviewState.input); reviewState.answers.push({q:q.q,user:value,correct:q.a,unit:q.unit,why:q.why,ok:Math.abs(value-q.a)<0.0001}); reviewState.input=""; if(reviewState.index<4){reviewState.index++;renderReviewQuestion();return;} await finishReviewQuiz();}
-async function finishReviewQuiz(){const s=reviewState,correct=s.answers.filter(x=>x.ok).length,elapsed=Math.max(1,Math.ceil((Date.now()-s.startedAt)/1000)),accuracy=Math.round(correct/5*100); const accuracyPoint=accuracy<=60?0:accuracy<=70?1:accuracy<100?2:3; const limits=REVIEW_LEVELS[s.level].speed; const speedPoint=elapsed<=limits[0]?3:elapsed<=limits[1]?2:1; const performance=accuracyPoint*speedPoint; const bonus=claimReviewBonus(s.level); saveReviewHistory(s.unitId,s.level); const wrong=s.answers.filter(x=>!x.ok); const min=Math.floor(elapsed/60),sec=elapsed%60; const lines=[`${getReviewUnit(s.unitId).title}・${REVIEW_LEVELS[s.level].label}を最後までやり切りました。`,`${correct}問／5問正解（正解率 ${accuracy}％）`,`タイム：${min?min+"分":""}${sec}秒`,`成績GP：${accuracyPoint} × ${speedPoint} ＝ ${performance}GP`,`本日初回ボーナス：${bonus}GP`]; if(wrong.length){lines.push("","まちがえた問題");wrong.forEach((x,i)=>lines.push(`${i+1}. ${x.q}\n【正しい答え】${x.correct}${x.unit||""}`));}else lines.push("","全問正解です！"); await s.context.complete({isPerfect:correct===5,correctCount:correct,totalQuestions:5,elapsedSeconds:elapsed,rewardOverride:performance+bonus,performanceRewardOverride:performance,accuracyPercent:accuracy,accuracyPoint,speedPoint,reviewBonus:bonus,message:lines.join("\n")});}
+async function finishReviewQuiz(){
+  const s=reviewState,correct=s.answers.filter(x=>x.ok).length,elapsed=Math.max(1,Math.ceil((Date.now()-s.startedAt)/1000)),accuracy=Math.round(correct/5*100);
+  const baseReward=REVIEW_LEVELS[s.level]?.reward||0;
+  const bonus=claimReviewBonus(s.level);
+  const totalReward=baseReward+bonus;
+  saveReviewHistory(s.unitId,s.level);
+  const wrong=s.answers.filter(x=>!x.ok);
+  const min=Math.floor(elapsed/60),sec=elapsed%60;
+  const lines=[
+    `${getReviewUnit(s.unitId).title}・${REVIEW_LEVELS[s.level].label}を最後までやり切りました。`,
+    `${correct}問／5問正解（正解率 ${accuracy}％）`,
+    `タイム：${min?min+"分":""}${sec}秒`,
+    `クリア報酬：${baseReward}GP`,
+    `本日初回ボーナス：${bonus}GP`,
+    `合計：${totalReward}GP`
+  ];
+  if(wrong.length){lines.push("","まちがえた問題");wrong.forEach((x,i)=>lines.push(`${i+1}. ${x.q}\n【正しい答え】${x.correct}${x.unit||""}`));}
+  else lines.push("","全問正解です！");
+  await s.context.complete({isPerfect:correct===5,correctCount:correct,totalQuestions:5,elapsedSeconds:elapsed,rewardOverride:totalReward,performanceRewardOverride:baseReward,accuracyPercent:accuracy,reviewBonus:bonus,message:lines.join("\n")});
+}
 
 document.addEventListener("DOMContentLoaded",()=>{
   registerReviewQuests();
