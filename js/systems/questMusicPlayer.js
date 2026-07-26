@@ -22,6 +22,9 @@ const MATH_GUILD_TEST_MUSIC_FILE =
 const REVIEW_TRAINING_MUSIC_FILE =
     "assets/audio/quests/The Clockwork Gambit 2.mp3";
 
+const LEARNING_FOREST_MUSIC_FILE =
+    "assets/audio/quests/learningForest.mp3";
+
 let questMusicAudio = null;
 let questMusicMode = "";
 let questMusicResumeWhenVisible = false;
@@ -172,6 +175,18 @@ function playReviewTrainingMusic(
 
 }
 
+function playLearningForestMusic(
+    options = {}
+) {
+
+    return playQuestMusic(
+        "learning-forest",
+        LEARNING_FOREST_MUSIC_FILE,
+        options
+    );
+
+}
+
 function pauseQuestMusic() {
 
     if (!questMusicAudio) {
@@ -253,6 +268,11 @@ function resumeQuestMusicAfterBackground() {
         === "review-training"
     ) {
         playReviewTrainingMusic();
+    } else if (
+        questMusicMode
+        === "learning-forest"
+    ) {
+        playLearningForestMusic();
     }
 
 }
@@ -325,6 +345,11 @@ function initQuestMusicPlayer() {
                     === "review-training"
                 ) {
                     playReviewTrainingMusic();
+                } else if (
+                    questMusicMode
+                    === "learning-forest"
+                ) {
+                    playLearningForestMusic();
                 }
             }
 
@@ -347,6 +372,8 @@ window.QuestMusicPlayer = {
         playMathGuildTestMusic,
     playReviewTraining:
         playReviewTrainingMusic,
+    playLearningForest:
+        playLearningForestMusic,
     pause:
         pauseQuestMusic,
     stop:
