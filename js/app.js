@@ -2199,6 +2199,14 @@ function activateScreen(
         window.BlackDogPet.handleScreenChange(screenName);
     }
 
+    if (window.DailyDashboard && typeof window.DailyDashboard.handleScreenChange === "function") {
+        window.DailyDashboard.handleScreenChange(screenName);
+    }
+
+    if (window.OwlMessenger && typeof window.OwlMessenger.handleScreenChange === "function") {
+        window.OwlMessenger.handleScreenChange(screenName);
+    }
+
 
     return true;
 
