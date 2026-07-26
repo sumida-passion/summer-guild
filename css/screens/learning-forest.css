@@ -1300,3 +1300,126 @@
     #learningforest-screen .lesson7-shortcut-board { gap: 2px; }
     #learningforest-screen .lesson7-shortcut-arrow { font-size: 14px; }
 }
+
+/* =========================================================
+   学びの森 Ver2.0・第8問 あめの入れ方
+   ========================================================= */
+#learningforest-screen .lesson8-problem-card { max-width: min(850px, 90%); }
+
+#learningforest-screen .lesson8-final-board,
+#learningforest-screen .lesson8-repack-board,
+#learningforest-screen .lesson8-original-board,
+#learningforest-screen .lesson8-shortcut-title,
+#learningforest-screen .lesson8-shortcut-board {
+    width: min(840px, 90%);
+    margin: auto;
+    color: #fff7dc;
+    text-align: center;
+}
+
+#learningforest-screen .lesson8-final-board { display: grid; gap: 13px; }
+#learningforest-screen .lesson8-bag-row {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(72px, 1fr));
+    gap: 8px;
+}
+#learningforest-screen .lesson8-bag {
+    min-height: 92px;
+    display: grid;
+    place-content: center;
+    gap: 3px;
+    border: 3px solid #d6b55a;
+    border-radius: 11px 11px 22px 22px;
+    background: linear-gradient(145deg, rgba(147,103,45,.94), rgba(88,62,31,.94));
+    box-shadow: inset 0 7px 0 rgba(255,239,183,.18);
+}
+#learningforest-screen .lesson8-bag b { color: #fff0ad; font-size: clamp(18px, 2vw, 29px); }
+#learningforest-screen .lesson8-bag small { color: #dcebc7; font-weight: 800; }
+#learningforest-screen .lesson8-final-board > strong { color: #fff4b7; font-size: clamp(25px, 3vw, 43px); }
+#learningforest-screen .lesson8-final-board > p { margin: 0; color: #dcebc7; font-weight: 850; }
+#learningforest-screen .lesson8-final-board.is-revealed .lesson8-bag { box-shadow: 0 0 0 3px rgba(244,217,134,.18), inset 0 7px 0 rgba(255,239,183,.18); }
+
+#learningforest-screen .lesson8-repack-board {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 13px;
+}
+#learningforest-screen .lesson8-repack-step,
+#learningforest-screen .lesson8-spare {
+    padding: 14px 12px;
+    border: 2px solid rgba(244,217,134,.68);
+    border-radius: 13px;
+    background: rgba(47,53,40,.79);
+}
+#learningforest-screen .lesson8-repack-step small,
+#learningforest-screen .lesson8-repack-step b,
+#learningforest-screen .lesson8-repack-step strong,
+#learningforest-screen .lesson8-spare small,
+#learningforest-screen .lesson8-spare b,
+#learningforest-screen .lesson8-spare strong { display: block; }
+#learningforest-screen .lesson8-repack-step small,
+#learningforest-screen .lesson8-spare small { color: #dcebc7; font-weight: 850; }
+#learningforest-screen .lesson8-repack-step b,
+#learningforest-screen .lesson8-spare b { margin: 7px 0; color: #ffd77e; letter-spacing: .1em; font-size: clamp(16px, 1.9vw, 27px); }
+#learningforest-screen .lesson8-repack-step strong,
+#learningforest-screen .lesson8-spare strong { color: #fff0ad; font-size: clamp(20px, 2.3vw, 33px); }
+#learningforest-screen .lesson8-repack-arrow { color: #fff0ad; font-weight: 950; }
+#learningforest-screen .lesson8-spare { grid-column: 1 / -1; justify-self: center; min-width: min(330px, 72%); opacity: .72; }
+#learningforest-screen .lesson8-repack-board.is-revealed .lesson8-spare { opacity: 1; box-shadow: 0 0 0 3px rgba(244,217,134,.18); }
+#learningforest-screen .lesson8-repack-board > p { grid-column: 1 / -1; margin: 0; color: #dcebc7; font-weight: 850; }
+
+#learningforest-screen .lesson8-original-board { display: grid; gap: 9px; }
+#learningforest-screen .lesson8-original-board > strong { color: #fff4b7; font-size: clamp(25px, 3vw, 42px); }
+#learningforest-screen .lesson8-original-arrow { color: #f4d986; font-size: 25px; font-weight: 950; }
+#learningforest-screen .lesson8-original-bags {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 7px;
+}
+#learningforest-screen .lesson8-original-bags span {
+    padding: 8px 5px;
+    border: 2px solid #d6b55a;
+    border-radius: 8px 8px 15px 15px;
+    background: rgba(125,85,37,.82);
+    color: #fff0ad;
+    font-weight: 900;
+}
+#learningforest-screen .lesson8-original-board > p { margin: 0; color: #dcebc7; font-weight: 850; }
+
+#learningforest-screen .lesson8-shortcut-title {
+    padding: 18px;
+    border: 3px solid rgba(244,217,134,.78);
+    border-radius: 16px;
+    background: rgba(52,48,31,.82);
+}
+#learningforest-screen .lesson8-shortcut-title small { color: #dcebc7; font-weight: 900; }
+#learningforest-screen .lesson8-shortcut-title h3 { margin: 4px 0; color: #fff0ad; font-size: clamp(27px, 3.2vw, 46px); }
+#learningforest-screen .lesson8-shortcut-title p { margin: 5px 0 0; color: #dcebc7; font-weight: 850; }
+
+#learningforest-screen .lesson8-shortcut-board { display: grid; gap: 3px; }
+#learningforest-screen .lesson8-shortcut-step {
+    padding: 8px 13px;
+    border: 2px solid rgba(229,216,173,.42);
+    border-radius: 11px;
+    background: rgba(47,53,40,.6);
+    opacity: .42;
+    transform: scale(.985);
+    transition: opacity .24s ease, transform .24s ease, box-shadow .24s ease;
+}
+#learningforest-screen .lesson8-shortcut-step.is-active { opacity: 1; transform: scale(1); box-shadow: 0 0 0 3px rgba(244,217,134,.17); }
+#learningforest-screen .lesson8-shortcut-step span,
+#learningforest-screen .lesson8-shortcut-step b { display: block; }
+#learningforest-screen .lesson8-shortcut-step span { color: #dcebc7; font-weight: 800; }
+#learningforest-screen .lesson8-shortcut-step b { margin-top: 2px; color: #fff0ad; font-size: clamp(19px, 2.2vw, 31px); }
+#learningforest-screen .lesson8-shortcut-arrow { color: #f4d986; line-height: 1; font-size: 17px; font-weight: 950; }
+
+@media screen and (max-width: 900px), screen and (max-height: 650px) {
+    #learningforest-screen .lesson8-bag-row { gap: 5px; }
+    #learningforest-screen .lesson8-bag { min-height: 65px; border-width: 2px; }
+    #learningforest-screen .lesson8-repack-step,
+    #learningforest-screen .lesson8-spare { padding: 7px 8px; }
+    #learningforest-screen .lesson8-original-bags span { padding: 5px 3px; }
+    #learningforest-screen .lesson8-shortcut-step { padding: 4px 8px; }
+    #learningforest-screen .lesson8-shortcut-arrow { font-size: 12px; }
+}
