@@ -40,11 +40,12 @@
         const settings = getSettingsRoot();
         if (!settings) return null;
         if (!settings.furniture || typeof settings.furniture !== "object" || Array.isArray(settings.furniture)) {
-            settings.furniture = { items: {}, deliveryNoticeDate: "" };
+            settings.furniture = { items: {}, deliveryNoticeDate: "", pendingNotices: [] };
         }
         if (!settings.furniture.items || typeof settings.furniture.items !== "object" || Array.isArray(settings.furniture.items)) {
             settings.furniture.items = {};
         }
+        if (!Array.isArray(settings.furniture.pendingNotices)) settings.furniture.pendingNotices = [];
         return settings.furniture;
     }
 
@@ -108,15 +109,16 @@
         if (delivered.length) {
             if (typeof saveSettings === "function") saveSettings();
             renderRoom();
-            if (showNotice && data.deliveryNoticeDate !== today) {
+            if (data.deliveryNoticeDate !== today) {
                 data.deliveryNoticeDate = today;
+                data.pendingNotices.push({
+                    id: `furniture-delivery-${today}`,
+                    title: "ギルド本部より、お届け物があります。",
+                    body: delivered.map((item) => `・${item.name}`).join("\n") + "\n\n部屋に設置されています。",
+                    createdAt: new Date().toISOString()
+                });
                 if (typeof saveSettings === "function") saveSettings();
-                const names = delivered.map((item) => `・${item.name}`).join("\n");
-                if (typeof showGuildShopMessage === "function") {
-                    showGuildShopMessage(`家具をお届けしました。\n\n${names}\n\n部屋に設置されています。`, "お届けしました");
-                } else {
-                    window.alert(`家具をお届けしました。\n\n${names}`);
-                }
+                if (window.OwlMessenger && typeof window.OwlMessenger.refresh === "function") window.OwlMessenger.refresh();
             }
         }
         return delivered;
