@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T07:24:33.219657+00:00",
-    "commit": "47d53d0",
-    "commitSubject": "Add files via upload"
+    "atUtc": "2026-07-26T12:00:39.708337+00:00",
+    "commit": "unknown",
+    "commitSubject": "unknown"
   },
   "summary": {
     "fileCount": 182,
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 24,
-    "totalBytes": 96057760,
+    "totalBytes": 96069069,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1329,9 +1329,9 @@
       "stem": "layout",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 71159,
-      "sha1": "8e5fc48b55",
-      "lineCount": 2932
+      "sizeBytes": 72019,
+      "sha1": "f2a55129e9",
+      "lineCount": 2936
     },
     {
       "path": "css/screens/.gitkeep",
@@ -1423,8 +1423,8 @@
       "stem": "items",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 7397,
-      "sha1": "7f7373333a",
+      "sizeBytes": 7398,
+      "sha1": "d3af227672",
       "lineCount": 116
     },
     {
@@ -1475,7 +1475,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 3195,
-      "sha1": "4d78e883da",
+      "sha1": "a335757086",
       "lineCount": 73
     },
     {
@@ -1506,9 +1506,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 36030,
-      "sha1": "de06439d34",
-      "lineCount": 387
+      "sizeBytes": 37441,
+      "sha1": "88c7189a9e",
+      "lineCount": 401
     },
     {
       "path": "docs/game-rules.md",
@@ -1528,9 +1528,9 @@
       "stem": "GPT_HANDOFF",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 18146,
-      "sha1": "0096f36e4c",
-      "lineCount": 316
+      "sizeBytes": 19728,
+      "sha1": "66228e1042",
+      "lineCount": 345
     },
     {
       "path": "docs/GPT_PROJECT_STATE.md",
@@ -1561,8 +1561,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 19316,
-      "sha1": "71ff3135ce",
+      "sizeBytes": 19450,
+      "sha1": "e41a9925d9",
       "lineCount": 790
     },
     {
@@ -1572,9 +1572,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 44138,
-      "sha1": "204209d4ce",
-      "lineCount": 2448
+      "sizeBytes": 44803,
+      "sha1": "e6d050e091",
+      "lineCount": 2467
     },
     {
       "path": "js/components/.gitkeep",
@@ -1714,9 +1714,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 22279,
-      "sha1": "86a073ce77",
-      "lineCount": 219
+      "sizeBytes": 26884,
+      "sha1": "c40e38b052",
+      "lineCount": 251
     },
     {
       "path": "js/quests/science.js",
@@ -1844,9 +1844,9 @@
       "stem": "dailyDashboard",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 2763,
-      "sha1": "672305b989",
-      "lineCount": 40
+      "sizeBytes": 4815,
+      "sha1": "5b5bb418f7",
+      "lineCount": 95
     },
     {
       "path": "js/systems/furnitureSystem.js",
@@ -1856,7 +1856,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 10681,
-      "sha1": "4e5ae0d437",
+      "sha1": "4a5649bac0",
       "lineCount": 202
     },
     {
@@ -1941,8 +1941,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4500,
-      "sha1": "cbff3f39e5",
+      "sizeBytes": 4499,
+      "sha1": "f712885465",
       "lineCount": 177
     },
     {
@@ -2876,10 +2876,15 @@
         "startReviewQuiz",
         "registerReviewQuests",
         "renderReviewQuestion",
+        "bindReviewMemo",
+        "reviewMemoPoint",
+        "redrawReviewMemo",
         "submitReviewChoice",
         "inputReviewKey",
         "submitReviewAnswer",
-        "finishReviewQuiz"
+        "finishReviewQuiz",
+        "resize",
+        "end"
       ],
       "classes": [],
       "windowExports": [
@@ -3177,6 +3182,9 @@
         "hyakumasuDone",
         "reviewStatus",
         "items",
+        "loadComplete",
+        "showCompletePopup",
+        "claimCompleteIfNeeded",
         "render",
         "handleScreenChange"
       ],
@@ -3485,32 +3493,7 @@
     ],
     "importantReminder": "GitHub Pagesではファイル名と拡張子の大文字・小文字を区別する。"
   },
-  "latestCommitChanges": [
-    {
-      "status": "M",
-      "paths": [
-        "docs/GPT_HANDOFF.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/GPT_PROJECT_STATE.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/PROJECT_STATE.json"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
-      ]
-    }
-  ],
+  "latestCommitChanges": [],
   "gptHandoff": {
     "primaryGoal": "新しいスレッドでも、直前のスレッドから続いているような理解度と実装品質を維持する。",
     "firstInstruction": "最初にproject-index.jsonを最後まで読み、フォルダ階層・実ファイル名・画像拡張子・警告を確認すること。",

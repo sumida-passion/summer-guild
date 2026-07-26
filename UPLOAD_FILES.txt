@@ -1,0 +1,24 @@
+夏休みギルド｜今回GitHubへアップロードするファイル
+
+以下のファイルを、GitHub上の同じ相対パスへ上書きアップロードしてください。
+
+css/layout.css
+data/items/items.js
+data/shop/music.js
+docs/GPT_HANDOFF.md
+docs/development-log.md
+index.html
+js/app.js
+js/quests/review.js
+js/systems/dailyDashboard.js
+js/systems/furnitureSystem.js
+project-index.json
+service-worker.js
+
+アップロード後の確認
+1. GitHub Actions「Generate Project Index」が完了すること
+2. iPad Safari／ホーム画面PWAで最新版へ更新すること
+3. ギルドホールの掲示板に7項目すべて表示されること
+4. 7項目達成時に当日1回だけ＋5GPが付与されること
+5. 算数ふりかえりでメモパッドが使えること
+6. 誤答説明が長くても「ギルドホールへ戻る」を押せること
