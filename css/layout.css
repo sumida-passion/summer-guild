@@ -2934,3 +2934,49 @@ body.wardrobe-open {
 .daily-complete-stars{font-size:54px}.daily-complete-dialog h2{margin:4px 0 12px;font-size:clamp(27px,4vw,42px)}
 .daily-complete-dialog p{margin:0;font-weight:800}.daily-complete-dialog strong{display:block;margin:8px 0 18px;font-size:clamp(38px,6vw,62px);color:#8d3c20}
 .daily-complete-dialog button{min-width:150px;padding:11px 22px;border:0;border-radius:12px;background:#70441f;color:#fff;font-weight:900;box-shadow:0 4px 0 #3f260f}
+
+
+/* =========================================================
+   ギルドホール ホーム画面 Ver1.2
+   7項目を保ったままデイリーボードを縮小し、2階上部へ移動
+   ========================================================= */
+#guildhall-screen #gotoQuestBoard {
+    top: 34.8%;
+}
+#guildhall-screen .guildhall-daily-board {
+    top: 1.4%;
+    width: clamp(420px, 39vw, 610px);
+    height: 31.5%;
+    max-height: 31.5%;
+    padding: clamp(7px, .8vw, 12px);
+}
+#guildhall-screen .guildhall-daily-header { margin-bottom: 4px; }
+#guildhall-screen .guildhall-daily-kicker { font-size: 8px; }
+#guildhall-screen .guildhall-daily-header h2 { font-size: clamp(17px,1.65vw,23px); }
+#guildhall-screen .guildhall-daily-progress { padding: 4px 9px; font-size: 13px; }
+#guildhall-screen .guildhall-daily-list { gap: 3px; }
+#guildhall-screen .guildhall-daily-item {
+    grid-template-columns: 18px minmax(0,1fr) auto auto;
+    gap: 4px;
+    padding: 2px 6px;
+    font-size: clamp(9px,.82vw,12px);
+}
+#guildhall-screen .guildhall-daily-check { font-size: 15px; }
+#guildhall-screen .guildhall-daily-item button {
+    min-width: 40px;
+    min-height: 24px;
+    padding: 2px 6px;
+}
+@media (max-width:900px), (max-height:650px) {
+    #guildhall-screen #gotoQuestBoard { top: 51%; }
+    #guildhall-screen .guildhall-daily-board {
+        top: 1%;
+        width: min(50vw,560px);
+        height: 47%;
+        max-height: 47%;
+        padding: 6px 8px;
+    }
+    #guildhall-screen .guildhall-daily-header h2 { font-size: 16px; }
+    #guildhall-screen .guildhall-daily-item { min-height: 0; padding: 1px 5px; font-size: 9px; }
+    #guildhall-screen .guildhall-daily-item button { min-width: 36px; min-height: 21px; }
+}
