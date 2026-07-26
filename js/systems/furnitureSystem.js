@@ -16,15 +16,15 @@
     });
 
     const FURNITURE = [
-        { id: "furniture_magic_circle", name: "賢者の魔法陣", price: 200, image: "assets/items/furniture/magicCircle.PNG", layer: 10, description: "賢者だけが描けると伝わる神秘の魔法陣。部屋の床に、静かな魔力の気配を残す。" },
-        { id: "furniture_magic_broom", name: "魔法のほうき", price: 250, image: "assets/items/furniture/magicBroom.PNG", layer: 12, description: "使い込まれた魔法使いのほうき。壁に立て掛けると、書斎に冒険の気配が生まれる。" },
-        { id: "furniture_magic_crystal", name: "知恵の水晶", price: 300, image: "assets/items/furniture/magicCrystal.PNG", layer: 42, description: "古代の賢者が学びのために使ったと伝わる水晶。机の上で淡い光をたたえている。" },
-        { id: "furniture_chair", name: "魔法使いの椅子", price: 300, image: "assets/items/furniture/chair.PNG", layer: 25, description: "長い読書と研究の時間を支えてきた、重厚な魔法使いの椅子。" },
-        { id: "furniture_bookshelf", name: "魔導書の本棚", price: 350, image: "assets/items/furniture/bookshelf.PNG", layer: 20, description: "歴代のギルドマスターが集めた魔導書が静かに並ぶ本棚。" },
-        { id: "furniture_star_globe", name: "星の地球儀", price: 350, image: "assets/items/furniture/starGlobe.PNG", layer: 22, description: "星々と世界の広がりを映し出す神秘の地球儀。見つめるたびに遠い場所へ思いが向かう。" },
-        { id: "furniture_wisemen_desk", name: "魔法使いの机", price: 400, image: "assets/items/furniture/wisemenDesk.PNG", layer: 35, description: "数え切れない学びと研究が積み重ねられてきた、賢者のための大きな机。" },
-        { id: "furniture_lightning_staff", name: "稲妻の杖", price: 400, image: "assets/items/furniture/staffofLightning.PNG", layer: 45, description: "稲妻の力を宿した上級魔法使いの杖。部屋の中でも強い存在感を放つ。" },
-        { id: "furniture_table_clock", name: "時詠みの置時計", price: 450, image: "assets/items/furniture/GuildTableClock.PNG", layer: 44, description: "時を読む魔法使いが大切に使っていた置時計。今日も静かに時を刻み、学ぶ者を見守る。" }
+        { id: "furniture_magic_circle", name: "賢者の魔法陣", price: 210, image: "assets/items/furniture/magicCircle.PNG", layer: 10, description: "賢者だけが描けると伝わる神秘の魔法陣。部屋の床に、静かな魔力の気配を残す。" },
+        { id: "furniture_magic_broom", name: "魔法のほうき", price: 260, image: "assets/items/furniture/magicBroom.PNG", layer: 12, description: "使い込まれた魔法使いのほうき。壁に立て掛けると、書斎に冒険の気配が生まれる。" },
+        { id: "furniture_magic_crystal", name: "知恵の水晶", price: 310, image: "assets/items/furniture/magicCrystal.PNG", layer: 42, description: "古代の賢者が学びのために使ったと伝わる水晶。机の上で淡い光をたたえている。" },
+        { id: "furniture_chair", name: "魔法使いの椅子", price: 310, image: "assets/items/furniture/chair.PNG", layer: 25, description: "長い読書と研究の時間を支えてきた、重厚な魔法使いの椅子。" },
+        { id: "furniture_bookshelf", name: "魔導書の本棚", price: 360, image: "assets/items/furniture/bookshelf.PNG", layer: 20, description: "歴代のギルドマスターが集めた魔導書が静かに並ぶ本棚。" },
+        { id: "furniture_star_globe", name: "星の地球儀", price: 360, image: "assets/items/furniture/starGlobe.PNG", layer: 22, description: "星々と世界の広がりを映し出す神秘の地球儀。見つめるたびに遠い場所へ思いが向かう。" },
+        { id: "furniture_wisemen_desk", name: "魔法使いの机", price: 410, image: "assets/items/furniture/wisemenDesk.PNG", layer: 35, description: "数え切れない学びと研究が積み重ねられてきた、賢者のための大きな机。" },
+        { id: "furniture_lightning_staff", name: "稲妻の杖", price: 410, image: "assets/items/furniture/staffofLightning.PNG", layer: 45, description: "稲妻の力を宿した上級魔法使いの杖。部屋の中でも強い存在感を放つ。" },
+        { id: "furniture_table_clock", name: "時詠みの置時計", price: 460, image: "assets/items/furniture/GuildTableClock.PNG", layer: 44, description: "時を読む魔法使いが大切に使っていた置時計。今日も静かに時を刻み、学ぶ者を見守る。" }
     ];
 
     function getSettingsRoot() {
