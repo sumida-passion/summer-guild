@@ -340,3 +340,12 @@
 - 症状：GP消費後、家具状態が保存されず、何度でも購入できた。
 - 修正：`Settings` のグローバル lexical binding を直接参照し、配送待ち状態を保存。保存失敗時はGPを自動返金。
 - 家具購入成功時に「ギルド商人：明日お届けします。」を表示。
+
+
+## 2026-07-26 家具描画レイヤー不具合 修正
+
+- 管理者モードで「即時設置」「全家具を即時設置」を実行すると状態表示は設置済みになる一方、自室には家具が表示されない不具合を修正。
+- 原因は、画面直下要素へ適用される `.screen > *:not(.background) { position: relative; z-index: 10; }` が、動的生成された家具レイヤーの `.furniture-layer { position: absolute; }` より詳細度が高く、絶対配置を上書きしていたこと。
+- `#room-screen > .furniture-layer` として詳細度を上げ、`position:absolute; inset:0; width:100%; height:100%` を固定。JavaScript側でも同じ値を明示し、Safariでの動的DOM生成後も描画領域を保証。
+- 家具PNGと部屋背景はすべて1536×1024の同一キャンバスであるため、家具画像を `object-fit: cover; object-position:center` に変更し、背景の `background-size:cover; background-position:center` と一致させた。
+- Service Workerおよび読み込みURLを `20260726-furniture-render-fix1` へ更新。

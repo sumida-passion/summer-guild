@@ -269,3 +269,12 @@ PNGのGitHubプレビューには白枠がなく、犬画像内に毛布も含�
 
 ### 家具購入バグ修正（2026-07-26）
 `Settings` は `let` 宣言のため `window.Settings` を使わないこと。家具データは `typeof Settings !== "undefined"` を確認して直接参照する。購入保存に失敗した場合はGPを返金する。
+
+
+### 家具描画レイヤー不具合修正（2026-07-26）
+
+- 症状：管理者モードでは家具状態が「設置済み」へ更新されるが、自室に家具が一つも表示されない。
+- 原因：`css/layout.css` の共通規則 `.screen > *:not(.background)` が、動的生成した `#furnitureLayer` の `position: absolute` を詳細度で上書きし、家具レイヤーの描画領域が実質0になっていた。
+- 修正：`#room-screen > .furniture-layer` で絶対配置・画面全体サイズを明示し、`furnitureSystem.js` 側でも同じスタイルを設定してSafariでの描画を安定化。
+- 背景と家具PNGはいずれも1536×1024の同一キャンバスなので、背景と同じ `cover / center` で重ねる。
+- 管理者の即時設置、一括即時設置、翌日配送のいずれも同じ `renderRoom()` を使い、自室へ戻った時に設置済み家具を再描画する。
