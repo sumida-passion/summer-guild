@@ -1,8 +1,8 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver1.9
-   算数の広場・第1〜7問の詳しい学び直し
+   学びの森 Ver2.0
+   算数の広場・第1〜8問の詳しい学び直し
    ========================================================= */
 
 (() => {
@@ -16,7 +16,7 @@
         { number: 5, group: 2, title: "はがきと切手", ready: true, id: "math-difference-05" },
         { number: 6, group: 2, title: "ケーキの買い物", ready: true, id: "math-savings-06" },
         { number: 7, group: 2, title: "えん筆の本数と代金", ready: true, id: "math-difference-07" },
-        { number: 8, group: 2, title: "あめの入れ方" },
+        { number: 8, group: 2, title: "あめの入れ方", ready: true, id: "math-repacking-08" },
         { number: 9, group: 3, title: "折り紙の余りと不足" },
         { number: 10, group: 3, title: "あめを配る人数と個数" },
         { number: 11, group: 3, title: "ノートの余りと不足" },
@@ -163,6 +163,27 @@
         ];
     }
 
+    function createLesson8Steps() {
+        return [
+            makeStep("8番も、まずは問題文を原文のまま読んでみよう。今回は、最後に見えている『6ふくろ多くできた』から考えていくよ。", renderLesson8Problem),
+            makeStep("主人公：『最後の形では、4個入りの袋が、最初より6袋多くできたんだね。』", () => renderLesson8FinalBags(false)),
+            makeStep("ギルドマスター：『そう。では、増えた6袋には、あめが全部で何個入っているかな？』", () => renderGenericNumber({ title: "増えた6袋に入ったあめ", formula: "6 × 4 ＝", expected: "24", unit: "個", success: "24個。最後には、24個分の余裕ができたと考えられるね。▽を押して続けよう。", hint: "増えた袋は6袋で、1袋に4個ずつ入っているよ。" }), true),
+            makeStep("主人公：『つまり、最後には24個分の余裕ができたってことなんだ！』", () => renderLesson8FinalBags(true)),
+            makeStep("ギルドマスター：『では、その24個の余裕は、どうやって生まれたんだろう？』6個入りの袋を、4個入りに詰め替える場面を見よう。", () => renderLesson8Repacking(false)),
+            makeStep("主人公：『6個を4個に入れ替えると、1袋につき2個ずつ余裕が生まれるんだね。』", () => renderLesson8Repacking(true)),
+            makeStep("最後の24個の余裕は、1回につき2個ずつ生まれた。何回、詰め替えたことになるかな？", () => renderGenericNumber({ title: "詰め替えた回数", formula: "24 ÷ 2 ＝", expected: "12", unit: "回", success: "12回。つまり、もともとは6個入りの袋が12袋あったんだ。▽を押して続けよう。", hint: "24個の中に、1回で生まれる2個の余裕が何回あるか考えよう。" }), true),
+            makeStep("主人公：『12回詰め替えたということは、もともとは6個入りが12袋あったってことだね。』", renderLesson8OriginalBags),
+            makeStep("もともとの1袋には6個ずつ入っていた。あめは全部で何個かな？", () => renderGenericNumber({ title: "あめの全部の数", formula: "12 × 6 ＝", expected: "72", unit: "個", success: "72個。最後に見えている6袋から、もとの数まで逆にたどれたね。▽を押して、効率のよい式も見てみよう。", hint: "もともとは12袋で、1袋に6個ずつ入っていたよ。" }), true),
+            makeStep("ギルドマスター：『ここまで分かったら、さっき考えたことを式だけで短く表せるよ。』", renderLesson8ShortcutIntro),
+            makeStep("まず、1袋を詰め替えるたびに生まれる余裕を求める。", () => renderLesson8Shortcut("unit")),
+            makeStep("次に、増えた6袋に入ったあめの数を求める。", () => renderLesson8Shortcut("extra")),
+            makeStep("24個の余裕が、1回2個ずつ何回生まれたかを求める。", () => renderLesson8Shortcut("count")),
+            makeStep("最後に、もとの12袋に6個ずつ入っていたことから、全部の数を求める。", () => renderLesson8Shortcut("answer")),
+            makeStep("効率のよい式を、意味がつながる順番に並べてみよう。", () => renderGenericOrder({ formulas: ["6−4＝2（1回の詰め替えで生まれる余裕）", "4×6＝24（増えた6袋に入ったあめ）", "24÷2＝12（もとの袋の数）", "12×6＝72（あめの全部の数）"], success: "72個。ゆっくり考えた道筋を、式だけで短く表せたね。▽を押して、8番の学びをまとめよう。", hint: "まず1袋ごとの余裕、次に増えた6袋分、そして元の袋数を求めよう。" }), true),
+            makeStep("主人公：『なるほど！ さっき考えたことを、式だけで短く書いたんだ！』 ギルドマスター：『その通り。式は、考え方を短く表したものなんだ。』", renderLesson8Summary)
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
@@ -170,7 +191,8 @@
         4: createLesson4Steps,
         5: createLesson5Steps,
         6: createLesson6Steps,
-        7: createLesson7Steps
+        7: createLesson7Steps,
+        8: createLesson8Steps
     };
 
     function init() {
@@ -200,10 +222,16 @@
         syncLearningPlayer();
         closeMemo();
         showLessonSelect();
+        if (window.QuestMusicPlayer && typeof window.QuestMusicPlayer.playLearningForest === "function") {
+            window.QuestMusicPlayer.playLearningForest();
+        }
     }
 
     function close() {
         closeMemo();
+        if (window.QuestMusicPlayer && typeof window.QuestMusicPlayer.stop === "function") {
+            window.QuestMusicPlayer.stop();
+        }
     }
 
     function renderStep() {
@@ -1078,6 +1106,93 @@
             ],
             formulas: ["220÷20＝11", "80×9＝720", "720÷20＝36", "11＋36＝47", "近道：940÷20＝47"],
             answer: "あきらくんは 47本 買った"
+        });
+    }
+
+    function renderLesson8Problem() {
+        setBoard(`
+            <article class="learning-problem-card lesson8-problem-card">
+                <h3>問題</h3>
+                <p>あめが1ふくろに6個ずつ入っています。</p>
+                <p>これを1ふくろに4個ずつにして入れると、6ふくろ多くできます。</p>
+                <p>あめは全部で何個ありますか。</p>
+            </article>
+        `);
+    }
+
+    function renderLesson8FinalBags(reveal) {
+        setBoard(`
+            <div class="lesson8-final-board ${reveal ? "is-revealed" : ""}">
+                <div class="lesson8-bag-row">
+                    ${Array.from({ length: 6 }, (_, index) => `<span class="lesson8-bag"><b>4個</b><small>増えた袋${index + 1}</small></span>`).join("")}
+                </div>
+                <strong>6袋 × 4個 ＝ ${reveal ? "24個" : "？個"}</strong>
+                <p>${reveal ? "最後には、24個分の余裕が生まれた" : "最後に増えた6袋には、何個入っている？"}</p>
+            </div>
+        `);
+    }
+
+    function renderLesson8Repacking(reveal) {
+        setBoard(`
+            <div class="lesson8-repack-board ${reveal ? "is-revealed" : ""}">
+                <div class="lesson8-repack-step"><small>もとの1袋</small><b>● ● ● ● ● ●</b><strong>6個</strong></div>
+                <div class="lesson8-repack-arrow">→ 詰め替える →</div>
+                <div class="lesson8-repack-step"><small>新しい1袋</small><b>● ● ● ●</b><strong>4個</strong></div>
+                <div class="lesson8-spare"><small>1回で生まれる余裕</small><b>${reveal ? "● ●" : "？"}</b><strong>${reveal ? "2個" : "6−4"}</strong></div>
+                <p>${reveal ? "袋を1つ詰め替えるたびに、2個ずつ余裕が生まれる" : "6個から4個にすると、いくつ余る？"}</p>
+            </div>
+        `);
+    }
+
+    function renderLesson8OriginalBags() {
+        setBoard(`
+            <div class="lesson8-original-board">
+                <strong>24 ÷ 2 ＝ 12回</strong>
+                <div class="lesson8-original-arrow">↓</div>
+                <div class="lesson8-original-bags">${Array.from({ length: 12 }, () => `<span>6個</span>`).join("")}</div>
+                <p>12回詰め替えた ＝ もともとは6個入りが12袋</p>
+            </div>
+        `);
+    }
+
+    function renderLesson8ShortcutIntro() {
+        setBoard(`
+            <div class="lesson8-shortcut-title">
+                <small>第2段階</small>
+                <h3>効率のよい式</h3>
+                <p>ゆっくり考えた道筋を、式だけで短く表そう</p>
+            </div>
+        `);
+    }
+
+    function renderLesson8Shortcut(stage) {
+        const stages = ["unit", "extra", "count", "answer"];
+        const activeIndex = stages.indexOf(stage);
+        const rows = [
+            ["1回の詰め替えで生まれる余裕", "6 − 4 ＝ 2"],
+            ["増えた6袋に入ったあめ", "4 × 6 ＝ 24"],
+            ["もとの袋の数", "24 ÷ 2 ＝ 12"],
+            ["あめの全部の数", "12 × 6 ＝ 72"]
+        ];
+        setBoard(`
+            <div class="lesson8-shortcut-board">
+                ${rows.map((row, index) => `<div class="lesson8-shortcut-step ${index <= activeIndex ? "is-active" : ""}"><span>${row[0]}</span><b>${row[1]}</b></div>${index < rows.length - 1 ? '<div class="lesson8-shortcut-arrow">↓</div>' : ''}`).join("")}
+            </div>
+        `);
+    }
+
+    function renderLesson8Summary() {
+        renderGenericSummary({
+            label: "8番の学び",
+            points: [
+                "まず問題文を原文のまま読み、『6ふくろ多くできた』に反応する",
+                "増えた6袋は、4×6＝24個分の余裕を表す",
+                "6個入りを4個入りにすると、1回につき2個の余裕が生まれる",
+                "24÷2＝12から、もとの袋は12袋だと分かる",
+                "式は、ゆっくり考えた道筋を短く表したもの"
+            ],
+            formulas: ["6−4＝2", "4×6＝24", "24÷2＝12", "12×6＝72"],
+            answer: "あめは全部で 72個"
         });
     }
 
