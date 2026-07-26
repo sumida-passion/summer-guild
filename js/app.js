@@ -179,6 +179,10 @@ function initGame() {
 
     }
 
+    if (window.FurnitureSystem && typeof window.FurnitureSystem.init === "function") {
+        window.FurnitureSystem.init();
+    }
+
     if (window.BlackDogPet && typeof window.BlackDogPet.init === "function") {
         window.BlackDogPet.init();
     }
@@ -2185,6 +2189,10 @@ function activateScreen(
             screenName
         );
 
+    }
+
+    if (window.FurnitureSystem && typeof window.FurnitureSystem.handleScreenChange === "function") {
+        window.FurnitureSystem.handleScreenChange(screenName);
     }
 
     if (window.BlackDogPet && typeof window.BlackDogPet.handleScreenChange === "function") {

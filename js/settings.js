@@ -27,7 +27,7 @@ const SETTINGS_STORAGE_KEY =
 
 const DEFAULT_SETTINGS = {
 
-    version: "0.4.0",
+    version: "0.5.0",
 
 
     /*
@@ -101,6 +101,11 @@ const DEFAULT_SETTINGS = {
             dogFood: 0
         }
 
+    },
+
+    furniture: {
+        items: {},
+        deliveryNoticeDate: ""
     },
 
     pet: {
@@ -355,6 +360,15 @@ function mergeSettings(
 
     if (savedSettings.shop && savedSettings.shop.inventory) {
         merged.shop.inventory.dogFood = Math.max(0, Math.floor(getSafeNumber(savedSettings.shop.inventory.dogFood, 0)));
+    }
+
+    if (savedSettings.furniture && typeof savedSettings.furniture === "object") {
+        if (savedSettings.furniture.items && typeof savedSettings.furniture.items === "object" && !Array.isArray(savedSettings.furniture.items)) {
+            merged.furniture.items = { ...savedSettings.furniture.items };
+        }
+        if (typeof savedSettings.furniture.deliveryNoticeDate === "string") {
+            merged.furniture.deliveryNoticeDate = savedSettings.furniture.deliveryNoticeDate;
+        }
     }
 
     if (savedSettings.pet && typeof savedSettings.pet === "object") {

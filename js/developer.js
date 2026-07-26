@@ -472,6 +472,23 @@ function buildDeveloperPanel() {
             </section>
 
 
+            <section class="developer-editor-section developer-furniture-section">
+                <div class="developer-section-heading">
+                    <span class="developer-section-icon">🪑</span>
+                    <div>
+                        <h3>Furniture</h3>
+                        <p>翌日を待たずに家具の状態を確認</p>
+                    </div>
+                </div>
+                <div class="developer-furniture-bulk">
+                    <button id="developerFurnitureAllPlaced" class="developer-secondary-button" type="button">全家具を即時設置</button>
+                    <button id="developerFurnitureAllPending" class="developer-secondary-button" type="button">全家具を配送待ち</button>
+                    <button id="developerFurnitureAllReset" class="developer-secondary-button" type="button">全家具を未購入へ戻す</button>
+                </div>
+                <div id="developerFurnitureList" class="developer-furniture-list"></div>
+                <p id="developerFurnitureMessage" class="developer-gp-message" aria-live="polite"></p>
+            </section>
+
             <section class="developer-editor-section developer-gp-section">
 
                 <div class="developer-section-heading">
@@ -764,6 +781,11 @@ function bindDeveloperPanelButtons() {
     bindClick("setDeveloperGp", applyDeveloperGpInput);
     bindClick("setDeveloperGp1000", () => setDeveloperGp(1000));
 
+    bindClick("developerFurnitureAllPlaced", () => setAllFurnitureForDeveloper("placed"));
+    bindClick("developerFurnitureAllPending", () => setAllFurnitureForDeveloper("pending"));
+    bindClick("developerFurnitureAllReset", () => setAllFurnitureForDeveloper("unowned"));
+    buildDeveloperFurnitureList();
+
     const developerGpInput = document.getElementById("developerGpInput");
 
     if (developerGpInput) {
@@ -795,6 +817,43 @@ function bindDeveloperPanelButtons() {
 
 }
 
+
+function buildDeveloperFurnitureList() {
+    const list = document.getElementById("developerFurnitureList");
+    if (!list || !window.FurnitureSystem) return;
+    list.innerHTML = window.FurnitureSystem.items.map((item) => `
+        <div class="developer-furniture-row" data-developer-furniture-id="${item.id}">
+            <div class="developer-furniture-name">${item.name}<small>${window.FurnitureSystem.statusLabel(item.id)}</small></div>
+            <div class="developer-furniture-actions">
+                <button type="button" data-furniture-status="unowned">未購入</button>
+                <button type="button" data-furniture-status="pending">配送待ち</button>
+                <button type="button" data-furniture-status="placed">即時設置</button>
+            </div>
+        </div>`).join("");
+    list.querySelectorAll("[data-furniture-status]").forEach((button) => {
+        button.addEventListener("click", () => {
+            const row = button.closest("[data-developer-furniture-id]");
+            window.FurnitureSystem.developerSet(row.dataset.developerFurnitureId, button.dataset.furnitureStatus);
+            buildDeveloperFurnitureList();
+            showDeveloperFurnitureMessage("家具の状態を更新しました。");
+        });
+    });
+}
+
+function setAllFurnitureForDeveloper(status) {
+    if (!window.FurnitureSystem) return;
+    window.FurnitureSystem.developerSetAll(status);
+    buildDeveloperFurnitureList();
+    showDeveloperFurnitureMessage("全家具の状態を更新しました。");
+}
+
+function showDeveloperFurnitureMessage(message) {
+    const element = document.getElementById("developerFurnitureMessage");
+    if (!element) return;
+    element.textContent = message;
+    window.clearTimeout(showDeveloperFurnitureMessage.timerId);
+    showDeveloperFurnitureMessage.timerId = window.setTimeout(() => { element.textContent = ""; }, 2200);
+}
 
 /* =========================================================
    7. 共通クリック登録
