@@ -9,7 +9,7 @@
    ・LocalStorage（GP・衣装・招待済み楽団など）には触れない
    ========================================================= */
 
-const SW_VERSION = "20260726-daily-foundation-v2";
+const SW_VERSION = "20260726-social-print1-board-v1";
 const CACHE_PREFIX = "summer-guild-";
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${SW_VERSION}`;
 
