@@ -2790,9 +2790,15 @@ body.wardrobe-open {
 /* =========================================================
    家具設置企画 Ver1.0
    ========================================================= */
-.furniture-layer {
+/*
+  `.screen > *:not(.background)` より詳細度を高くし、
+  家具レイヤーが position: relative に上書きされて高さ0になるのを防ぐ。
+*/
+#room-screen > .furniture-layer {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
     z-index: 2;
     overflow: hidden;
     pointer-events: none;
@@ -2802,7 +2808,8 @@ body.wardrobe-open {
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
+    object-position: center;
     border: 0;
     box-shadow: none;
     pointer-events: none;
