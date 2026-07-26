@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T04:27:37.334980+00:00",
-    "commit": "622dc86",
+    "atUtc": "2026-07-26T04:28:01.105291+00:00",
+    "commit": "5f8fc78",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 21,
-    "totalBytes": 96014757,
+    "totalBytes": 96018981,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1572,9 +1572,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 43504,
-      "sha1": "bca5e2dd70",
-      "lineCount": 2432
+      "sizeBytes": 43808,
+      "sha1": "ba4fc9956f",
+      "lineCount": 2440
     },
     {
       "path": "js/components/.gitkeep",
@@ -1593,9 +1593,9 @@
       "stem": "developer",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 29664,
-      "sha1": "0ad9d35bf5",
-      "lineCount": 1454
+      "sizeBytes": 33006,
+      "sha1": "03ee7c428c",
+      "lineCount": 1513
     },
     {
       "path": "js/numberpad.js",
@@ -1801,9 +1801,9 @@
       "stem": "settings",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 50632,
-      "sha1": "05c0f8977c",
-      "lineCount": 3027
+      "sizeBytes": 51210,
+      "sha1": "488c9cb1e4",
+      "lineCount": 3041
     },
     {
       "path": "js/storage.js",
@@ -2645,6 +2645,9 @@
         "initDeveloperMode",
         "buildDeveloperPanel",
         "bindDeveloperPanelButtons",
+        "buildDeveloperFurnitureList",
+        "setAllFurnitureForDeveloper",
+        "showDeveloperFurnitureMessage",
         "bindClick",
         "sanitizeDeveloperGp",
         "setDeveloperGp",
@@ -3388,25 +3391,19 @@
     {
       "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
+        "js/app.js"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "docs/GPT_PROJECT_STATE.md"
+        "js/developer.js"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "docs/PROJECT_STATE.json"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
+        "js/settings.js"
       ]
     }
   ],
