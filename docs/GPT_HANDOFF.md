@@ -265,3 +265,7 @@ PNGのGitHubプレビューには白枠がなく、犬画像内に毛布も含�
 - 家具は能力を与えず、「勉強して集めた思い出」として部屋を完成させる。
 - 家具データと描画・配送処理は `js/systems/furnitureSystem.js` に集約。
 - 現在の家具画像は `assets/items/furniture/` の英語名PNGを参照。単体の魔法のランプ画像は未収録。
+
+
+### 家具購入バグ修正（2026-07-26）
+`Settings` は `let` 宣言のため `window.Settings` を使わないこと。家具データは `typeof Settings !== "undefined"` を確認して直接参照する。購入保存に失敗した場合はGPを返金する。
