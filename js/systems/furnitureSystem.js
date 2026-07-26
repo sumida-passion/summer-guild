@@ -132,6 +132,20 @@
             layer.className = "furniture-layer";
             room.insertBefore(layer, document.getElementById("player"));
         }
+
+        /*
+          layout.css の共通規則 `.screen > *:not(.background)` は、
+          画面直下の要素を position: relative にする。家具レイヤーは
+          画面全体を使う必要があるため、ここでも明示してSafariを含む
+          実機で描画領域が0にならないようにする。
+        */
+        layer.style.position = "absolute";
+        layer.style.inset = "0";
+        layer.style.width = "100%";
+        layer.style.height = "100%";
+        layer.style.zIndex = "2";
+        layer.style.pointerEvents = "none";
+
         return layer;
     }
 
