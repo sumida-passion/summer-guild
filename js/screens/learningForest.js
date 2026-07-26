@@ -316,7 +316,7 @@
         const back = document.getElementById("learningBackStep");
         const restartButton = document.getElementById("learningRestart");
 
-        if (text) text.textContent = "夏期講習プリントの1〜26番から、学び直したい問題を選ぼう。1〜3番は詳しい解説を始められるぞ。";
+        if (text) text.textContent = "夏期講習プリントの1〜26番から、学び直したい問題を選ぼう。番号を選べば、いつでも解説を見直せるぞ。";
         if (mark) {
             mark.hidden = true;
             mark.textContent = "▼";
