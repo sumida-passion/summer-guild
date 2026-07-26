@@ -1,8 +1,8 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver1.6
-   算数の広場・第1〜4問の詳しい学び直し
+   学びの森 Ver1.7
+   算数の広場・第1〜5問の詳しい学び直し
    ========================================================= */
 
 (() => {
@@ -13,7 +13,7 @@
         { number: 2, group: 1, title: "3人で分けたおこづかい", ready: true, id: "math-wasa-02" },
         { number: 3, group: 1, title: "姉と妹のお金", ready: true, id: "math-wasa-03" },
         { number: 4, group: 1, title: "3つの容器の水", ready: true, id: "math-volume-04" },
-        { number: 5, group: 2, title: "はがきと切手" },
+        { number: 5, group: 2, title: "はがきと切手", ready: true, id: "math-difference-05" },
         { number: 6, group: 2, title: "ケーキの買い物" },
         { number: 7, group: 2, title: "えん筆の本数と代金" },
         { number: 8, group: 2, title: "あめの入れ方" },
@@ -111,11 +111,26 @@
         ];
     }
 
+    function createLesson5Steps() {
+        return [
+            makeStep("5番も、まずは問題文を原文のまま読んでみよう。どの言葉が、解き方を教えてくれているかな。", renderLesson5Problem),
+            makeStep("主人公：『50円と80円と420円……。数字は見えるけど、どこに反応したらいいんだろう？』", () => renderLesson5Keywords(false)),
+            makeStep("ギルドマスター：『ポイントは、“同じ枚数ずつ買った”と、“1枚あたりの値段の差が30円”ってところだね。この言葉に反応できるのが大切だな。』", () => renderLesson5Keywords(true)),
+            makeStep("はがき1枚は50円、切手1枚は80円。1枚ずつ買うたびに、代金にはいくらの差ができるかな？", renderLesson5PriceChoice, true),
+            makeStep("そう。1枚なら30円差、2枚なら60円差、3枚なら90円差。『同じ枚数』だから、この30円の差が同じ回数だけ積み重なるんだ。", renderLesson5DifferenceGrowth),
+            makeStep("主人公：『なるほど！ 420円の中に、1枚ごとの差の30円が何回あるかを考えればいいんだ！』", renderLesson5UnknownCount),
+            makeStep("420円の差は、30円の差が何回分かな？", () => renderGenericNumber({ title: "買った枚数を求めよう", formula: "420 ÷ 30 ＝", expected: "14", unit: "枚", success: "14枚。同じ枚数ずつ買ったので、はがきも切手も14枚ずつだ。▽を押して続けよう。", hint: "合計の差420円の中に、1枚ごとの差30円がいくつあるか考えよう。" }), true),
+            makeStep("最後に、問題文の言葉から式へつなげた順番を並べよう。", () => renderGenericOrder({ formulas: ["同じ枚数ずつ買った", "80−50＝30（1枚ごとの差）", "420円＝30円の差が何回分か", "420÷30＝14"], success: "『同じ枚数』と『1枚ごとの差』に反応できたから、420÷30につながった。▽を押して、5番の学びをまとめよう。", hint: "まず『同じ枚数』に注目し、次に1枚ごとの差を求めよう。" }), true),
+            makeStep("よくできた。文章題では、数字だけでなく、数字どうしを結びつける言葉に反応することが大切だ。", renderLesson5Summary)
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
         3: createLesson3Steps,
-        4: createLesson4Steps
+        4: createLesson4Steps,
+        5: createLesson5Steps
     };
 
     function init() {
@@ -751,6 +766,85 @@
             points: ["最初に問題文を原文のまま読む", "『同じかさだけ入る』を『満タンまで入る量が同じ』へ翻訳する", "順番は書かれていないので、最後の状態だけを使う", "4/4＋1/4＋3/4＝8/4＝容器2個分と考える"],
             formulas: ["4/4＋1/4＋3/4＝8/4", "8/4＝容器2個分", "16÷2＝8"],
             answer: "容器1つには 8L 入る"
+        });
+    }
+
+    function renderLesson5Problem() {
+        setBoard(`
+            <article class="learning-problem-card lesson5-problem-card">
+                <p class="learning-problem-label">5番の問題（原文）</p>
+                <p>1枚50円のはがきと、1枚80円の切手を同じ枚数ずつ買ったら、はがきと切手の代金の差は420円になりました。</p>
+                <p>はがきは何枚買いましたか。</p>
+            </article>
+        `);
+    }
+
+    function renderLesson5Keywords(reveal) {
+        setBoard(`
+            <div class="lesson5-keyword-board ${reveal ? "is-revealed" : ""}">
+                <p class="lesson5-keyword-line">1枚50円のはがきと、1枚80円の切手を
+                    <mark>同じ枚数ずつ買った</mark>
+                </p>
+                <p class="lesson5-keyword-line">代金の差は <strong>420円</strong></p>
+                ${reveal ? `
+                    <div class="lesson5-reaction-points">
+                        <span>反応する言葉①<br><b>同じ枚数ずつ</b></span>
+                        <span>反応する言葉②<br><b>1枚ごとの差</b></span>
+                    </div>
+                ` : '<p class="lesson5-search-note">数字だけでなく、数字を結びつける言葉を探そう</p>'}
+            </div>
+        `);
+    }
+
+    function renderLesson5PriceChoice() {
+        renderGenericChoice({
+            question: "1枚ずつ買ったときの、代金の差はいくら？",
+            choices: [
+                { value: "30", label: "80−50＝30円" },
+                { value: "130", label: "80＋50＝130円" },
+                { value: "420", label: "420円" }
+            ],
+            correct: "30",
+            success: "そうだ。切手は、はがきより1枚につき30円高い。▽を押して続けよう。",
+            hint: "『差』なので、80円と50円を引いて比べよう。"
+        });
+    }
+
+    function renderLesson5DifferenceGrowth() {
+        setBoard(`
+            <div class="lesson5-growth-board">
+                <div class="lesson5-growth-row"><b>1枚ずつ</b><span>50円</span><span>80円</span><strong>差 30円</strong></div>
+                <div class="lesson5-growth-row"><b>2枚ずつ</b><span>100円</span><span>160円</span><strong>差 60円</strong></div>
+                <div class="lesson5-growth-row"><b>3枚ずつ</b><span>150円</span><span>240円</span><strong>差 90円</strong></div>
+                <div class="lesson5-growth-arrow">1枚増えるたびに、差も30円ずつ増える</div>
+            </div>
+        `);
+    }
+
+    function renderLesson5UnknownCount() {
+        setBoard(`
+            <div class="lesson5-count-board">
+                <div class="lesson5-difference-strip">
+                    <span>30円</span><span>30円</span><span>30円</span><span>…</span><span>30円</span>
+                </div>
+                <div class="lesson5-total-brace">全部合わせた差 ＝ 420円</div>
+                <p>30円の差が、何回分ある？</p>
+                <strong>420 ÷ 30</strong>
+            </div>
+        `);
+    }
+
+    function renderLesson5Summary() {
+        renderGenericSummary({
+            label: "5番の学び",
+            points: [
+                "問題文は最初に原文のまま読む",
+                "『同じ枚数ずつ』という言葉に反応する",
+                "80−50＝30で、1枚あたりの値段の差を求める",
+                "420円の中に30円の差が何回あるかを考える"
+            ],
+            formulas: ["80−50＝30", "420÷30＝14"],
+            answer: "はがきは 14枚 買った"
         });
     }
 
