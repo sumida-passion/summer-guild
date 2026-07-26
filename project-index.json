@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T06:47:57.149872+00:00",
-    "commit": "2e615c4",
+    "atUtc": "2026-07-26T06:48:19.613222+00:00",
+    "commit": "e672815",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 66,
     "javascriptApiFileCount": 22,
-    "totalBytes": 96043636,
+    "totalBytes": 96044803,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1626,9 +1626,9 @@
       "stem": "daily",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 7143,
-      "sha1": "54625be3fc",
-      "lineCount": 327
+      "sizeBytes": 7302,
+      "sha1": "68137bb424",
+      "lineCount": 328
     },
     {
       "path": "js/quests/engine.js",
@@ -1714,9 +1714,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 21271,
-      "sha1": "3675c34ef2",
-      "lineCount": 188
+      "sizeBytes": 22279,
+      "sha1": "86a073ce77",
+      "lineCount": 219
     },
     {
       "path": "js/quests/science.js",
@@ -2833,6 +2833,8 @@
         "stopReviewTrainingMusic",
         "reviewTodayKey",
         "loadJson",
+        "emptyReviewBonuses",
+        "getReviewSubject",
         "getReviewDaily",
         "saveReviewDaily",
         "hasReviewBonus",
@@ -2860,7 +2862,8 @@
       "classes": [],
       "windowExports": [
         "openReviewTraining",
-        "getReviewDailyBonusStatus"
+        "getReviewDailyBonusStatus",
+        "openReviewDailyTarget"
       ]
     },
     {
@@ -3432,7 +3435,13 @@
     {
       "status": "M",
       "paths": [
-        "js/app.js"
+        "js/quests/daily.js"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "js/quests/review.js"
       ]
     }
   ],
