@@ -128,17 +128,18 @@ function createDailyQuestCardHtml(
 ) {
 
     if (quest.id === "review-training") {
-        const status = typeof window.getReviewDailyBonusStatus === "function"
+        const allStatus = typeof window.getReviewDailyBonusStatus === "function"
             ? window.getReviewDailyBonusStatus()
-            : { basic:false, standard:false, challenge:false };
-        const remaining = [status.basic, status.standard, status.challenge].filter(done => !done).length;
+            : { math:{basic:false,standard:false,challenge:false}, social:{basic:false,standard:false,challenge:false} };
+        const statuses = [allStatus.math, allStatus.social].filter(Boolean);
+        const remaining = statuses.reduce((sum,status)=>sum+[status.basic,status.standard,status.challenge].filter(done=>!done).length,0);
         return `
         <article class="quest-card" data-quest-id="${quest.id}">
             <div class="quest-card-info">
                 <h3 class="quest-title">${quest.title}</h3>
                 <p class="quest-description">${quest.description}</p>
-                <p class="quest-reward">基礎・標準・挑戦：各レベル本日初回 +2GP ＋ 成績GP</p>
-                <p class="quest-status">初回ボーナス残り ${remaining}/3</p>
+                <p class="quest-reward">教科ごと・難易度ごとに本日初回ボーナス</p>
+                <p class="quest-status">初回ボーナス残り ${remaining}/6</p>
             </div>
             <button class="game-button quest-start-button" type="button" data-open-review>選んで挑戦</button>
         </article>`;

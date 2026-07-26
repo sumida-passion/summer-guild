@@ -1,7 +1,7 @@
 "use strict";
 
 /* ふりかえりの修行：教科→単元→難易度を自由に選ぶデイリー復習 */
-const REVIEW_DAILY_KEY = "summerGuildReviewDailyV1";
+const REVIEW_DAILY_KEY = "summerGuildReviewDailyV2";
 const REVIEW_HISTORY_KEY = "summerGuildReviewHistoryV1";
 const REVIEW_LEVELS = {
   basic: { label: "基本", reward: 2, firstBonus: 1 },
@@ -70,16 +70,36 @@ function reviewTodayKey() {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 }
 function loadJson(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch (_) { return fallback; } }
+function emptyReviewBonuses() {
+  return {
+    math: { basic:false, standard:false, challenge:false },
+    social: { basic:false, standard:false, challenge:false }
+  };
+}
+function getReviewSubject(unitId) { return unitId === "social_world" ? "social" : "math"; }
 function getReviewDaily() {
   const today = reviewTodayKey();
   const data = loadJson(REVIEW_DAILY_KEY, {});
-  if (data.date !== today) return { date: today, bonuses: { basic:false, standard:false, challenge:false } };
-  data.bonuses = Object.assign({ basic:false, standard:false, challenge:false }, data.bonuses || {});
+  if (data.date !== today) return { date: today, bonuses: emptyReviewBonuses() };
+  const defaults = emptyReviewBonuses();
+  data.bonuses = data.bonuses && typeof data.bonuses === "object" ? data.bonuses : {};
+  Object.keys(defaults).forEach(subject => {
+    data.bonuses[subject] = Object.assign({}, defaults[subject], data.bonuses[subject] || {});
+  });
   return data;
 }
 function saveReviewDaily(data) { localStorage.setItem(REVIEW_DAILY_KEY, JSON.stringify(data)); }
-function hasReviewBonus(level) { return !getReviewDaily().bonuses[level]; }
-function claimReviewBonus(level) { const d=getReviewDaily(); const earned=!d.bonuses[level]; d.bonuses[level]=true; saveReviewDaily(d); return earned ? (REVIEW_LEVELS[level]?.firstBonus || 0) : 0; }
+function hasReviewBonus(unitId, level) {
+  const subject = getReviewSubject(unitId);
+  return !getReviewDaily().bonuses[subject][level];
+}
+function claimReviewBonus(unitId, level) {
+  const d=getReviewDaily(), subject=getReviewSubject(unitId);
+  const earned=!d.bonuses[subject][level];
+  d.bonuses[subject][level]=true;
+  saveReviewDaily(d);
+  return earned ? (REVIEW_LEVELS[level]?.firstBonus || 0) : 0;
+}
 function saveReviewHistory(unitId, level) {
   const h=loadJson(REVIEW_HISTORY_KEY, {}); h[unitId]=h[unitId]||{}; h[unitId][level]={ lastCompletedAt:new Date().toISOString(), count:(h[unitId][level]?.count||0)+1 }; localStorage.setItem(REVIEW_HISTORY_KEY,JSON.stringify(h));
 }
@@ -136,13 +156,13 @@ function getSocialReviewLevels(){
   };
 }
 function showReviewLevels(unitId){
-  const unit=getReviewUnit(unitId), daily=getReviewDaily();
+  const unit=getReviewUnit(unitId), daily=getReviewDaily(), subject=getReviewSubject(unitId);
   const c=document.getElementById("questContainer");
   c.classList.remove("review-quiz-container");
   c.innerHTML=`<div class="review-wrap"><section class="review-panel"><header class="review-head"><p class="review-badge">${unitId==="social_world"?"社会":"算数"}</p><h2>${unit.title}</h2><p class="review-sub">どの難易度からでも、何度でも挑戦できます。</p></header><div class="review-levels">${Object.entries(REVIEW_LEVELS).map(([id,l])=>{
     const available=(unit.questions[id]||[]).length>=5;
-    const bonusText=daily.bonuses[id]?"本日ボーナス獲得済み":`本日初回 +${l.firstBonus}GP`;
-    return `<article class="review-level ${available?"":"is-preparing"}" ${available?`data-review-level="${id}"`:""}><h3>${l.label}</h3><p>${available?`5問・毎回 ${l.reward}GP`:`新しい問題を準備中`}</p><span class="review-badge ${daily.bonuses[id]?"done":""}">${available?bonusText:"COMING SOON"}</span></article>`;
+    const bonusText=daily.bonuses[subject][id]?"本日ボーナス獲得済み":`本日初回 +${l.firstBonus}GP`;
+    return `<article class="review-level ${available?"":"is-preparing"}" ${available?`data-review-level="${id}"`:""}><h3>${l.label}</h3><p>${available?`5問・毎回 ${l.reward}GP`:`新しい問題を準備中`}</p><span class="review-badge ${daily.bonuses[subject][id]?"done":""}">${available?bonusText:"COMING SOON"}</span></article>`;
   }).join("")}</div><button class="review-back" data-review-units>単元選択へ戻る</button></section></div>`;
   document.querySelectorAll("[data-review-level]").forEach(el=>el.addEventListener("click",()=>startReviewQuiz(unitId,el.dataset.reviewLevel)));
   document.querySelector("[data-review-units]")?.addEventListener("click",()=>unitId==="social_world"?showSocialUnits():showMathUnits());
@@ -157,7 +177,7 @@ async function submitReviewAnswer(){if(reviewState.input==="")return; const q=re
 async function finishReviewQuiz(){
   const s=reviewState,correct=s.answers.filter(x=>x.ok).length,elapsed=Math.max(1,Math.ceil((Date.now()-s.startedAt)/1000)),accuracy=Math.round(correct/5*100);
   const baseReward=REVIEW_LEVELS[s.level]?.reward||0;
-  const bonus=claimReviewBonus(s.level);
+  const bonus=claimReviewBonus(s.unitId,s.level);
   const totalReward=baseReward+bonus;
   saveReviewHistory(s.unitId,s.level);
   const wrong=s.answers.filter(x=>!x.ok);
@@ -185,4 +205,15 @@ document.addEventListener("DOMContentLoaded",()=>{
   });
 });
 window.openReviewTraining=openReviewTraining;
-window.getReviewDailyBonusStatus=()=>getReviewDaily().bonuses;
+window.getReviewDailyBonusStatus=(subject)=>{
+  const bonuses=getReviewDaily().bonuses;
+  return subject ? bonuses[subject] : bonuses;
+};
+window.openReviewDailyTarget=async(subject,level)=>{
+  const unitId=subject==="social"?"social_world":"unit_average";
+  const unit=getReviewUnit(unitId);
+  if(!(unit?.questions?.[level]||[]).length) return false;
+  if(typeof changeScreen==="function") await changeScreen("quest");
+  startReviewQuiz(unitId,level);
+  return true;
+};
