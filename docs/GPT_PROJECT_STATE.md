@@ -7,7 +7,7 @@
 
 | 項目 | 内容 |
 |---|---|
-| 生成日時（UTC） | 2026-07-26T07:18:48.819Z |
+| 生成日時（UTC） | 2026-07-26T13:41:02.066Z |
 | リポジトリ | unknown |
 | ブランチ | `unknown` |
 | コミット | `unknown` |
@@ -17,9 +17,9 @@
 
 | 種類 | 数 |
 |---|---:|
-| 全ファイル | 181 |
+| 全ファイル | 184 |
 | フォルダ | 67 |
-| 画像 | 66 |
+| 画像 | 68 |
 | 音声 | 15 |
 | 動画 | 0 |
 | JavaScript | 32 |
@@ -79,6 +79,8 @@ summer-guild/
 │   │   │   └── .gitkeep
 │   │   ├── special/
 │   │   │   ├── .gitkeep
+│   │   │   ├── map_Japan.PNG
+│   │   │   ├── map_world.PNG
 │   │   │   └── mathGuildForest.png
 │   │   └── title/
 │   │       ├── .gitkeep
@@ -276,8 +278,9 @@ summer-guild/
 ├── service-worker.js
 ├── tests/
 │   └── .gitkeep
-└── tools/
-    └── generateProjectState.js
+├── tools/
+│   └── generateProjectState.js
+└── UPLOAD_FILES.txt
 ```
 
 ※自動生成される次の2ファイル自身は、循環防止のためツリーから除外しています。
@@ -289,36 +292,36 @@ summer-guild/
 
 ### CSS
 
-1. `css/common.css?v=20260723-layer-order-v1`
-2. `css/layout.css?v=20260726-guildhall-daily-v1-1`
-3. `css/screens/iphone-landscape.css?v=20260723-review-iphone1`
-4. `css/screens/learning-forest.css?v=20260726-learning-forest-lesson8-bgm-v1`
-5. `css/developer.css?v=20260726-furniture-render-fix1`
+1. `css/common.css?v=20260726-social-print1-board-v1`
+2. `css/layout.css?v=20260726-social-print1-board-v1`
+3. `css/screens/iphone-landscape.css?v=20260726-social-print1-board-v1`
+4. `css/screens/learning-forest.css?v=20260726-social-print1-board-v1`
+5. `css/developer.css?v=20260726-social-print1-board-v1`
 
 ### JavaScript
 
-1. `js/settings.js?v=20260725-dogscale1`
-2. `js/systems/owlMessenger.js?v=20260726-guildhall-daily-v1`
-3. `js/systems/furnitureSystem.js?v=20260726-guildhall-daily-v1`
-4. `data/items/items.js?v=20260726-furniture-render-fix1`
-5. `data/shop/music.js?v=20260721-1`
-6. `js/systems/musicPlayer.js?v=20260721-1`
-7. `js/systems/questMusicPlayer.js?v=20260726-learning-forest-bgm-v1`
-8. `js/screens/shop.js?v=20260726-furniture-render-fix1`
-9. `js/screens/musicShop.js?v=20260721-1`
-10. `js/screens/wardrobe.js?v=20260724-rockshoe1`
-11. `js/systems/questEngine.js?v=20260722-3`
-12. `js/quests/daily.js?v=20260726-guildhall-daily-v1`
-13. `js/numberpad.js?v=20260721-1`
-14. `js/quests/hyakumasu.js?v=20260723-5`
-15. `js/quests/review.js?v=20260726-guildhall-daily-v1`
-16. `js/systems/dailyDashboard.js?v=20260726-guildhall-daily-v1-1`
-17. `js/quests/math.js?v=20260723-mathguild30`
-18. `js/quests/society.js?v=20260724-socialguild1`
-19. `js/screens/learningForest.js?v=20260726-learning-forest-daily-gp-v1-1`
-20. `js/developer.js?v=20260726-furniture-render-fix1`
-21. `js/systems/blackDogPet.js?v=20260725-dogscale1`
-22. `js/app.js?v=20260726-guildhall-daily-v1`
+1. `js/settings.js?v=20260726-social-print1-board-v1`
+2. `js/systems/owlMessenger.js?v=20260726-social-print1-board-v1`
+3. `js/systems/furnitureSystem.js?v=20260726-social-print1-board-v1`
+4. `data/items/items.js?v=20260726-social-print1-board-v1`
+5. `data/shop/music.js?v=20260726-social-print1-board-v1`
+6. `js/systems/musicPlayer.js?v=20260726-social-print1-board-v1`
+7. `js/systems/questMusicPlayer.js?v=20260726-social-print1-board-v1`
+8. `js/screens/shop.js?v=20260726-social-print1-board-v1`
+9. `js/screens/musicShop.js?v=20260726-social-print1-board-v1`
+10. `js/screens/wardrobe.js?v=20260726-social-print1-board-v1`
+11. `js/systems/questEngine.js?v=20260726-social-print1-board-v1`
+12. `js/quests/daily.js?v=20260726-social-print1-board-v1`
+13. `js/numberpad.js?v=20260726-social-print1-board-v1`
+14. `js/quests/hyakumasu.js?v=20260726-social-print1-board-v1`
+15. `js/quests/review.js?v=20260726-social-print1-board-v1`
+16. `js/systems/dailyDashboard.js?v=20260726-social-print1-board-v1`
+17. `js/quests/math.js?v=20260726-social-print1-board-v1`
+18. `js/quests/society.js?v=20260726-social-print1-board-v1`
+19. `js/screens/learningForest.js?v=20260726-social-print1-board-v1`
+20. `js/developer.js?v=20260726-social-print1-board-v1`
+21. `js/systems/blackDogPet.js?v=20260726-social-print1-board-v1`
+22. `js/app.js?v=20260726-social-print1-board-v1`
 
 ### 画像参照
 
@@ -395,6 +398,8 @@ summer-guild/
 - `assets/backgrounds/guilds/guildhall.png`
 - `assets/backgrounds/guilds/guildshop_bg.png`
 - `assets/backgrounds/home/room.png`
+- `assets/backgrounds/special/map_Japan.PNG`
+- `assets/backgrounds/special/map_world.PNG`
 - `assets/backgrounds/special/mathGuildForest.png`
 - `assets/backgrounds/title/title.PNG`
 - `assets/characters/masters/math/mathGuildMaster.png`
