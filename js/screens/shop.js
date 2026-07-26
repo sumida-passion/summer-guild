@@ -23,10 +23,9 @@ function renderGuildShop() {
     }
 
 
-    const items =
-        Array.isArray(window.GUILD_SHOP_ITEMS)
-            ? window.GUILD_SHOP_ITEMS
-            : [];
+    const items = [
+        ...(Array.isArray(window.GUILD_SHOP_ITEMS) ? window.GUILD_SHOP_ITEMS : [])
+    ];
 
 
     if (items.length === 0) {
@@ -74,9 +73,13 @@ function createGuildShopItemHtml(item) {
         getSafeShopPrice(item && item.price);
 
     const repeatable = Boolean(item && item.repeatable);
-    const owned = !repeatable && typeof isShopItemOwned === "function"
-            ? isShopItemOwned(itemId)
-            : false;
+    const owned = !repeatable && item && item.furniture && window.FurnitureSystem
+        ? window.FurnitureSystem.isOwned(itemId)
+        : (!repeatable && typeof isShopItemOwned === "function" ? isShopItemOwned(itemId) : false);
+    const furnitureStatus = item && item.furniture && window.FurnitureSystem
+        ? window.FurnitureSystem.statusLabel(itemId)
+        : "";
+    const description = getSafeShopText(item && item.description);
     const ownedLabel = repeatable && item.consumable === "dogFood" && typeof getDogFoodCount === "function"
         ? `所持 ${getDogFoodCount()}個`
         : "";
@@ -89,12 +92,13 @@ function createGuildShopItemHtml(item) {
             data-shop-item-id="${escapeShopHtml(itemId)}"
             ${owned ? "disabled" : ""}>
 
-            <span class="shop-item-name">
-                ${escapeShopHtml(itemName)}
+            <span class="shop-item-copy">
+                <span class="shop-item-name">${escapeShopHtml(itemName)}</span>
+                ${description ? `<span class="shop-item-description">${escapeShopHtml(description)}</span>` : ""}
             </span>
 
             <span class="shop-item-price">
-                ${owned ? "購入済み" : `${price} GP${ownedLabel ? `・${ownedLabel}` : ""}`}
+                ${owned ? (furnitureStatus || "購入済み") : `${price} GP${ownedLabel ? `・${ownedLabel}` : ""}`}
             </span>
 
         </button>
@@ -170,8 +174,8 @@ function handleGuildShopItemClick(event) {
 
     if (
         !item.repeatable
-        && typeof isShopItemOwned === "function"
-        && isShopItemOwned(item.id)
+        && ((item.furniture && window.FurnitureSystem && window.FurnitureSystem.isOwned(item.id))
+            || (!item.furniture && typeof isShopItemOwned === "function" && isShopItemOwned(item.id)))
     ) {
 
         showGuildShopMessage(
@@ -210,7 +214,9 @@ function purchaseGuildShopItem(item) {
 
     let result;
 
-    if (item.repeatable && item.consumable === "dogFood") {
+    if (item.furniture && window.FurnitureSystem) {
+        result = window.FurnitureSystem.purchase(item);
+    } else if (item.repeatable && item.consumable === "dogFood") {
         if (typeof spendGp !== "function" || !spendGp(item.price)) {
             result = { success: false, reason: "not-enough-gp", totalGp: typeof getGp === "function" ? getGp() : 0 };
         } else {
@@ -602,7 +608,7 @@ function showGuildShopConfirm(item, onConfirm) {
             getSafeShopText(item.name),
 
         message:
-            `${getSafeShopPrice(item.price)} GP\n\nこの品を購入しますか？`,
+            `${getSafeShopText(item.description) ? `${getSafeShopText(item.description)}\n\n` : ""}${getSafeShopPrice(item.price)} GP\n\nこの品を購入しますか？`,
 
         confirmLabel:
             "購入する",
