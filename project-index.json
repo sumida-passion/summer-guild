@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T14:18:26.174734+00:00",
-    "commit": "5025e78",
-    "commitSubject": "Add files via upload"
+    "atUtc": "2026-07-26T13:41:02.615877+00:00",
+    "commit": "unknown",
+    "commitSubject": "unknown"
   },
   "summary": {
     "fileCount": 185,
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 24,
-    "totalBytes": 97032103,
+    "totalBytes": 97047838,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1735,9 +1735,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 26884,
-      "sha1": "c40e38b052",
-      "lineCount": 251
+      "sizeBytes": 42619,
+      "sha1": "ab305d6a64",
+      "lineCount": 302
     },
     {
       "path": "js/quests/science.js",
@@ -2901,6 +2901,10 @@
     {
       "path": "js/quests/review.js",
       "functions": [
+        "socialMapVisual",
+        "riceWorkCalendarVisual",
+        "ricePrefectureChartVisual",
+        "riceTrendChartVisual",
         "playReviewTrainingMusic",
         "stopReviewTrainingMusic",
         "reviewTodayKey",
@@ -3545,32 +3549,7 @@
     ],
     "importantReminder": "GitHub Pagesではファイル名と拡張子の大文字・小文字を区別する。"
   },
-  "latestCommitChanges": [
-    {
-      "status": "M",
-      "paths": [
-        "docs/GPT_HANDOFF.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/GPT_PROJECT_STATE.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/PROJECT_STATE.json"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
-      ]
-    }
-  ],
+  "latestCommitChanges": [],
   "gptHandoff": {
     "primaryGoal": "新しいスレッドでも、直前のスレッドから続いているような理解度と実装品質を維持する。",
     "firstInstruction": "最初にproject-index.jsonを最後まで読み、フォルダ階層・実ファイル名・画像拡張子・警告を確認すること。",
