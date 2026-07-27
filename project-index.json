@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-26T14:19:22.630222+00:00",
-    "commit": "d0f8c06",
+    "atUtc": "2026-07-27T01:58:30.246498+00:00",
+    "commit": "49fa266",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 24,
-    "totalBytes": 97047838,
+    "totalBytes": 97047846,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1582,8 +1582,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 19531,
-      "sha1": "04c6c1a7f0",
+      "sizeBytes": 19585,
+      "sha1": "01ec8e5dc6",
       "lineCount": 790
     },
     {
@@ -1962,8 +1962,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4502,
-      "sha1": "df9fc2c99b",
+      "sizeBytes": 4504,
+      "sha1": "42ab8c6a12",
       "lineCount": 177
     },
     {
@@ -1994,9 +1994,9 @@
       "stem": "UPLOAD_FILES",
       "extension": ".txt",
       "extensionNormalized": ".txt",
-      "sizeBytes": 256,
-      "sha1": "647e1359e9",
-      "lineCount": 12
+      "sizeBytes": 208,
+      "sha1": "4c000e6410",
+      "lineCount": 10
     }
   ],
   "images": [
@@ -3553,7 +3553,25 @@
     {
       "status": "M",
       "paths": [
-        "js/quests/review.js"
+        "UPLOAD_FILES.txt"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "project-index.json"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
@@ -3603,22 +3621,5 @@
     ],
     "newThreadOpeningMessage": "夏休みギルドの開発を続けます。最初にproject-index.jsonを最後まで読み、次に今回の改修対象と関連ファイルを確認してください。既存API・ファイル名・画像拡張子を推測で扱わず、iPad Safari前提で進めてください。大きな完成ファイルはZIPで渡してください。",
     "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。"
-  },
-  "implementationSnapshot": {
-    "updatedAtUtc": "2026-07-27T01:49:42.693017+00:00",
-    "version": "20260727-social-review-mastery-v1",
-    "summary": "社会地図オーバーレイ修正、社会プリント②追加、複数選択、即時解説、全問理解までの復習、初見正解GPを実装。",
-    "changedFiles": [
-      "index.html",
-      "service-worker.js",
-      "js/quests/review.js",
-      "js/systems/dailyDashboard.js",
-      "docs/GPT_HANDOFF.md",
-      "docs/development-log.md",
-      "docs/GPT_PROJECT_STATE.md",
-      "docs/PROJECT_STATE.json",
-      "project-index.json",
-      "UPLOAD_FILES.txt"
-    ]
   }
 }
