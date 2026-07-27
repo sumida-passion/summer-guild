@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-27T01:58:30.246498+00:00",
-    "commit": "49fa266",
+    "atUtc": "2026-07-27T02:01:12.270617+00:00",
+    "commit": "647306d",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 24,
-    "totalBytes": 97047846,
+    "totalBytes": 97051341,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1527,9 +1527,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 39062,
-      "sha1": "00b6cb887b",
-      "lineCount": 416
+      "sizeBytes": 40860,
+      "sha1": "db01ee7175",
+      "lineCount": 431
     },
     {
       "path": "docs/game-rules.md",
@@ -1549,9 +1549,9 @@
       "stem": "GPT_HANDOFF",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 21293,
-      "sha1": "c3d8a670e8",
-      "lineCount": 371
+      "sizeBytes": 22882,
+      "sha1": "3635728266",
+      "lineCount": 387
     },
     {
       "path": "docs/GPT_PROJECT_STATE.md",
@@ -1560,8 +1560,8 @@
       "stem": "GPT_PROJECT_STATE",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 18481,
-      "sha1": "be41b2bd38",
+      "sizeBytes": 18535,
+      "sha1": "8e2ab73b8f",
       "lineCount": 501
     },
     {
@@ -1571,8 +1571,8 @@
       "stem": "PROJECT_STATE",
       "extension": ".json",
       "extensionNormalized": ".json",
-      "sizeBytes": 69158,
-      "sha1": "d9a56509b8",
+      "sizeBytes": 69212,
+      "sha1": "f3315c795d",
       "lineCount": 1874
     },
     {
@@ -3553,25 +3553,25 @@
     {
       "status": "M",
       "paths": [
-        "UPLOAD_FILES.txt"
+        "docs/GPT_HANDOFF.md"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "index.html"
+        "docs/GPT_PROJECT_STATE.md"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "project-index.json"
+        "docs/PROJECT_STATE.json"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "service-worker.js"
+        "docs/development-log.md"
       ]
     }
   ],
