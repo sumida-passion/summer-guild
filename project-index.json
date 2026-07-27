@@ -13,21 +13,21 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-27T02:02:05.902857+00:00",
+    "atUtc": "2026-07-27T04:22:23.915019+00:00",
     "commit": "bcd4c23",
     "commitSubject": "Add files via upload"
   },
   "summary": {
-    "fileCount": 185,
-    "directoryCount": 57,
+    "fileCount": 186,
+    "directoryCount": 67,
     "imageCount": 68,
     "javascriptApiFileCount": 24,
-    "totalBytes": 97059185,
+    "totalBytes": 97193313,
     "extensions": {
       ".css": 6,
       ".html": 1,
       ".js": 32,
-      ".json": 1,
+      ".json": 2,
       ".md": 6,
       ".mp3": 15,
       ".png": 68,
@@ -39,11 +39,15 @@
   },
   "directoryStructure": {
     "directories": [
+      ".github",
       ".github/workflows",
+      "assets",
       "assets/app-icons",
+      "assets/audio",
       "assets/audio/bgm",
       "assets/audio/quests",
       "assets/audio/sfx",
+      "assets/backgrounds",
       "assets/backgrounds/facilities",
       "assets/backgrounds/guild-hall",
       "assets/backgrounds/guilds",
@@ -51,11 +55,14 @@
       "assets/backgrounds/masters",
       "assets/backgrounds/special",
       "assets/backgrounds/title",
+      "assets/characters",
+      "assets/characters/masters",
       "assets/characters/masters/japanese",
       "assets/characters/masters/math",
       "assets/characters/masters/science",
       "assets/characters/masters/social",
       "assets/characters/pet",
+      "assets/characters/player",
       "assets/characters/player/accessories",
       "assets/characters/player/base",
       "assets/characters/player/clothes",
@@ -69,9 +76,11 @@
       "assets/characters/player/hands",
       "assets/characters/player/head",
       "assets/characters/player/templates",
+      "assets/items",
       "assets/items/consumables",
       "assets/items/decorations",
       "assets/items/furniture",
+      "assets/ui",
       "assets/ui/buttons",
       "assets/ui/effects",
       "assets/ui/frames",
@@ -79,6 +88,7 @@
       "css",
       "css/components",
       "css/screens",
+      "data",
       "data/achievements",
       "data/exams",
       "data/facilities",
@@ -118,8 +128,27 @@
       "extension": ".yml",
       "extensionNormalized": ".yml",
       "sizeBytes": 16575,
-      "sha1": "8ec7931057",
-      "lineCount": 385
+      "sha1": "8ec7931057"
+    },
+    {
+      "path": "README.md",
+      "directory": ".",
+      "name": "README.md",
+      "stem": "README",
+      "extension": ".md",
+      "extensionNormalized": ".md",
+      "sizeBytes": 28,
+      "sha1": "83de97a1fe"
+    },
+    {
+      "path": "UPLOAD_FILES.txt",
+      "directory": ".",
+      "name": "UPLOAD_FILES.txt",
+      "stem": "UPLOAD_FILES",
+      "extension": ".txt",
+      "extensionNormalized": ".txt",
+      "sizeBytes": 301,
+      "sha1": "8b43244ee9"
     },
     {
       "path": "assets/app-icons/.gitkeep",
@@ -272,16 +301,6 @@
       "sha1": "e882067dda"
     },
     {
-      "path": "assets/audio/quests/learningForest.mp3",
-      "directory": "assets/audio/quests",
-      "name": "learningForest.mp3",
-      "stem": "learningForest",
-      "extension": ".mp3",
-      "extensionNormalized": ".mp3",
-      "sizeBytes": 3209645,
-      "sha1": "685d72d4eb"
-    },
-    {
       "path": "assets/audio/quests/The Clockwork Gambit 2.mp3",
       "directory": "assets/audio/quests",
       "name": "The Clockwork Gambit 2.mp3",
@@ -310,6 +329,16 @@
       "extensionNormalized": ".mp3",
       "sizeBytes": 3017441,
       "sha1": "de7173bcc8"
+    },
+    {
+      "path": "assets/audio/quests/learningForest.mp3",
+      "directory": "assets/audio/quests",
+      "name": "learningForest.mp3",
+      "stem": "learningForest",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 3209645,
+      "sha1": "685d72d4eb"
     },
     {
       "path": "assets/audio/quests/vsMathGuildMaster_final.mp3",
@@ -1142,6 +1171,16 @@
       "sha1": "da39a3ee5e"
     },
     {
+      "path": "assets/items/furniture/GuildTableClock.PNG",
+      "directory": "assets/items/furniture",
+      "name": "GuildTableClock.PNG",
+      "stem": "GuildTableClock",
+      "extension": ".PNG",
+      "extensionNormalized": ".png",
+      "sizeBytes": 78168,
+      "sha1": "8c265d3de3"
+    },
+    {
       "path": "assets/items/furniture/bookshelf.PNG",
       "directory": "assets/items/furniture",
       "name": "bookshelf.PNG",
@@ -1160,16 +1199,6 @@
       "extensionNormalized": ".png",
       "sizeBytes": 261271,
       "sha1": "d2ebfc4d9f"
-    },
-    {
-      "path": "assets/items/furniture/GuildTableClock.PNG",
-      "directory": "assets/items/furniture",
-      "name": "GuildTableClock.PNG",
-      "stem": "GuildTableClock",
-      "extension": ".PNG",
-      "extensionNormalized": ".png",
-      "sizeBytes": 78168,
-      "sha1": "8c265d3de3"
     },
     {
       "path": "assets/items/furniture/magicBroom.PNG",
@@ -1319,8 +1348,7 @@
       "extension": ".css",
       "extensionNormalized": ".css",
       "sizeBytes": 8934,
-      "sha1": "e9116b59d8",
-      "lineCount": 518
+      "sha1": "e9116b59d8"
     },
     {
       "path": "css/components/.gitkeep",
@@ -1340,8 +1368,7 @@
       "extension": ".css",
       "extensionNormalized": ".css",
       "sizeBytes": 12979,
-      "sha1": "569d2c337a",
-      "lineCount": 843
+      "sha1": "569d2c337a"
     },
     {
       "path": "css/layout.css",
@@ -1350,9 +1377,8 @@
       "stem": "layout",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 73741,
-      "sha1": "c331944d5b",
-      "lineCount": 2982
+      "sizeBytes": 74488,
+      "sha1": "bae1a8f97f"
     },
     {
       "path": "css/screens/.gitkeep",
@@ -1372,8 +1398,7 @@
       "extension": ".css",
       "extensionNormalized": ".css",
       "sizeBytes": 8803,
-      "sha1": "0809aaf0cd",
-      "lineCount": 516
+      "sha1": "0809aaf0cd"
     },
     {
       "path": "css/screens/iphone-landscape.css",
@@ -1383,8 +1408,7 @@
       "extension": ".css",
       "extensionNormalized": ".css",
       "sizeBytes": 10454,
-      "sha1": "2ddb37d492",
-      "lineCount": 458
+      "sha1": "2ddb37d492"
     },
     {
       "path": "css/screens/learning-forest.css",
@@ -1394,8 +1418,7 @@
       "extension": ".css",
       "extensionNormalized": ".css",
       "sizeBytes": 46432,
-      "sha1": "144e722802",
-      "lineCount": 1425
+      "sha1": "144e722802"
     },
     {
       "path": "data/achievements/.gitkeep",
@@ -1445,8 +1468,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 7398,
-      "sha1": "d3af227672",
-      "lineCount": 116
+      "sha1": "d3af227672"
     },
     {
       "path": "data/masters/.gitkeep",
@@ -1496,8 +1518,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 3195,
-      "sha1": "a335757086",
-      "lineCount": 73
+      "sha1": "a335757086"
     },
     {
       "path": "docs/.gitkeep",
@@ -1510,6 +1531,36 @@
       "sha1": "da39a3ee5e"
     },
     {
+      "path": "docs/GPT_HANDOFF.md",
+      "directory": "docs",
+      "name": "GPT_HANDOFF.md",
+      "stem": "GPT_HANDOFF",
+      "extension": ".md",
+      "extensionNormalized": ".md",
+      "sizeBytes": 24082,
+      "sha1": "80ce56b98c"
+    },
+    {
+      "path": "docs/GPT_PROJECT_STATE.md",
+      "directory": "docs",
+      "name": "GPT_PROJECT_STATE.md",
+      "stem": "GPT_PROJECT_STATE",
+      "extension": ".md",
+      "extensionNormalized": ".md",
+      "sizeBytes": 18643,
+      "sha1": "c3456c19f7"
+    },
+    {
+      "path": "docs/PROJECT_STATE.json",
+      "directory": "docs",
+      "name": "PROJECT_STATE.json",
+      "stem": "PROJECT_STATE",
+      "extension": ".json",
+      "extensionNormalized": ".json",
+      "sizeBytes": 69320,
+      "sha1": "e5aba81829"
+    },
+    {
       "path": "docs/asset-guide.md",
       "directory": "docs",
       "name": "asset-guide.md",
@@ -1517,8 +1568,7 @@
       "extension": ".md",
       "extensionNormalized": ".md",
       "sizeBytes": 8,
-      "sha1": "cd2275866b",
-      "lineCount": 1
+      "sha1": "cd2275866b"
     },
     {
       "path": "docs/development-log.md",
@@ -1527,9 +1577,8 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 40860,
-      "sha1": "db01ee7175",
-      "lineCount": 431
+      "sizeBytes": 41889,
+      "sha1": "c1731a0b8e"
     },
     {
       "path": "docs/game-rules.md",
@@ -1539,41 +1588,7 @@
       "extension": ".md",
       "extensionNormalized": ".md",
       "sizeBytes": 5480,
-      "sha1": "2817271bd4",
-      "lineCount": 70
-    },
-    {
-      "path": "docs/GPT_HANDOFF.md",
-      "directory": "docs",
-      "name": "GPT_HANDOFF.md",
-      "stem": "GPT_HANDOFF",
-      "extension": ".md",
-      "extensionNormalized": ".md",
-      "sizeBytes": 22882,
-      "sha1": "3635728266",
-      "lineCount": 387
-    },
-    {
-      "path": "docs/GPT_PROJECT_STATE.md",
-      "directory": "docs",
-      "name": "GPT_PROJECT_STATE.md",
-      "stem": "GPT_PROJECT_STATE",
-      "extension": ".md",
-      "extensionNormalized": ".md",
-      "sizeBytes": 18535,
-      "sha1": "8e2ab73b8f",
-      "lineCount": 501
-    },
-    {
-      "path": "docs/PROJECT_STATE.json",
-      "directory": "docs",
-      "name": "PROJECT_STATE.json",
-      "stem": "PROJECT_STATE",
-      "extension": ".json",
-      "extensionNormalized": ".json",
-      "sizeBytes": 69212,
-      "sha1": "f3315c795d",
-      "lineCount": 1874
+      "sha1": "2817271bd4"
     },
     {
       "path": "index.html",
@@ -1582,9 +1597,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 19585,
-      "sha1": "01ec8e5dc6",
-      "lineCount": 790
+      "sizeBytes": 19693,
+      "sha1": "581837c910"
     },
     {
       "path": "js/app.js",
@@ -1594,8 +1608,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 44803,
-      "sha1": "e6d050e091",
-      "lineCount": 2467
+      "sha1": "e6d050e091"
     },
     {
       "path": "js/components/.gitkeep",
@@ -1615,8 +1628,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 33006,
-      "sha1": "03ee7c428c",
-      "lineCount": 1513
+      "sha1": "03ee7c428c"
     },
     {
       "path": "js/numberpad.js",
@@ -1626,8 +1638,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 31407,
-      "sha1": "e2ed75f1f6",
-      "lineCount": 1736
+      "sha1": "e2ed75f1f6"
     },
     {
       "path": "js/quests/cleaning.js",
@@ -1637,8 +1648,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 1,
-      "sha1": "adc83b19e7",
-      "lineCount": 1
+      "sha1": "adc83b19e7"
     },
     {
       "path": "js/quests/daily.js",
@@ -1648,8 +1658,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 7302,
-      "sha1": "68137bb424",
-      "lineCount": 328
+      "sha1": "68137bb424"
     },
     {
       "path": "js/quests/engine.js",
@@ -1659,8 +1668,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 1,
-      "sha1": "adc83b19e7",
-      "lineCount": 1
+      "sha1": "adc83b19e7"
     },
     {
       "path": "js/quests/exercise.js",
@@ -1670,8 +1678,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 1,
-      "sha1": "adc83b19e7",
-      "lineCount": 1
+      "sha1": "adc83b19e7"
     },
     {
       "path": "js/quests/hyakumasu.js",
@@ -1681,8 +1688,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 65712,
-      "sha1": "790ab5b89b",
-      "lineCount": 3600
+      "sha1": "790ab5b89b"
     },
     {
       "path": "js/quests/kanji.js",
@@ -1692,8 +1698,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 1,
-      "sha1": "adc83b19e7",
-      "lineCount": 1
+      "sha1": "adc83b19e7"
     },
     {
       "path": "js/quests/math.js",
@@ -1703,8 +1708,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 43478,
-      "sha1": "70b4e4abb6",
-      "lineCount": 856
+      "sha1": "70b4e4abb6"
     },
     {
       "path": "js/quests/music.js",
@@ -1714,8 +1718,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 1,
-      "sha1": "adc83b19e7",
-      "lineCount": 1
+      "sha1": "adc83b19e7"
     },
     {
       "path": "js/quests/reading.js",
@@ -1725,8 +1728,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 1,
-      "sha1": "adc83b19e7",
-      "lineCount": 1
+      "sha1": "adc83b19e7"
     },
     {
       "path": "js/quests/review.js",
@@ -1735,9 +1737,8 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 50425,
-      "sha1": "598e818c2f",
-      "lineCount": 388
+      "sizeBytes": 62937,
+      "sha1": "eafe3d43b7"
     },
     {
       "path": "js/quests/science.js",
@@ -1747,8 +1748,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 1,
-      "sha1": "adc83b19e7",
-      "lineCount": 1
+      "sha1": "adc83b19e7"
     },
     {
       "path": "js/quests/society.js",
@@ -1758,8 +1758,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 23129,
-      "sha1": "11e1195440",
-      "lineCount": 147
+      "sha1": "11e1195440"
     },
     {
       "path": "js/screens/.gitkeep",
@@ -1779,8 +1778,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 88829,
-      "sha1": "012ecfc8ab",
-      "lineCount": 1468
+      "sha1": "012ecfc8ab"
     },
     {
       "path": "js/screens/musicShop.js",
@@ -1790,8 +1788,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 9338,
-      "sha1": "e7a99015af",
-      "lineCount": 285
+      "sha1": "e7a99015af"
     },
     {
       "path": "js/screens/shop.js",
@@ -1801,8 +1798,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 13211,
-      "sha1": "7d573272e8",
-      "lineCount": 700
+      "sha1": "7d573272e8"
     },
     {
       "path": "js/screens/wardrobe.js",
@@ -1812,8 +1808,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 7616,
-      "sha1": "6f50c51428",
-      "lineCount": 368
+      "sha1": "6f50c51428"
     },
     {
       "path": "js/settings.js",
@@ -1823,8 +1818,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 51210,
-      "sha1": "488c9cb1e4",
-      "lineCount": 3041
+      "sha1": "488c9cb1e4"
     },
     {
       "path": "js/storage.js",
@@ -1834,8 +1828,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 10,
-      "sha1": "b54cc3693d",
-      "lineCount": 1
+      "sha1": "b54cc3693d"
     },
     {
       "path": "js/systems/.gitkeep",
@@ -1855,8 +1848,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 6326,
-      "sha1": "d4a5b2d2e4",
-      "lineCount": 136
+      "sha1": "d4a5b2d2e4"
     },
     {
       "path": "js/systems/dailyDashboard.js",
@@ -1866,8 +1858,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 4853,
-      "sha1": "406794319b",
-      "lineCount": 95
+      "sha1": "406794319b"
     },
     {
       "path": "js/systems/furnitureSystem.js",
@@ -1877,8 +1868,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 10681,
-      "sha1": "4a5649bac0",
-      "lineCount": 202
+      "sha1": "4a5649bac0"
     },
     {
       "path": "js/systems/musicPlayer.js",
@@ -1888,8 +1878,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 9509,
-      "sha1": "2dcbaf9be5",
-      "lineCount": 359
+      "sha1": "2dcbaf9be5"
     },
     {
       "path": "js/systems/owlMessenger.js",
@@ -1899,8 +1888,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 1953,
-      "sha1": "355ffd49a3",
-      "lineCount": 17
+      "sha1": "355ffd49a3"
     },
     {
       "path": "js/systems/questEngine.js",
@@ -1910,8 +1898,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 26486,
-      "sha1": "a0b7a685cf",
-      "lineCount": 1464
+      "sha1": "a0b7a685cf"
     },
     {
       "path": "js/systems/questMusicPlayer.js",
@@ -1921,8 +1908,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 7641,
-      "sha1": "01399d9594",
-      "lineCount": 387
+      "sha1": "01399d9594"
     },
     {
       "path": "manifest.webmanifest",
@@ -1935,15 +1921,14 @@
       "sha1": "57906bcc9e"
     },
     {
-      "path": "README.md",
+      "path": "project-index.json",
       "directory": ".",
-      "name": "README.md",
-      "stem": "README",
-      "extension": ".md",
-      "extensionNormalized": ".md",
-      "sizeBytes": 28,
-      "sha1": "83de97a1fe",
-      "lineCount": 1
+      "name": "project-index.json",
+      "stem": "project-index",
+      "extension": ".json",
+      "extensionNormalized": ".json",
+      "sizeBytes": 118219,
+      "sha1": "775a2d662a"
     },
     {
       "path": "saves/.gitkeep",
@@ -1962,9 +1947,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4504,
-      "sha1": "42ab8c6a12",
-      "lineCount": 177
+      "sizeBytes": 4508,
+      "sha1": "c6509aefb9"
     },
     {
       "path": "tests/.gitkeep",
@@ -1984,633 +1968,689 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 27130,
-      "sha1": "5f78fead5c",
-      "lineCount": 1650
-    },
-    {
-      "path": "UPLOAD_FILES.txt",
-      "directory": ".",
-      "name": "UPLOAD_FILES.txt",
-      "stem": "UPLOAD_FILES",
-      "extension": ".txt",
-      "extensionNormalized": ".txt",
-      "sizeBytes": 208,
-      "sha1": "4c000e6410",
-      "lineCount": 10
+      "sha1": "5f78fead5c"
     }
   ],
   "images": [
     {
       "path": "assets/app-icons/apple-touch-icon.png",
       "directory": "assets/app-icons",
-      "fileName": "apple-touch-icon.png",
+      "name": "apple-touch-icon.png",
       "stem": "apple-touch-icon",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2762520
+      "sizeBytes": 2762520,
+      "sha1": "adbf64a56c"
     },
     {
       "path": "assets/app-icons/icon-192.png",
       "directory": "assets/app-icons",
-      "fileName": "icon-192.png",
+      "name": "icon-192.png",
       "stem": "icon-192",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2762520
+      "sizeBytes": 2762520,
+      "sha1": "adbf64a56c"
     },
     {
       "path": "assets/app-icons/icon-512.png",
       "directory": "assets/app-icons",
-      "fileName": "icon-512.png",
+      "name": "icon-512.png",
       "stem": "icon-512",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2762520
+      "sizeBytes": 2762520,
+      "sha1": "adbf64a56c"
     },
     {
       "path": "assets/backgrounds/guild-hall/guildhall.png",
       "directory": "assets/backgrounds/guild-hall",
-      "fileName": "guildhall.png",
+      "name": "guildhall.png",
       "stem": "guildhall",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 3070695
+      "sizeBytes": 3070695,
+      "sha1": "e29ca5ea2b"
     },
     {
       "path": "assets/backgrounds/guilds/guildhall.png",
       "directory": "assets/backgrounds/guilds",
-      "fileName": "guildhall.png",
+      "name": "guildhall.png",
       "stem": "guildhall",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 3070695
+      "sizeBytes": 3070695,
+      "sha1": "e29ca5ea2b"
     },
     {
       "path": "assets/backgrounds/guilds/guildshop_bg.png",
       "directory": "assets/backgrounds/guilds",
-      "fileName": "guildshop_bg.png",
+      "name": "guildshop_bg.png",
       "stem": "guildshop_bg",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2250433
+      "sizeBytes": 2250433,
+      "sha1": "4cc9022741"
     },
     {
       "path": "assets/backgrounds/home/room.png",
       "directory": "assets/backgrounds/home",
-      "fileName": "room.png",
+      "name": "room.png",
       "stem": "room",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2527510
+      "sizeBytes": 2527510,
+      "sha1": "ca1f544339"
     },
     {
       "path": "assets/backgrounds/special/map_Japan.PNG",
       "directory": "assets/backgrounds/special",
-      "fileName": "map_Japan.PNG",
+      "name": "map_Japan.PNG",
       "stem": "map_Japan",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 344465
+      "sizeBytes": 344465,
+      "sha1": "0ec9c1eaf7"
     },
     {
       "path": "assets/backgrounds/special/map_world.PNG",
       "directory": "assets/backgrounds/special",
-      "fileName": "map_world.PNG",
+      "name": "map_world.PNG",
       "stem": "map_world",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 611771
+      "sizeBytes": 611771,
+      "sha1": "623859a89c"
     },
     {
       "path": "assets/backgrounds/special/mathGuildForest.png",
       "directory": "assets/backgrounds/special",
-      "fileName": "mathGuildForest.png",
+      "name": "mathGuildForest.png",
       "stem": "mathGuildForest",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2615106
+      "sizeBytes": 2615106,
+      "sha1": "bd7a488794"
     },
     {
       "path": "assets/backgrounds/title/title.PNG",
       "directory": "assets/backgrounds/title",
-      "fileName": "title.PNG",
+      "name": "title.PNG",
       "stem": "title",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 2903329
+      "sizeBytes": 2903329,
+      "sha1": "39e2245a7d"
     },
     {
       "path": "assets/characters/masters/math/mathGuildMaster.png",
       "directory": "assets/characters/masters/math",
-      "fileName": "mathGuildMaster.png",
+      "name": "mathGuildMaster.png",
       "stem": "mathGuildMaster",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2473515
+      "sizeBytes": 2473515,
+      "sha1": "d62ad336f5"
     },
     {
       "path": "assets/characters/pet/blackdog_base.PNG",
       "directory": "assets/characters/pet",
-      "fileName": "blackdog_base.PNG",
+      "name": "blackdog_base.PNG",
       "stem": "blackdog_base",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 44211
+      "sizeBytes": 44211,
+      "sha1": "48d5620119"
     },
     {
       "path": "assets/characters/pet/blackdog_calm.PNG",
       "directory": "assets/characters/pet",
-      "fileName": "blackdog_calm.PNG",
+      "name": "blackdog_calm.PNG",
       "stem": "blackdog_calm",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 27889
+      "sizeBytes": 27889,
+      "sha1": "ea7349af7a"
     },
     {
       "path": "assets/characters/pet/blackdog_joy.PNG",
       "directory": "assets/characters/pet",
-      "fileName": "blackdog_joy.PNG",
+      "name": "blackdog_joy.PNG",
       "stem": "blackdog_joy",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 30497
+      "sizeBytes": 30497,
+      "sha1": "9fb0b3d63b"
     },
     {
       "path": "assets/characters/pet/blackdog_sleep.PNG",
       "directory": "assets/characters/pet",
-      "fileName": "blackdog_sleep.PNG",
+      "name": "blackdog_sleep.PNG",
       "stem": "blackdog_sleep",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 28820
+      "sizeBytes": 28820,
+      "sha1": "bd6792b2b5"
     },
     {
       "path": "assets/characters/pet/blanket.PNG",
       "directory": "assets/characters/pet",
-      "fileName": "blanket.PNG",
+      "name": "blanket.PNG",
       "stem": "blanket",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 33143
+      "sizeBytes": 33143,
+      "sha1": "1714625077"
     },
     {
       "path": "assets/characters/pet/dogtoy_ball.PNG",
       "directory": "assets/characters/pet",
-      "fileName": "dogtoy_ball.PNG",
+      "name": "dogtoy_ball.PNG",
       "stem": "dogtoy_ball",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 10233
+      "sizeBytes": 10233,
+      "sha1": "e0148eb630"
     },
     {
       "path": "assets/characters/pet/dogtoy_bone.PNG",
       "directory": "assets/characters/pet",
-      "fileName": "dogtoy_bone.PNG",
+      "name": "dogtoy_bone.PNG",
       "stem": "dogtoy_bone",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 10923
+      "sizeBytes": 10923,
+      "sha1": "f2c74bafaf"
     },
     {
       "path": "assets/characters/pet/dogtoy_rope.PNG",
       "directory": "assets/characters/pet",
-      "fileName": "dogtoy_rope.PNG",
+      "name": "dogtoy_rope.PNG",
       "stem": "dogtoy_rope",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 17116
+      "sizeBytes": 17116,
+      "sha1": "b1a3c3c5a2"
     },
     {
       "path": "assets/characters/player/accessories/neckwarmer_acc.PNG",
       "directory": "assets/characters/player/accessories",
-      "fileName": "neckwarmer_acc.PNG",
+      "name": "neckwarmer_acc.PNG",
       "stem": "neckwarmer_acc",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 120012
+      "sizeBytes": 120012,
+      "sha1": "0f78f0a8e3"
     },
     {
       "path": "assets/characters/player/base/base.png",
       "directory": "assets/characters/player/base",
-      "fileName": "base.png",
+      "name": "base.png",
       "stem": "base",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 677164
+      "sizeBytes": 677164,
+      "sha1": "2c8d6b37d1"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/battle_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "battle_bottoms.PNG",
+      "name": "battle_bottoms.PNG",
       "stem": "battle_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 126198
+      "sizeBytes": 126198,
+      "sha1": "4037aacf06"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/bluejeans_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "bluejeans_bottoms.PNG",
+      "name": "bluejeans_bottoms.PNG",
       "stem": "bluejeans_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 235065
+      "sizeBytes": 235065,
+      "sha1": "f4ff02983e"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/cycling_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "cycling_bottoms.PNG",
+      "name": "cycling_bottoms.PNG",
       "stem": "cycling_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 113223
+      "sizeBytes": 113223,
+      "sha1": "e8f7b18ea6"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/default_bottoms.png",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "default_bottoms.png",
+      "name": "default_bottoms.png",
       "stem": "default_bottoms",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 93998
+      "sizeBytes": 93998,
+      "sha1": "8c39e740a2"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/doctor_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "doctor_bottoms.PNG",
+      "name": "doctor_bottoms.PNG",
       "stem": "doctor_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 164380
+      "sizeBytes": 164380,
+      "sha1": "9705a8f24b"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/kyudo_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "kyudo_bottoms.PNG",
+      "name": "kyudo_bottoms.PNG",
       "stem": "kyudo_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 273572
+      "sizeBytes": 273572,
+      "sha1": "7078c5950a"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/longskirtgrey_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "longskirtgrey_bottoms.PNG",
+      "name": "longskirtgrey_bottoms.PNG",
       "stem": "longskirtgrey_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 182286
+      "sizeBytes": 182286,
+      "sha1": "6fa79be2bd"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/rocknroll_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "rocknroll_bottoms.PNG",
+      "name": "rocknroll_bottoms.PNG",
       "stem": "rocknroll_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 272463
+      "sizeBytes": 272463,
+      "sha1": "62fc220bbb"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/schooluniform_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "schooluniform_bottoms.PNG",
+      "name": "schooluniform_bottoms.PNG",
       "stem": "schooluniform_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 153945
+      "sizeBytes": 153945,
+      "sha1": "38b5fcca50"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/stripe_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "stripe_bottoms.PNG",
+      "name": "stripe_bottoms.PNG",
       "stem": "stripe_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 191936
+      "sizeBytes": 191936,
+      "sha1": "0485f5ed94"
     },
     {
       "path": "assets/characters/player/clothes/bottoms/tennis_bottoms.PNG",
       "directory": "assets/characters/player/clothes/bottoms",
-      "fileName": "tennis_bottoms.PNG",
+      "name": "tennis_bottoms.PNG",
       "stem": "tennis_bottoms",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 100911
+      "sizeBytes": 100911,
+      "sha1": "63c2b60e7f"
     },
     {
       "path": "assets/characters/player/clothes/capes/kokugoguild_capes.PNG",
       "directory": "assets/characters/player/clothes/capes",
-      "fileName": "kokugoguild_capes.PNG",
+      "name": "kokugoguild_capes.PNG",
       "stem": "kokugoguild_capes",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 563425
+      "sizeBytes": 563425,
+      "sha1": "eac79e01f9"
     },
     {
       "path": "assets/characters/player/clothes/capes/rikaguild_capes.PNG",
       "directory": "assets/characters/player/clothes/capes",
-      "fileName": "rikaguild_capes.PNG",
+      "name": "rikaguild_capes.PNG",
       "stem": "rikaguild_capes",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 440253
+      "sizeBytes": 440253,
+      "sha1": "29dec9d437"
     },
     {
       "path": "assets/characters/player/clothes/outer/blackdog_fullset.PNG",
       "directory": "assets/characters/player/clothes/outer",
-      "fileName": "blackdog_fullset.PNG",
+      "name": "blackdog_fullset.PNG",
       "stem": "blackdog_fullset",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 543638
+      "sizeBytes": 543638,
+      "sha1": "234e280c95"
     },
     {
       "path": "assets/characters/player/clothes/outer/cloudstrife_outerset.PNG",
       "directory": "assets/characters/player/clothes/outer",
-      "fileName": "cloudstrife_outerset.PNG",
+      "name": "cloudstrife_outerset.PNG",
       "stem": "cloudstrife_outerset",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 653911
+      "sizeBytes": 653911,
+      "sha1": "1d06b77e84"
     },
     {
       "path": "assets/characters/player/clothes/shoes/doctor_shoes.PNG",
       "directory": "assets/characters/player/clothes/shoes",
-      "fileName": "doctor_shoes.PNG",
+      "name": "doctor_shoes.PNG",
       "stem": "doctor_shoes",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 81801
+      "sizeBytes": 81801,
+      "sha1": "539e03c4b1"
     },
     {
       "path": "assets/characters/player/clothes/shoes/kyudo_shoes.PNG",
       "directory": "assets/characters/player/clothes/shoes",
-      "fileName": "kyudo_shoes.PNG",
+      "name": "kyudo_shoes.PNG",
       "stem": "kyudo_shoes",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 64821
+      "sizeBytes": 64821,
+      "sha1": "52b6f78dbb"
     },
     {
       "path": "assets/characters/player/clothes/shoes/schooluniform_shoes.PNG",
       "directory": "assets/characters/player/clothes/shoes",
-      "fileName": "schooluniform_shoes.PNG",
+      "name": "schooluniform_shoes.PNG",
       "stem": "schooluniform_shoes",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 213872
+      "sizeBytes": 213872,
+      "sha1": "0dfe2404b6"
     },
     {
       "path": "assets/characters/player/clothes/tops/battle_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "battle_tops.PNG",
+      "name": "battle_tops.PNG",
       "stem": "battle_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 206349
+      "sizeBytes": 206349,
+      "sha1": "6927a90913"
     },
     {
       "path": "assets/characters/player/clothes/tops/border_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "border_tops.PNG",
+      "name": "border_tops.PNG",
       "stem": "border_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 220710
+      "sizeBytes": 220710,
+      "sha1": "826b51c45b"
     },
     {
       "path": "assets/characters/player/clothes/tops/cycling_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "cycling_tops.PNG",
+      "name": "cycling_tops.PNG",
       "stem": "cycling_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 192703
+      "sizeBytes": 192703,
+      "sha1": "f35a26c80d"
     },
     {
       "path": "assets/characters/player/clothes/tops/default_tops.png",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "default_tops.png",
+      "name": "default_tops.png",
       "stem": "default_tops",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 148876
+      "sizeBytes": 148876,
+      "sha1": "1be8f0c625"
     },
     {
       "path": "assets/characters/player/clothes/tops/doctor_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "doctor_tops.PNG",
+      "name": "doctor_tops.PNG",
       "stem": "doctor_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 355110
+      "sizeBytes": 355110,
+      "sha1": "66f97ffb76"
     },
     {
       "path": "assets/characters/player/clothes/tops/foody_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "foody_tops.PNG",
+      "name": "foody_tops.PNG",
       "stem": "foody_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 191507
+      "sizeBytes": 191507,
+      "sha1": "78097be31a"
     },
     {
       "path": "assets/characters/player/clothes/tops/kyudo_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "kyudo_tops.PNG",
+      "name": "kyudo_tops.PNG",
       "stem": "kyudo_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 271667
+      "sizeBytes": 271667,
+      "sha1": "42e5be04e0"
     },
     {
       "path": "assets/characters/player/clothes/tops/lightning_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "lightning_tops.PNG",
+      "name": "lightning_tops.PNG",
       "stem": "lightning_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 199244
+      "sizeBytes": 199244,
+      "sha1": "e7e4b9992d"
     },
     {
       "path": "assets/characters/player/clothes/tops/mountainparker_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "mountainparker_tops.PNG",
+      "name": "mountainparker_tops.PNG",
       "stem": "mountainparker_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 241605
+      "sizeBytes": 241605,
+      "sha1": "ea6cb63540"
     },
     {
       "path": "assets/characters/player/clothes/tops/rocknroll_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "rocknroll_tops.PNG",
+      "name": "rocknroll_tops.PNG",
       "stem": "rocknroll_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 228515
+      "sizeBytes": 228515,
+      "sha1": "9740f332f1"
     },
     {
       "path": "assets/characters/player/clothes/tops/schooluniform_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "schooluniform_tops.PNG",
+      "name": "schooluniform_tops.PNG",
       "stem": "schooluniform_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 245944
+      "sizeBytes": 245944,
+      "sha1": "6b767ea5a9"
     },
     {
       "path": "assets/characters/player/clothes/tops/schooluniformsummer_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "schooluniformsummer_tops.PNG",
+      "name": "schooluniformsummer_tops.PNG",
       "stem": "schooluniformsummer_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 190726
+      "sizeBytes": 190726,
+      "sha1": "522cb041a4"
     },
     {
       "path": "assets/characters/player/clothes/tops/tennis_tops.PNG",
       "directory": "assets/characters/player/clothes/tops",
-      "fileName": "tennis_tops.PNG",
+      "name": "tennis_tops.PNG",
       "stem": "tennis_tops",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 182043
+      "sizeBytes": 182043,
+      "sha1": "a6cf12b6b9"
     },
     {
       "path": "assets/characters/player/head/glasses_head.PNG",
       "directory": "assets/characters/player/head",
-      "fileName": "glasses_head.PNG",
+      "name": "glasses_head.PNG",
       "stem": "glasses_head",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 177513
+      "sizeBytes": 177513,
+      "sha1": "91d9b2183b"
     },
     {
       "path": "assets/characters/player/head/google_head.PNG",
       "directory": "assets/characters/player/head",
-      "fileName": "google_head.PNG",
+      "name": "google_head.PNG",
       "stem": "google_head",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 175279
-    },
-    {
-      "path": "assets/items/furniture/bookshelf.PNG",
-      "directory": "assets/items/furniture",
-      "fileName": "bookshelf.PNG",
-      "stem": "bookshelf",
-      "extension": ".PNG",
-      "extensionNormalized": ".png",
-      "sizeBytes": 106656
-    },
-    {
-      "path": "assets/items/furniture/chair.PNG",
-      "directory": "assets/items/furniture",
-      "fileName": "chair.PNG",
-      "stem": "chair",
-      "extension": ".PNG",
-      "extensionNormalized": ".png",
-      "sizeBytes": 261271
+      "sizeBytes": 175279,
+      "sha1": "f5eae5cdd1"
     },
     {
       "path": "assets/items/furniture/GuildTableClock.PNG",
       "directory": "assets/items/furniture",
-      "fileName": "GuildTableClock.PNG",
+      "name": "GuildTableClock.PNG",
       "stem": "GuildTableClock",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 78168
+      "sizeBytes": 78168,
+      "sha1": "8c265d3de3"
+    },
+    {
+      "path": "assets/items/furniture/bookshelf.PNG",
+      "directory": "assets/items/furniture",
+      "name": "bookshelf.PNG",
+      "stem": "bookshelf",
+      "extension": ".PNG",
+      "extensionNormalized": ".png",
+      "sizeBytes": 106656,
+      "sha1": "db16bf0013"
+    },
+    {
+      "path": "assets/items/furniture/chair.PNG",
+      "directory": "assets/items/furniture",
+      "name": "chair.PNG",
+      "stem": "chair",
+      "extension": ".PNG",
+      "extensionNormalized": ".png",
+      "sizeBytes": 261271,
+      "sha1": "d2ebfc4d9f"
     },
     {
       "path": "assets/items/furniture/magicBroom.PNG",
       "directory": "assets/items/furniture",
-      "fileName": "magicBroom.PNG",
+      "name": "magicBroom.PNG",
       "stem": "magicBroom",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 75140
+      "sizeBytes": 75140,
+      "sha1": "1e124089b7"
     },
     {
       "path": "assets/items/furniture/magicCircle.PNG",
       "directory": "assets/items/furniture",
-      "fileName": "magicCircle.PNG",
+      "name": "magicCircle.PNG",
       "stem": "magicCircle",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 124238
+      "sizeBytes": 124238,
+      "sha1": "c9a3866946"
     },
     {
       "path": "assets/items/furniture/magicCrystal.PNG",
       "directory": "assets/items/furniture",
-      "fileName": "magicCrystal.PNG",
+      "name": "magicCrystal.PNG",
       "stem": "magicCrystal",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 65478
+      "sizeBytes": 65478,
+      "sha1": "952b2461ef"
     },
     {
       "path": "assets/items/furniture/staffofLightning.PNG",
       "directory": "assets/items/furniture",
-      "fileName": "staffofLightning.PNG",
+      "name": "staffofLightning.PNG",
       "stem": "staffofLightning",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 103574
+      "sizeBytes": 103574,
+      "sha1": "50792e25b0"
     },
     {
       "path": "assets/items/furniture/starGlobe.PNG",
       "directory": "assets/items/furniture",
-      "fileName": "starGlobe.PNG",
+      "name": "starGlobe.PNG",
       "stem": "starGlobe",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 96816
+      "sizeBytes": 96816,
+      "sha1": "4a93b2804e"
     },
     {
       "path": "assets/items/furniture/wisemenDesk.PNG",
       "directory": "assets/items/furniture",
-      "fileName": "wisemenDesk.PNG",
+      "name": "wisemenDesk.PNG",
       "stem": "wisemenDesk",
       "extension": ".PNG",
       "extensionNormalized": ".png",
-      "sizeBytes": 364866
+      "sizeBytes": 364866,
+      "sha1": "e5aab7a41c"
     },
     {
       "path": "assets/ui/buttons/numberpad_bg.png",
       "directory": "assets/ui/buttons",
-      "fileName": "numberpad_bg.png",
+      "name": "numberpad_bg.png",
       "stem": "numberpad_bg",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2635279
+      "sizeBytes": 2635279,
+      "sha1": "8a2dfcda50"
     },
     {
       "path": "assets/ui/buttons/wood_button.png",
       "directory": "assets/ui/buttons",
-      "fileName": "wood_button.png",
+      "name": "wood_button.png",
       "stem": "wood_button",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 1990592
+      "sizeBytes": 1990592,
+      "sha1": "be71fb72b9"
     },
     {
       "path": "assets/ui/buttons/wood_button_pressed.png",
       "directory": "assets/ui/buttons",
-      "fileName": "wood_button_pressed.png",
+      "name": "wood_button_pressed.png",
       "stem": "wood_button_pressed",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2405205
+      "sizeBytes": 2405205,
+      "sha1": "631b0aabfe"
     },
     {
       "path": "assets/ui/buttons/wood_panel.png",
       "directory": "assets/ui/buttons",
-      "fileName": "wood_panel.png",
+      "name": "wood_panel.png",
       "stem": "wood_panel",
       "extension": ".png",
       "extensionNormalized": ".png",
-      "sizeBytes": 2267704
+      "sizeBytes": 2267704,
+      "sha1": "1d30cfee6a"
     }
   ],
   "entrypoints": {
@@ -3561,7 +3601,16 @@
     {
       "status": "M",
       "paths": [
-        "js/quests/review.js"
+        "css/layout.css",
+        "js/quests/review.js",
+        "index.html",
+        "service-worker.js",
+        "docs/GPT_HANDOFF.md",
+        "docs/development-log.md",
+        "docs/PROJECT_STATE.json",
+        "docs/GPT_PROJECT_STATE.md",
+        "UPLOAD_FILES.txt",
+        "project-index.json"
       ]
     }
   ],
@@ -3611,5 +3660,16 @@
     ],
     "newThreadOpeningMessage": "夏休みギルドの開発を続けます。最初にproject-index.jsonを最後まで読み、次に今回の改修対象と関連ファイルを確認してください。既存API・ファイル名・画像拡張子を推測で扱わず、iPad Safari前提で進めてください。大きな完成ファイルはZIPで渡してください。",
     "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。"
+  },
+  "latestImplementation": {
+    "date": "2026-07-27",
+    "title": "ギルドホール配置・社会農業問題・復習終了安定化",
+    "version": "20260727-social-agriculture-layout-v2",
+    "changes": [
+      "今日のクエストをデイリーボード直下へ移動",
+      "デイリーボード7行の高さと余白を拡大",
+      "復習キュー0件後の結果画面遷移を安定化",
+      "社会プリント③（食料自給率・農業・生産量・出荷時期）を追加"
+    ]
   }
 }
