@@ -123,6 +123,72 @@ const SOCIAL_PRINT_2_QUESTIONS = {
   ]
 };
 
+
+/* 塾プリント③（食料自給率・農業・都道府県別生産・キャベツ出荷） */
+function foodSelfSufficiencyVisual(){
+  return `<figure class="social-material social-data-table"><table><thead><tr><th></th><th>1980年</th><th>2000年</th><th>2020年</th><th>2023年</th></tr></thead><tbody>
+  <tr><th>米</th><td>100</td><td>95</td><td>97</td><td>99</td></tr>
+  <tr><th>小麦</th><td>10</td><td>11</td><td>15</td><td>17</td></tr>
+  <tr><th>大豆</th><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+  <tr><th>野菜</th><td>97</td><td>81</td><td>80</td><td>80</td></tr>
+  <tr><th>果実</th><td>81</td><td>44</td><td>38</td><td>38</td></tr>
+  <tr><th>肉類</th><td>81</td><td>52</td><td>53</td><td>53</td></tr>
+  </tbody></table><figcaption>食料自給率（単位：％）</figcaption></figure>`;
+}
+function farmRankingVisual(){
+  return `<figure class="social-material social-data-table social-ranking-table"><table><thead><tr><th></th><th>レタス</th><th>トマト</th><th>日本なし</th><th>りんご</th><th>米</th></tr></thead><tbody>
+  <tr><th>1位</th><td>長野県</td><td>熊本県</td><td>千葉県</td><td>青森県</td><td>新潟県</td></tr>
+  <tr><th>2位</th><td>茨城県</td><td>北海道</td><td>茨城県</td><td>長野県</td><td>北海道</td></tr>
+  <tr><th>3位</th><td>群馬県</td><td>愛知県</td><td>栃木県</td><td>岩手県</td><td>秋田県</td></tr>
+  <tr><th>4位</th><td>長崎県</td><td>千葉県</td><td>福島県</td><td>山形県</td><td>宮城県</td></tr>
+  <tr><th>5位</th><td>兵庫県</td><td>栃木県</td><td>鳥取県</td><td>福島県</td><td>福島県</td></tr>
+  </tbody></table><figcaption>都道府県別の生産量上位（プリント資料を単独問題用に整理）</figcaption></figure>`;
+}
+function prefectureShapeVisual(kind){
+  const paths={
+    nagano:"M70 8 L105 28 L98 58 L116 86 L91 115 L97 151 L70 174 L43 154 L49 120 L28 95 L40 62 L31 34 Z",
+    hokkaido:"M18 74 L43 54 L47 18 L68 37 L91 34 L111 48 L151 38 L178 52 L151 70 L126 83 L112 106 L78 104 L53 92 Z",
+    chiba:"M51 12 L92 25 L105 58 L93 88 L75 103 L80 138 L57 168 L42 143 L48 109 L30 84 L37 53 Z",
+    ibaraki:"M64 8 L91 23 L98 54 L87 79 L101 105 L83 137 L91 166 L57 174 L45 145 L51 112 L35 87 L43 52 L31 28 Z"
+  };
+  const labels={nagano:"長野県",hokkaido:"北海道",chiba:"千葉県",ibaraki:"茨城県"};
+  return `<figure class="social-material social-shape-card"><svg viewBox="0 0 200 190" role="img" aria-label="${labels[kind]}の形"><path d="${paths[kind]}"></path></svg><figcaption>この都道府県の形はどれ？</figcaption></figure>`;
+}
+function cabbageShipmentVisual(){
+  const a=[9200,8900,11000,8000,2700,1300,500,400,600,900,3500,6500];
+  const n=[0,0,0,0,100,400,1200,700,1100,300,0,0];
+  const max=12000;
+  const bars=a.map((v,i)=>`<div class="cabbage-month"><div class="cabbage-bars"><i class="aichi" style="height:${Math.max(2,v/max*100)}%"></i><i class="nagano" style="height:${Math.max(2,n[i]/max*100)}%"></i></div><b>${i+1}月</b></div>`).join("");
+  return `<figure class="social-material social-cabbage-chart"><div class="cabbage-legend"><span><i class="aichi"></i>愛知県</span><span><i class="nagano"></i>長野県</span></div><div class="cabbage-plot">${bars}</div><figcaption>東京へのキャベツの月別出荷量（資料の特徴を再現）</figcaption></figure>`;
+}
+
+const SOCIAL_PRINT_3_QUESTIONS = {
+  basic: [
+    {q:"表を見て、2023年の食料自給率が最も高いものはどれですか。",a:"米",choices:["米","野菜","果実","肉類"],visual:foodSelfSufficiencyVisual(),why:"2023年は米が99％で、表の中で最も高くなっています。"},
+    {q:"表のイ（1980年10％、2023年17％）にあてはまる食料はどれですか。",a:"小麦",choices:["野菜","果物","小麦","大豆"],visual:foodSelfSufficiencyVisual(),why:"小麦の自給率は1980年10％から2023年17％へ変化しています。"},
+    {q:"表のウ（1980年4％、2023年7％）にあてはまる食料はどれですか。",a:"大豆",choices:["野菜","果物","小麦","大豆"],visual:foodSelfSufficiencyVisual(),why:"大豆の自給率は表の中でも特に低く、2023年は7％です。"},
+    {q:"地元で生産された農作物を、なるべく地元で消費する取り組みを何といいますか。",a:"地産地消",choices:["地産地消","促成栽培","抑制栽培","集約農業"],why:"地元で生産し、地元で消費することを地産地消といいます。"},
+    {q:"外国からの輸入にたよりすぎると起こりうる問題として正しいものはどれですか。",a:"戦争や天候不順のとき輸入しにくくなる",choices:["国内の農地が必ず増える","戦争や天候不順のとき輸入しにくくなる","食料自給率が必ず100％になる","輸送費が必ずゼロになる"],why:"輸入先で戦争や天候不順が起きると、必要な農作物を輸入できないおそれがあります。"},
+    {q:"せまい耕地で、農薬や肥料などを使って多くの収穫をあげる農業を何といいますか。",a:"集約農業",choices:["集約農業","粗放農業","遊牧","焼畑農業"],why:"限られた土地に労働力や肥料などを多く投入する農業を集約農業といいます。"}
+  ],
+  standard: [
+    {q:"資料を見て、レタスの生産量が第1位の都道府県はどこですか。",a:"長野県",choices:["長野県","群馬県","長崎県","兵庫県"],visual:farmRankingVisual(),why:"レタスの第1位は長野県です。"},
+    {q:"資料を見て、トマトの生産量が第1位の都道府県はどこですか。",a:"熊本県",choices:["熊本県","北海道","愛知県","栃木県"],visual:farmRankingVisual(),why:"トマトの第1位は熊本県です。"},
+    {q:"資料を見て、りんごの生産量が第1位の都道府県はどこですか。",a:"青森県",choices:["青森県","長野県","岩手県","山形県"],visual:farmRankingVisual(),why:"りんごの第1位は青森県です。"},
+    {q:"資料を見て、米の生産量が第1位の都道府県はどこですか。",a:"新潟県",choices:["新潟県","北海道","秋田県","宮城県"],visual:farmRankingVisual(),why:"米の第1位は新潟県です。"},
+    {q:"長野県の高原でレタスなどの栽培が盛んな理由はどれですか。",a:"夏でもすずしい気候を利用できるから",choices:["冬に雪が多く降るから","夏でもすずしい気候を利用できるから","一年中台風が多いから","平地が非常に広いから"],visual:prefectureShapeVisual("nagano"),why:"長野県の高原では、夏のすずしい気候を利用して野菜を栽培します。"},
+    {q:"千葉県と茨城県の間を流れ、日本で2番目に長く、流域面積が第1位の川は何ですか。",a:"利根川",choices:["利根川","信濃川","石狩川","筑後川"],why:"利根川は長さが日本第2位で、流域面積は日本第1位です。"}
+  ],
+  challenge: [
+    {q:"グラフを見て、長野県産キャベツの出荷が多くなる時期はいつですか。",a:"夏から秋",choices:["冬から春","春だけ","夏から秋","一年中同じ"],visual:cabbageShipmentVisual(),why:"長野県では高原のすずしい気候を利用し、夏から秋に出荷量が増えます。"},
+    {q:"グラフを見て、愛知県産キャベツの出荷が多い時期として最も適切なものはどれですか。",a:"冬から春",choices:["冬から春","夏だけ","秋だけ","一年中同じ"],visual:cabbageShipmentVisual(),why:"愛知県は冬から春にかけての出荷量が多くなっています。"},
+    {q:"夏でもすずしい高原の気候を利用し、出荷時期をずらす栽培を何といいますか。",a:"抑制栽培",choices:["促成栽培","抑制栽培","二期作","輪作"],why:"高冷地のすずしさを利用して生育を遅らせ、出荷時期をずらすのが抑制栽培です。"},
+    {q:"暖かい気候やビニールハウスを利用して、出荷時期を早める栽培を何といいますか。",a:"促成栽培",choices:["促成栽培","抑制栽培","二毛作","酪農"],why:"暖かさを利用して生育を早め、早い時期に出荷するのが促成栽培です。"},
+    {q:"食料自給率の表から読み取れることとして正しいものはどれですか。",a:"果実の自給率は1980年より大きく低下している",choices:["米は2023年に50％を下回った","果実の自給率は1980年より大きく低下している","大豆は2023年に80％を超えた","すべての食料の自給率が上昇した"],visual:foodSelfSufficiencyVisual(),why:"果実は1980年81％から2023年38％へ大きく低下しています。"},
+    {q:"輸入農作物と競争するために、日本の農業で重要な取り組みはどれですか。",a:"安全性や品質を高め、地域の特色を生かす",choices:["農地をすべて手放す","安全性や品質を高め、地域の特色を生かす","国内生産をすべてやめる","農作物の種類を一つだけにする"],why:"安全性や品質、地域ブランドなどを高めることが、日本の農業を支える取り組みになります。"}
+  ]
+};
+
 let reviewState = null;
 let reviewMemo = { open:false, strokes:[], active:null, context:null };
 
@@ -218,6 +284,9 @@ function installReviewStyles() {
   .social-calendar{padding:9px;background:#fff9e8}.calendar-months{display:grid;grid-template-columns:repeat(9,1fr);font-size:12px;text-align:center;border:1px solid #7c654d}.calendar-months>*{padding:4px;border-right:1px solid #7c654d}.calendar-tasks{position:relative;height:92px;border:1px solid #7c654d;border-top:0;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(11.111% - 1px),rgba(124,101,77,.35) calc(11.111% - 1px),rgba(124,101,77,.35) 11.111%)}.calendar-tasks .task{position:absolute;font-size:11px;font-weight:800;writing-mode:vertical-rl;line-height:1.1}.seed{left:2%;top:5px}.plow{left:22%;top:6px}.marker-a{left:31%;top:6px;font-size:20px!important;color:#8b2d22}.marker-i{left:36%;top:35px;font-size:20px!important;color:#8b2d22}.marker-u{left:64%;top:34px;font-size:20px!important;color:#8b2d22}.marker-e{left:84%;top:35px;font-size:20px!important;color:#8b2d22}.plant{left:43%;top:6px}.water{left:54%;top:6px}.reap{left:74%;top:6px}.marker-star{left:80%;top:5px;font-size:20px!important;color:#8b2d22}.dry{left:88%;top:5px}
   .social-rice-bars{height:210px;padding:12px 14px 28px;display:flex;align-items:flex-end;justify-content:center;gap:14px;background:#fff9e8}.rice-bar{position:relative;width:52px;height:calc(var(--h)*1.45px);border:2px solid #65513d;background:linear-gradient(#7d674f,#c5ac88)}.rice-bar.x{background:linear-gradient(#5b4938,#9b7a55)}.rice-bar.other{margin-left:14px}.rice-bar b{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:11px;white-space:nowrap}.rice-bar span{position:absolute;top:-18px;width:100%;text-align:center;font-size:10px}.social-rice-bars figcaption{position:absolute;right:10px;bottom:4px;font-size:9px;color:#66594a}
   .social-trend-chart{padding:8px;background:#fff9e8}.social-trend-chart svg{display:block;width:100%;height:auto}.social-trend-chart .grid line{stroke:#6c5b49;stroke-width:2}.social-trend-chart .stock-bars rect{fill:#89725a}.social-trend-chart .line-a,.social-trend-chart .line-b{fill:none;stroke-width:4}.social-trend-chart .line-a{stroke:#47372b}.social-trend-chart .line-b{stroke:#826244}.social-trend-chart text{font-weight:900;font-size:20px;fill:#4a2f1d}.social-trend-chart figcaption{text-align:center;font-size:11px;color:#66594a}
+  .social-data-table{padding:8px;background:#fff9e8;overflow:auto}.social-data-table table{width:100%;border-collapse:collapse;font-size:clamp(11px,1.8vw,16px);background:#fff}.social-data-table th,.social-data-table td{border:1px solid #705842;padding:5px 7px;text-align:center}.social-data-table thead th,.social-data-table tbody th{background:#ead9b7;font-weight:900}.social-data-table figcaption,.social-shape-card figcaption,.social-cabbage-chart figcaption{text-align:center;margin-top:5px;font-size:11px;color:#66594a}.social-ranking-table{width:min(100%,720px)}
+  .social-shape-card{width:min(48%,300px);padding:8px;background:#fff9e8}.social-shape-card svg{display:block;width:100%;max-height:220px}.social-shape-card path{fill:#b9b1a4;stroke:#544b40;stroke-width:4}
+  .social-cabbage-chart{padding:10px;background:#fff9e8}.cabbage-legend{display:flex;justify-content:flex-end;gap:15px;font-size:11px;font-weight:800}.cabbage-legend span{display:flex;align-items:center;gap:4px}.cabbage-legend i{display:inline-block;width:13px;height:13px}.cabbage-legend .aichi,.cabbage-bars .aichi{background:#574434}.cabbage-legend .nagano,.cabbage-bars .nagano{background:#fff;border:2px solid #574434}.cabbage-plot{height:210px;display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:end;border-left:2px solid #604b38;border-bottom:2px solid #604b38;padding:10px 4px 0}.cabbage-month{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}.cabbage-bars{height:calc(100% - 22px);width:100%;display:flex;align-items:flex-end;justify-content:center;gap:1px}.cabbage-bars i{display:block;width:42%;min-height:2px}.cabbage-month b{height:20px;font-size:9px;white-space:nowrap}
   .review-choice-grid.is-multiple button{display:flex;align-items:center;gap:10px;text-align:left}.review-choice-grid button.selected{background:#e8f3d8;border-color:#4f7b35;box-shadow:inset 0 0 0 2px #91b876}.choice-check{min-width:24px;font-size:22px;color:#4f7b35}.review-phase-badge{display:inline-block;margin-right:8px;padding:3px 9px;border-radius:999px;background:#7f3428;color:#fff}.review-feedback,.review-training-intro{text-align:center;max-width:650px;margin:auto}.feedback-symbol{font-size:72px;line-height:1;font-weight:900}.review-feedback.is-correct .feedback-symbol{color:#367c3f}.review-feedback.is-wrong .feedback-symbol{color:#a33127}.feedback-answer,.feedback-explanation{margin:15px auto;padding:15px;border:3px solid #9b7048;border-radius:13px;background:#fff;text-align:left}.feedback-answer{display:flex;align-items:center;justify-content:space-between;gap:20px}.feedback-answer span{font-size:clamp(22px,4vw,34px);font-weight:900;color:#8d2c22}.feedback-explanation p{margin:8px 0 0;font-size:18px;line-height:1.6}.feedback-short{font-size:20px}.review-training-intro strong{font-size:1.3em;color:#8d2c22}
   @media(max-width:640px){.review-grid,.review-levels,.review-choice-grid{grid-template-columns:1fr}.review-wrap{padding:8px}.review-panel{padding:12px}.review-question{min-height:auto}}
   `; document.head.appendChild(s);
@@ -239,13 +308,13 @@ function createSubjectHtml(){return `<div class="review-wrap"><section class="re
 function bindSubjectEvents(){document.querySelector("[data-review-subject='math']")?.addEventListener("click",showMathUnits); document.querySelector("[data-review-subject='social']")?.addEventListener("click",showSocialUnits); document.querySelector("[data-review-board]")?.addEventListener("click",()=>{stopReviewTrainingMusic(); if(typeof changeScreen==="function") changeScreen("questboard");});}
 function showMathUnits(){const c=document.getElementById("questContainer"); c.classList.remove("review-quiz-container"); c.innerHTML=`<div class="review-wrap"><section class="review-panel"><header class="review-head"><p class="review-badge">算数</p><h2>単元を選ぶ</h2><p class="review-sub">塾で学んだところも、未来への投資も、自由に選べます。</p></header><div class="review-grid"><article class="review-card available" data-review-unit="unit_average"><h3>単位量・平均</h3><p>平均、1あたりの量、人口密度など</p><span class="review-badge">${historyText("unit_average")}</span></article></div><button class="review-back" data-review-subjects>教科選択へ戻る</button></section></div>`; document.querySelector("[data-review-unit]")?.addEventListener("click",()=>showReviewLevels("unit_average")); document.querySelector("[data-review-subjects]")?.addEventListener("click",()=>openReviewTraining({ restart:false }));}
 
-function showSocialUnits(){const c=document.getElementById("questContainer"); c.classList.remove("review-quiz-container"); c.innerHTML=`<div class="review-wrap"><section class="review-panel"><header class="review-head"><p class="review-badge">社会</p><h2>単元を選ぶ</h2><p class="review-sub">社会ギルドで一度出会った問題と、別の場所でもう一度再会します。</p></header><div class="review-grid"><article class="review-card available" data-review-unit="social_world"><h3>世界のすがた</h3><p>夏期講習 確認テスト①・②／世界・日本の国土・米づくり</p><span class="review-badge">${historyText("social_world")}</span></article></div><button class="review-back" data-review-subjects>教科選択へ戻る</button></section></div>`; document.querySelector("[data-review-unit]")?.addEventListener("click",()=>showReviewLevels("social_world")); document.querySelector("[data-review-subjects]")?.addEventListener("click",()=>openReviewTraining({ restart:false }));}
-function getReviewUnit(unitId){if(unitId!=="social_world")return REVIEW_QUESTIONS[unitId];return {title:"社会プリント①・②",questions:getSocialReviewLevels()};}
+function showSocialUnits(){const c=document.getElementById("questContainer"); c.classList.remove("review-quiz-container"); c.innerHTML=`<div class="review-wrap"><section class="review-panel"><header class="review-head"><p class="review-badge">社会</p><h2>単元を選ぶ</h2><p class="review-sub">社会ギルドで一度出会った問題と、別の場所でもう一度再会します。</p></header><div class="review-grid"><article class="review-card available" data-review-unit="social_world"><h3>世界のすがた</h3><p>夏期講習 確認テスト①〜③／世界・日本の国土・農業</p><span class="review-badge">${historyText("social_world")}</span></article></div><button class="review-back" data-review-subjects>教科選択へ戻る</button></section></div>`; document.querySelector("[data-review-unit]")?.addEventListener("click",()=>showReviewLevels("social_world")); document.querySelector("[data-review-subjects]")?.addEventListener("click",()=>openReviewTraining({ restart:false }));}
+function getReviewUnit(unitId){if(unitId!=="social_world")return REVIEW_QUESTIONS[unitId];return {title:"社会プリント①〜③",questions:getSocialReviewLevels()};}
 function getSocialReviewLevels(){
   return {
-    basic:[...SOCIAL_PRINT_1_QUESTIONS.basic,...SOCIAL_PRINT_2_QUESTIONS.basic],
-    standard:[...SOCIAL_PRINT_1_QUESTIONS.standard,...SOCIAL_PRINT_2_QUESTIONS.standard],
-    challenge:[...SOCIAL_PRINT_1_QUESTIONS.challenge,...SOCIAL_PRINT_2_QUESTIONS.challenge]
+    basic:[...SOCIAL_PRINT_1_QUESTIONS.basic,...SOCIAL_PRINT_2_QUESTIONS.basic,...SOCIAL_PRINT_3_QUESTIONS.basic],
+    standard:[...SOCIAL_PRINT_1_QUESTIONS.standard,...SOCIAL_PRINT_2_QUESTIONS.standard,...SOCIAL_PRINT_3_QUESTIONS.standard],
+    challenge:[...SOCIAL_PRINT_1_QUESTIONS.challenge,...SOCIAL_PRINT_2_QUESTIONS.challenge,...SOCIAL_PRINT_3_QUESTIONS.challenge]
   };
 }
 function showReviewLevels(unitId){
@@ -335,7 +404,12 @@ function advanceReviewAfterFeedback(ok){
     const q=s.reviewQueue.splice(s.index,1)[0];
     s.reviewQueue.push(q);
   }
-  if(!s.reviewQueue.length){finishReviewQuiz();return;}
+  if(!s.reviewQueue.length){
+    s.phase="finishing";
+    s.index=0;
+    finishReviewQuiz();
+    return;
+  }
   if(s.index>=s.reviewQueue.length)s.index=0;
   renderReviewQuestion();
 }
@@ -346,7 +420,17 @@ function showReviewTrainingIntro(){
   c.querySelector("[data-review-training-start]")?.addEventListener("click",renderReviewQuestion);
 }
 async function finishReviewQuiz(){
-  const s=reviewState,correct=s.initialAnswers.filter(x=>x.ok).length,elapsed=Math.max(1,Math.ceil((Date.now()-s.startedAt)/1000)),accuracy=Math.round(correct/5*100);
+  const s=reviewState;
+  if(!s || s.finishing) return;
+  s.finishing=true;
+  s.phase="finishing";
+  const c=s.context?.getContainer?.();
+  if(c){
+    c.innerHTML=`<div class="review-wrap"><section class="review-panel review-training-intro"><p class="review-badge">COMPLETE</p><h2>復習の修行を完了しました</h2><p>全問理解を確認しました。結果を集計しています。</p></section></div>`;
+  }
+  const correct=s.initialAnswers.filter(x=>x.ok).length;
+  const elapsed=Math.max(1,Math.ceil((Date.now()-s.startedAt)/1000));
+  const accuracy=Math.round(correct/5*100);
   const baseReward=correct;
   const bonus=claimReviewBonus(s.unitId,s.level);
   const totalReward=baseReward+bonus;
@@ -361,7 +445,17 @@ async function finishReviewQuiz(){
     `本日初回ボーナス：${bonus}GP`,
     `合計：${totalReward}GP`
   ];
-  await s.context.complete({isPerfect:correct===5,correctCount:correct,totalQuestions:5,elapsedSeconds:elapsed,rewardOverride:totalReward,performanceRewardOverride:baseReward,accuracyPercent:accuracy,reviewBonus:bonus,message:lines.join("\n")});
+  try{
+    if(!s.context || typeof s.context.complete!=="function") throw new Error("クエスト完了処理が見つかりません。");
+    await s.context.complete({isPerfect:correct===5,correctCount:correct,totalQuestions:5,elapsedSeconds:elapsed,rewardOverride:totalReward,performanceRewardOverride:baseReward,accuracyPercent:accuracy,reviewBonus:bonus,message:lines.join("\n")});
+  }catch(error){
+    console.error("ふりかえりの修行の結果表示に失敗しました。",error);
+    s.finishing=false;
+    if(c){
+      c.innerHTML=`<div class="review-wrap"><section class="review-panel review-feedback is-wrong"><h2>結果画面を開けませんでした</h2><p>GPと修行記録は保存されています。クエストボードへ戻ってください。</p><div class="review-actions"><button type="button" class="primary" data-review-fallback-back>クエストボードへ戻る</button></div></section></div>`;
+      c.querySelector("[data-review-fallback-back]")?.addEventListener("click",()=>{stopReviewTrainingMusic();if(typeof changeScreen==="function")changeScreen("questboard");});
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
