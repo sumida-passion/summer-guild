@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-27T02:01:34.492695+00:00",
-    "commit": "735911e",
+    "atUtc": "2026-07-27T02:02:05.902857+00:00",
+    "commit": "bcd4c23",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 24,
-    "totalBytes": 97051379,
+    "totalBytes": 97059185,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1735,9 +1735,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 42619,
-      "sha1": "ab305d6a64",
-      "lineCount": 302
+      "sizeBytes": 50425,
+      "sha1": "598e818c2f",
+      "lineCount": 388
     },
     {
       "path": "js/quests/science.js",
@@ -2901,6 +2901,7 @@
     {
       "path": "js/quests/review.js",
       "functions": [
+        "socialOverlayLabel",
         "socialMapVisual",
         "riceWorkCalendarVisual",
         "ricePrefectureChartVisual",
@@ -2929,16 +2930,23 @@
         "shuffledFive",
         "startReviewQuiz",
         "registerReviewQuests",
+        "currentReviewQuestion",
+        "reviewProgressText",
+        "escapeReviewValue",
         "renderReviewQuestion",
-        "bindReviewMemo",
-        "reviewMemoPoint",
-        "redrawReviewMemo",
+        "toggleReviewChoice",
+        "normalizeReviewAnswer",
+        "isReviewCorrect",
+        "formattedReviewAnswer",
         "submitReviewChoice",
+        "submitReviewMultiple",
         "inputReviewKey",
         "submitReviewAnswer",
-        "finishReviewQuiz",
-        "resize",
-        "end"
+        "processReviewSubmission",
+        "renderReviewFeedback",
+        "advanceReviewAfterFeedback",
+        "showReviewTrainingIntro",
+        "finishReviewQuiz"
       ],
       "classes": [],
       "windowExports": [
@@ -3553,7 +3561,7 @@
     {
       "status": "M",
       "paths": [
-        "js/systems/dailyDashboard.js"
+        "js/quests/review.js"
       ]
     }
   ],
