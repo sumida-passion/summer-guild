@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-27T04:33:32.286495+00:00",
-    "commit": "75bb14f",
+    "atUtc": "2026-07-27T04:33:59.315092+00:00",
+    "commit": "6b13ff2",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 24,
-    "totalBytes": 97062582,
+    "totalBytes": 97075094,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1735,9 +1735,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 50425,
-      "sha1": "598e818c2f",
-      "lineCount": 388
+      "sizeBytes": 62937,
+      "sha1": "eafe3d43b7",
+      "lineCount": 482
     },
     {
       "path": "js/quests/science.js",
@@ -2906,6 +2906,10 @@
         "riceWorkCalendarVisual",
         "ricePrefectureChartVisual",
         "riceTrendChartVisual",
+        "foodSelfSufficiencyVisual",
+        "farmRankingVisual",
+        "prefectureShapeVisual",
+        "cabbageShipmentVisual",
         "playReviewTrainingMusic",
         "stopReviewTrainingMusic",
         "reviewTodayKey",
@@ -3561,25 +3565,7 @@
     {
       "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/GPT_PROJECT_STATE.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/PROJECT_STATE.json"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
+        "js/quests/review.js"
       ]
     }
   ],
