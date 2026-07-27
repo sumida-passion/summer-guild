@@ -4,7 +4,7 @@
 (function(){
   const COMPLETE_KEY="summerGuildDailyCompleteV1";
   const COMPLETE_GP=5;
-  const LEVELS={basic:{label:"基本",gp:3},standard:{label:"標準",gp:5},challenge:{label:"挑戦",gp:7}};
+  const LEVELS={basic:{label:"基本",gp:"1〜6"},standard:{label:"標準",gp:"2〜7"},challenge:{label:"挑戦",gp:"3〜8"}};
 
   function todayKey(){
     const d=new Date();
@@ -31,11 +31,11 @@
     return [
       {id:"hyakumasu",label:"百ます計算",gp:"10〜16GP",done:hyakumasuDone(),go:()=>typeof startQuest==="function"&&startQuest("hyakumasu")},
       {id:"learning-forest",label:"学びの森",gp:"3GP",done:learningForestDone(),go:()=>typeof changeScreen==="function"&&changeScreen("learningforest")},
-      {id:"math-basic",label:"算数 基本",gp:"3GP",done:Boolean(r?.math?.basic),go:()=>window.openReviewDailyTarget?.("math","basic")},
-      {id:"math-standard",label:"算数 標準",gp:"5GP",done:Boolean(r?.math?.standard),go:()=>window.openReviewDailyTarget?.("math","standard")},
-      {id:"math-challenge",label:"算数 挑戦",gp:"7GP",done:Boolean(r?.math?.challenge),go:()=>window.openReviewDailyTarget?.("math","challenge")},
-      {id:"social-basic",label:"社会 基本",gp:"3GP",done:Boolean(r?.social?.basic),go:()=>window.openReviewDailyTarget?.("social","basic")},
-      {id:"social-standard",label:"社会 標準",gp:"5GP",done:Boolean(r?.social?.standard),go:()=>window.openReviewDailyTarget?.("social","standard")}
+      {id:"math-basic",label:"算数 基本",gp:"1〜6GP",done:Boolean(r?.math?.basic),go:()=>window.openReviewDailyTarget?.("math","basic")},
+      {id:"math-standard",label:"算数 標準",gp:"2〜7GP",done:Boolean(r?.math?.standard),go:()=>window.openReviewDailyTarget?.("math","standard")},
+      {id:"math-challenge",label:"算数 挑戦",gp:"3〜8GP",done:Boolean(r?.math?.challenge),go:()=>window.openReviewDailyTarget?.("math","challenge")},
+      {id:"social-basic",label:"社会 基本",gp:"1〜6GP",done:Boolean(r?.social?.basic),go:()=>window.openReviewDailyTarget?.("social","basic")},
+      {id:"social-standard",label:"社会 標準",gp:"2〜7GP",done:Boolean(r?.social?.standard),go:()=>window.openReviewDailyTarget?.("social","standard")}
     ];
   }
   function loadComplete(){
