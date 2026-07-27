@@ -422,38 +422,70 @@ function showReviewTrainingIntro(){
 async function finishReviewQuiz(){
   const s=reviewState;
   if(!s || s.finishing) return;
+
   s.finishing=true;
   s.phase="finishing";
-  const c=s.context?.getContainer?.();
-  if(c){
-    c.innerHTML=`<div class="review-wrap"><section class="review-panel review-training-intro"><p class="review-badge">COMPLETE</p><h2>復習の修行を完了しました</h2><p>全問理解を確認しました。結果を集計しています。</p></section></div>`;
-  }
+
   const correct=s.initialAnswers.filter(x=>x.ok).length;
   const elapsed=Math.max(1,Math.ceil((Date.now()-s.startedAt)/1000));
   const accuracy=Math.round(correct/5*100);
   const baseReward=correct;
   const bonus=claimReviewBonus(s.unitId,s.level);
   const totalReward=baseReward+bonus;
+
   saveReviewHistory(s.unitId,s.level);
+
   const min=Math.floor(elapsed/60),sec=elapsed%60;
-  const lines=[
-    `${getReviewUnit(s.unitId).title}・${REVIEW_LEVELS[s.level].label}の修行完了！`,
-    `初見正解：${correct}問／5問（${accuracy}％）`,
-    `復習の修行：全問理解`,
-    `タイム：${min?min+"分":""}${sec}秒`,
-    `初見クリアGP：${baseReward}GP`,
-    `本日初回ボーナス：${bonus}GP`,
-    `合計：${totalReward}GP`
-  ];
-  try{
-    if(!s.context || typeof s.context.complete!=="function") throw new Error("クエスト完了処理が見つかりません。");
-    await s.context.complete({isPerfect:correct===5,correctCount:correct,totalQuestions:5,elapsedSeconds:elapsed,rewardOverride:totalReward,performanceRewardOverride:baseReward,accuracyPercent:accuracy,reviewBonus:bonus,message:lines.join("\n")});
-  }catch(error){
-    console.error("ふりかえりの修行の結果表示に失敗しました。",error);
+  const completionData={
+    isPerfect:correct===5,
+    correctCount:correct,
+    totalQuestions:5,
+    elapsedSeconds:elapsed,
+    rewardOverride:totalReward,
+    performanceRewardOverride:baseReward,
+    accuracyPercent:accuracy,
+    reviewBonus:bonus,
+    message:[
+      `${getReviewUnit(s.unitId).title}・${REVIEW_LEVELS[s.level].label}の修行完了！`,
+      `初見正解：${correct}問／5問（${accuracy}％）`,
+      `復習の修行：全問理解`,
+      `タイム：${min?min+"分":""}${sec}秒`,
+      `初見クリアGP：${baseReward}GP`,
+      `本日初回ボーナス：${bonus}GP`,
+      `合計：${totalReward}GP`
+    ].join("\n")
+  };
+
+  if(!s.context || typeof s.context.complete!=="function"){
+    console.error("クエスト完了処理が見つかりません。");
     s.finishing=false;
-    if(c){
-      c.innerHTML=`<div class="review-wrap"><section class="review-panel review-feedback is-wrong"><h2>結果画面を開けませんでした</h2><p>GPと修行記録は保存されています。クエストボードへ戻ってください。</p><div class="review-actions"><button type="button" class="primary" data-review-fallback-back>クエストボードへ戻る</button></div></section></div>`;
-      c.querySelector("[data-review-fallback-back]")?.addEventListener("click",()=>{stopReviewTrainingMusic();if(typeof changeScreen==="function")changeScreen("questboard");});
+    return;
+  }
+
+  /*
+    QuestEngine.complete() は、報酬保存と結果画面の内容更新を先に行い、
+    その後 changeScreen("result") を待つ。
+    Safariで画面遷移Promiseが止まる場合に備え、完了処理を開始した後、
+    結果画面がまだ開いていなければ即時表示する。
+  */
+  const completePromise=s.context.complete(completionData);
+
+  window.setTimeout(()=>{
+    const resultScreen=document.getElementById("result-screen");
+    if(!resultScreen?.classList.contains("active")
+      && typeof showScreenImmediately==="function"){
+      showScreenImmediately("result");
+    }
+  },900);
+
+  try{
+    await completePromise;
+  }catch(error){
+    console.error("ふりかえりの修行の結果処理に失敗しました。",error);
+    const resultScreen=document.getElementById("result-screen");
+    if(!resultScreen?.classList.contains("active")
+      && typeof showScreenImmediately==="function"){
+      showScreenImmediately("result");
     }
   }
 }
