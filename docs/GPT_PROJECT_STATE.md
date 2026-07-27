@@ -7,7 +7,7 @@
 
 | 項目 | 内容 |
 |---|---|
-| 生成日時（UTC） | 2026-07-27T04:47:58.411Z |
+| 生成日時（UTC） | 2026-07-27T06:24:31.727Z |
 | リポジトリ | unknown |
 | ブランチ | `unknown` |
 | コミット | `unknown` |
@@ -17,12 +17,12 @@
 
 | 種類 | 数 |
 |---|---:|
-| 全ファイル | 184 |
+| 全ファイル | 185 |
 | フォルダ | 67 |
 | 画像 | 68 |
 | 音声 | 15 |
 | 動画 | 0 |
-| JavaScript | 32 |
+| JavaScript | 33 |
 | CSS | 6 |
 | HTML | 1 |
 
@@ -203,6 +203,7 @@ summer-guild/
 │   │   └── .gitkeep
 │   ├── developer.css
 │   ├── layout.css
+│   ├── review.js
 │   └── screens/
 │       ├── .gitkeep
 │       ├── common.css
@@ -292,36 +293,36 @@ summer-guild/
 
 ### CSS
 
-1. `css/common.css?v=20260727-review-result-direct-v3`
-2. `css/layout.css?v=20260727-review-result-direct-v3`
-3. `css/screens/iphone-landscape.css?v=20260727-review-result-direct-v3`
-4. `css/screens/learning-forest.css?v=20260727-review-result-direct-v3`
-5. `css/developer.css?v=20260727-review-result-direct-v3`
+1. `css/common.css?v=20260727-review-result-safari-v4`
+2. `css/layout.css?v=20260727-review-result-safari-v4`
+3. `css/screens/iphone-landscape.css?v=20260727-review-result-safari-v4`
+4. `css/screens/learning-forest.css?v=20260727-review-result-safari-v4`
+5. `css/developer.css?v=20260727-review-result-safari-v4`
 
 ### JavaScript
 
-1. `js/settings.js?v=20260727-review-result-direct-v3`
-2. `js/systems/owlMessenger.js?v=20260727-review-result-direct-v3`
-3. `js/systems/furnitureSystem.js?v=20260727-review-result-direct-v3`
-4. `data/items/items.js?v=20260727-review-result-direct-v3`
-5. `data/shop/music.js?v=20260727-review-result-direct-v3`
-6. `js/systems/musicPlayer.js?v=20260727-review-result-direct-v3`
-7. `js/systems/questMusicPlayer.js?v=20260727-review-result-direct-v3`
-8. `js/screens/shop.js?v=20260727-review-result-direct-v3`
-9. `js/screens/musicShop.js?v=20260727-review-result-direct-v3`
-10. `js/screens/wardrobe.js?v=20260727-review-result-direct-v3`
-11. `js/systems/questEngine.js?v=20260727-review-result-direct-v3`
-12. `js/quests/daily.js?v=20260727-review-result-direct-v3`
-13. `js/numberpad.js?v=20260727-review-result-direct-v3`
-14. `js/quests/hyakumasu.js?v=20260727-review-result-direct-v3`
-15. `js/quests/review.js?v=20260727-review-result-direct-v3`
-16. `js/systems/dailyDashboard.js?v=20260727-review-result-direct-v3`
-17. `js/quests/math.js?v=20260727-review-result-direct-v3`
-18. `js/quests/society.js?v=20260727-review-result-direct-v3`
-19. `js/screens/learningForest.js?v=20260727-review-result-direct-v3`
-20. `js/developer.js?v=20260727-review-result-direct-v3`
-21. `js/systems/blackDogPet.js?v=20260727-review-result-direct-v3`
-22. `js/app.js?v=20260727-review-result-direct-v3`
+1. `js/settings.js?v=20260727-review-result-safari-v4`
+2. `js/systems/owlMessenger.js?v=20260727-review-result-safari-v4`
+3. `js/systems/furnitureSystem.js?v=20260727-review-result-safari-v4`
+4. `data/items/items.js?v=20260727-review-result-safari-v4`
+5. `data/shop/music.js?v=20260727-review-result-safari-v4`
+6. `js/systems/musicPlayer.js?v=20260727-review-result-safari-v4`
+7. `js/systems/questMusicPlayer.js?v=20260727-review-result-safari-v4`
+8. `js/screens/shop.js?v=20260727-review-result-safari-v4`
+9. `js/screens/musicShop.js?v=20260727-review-result-safari-v4`
+10. `js/screens/wardrobe.js?v=20260727-review-result-safari-v4`
+11. `js/systems/questEngine.js?v=20260727-review-result-safari-v4`
+12. `js/quests/daily.js?v=20260727-review-result-safari-v4`
+13. `js/numberpad.js?v=20260727-review-result-safari-v4`
+14. `js/quests/hyakumasu.js?v=20260727-review-result-safari-v4`
+15. `js/quests/review.js?v=20260727-review-result-safari-v4`
+16. `js/systems/dailyDashboard.js?v=20260727-review-result-safari-v4`
+17. `js/quests/math.js?v=20260727-review-result-safari-v4`
+18. `js/quests/society.js?v=20260727-review-result-safari-v4`
+19. `js/screens/learningForest.js?v=20260727-review-result-safari-v4`
+20. `js/developer.js?v=20260727-review-result-safari-v4`
+21. `js/systems/blackDogPet.js?v=20260727-review-result-safari-v4`
+22. `js/app.js?v=20260727-review-result-safari-v4`
 
 ### 画像参照
 
@@ -336,6 +337,7 @@ summer-guild/
 
 ## 5. JavaScriptファイル一覧
 
+- `css/review.js`
 - `data/items/items.js`
 - `data/shop/music.js`
 - `js/app.js`

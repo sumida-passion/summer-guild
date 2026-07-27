@@ -404,3 +404,11 @@ Pythonによる実編集を行っていない場合は、「編集済みZIP」�
 - 待機画面への `innerHTML` 書き換えを廃止し、最後の正解後は直接 `QuestEngine.complete()` から結果画面へ進む。
 - `complete()` 後に結果画面が有効化されていない場合は、`showScreenImmediately("result")` を使って結果画面を確実に表示する。
 - 初見正解数によるGP、復習ではGPを増やさないルール、全問理解後のみ修行完了とする仕様は変更しない。
+
+
+## 16. ふりかえり結果画面・Safari遷移停止の確実化（2026-07-27）
+
+- 最新ZIPを再確認した結果、`index.html` とService Workerの版番号は direct-v3 だったが、`js/quests/review.js` 本体には旧「結果を集計しています」待機画面が残っていた。
+- 待機画面を完全に削除した。
+- `QuestEngine.complete()` を開始した900ms後、結果画面がまだ有効化されていなければ `showScreenImmediately("result")` で強制表示する。
+- 報酬保存と結果内容更新は `complete()` 内で画面遷移より先に行われるため、Safariで通常遷移が停止しても結果画面を表示できる。
