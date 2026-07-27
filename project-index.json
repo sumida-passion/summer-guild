@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-27T06:30:24.841818+00:00",
-    "commit": "e1144b8",
+    "atUtc": "2026-07-27T06:30:51.903053+00:00",
+    "commit": "42816b8",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97140902,
+    "totalBytes": 97140914,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1746,9 +1746,9 @@
       "stem": "review",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 62937,
-      "sha1": "eafe3d43b7",
-      "lineCount": 482
+      "sizeBytes": 62949,
+      "sha1": "7ff8848a76",
+      "lineCount": 514
     },
     {
       "path": "js/quests/science.js",
@@ -3644,25 +3644,7 @@
     {
       "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/GPT_PROJECT_STATE.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/PROJECT_STATE.json"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
+        "js/quests/review.js"
       ]
     }
   ],
