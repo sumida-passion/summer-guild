@@ -1,12 +1,10 @@
-今回GitHubへ上書きアップロードするファイル
-
-css/layout.css
+UPLOAD_FILES.txt
 docs/GPT_HANDOFF.md
 docs/GPT_PROJECT_STATE.md
 docs/PROJECT_STATE.json
 docs/development-log.md
 index.html
 js/quests/review.js
+js/systems/dailyDashboard.js
 project-index.json
 service-worker.js
-UPLOAD_FILES.txt

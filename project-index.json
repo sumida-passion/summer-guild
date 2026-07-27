@@ -3603,5 +3603,22 @@
     ],
     "newThreadOpeningMessage": "夏休みギルドの開発を続けます。最初にproject-index.jsonを最後まで読み、次に今回の改修対象と関連ファイルを確認してください。既存API・ファイル名・画像拡張子を推測で扱わず、iPad Safari前提で進めてください。大きな完成ファイルはZIPで渡してください。",
     "importantLimitation": "project-index.jsonは構造と引き継ぎ指示を伝えるが、各ソースコード本文までは含まない。高品質な改修には、リポジトリ全体ZIPまたは対象ファイル群も新しいスレッドへ渡す必要がある。"
+  },
+  "implementationSnapshot": {
+    "updatedAtUtc": "2026-07-27T01:49:42.693017+00:00",
+    "version": "20260727-social-review-mastery-v1",
+    "summary": "社会地図オーバーレイ修正、社会プリント②追加、複数選択、即時解説、全問理解までの復習、初見正解GPを実装。",
+    "changedFiles": [
+      "index.html",
+      "service-worker.js",
+      "js/quests/review.js",
+      "js/systems/dailyDashboard.js",
+      "docs/GPT_HANDOFF.md",
+      "docs/development-log.md",
+      "docs/GPT_PROJECT_STATE.md",
+      "docs/PROJECT_STATE.json",
+      "project-index.json",
+      "UPLOAD_FILES.txt"
+    ]
   }
 }
