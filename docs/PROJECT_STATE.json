@@ -2,7 +2,7 @@
   "generator": {
     "name": "Summer Guild Project State Generator",
     "version": "1.0.0",
-    "generatedAt": "2026-07-27T04:21:35.802Z",
+    "generatedAt": "2026-07-27T04:47:58.411Z",
     "excludedGeneratedFiles": [
       "docs/GPT_PROJECT_STATE.md",
       "docs/PROJECT_STATE.json"
@@ -1132,7 +1132,7 @@
       "path": "docs/development-log.md",
       "name": "development-log.md",
       "extension": ".md",
-      "sizeBytes": 41889
+      "sizeBytes": 42613
     },
     {
       "path": "docs/game-rules.md",
@@ -1144,13 +1144,13 @@
       "path": "docs/GPT_HANDOFF.md",
       "name": "GPT_HANDOFF.md",
       "extension": ".md",
-      "sizeBytes": 24082
+      "sizeBytes": 24800
     },
     {
       "path": "index.html",
       "name": "index.html",
       "extension": ".html",
-      "sizeBytes": 19693
+      "sizeBytes": 19558
     },
     {
       "path": "js/app.js",
@@ -1234,7 +1234,7 @@
       "path": "js/quests/review.js",
       "name": "review.js",
       "extension": ".js",
-      "sizeBytes": 62937
+      "sizeBytes": 63257
     },
     {
       "path": "js/quests/science.js",
@@ -1348,7 +1348,7 @@
       "path": "project-index.json",
       "name": "project-index.json",
       "extension": ".json",
-      "sizeBytes": 118219
+      "sizeBytes": 118202
     },
     {
       "path": "README.md",
@@ -1366,7 +1366,7 @@
       "path": "service-worker.js",
       "name": "service-worker.js",
       "extension": ".js",
-      "sizeBytes": 4508
+      "sizeBytes": 4503
     },
     {
       "path": "tests/.gitkeep",
@@ -1531,35 +1531,35 @@
   "indexHtml": {
     "exists": true,
     "stylesheets": [
-      "css/common.css?v=20260727-social-agriculture-layout-v2",
-      "css/layout.css?v=20260727-social-agriculture-layout-v2",
-      "css/screens/iphone-landscape.css?v=20260727-social-agriculture-layout-v2",
-      "css/screens/learning-forest.css?v=20260727-social-agriculture-layout-v2",
-      "css/developer.css?v=20260727-social-agriculture-layout-v2"
+      "css/common.css?v=20260727-review-result-direct-v3",
+      "css/layout.css?v=20260727-review-result-direct-v3",
+      "css/screens/iphone-landscape.css?v=20260727-review-result-direct-v3",
+      "css/screens/learning-forest.css?v=20260727-review-result-direct-v3",
+      "css/developer.css?v=20260727-review-result-direct-v3"
     ],
     "scripts": [
-      "js/settings.js?v=20260727-social-agriculture-layout-v2",
-      "js/systems/owlMessenger.js?v=20260727-social-agriculture-layout-v2",
-      "js/systems/furnitureSystem.js?v=20260727-social-agriculture-layout-v2",
-      "data/items/items.js?v=20260727-social-agriculture-layout-v2",
-      "data/shop/music.js?v=20260727-social-agriculture-layout-v2",
-      "js/systems/musicPlayer.js?v=20260727-social-agriculture-layout-v2",
-      "js/systems/questMusicPlayer.js?v=20260727-social-agriculture-layout-v2",
-      "js/screens/shop.js?v=20260727-social-agriculture-layout-v2",
-      "js/screens/musicShop.js?v=20260727-social-agriculture-layout-v2",
-      "js/screens/wardrobe.js?v=20260727-social-agriculture-layout-v2",
-      "js/systems/questEngine.js?v=20260727-social-agriculture-layout-v2",
-      "js/quests/daily.js?v=20260727-social-agriculture-layout-v2",
-      "js/numberpad.js?v=20260727-social-agriculture-layout-v2",
-      "js/quests/hyakumasu.js?v=20260727-social-agriculture-layout-v2",
-      "js/quests/review.js?v=20260727-social-agriculture-layout-v2",
-      "js/systems/dailyDashboard.js?v=20260727-social-agriculture-layout-v2",
-      "js/quests/math.js?v=20260727-social-agriculture-layout-v2",
-      "js/quests/society.js?v=20260727-social-agriculture-layout-v2",
-      "js/screens/learningForest.js?v=20260727-social-agriculture-layout-v2",
-      "js/developer.js?v=20260727-social-agriculture-layout-v2",
-      "js/systems/blackDogPet.js?v=20260727-social-agriculture-layout-v2",
-      "js/app.js?v=20260727-social-agriculture-layout-v2"
+      "js/settings.js?v=20260727-review-result-direct-v3",
+      "js/systems/owlMessenger.js?v=20260727-review-result-direct-v3",
+      "js/systems/furnitureSystem.js?v=20260727-review-result-direct-v3",
+      "data/items/items.js?v=20260727-review-result-direct-v3",
+      "data/shop/music.js?v=20260727-review-result-direct-v3",
+      "js/systems/musicPlayer.js?v=20260727-review-result-direct-v3",
+      "js/systems/questMusicPlayer.js?v=20260727-review-result-direct-v3",
+      "js/screens/shop.js?v=20260727-review-result-direct-v3",
+      "js/screens/musicShop.js?v=20260727-review-result-direct-v3",
+      "js/screens/wardrobe.js?v=20260727-review-result-direct-v3",
+      "js/systems/questEngine.js?v=20260727-review-result-direct-v3",
+      "js/quests/daily.js?v=20260727-review-result-direct-v3",
+      "js/numberpad.js?v=20260727-review-result-direct-v3",
+      "js/quests/hyakumasu.js?v=20260727-review-result-direct-v3",
+      "js/quests/review.js?v=20260727-review-result-direct-v3",
+      "js/systems/dailyDashboard.js?v=20260727-review-result-direct-v3",
+      "js/quests/math.js?v=20260727-review-result-direct-v3",
+      "js/quests/society.js?v=20260727-review-result-direct-v3",
+      "js/screens/learningForest.js?v=20260727-review-result-direct-v3",
+      "js/developer.js?v=20260727-review-result-direct-v3",
+      "js/systems/blackDogPet.js?v=20260727-review-result-direct-v3",
+      "js/app.js?v=20260727-review-result-direct-v3"
     ],
     "images": [
       "assets/characters/player/base/base.png",
