@@ -1,0 +1,21 @@
+今回GitHubへアップロードして更新するファイル
+
+1. js/screens/learningForest.js
+   アップロード先: /js/screens/learningForest.js
+   内容: 第11・12問、理解文、ノート指導、図解、検算、気づき選択を追加
+
+2. css/screens/learning-forest.css
+   アップロード先: /css/screens/learning-forest.css
+   内容: 第11・12問の3色ルール、理解文、ノート、図解などの表示スタイルを追加
+
+3. index.html
+   アップロード先: /index.html
+   内容: CSS・JavaScriptのキャッシュ更新版番号を変更
+
+4. service-worker.js
+   アップロード先: /service-worker.js
+   内容: Service Workerのキャッシュ版番号を変更
+
+5. docs/development-log.md
+   アップロード先: /docs/development-log.md
+   内容: 今回の実装履歴を追記
