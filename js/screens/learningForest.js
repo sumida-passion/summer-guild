@@ -1,8 +1,8 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver2.1
-   算数の広場・第1〜10問の詳しい学び直し
+   学びの森 Ver2.2
+   算数の広場・第1〜10問＋第11〜12問「勉強の仕方」
    ========================================================= */
 
 (() => {
@@ -20,8 +20,8 @@
         { number: 8, group: 2, title: "あめの入れ方", ready: true, id: "math-repacking-08" },
         { number: 9, group: 3, title: "折り紙の余りと不足", ready: true, id: "math-distribution-09" },
         { number: 10, group: 3, title: "あめを配る人数と個数", ready: true, id: "math-distribution-10" },
-        { number: 11, group: 3, title: "ノートの余りと不足" },
-        { number: 12, group: 3, title: "クッキーを分ける" },
+        { number: 11, group: 3, title: "ノートの余りと不足", ready: true, id: "math-study-method-11" },
+        { number: 12, group: 3, title: "クッキーを分ける", ready: true, id: "math-study-method-12" },
         { number: 13, group: 3, title: "長いすと5年生" },
         { number: 14, group: 4, title: "あめとガム" },
         { number: 15, group: 4, title: "シュークリームとケーキ" },
@@ -220,6 +220,100 @@
         ];
     }
 
+
+    function createLesson11Steps() {
+        const steps = [];
+        const state = getState();
+        if (!state.studyMethodTutorialSeen) {
+            steps.push(makeStep("ここまで本当によく頑張ったね。今日からは、問題を解くだけじゃなくて、『勉強の仕方』もレベルアップしていこう。", renderStudyMethodTutorial, true));
+        }
+        return steps.concat([
+            makeStep("まずは問題文を読む。まだ電卓も計算も使わない。何が起きている問題なのか、言葉をつかもう。", () => renderStudyMethodProblem(11)),
+            makeStep("問題をやさしい言葉に言い換えて、意味が合うように空欄を完成させよう。全部合うまで次へは進まないよ。", () => renderUnderstandingCloze({
+                lesson: 11,
+                sentences: [
+                    { before: "3冊ずつ配ると、ノートが", answer: "16冊余る", choices: ["16冊余る", "16冊足りない", "子どもが16人"] },
+                    { before: "5冊ずつ配るには、ノートが", answer: "20冊足りない", choices: ["20冊余る", "20冊足りない", "5冊足りない"] },
+                    { before: "1人分の配る数は、3冊から5冊へ", answer: "2冊増える", choices: ["2冊増える", "2冊減る", "8冊増える"] },
+                    { before: "余りの16冊を全部使っても、さらに", answer: "20冊必要", choices: ["20冊必要", "16冊余る", "36人必要"] }
+                ],
+                hint: "もう一度、問題文の『余る』『足りない』『3冊ずつ』『5冊ずつ』を見てみよう。",
+                success: "問題の意味を正しく言い換えられた。次は、分かったことをノートに残そう。▽を押して続けよう。"
+            }), true),
+            makeStep("ノートを開こう。黄色は板書だから必ず写す。緑は、ノートの取り方のコツだ。", () => renderNotebookPrompt({
+                title: "学びの森11",
+                lines: ["3冊ずつ → 16冊余る", "5冊ずつ → 20冊足りない"],
+                advice: "このあと式を書き足すので、ここは1行空けよう。",
+                detail: "問題文を全部写さず、大切な数字と言葉だけを短く書こう。"
+            }), true),
+            makeStep("図にすると、余っていた16冊を使い切っても、さらに20冊必要になる。余りと不足の間は全部で36冊だ。", () => renderStudyDifferenceDiagram({ lesson: 11, stage: "whole" })),
+            makeStep("1人分は3冊から5冊へ、2冊増える。ノートへ式を書き足そう。", () => renderNotebookPrompt({
+                title: "ノートに書き足す",
+                lines: ["1人分の差　5−3＝2冊", "全体の差　16＋20＝36冊"],
+                advice: "式の終わりに『冊』をつけると、何を求めた式か分かりやすい。",
+                detail: "白い説明の中でも、あとで自分を助けると思った言葉は書いていい。"
+            }), true),
+            makeStep("全体の差36冊を、1人分の差2冊ずつに分ける。子どもは何人かな？", () => renderGenericNumber({ title: "子どもの人数", formula: "36 ÷ 2 ＝", expected: "18", unit: "人", success: "18人。意味を理解してから計算したので、36÷2が何を表すかも説明できるね。▽を押して続けよう。", hint: "全体で必要な36冊を、1人につき増える2冊ずつに分けよう。" }), true),
+            makeStep("子どもが18人と分かった。3冊ずつ配って16冊余るとき、ノートは全部で何冊かな？", () => renderGenericNumber({ title: "ノートの全部の数", formula: "3 × 18 ＋ 16 ＝", expected: "70", unit: "冊", success: "70冊。答えを出したら、もう一つの配り方でも確かめよう。▽を押して続けよう。", hint: "18人へ3冊ずつ配った分に、余り16冊を足そう。" }), true),
+            makeStep("答えを問題へ戻して確認する。3冊ずつでも5冊ずつでも、全部のノートは70冊になる。", () => renderStudyVerification({ left: "3×18＋16", right: "5×18−20", answer: "70冊" })),
+            makeStep("ゆっくり考えた道筋は、一つの効率のよい式にもまとめられる。", () => renderStudyShortcut({ formula: "（16＋20）÷（5−3）＝18人", notes: ["余り＋不足＝全体の差", "多い数−少ない数＝1人分の差"] })),
+            makeStep("今日の気づきに一番近いものを選ぼう。", () => renderInsightChoice({
+                choices: ["数字をすぐ電卓へ入れる前に、問題の意味を言い換える", "式だけを覚えれば、問題文は読まなくてよい", "ノートには答えだけを書けばよい"],
+                correct: 0,
+                success: "その通り。理解→ノート→図→計算→確認の順で進むと、勉強の力そのものが育つ。"
+            }), true),
+            makeStep("本当の経験値は、画面の中だけではなく、君自身についている。", () => renderStudySummary({
+                lesson: 11,
+                points: ["問題をやさしい言葉に言い換える", "黄色の板書を写し、緑の助言でノートを整える", "理解してから計算し、答えを元の問題で確かめる"],
+                answer: "子ども18人　ノート70冊"
+            }))
+        ]);
+    }
+
+    function createLesson12Steps() {
+        return [
+            makeStep("12番は、11番で練習した勉強の進め方を、自分の力で使う問題だ。今回は案内を少し減らすよ。", () => renderStudyMethodProblem(12)),
+            makeStep("問題の意味が合うように、空欄を完成させよう。", () => renderUnderstandingCloze({
+                lesson: 12,
+                sentences: [
+                    { before: "4個ずつ分けると、クッキーが", answer: "9個余る", choices: ["9個余る", "9個足りない", "4人余る"] },
+                    { before: "6個ずつ分けるには、クッキーが", answer: "5個足りない", choices: ["5個余る", "5個足りない", "6個足りない"] },
+                    { before: "1人分の差は", answer: "2個", choices: ["2個", "10個", "14個"] },
+                    { before: "余りから不足までの全体の差は", answer: "14個", choices: ["4個", "9個", "14個"] }
+                ],
+                hint: "『余る』と『足りない』は、間をつなぐので足す。4個と6個は、1人分の違いを比べよう。",
+                success: "問題の意味を整理できた。自分のノートへ、必要な情報を書こう。▽を押して続けよう。"
+            }), true),
+            makeStep("ノートへ、問題番号と必要な条件を書こう。今回は書く内容を自分で選んでみよう。", () => renderNotebookPrompt({
+                title: "学びの森12",
+                lines: ["4個ずつ → 9個余る", "6個ずつ → 5個足りない"],
+                advice: "式を書き足せるように、下を少し空けておこう。",
+                detail: "板書は必ず写す。説明は、自分に必要だと思うところを選んで書く。"
+            }), true),
+            makeStep("余り9個を使っても、さらに5個必要。全員へ増やすクッキーは14個になる。", () => renderStudyDifferenceDiagram({ lesson: 12, stage: "whole" })),
+            makeStep("ノートへ、自分で見つけた2つの差を書き足そう。", () => renderNotebookPrompt({
+                title: "考えた式",
+                lines: ["6−4＝2個", "9＋5＝14個"],
+                advice: "同じ役割の式は、縦をそろえて書くと見直しやすい。",
+                detail: "『1人分の差』『全体の差』という言葉も必要だと思えば加えよう。"
+            }), true),
+            makeStep("全体の差14個を、1人分の差2個ずつに分けよう。何人に分ける問題かな？", () => renderGenericNumber({ title: "分ける人数", formula: "14 ÷ 2 ＝", expected: "7", unit: "人", success: "7人。次はクッキーの全部の数を求めよう。▽を押して続けよう。", hint: "14個の中に、1人分の2個が何回あるか考えよう。" }), true),
+            makeStep("4個ずつ7人へ分けて9個余る。クッキーは全部で何個かな？", () => renderGenericNumber({ title: "クッキーの全部の数", formula: "4 × 7 ＋ 9 ＝", expected: "37", unit: "個", success: "37個。もう一つの条件にも合うか確かめよう。▽を押して続けよう。", hint: "7人へ4個ずつ分けた数に、余り9個を足そう。" }), true),
+            makeStep("6個ずつなら、6×7＝42個必要。37個では5個足りない。両方の条件に合っている。", () => renderStudyVerification({ left: "4×7＋9", right: "6×7−5", answer: "37個" })),
+            makeStep("効率のよい式を、自分の考えとつなげて確認しよう。", () => renderStudyShortcut({ formula: "（9＋5）÷（6−4）＝7人", notes: ["9＋5＝14個", "6−4＝2個"] })),
+            makeStep("今日できたことに一番近いものを選ぼう。", () => renderInsightChoice({
+                choices: ["11番の手順を使って、自分で必要な情報と式を整理した", "問題文を読まずに数字を組み合わせた", "答えが出たので確認はしなかった"],
+                correct: 0,
+                success: "その力が、教室で先生の話を聞き、自分のノートを作る力につながっていく。"
+            }), true),
+            makeStep("案内が少なくても、同じ学び方を自分で使えた。これが本当のレベルアップだ。", () => renderStudySummary({
+                lesson: 12,
+                points: ["必要な条件を短くノートへ書く", "1人分の差と全体の差を見つける", "計算のあとに、両方の条件で検算する"],
+                answer: "7人　クッキー37個"
+            }))
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
@@ -230,7 +324,9 @@
         7: createLesson7Steps,
         8: createLesson8Steps,
         9: createLesson9Steps,
-        10: createLesson10Steps
+        10: createLesson10Steps,
+        11: createLesson11Steps,
+        12: createLesson12Steps
     };
 
     function init() {
@@ -1453,6 +1549,156 @@
             formulas: ["15−5＝10", "8−6＝2", "10÷2＝5", "6×5＋15＝45"],
             answer: "子どもは5人　あめは45個"
         });
+    }
+
+
+    function renderStudyMethodTutorial() {
+        setBoard(`
+            <section class="study-method-tutorial">
+                <header><small>LEARNING FOREST Ver.2</small><h3>勉強の仕方をレベルアップ</h3></header>
+                <div class="study-color-rule is-yellow"><b>黄色＝板書</b><span>先生が黒板に書いたもの。必ずノートへ写す。</span></div>
+                <div class="study-color-rule is-white"><b>白＝説明</b><span>あとで自分を助けると思った内容は、自分で選んで書く。</span></div>
+                <div class="study-color-rule is-green"><b>緑＝ノートのコツ</b><span>1行空ける、縦をそろえる、単位を書くなどの学び方。</span></div>
+                <button type="button" class="study-confirm-button">わかった！</button>
+            </section>
+        `);
+        board().querySelector('.study-confirm-button')?.addEventListener('click', () => {
+            const state = getState();
+            state.studyMethodTutorialSeen = true;
+            state.studyMethodTutorialSeenAt = new Date().toISOString();
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            completeInteractiveStep("これから黄色・白・緑を見分けながら、勉強の仕方を練習しよう。▽を押して続けよう。");
+        });
+    }
+
+    function renderStudyMethodProblem(lesson) {
+        const is11 = lesson === 11;
+        setBoard(`
+            <article class="learning-problem-card study-method-problem">
+                <p class="learning-problem-label">${lesson}番の問題</p>
+                <p>${is11 ? 'ノートを子どもたちに3冊ずつ配ると16冊余り、5冊ずつ配ると20冊足りません。' : 'クッキーを子どもたちに4個ずつ分けると9個余り、6個ずつ分けると5個足りません。'}</p>
+                <p>${is11 ? '子どもは何人いますか。また、ノートは全部で何冊ありますか。' : '子どもは何人いますか。また、クッキーは全部で何個ありますか。'}</p>
+                <div class="study-no-calculator">まだ計算しない　まず意味をつかむ</div>
+            </article>
+        `);
+    }
+
+    function renderUnderstandingCloze({ sentences, hint, success }) {
+        setBoard(`
+            <section class="understanding-cloze">
+                <header><small>STEP 1</small><h3>問題の意味を言い換える</h3></header>
+                <div class="cloze-sentences">
+                    ${sentences.map((item, index) => `<label><span>${item.before}</span><select data-cloze="${index}"><option value="">選ぶ</option>${item.choices.map(choice => `<option value="${choice}">${choice}</option>`).join('')}</select></label>`).join('')}
+                </div>
+                <button type="button" class="cloze-submit">決定</button>
+                <p class="learning-feedback" aria-live="polite"></p>
+            </section>
+        `);
+        board().querySelector('.cloze-submit')?.addEventListener('click', () => {
+            const selects = [...board().querySelectorAll('[data-cloze]')];
+            const allCorrect = selects.every((select, index) => select.value === sentences[index].answer);
+            selects.forEach((select, index) => select.classList.toggle('wrong', select.value !== sentences[index].answer));
+            if (allCorrect) {
+                selects.forEach(select => { select.classList.add('correct'); select.disabled = true; });
+                completeInteractiveStep(success);
+            } else {
+                const feedback = board().querySelector('.learning-feedback');
+                if (feedback) feedback.textContent = hint;
+            }
+        });
+    }
+
+    function renderNotebookPrompt({ title, lines, advice, detail }) {
+        setBoard(`
+            <section class="notebook-training">
+                <header><small>NOTEBOOK TIME</small><h3>ノートへ書こう</h3></header>
+                <div class="board-copy is-yellow"><b>${title}</b>${lines.map(line => `<span>${line}</span>`).join('')}</div>
+                <div class="teacher-explanation is-white"><b>ギルドマスターの説明</b><span>${detail}</span></div>
+                <div class="notebook-advice is-green"><b>ノートのコツ</b><span>${advice}</span></div>
+                <button type="button" class="notebook-done-button">ノートに書いた</button>
+            </section>
+        `);
+        board().querySelector('.notebook-done-button')?.addEventListener('click', () => {
+            openMemo();
+            completeInteractiveStep("書けたね。メモパッドを閉じたら、▽を押して次へ進もう。");
+        });
+    }
+
+    function renderStudyDifferenceDiagram({ lesson }) {
+        const is11 = lesson === 11;
+        const left = is11 ? 16 : 9;
+        const right = is11 ? 20 : 5;
+        const total = left + right;
+        const unit = is11 ? 2 : 2;
+        setBoard(`
+            <section class="study-difference-diagram">
+                <header><small>DIAGRAM</small><h3>余りから不足までをつなぐ</h3></header>
+                <div class="difference-track">
+                    <div class="difference-part surplus"><b>${left}</b><span>余っている分</span></div>
+                    <div class="difference-arrow">＋</div>
+                    <div class="difference-part shortage"><b>${right}</b><span>さらに必要な分</span></div>
+                </div>
+                <div class="difference-total">全体の差　${left}＋${right}＝<strong>${total}${is11 ? '冊' : '個'}</strong></div>
+                <div class="difference-unit">1人分の差　${is11 ? '5−3' : '6−4'}＝<strong>${unit}${is11 ? '冊' : '個'}</strong></div>
+            </section>
+        `);
+    }
+
+    function renderStudyVerification({ left, right, answer }) {
+        setBoard(`
+            <section class="study-verification">
+                <header><small>CHECK</small><h3>答えを問題へ戻す</h3></header>
+                <div><span>最初の条件</span><b>${left}＝${answer}</b></div>
+                <div><span>もう一つの条件</span><b>${right}＝${answer}</b></div>
+                <p>両方が同じ答えになるので、条件に合っている。</p>
+            </section>
+        `);
+    }
+
+    function renderStudyShortcut({ formula, notes }) {
+        setBoard(`
+            <section class="study-shortcut">
+                <header><small>SHORT FORM</small><h3>効率のよい式</h3></header>
+                ${notes.map(note => `<p>${note}</p>`).join('')}
+                <strong>${formula}</strong>
+                <div class="notebook-advice is-green"><b>ノートのコツ</b><span>近道の式も、何を表す数字か分かる言葉と一緒に残そう。</span></div>
+            </section>
+        `);
+    }
+
+    function renderInsightChoice({ choices, correct, success }) {
+        setBoard(`
+            <section class="study-insight-choice">
+                <header><small>REFLECTION</small><h3>今日の気づき</h3></header>
+                <div>${choices.map((choice, index) => `<button type="button" data-insight="${index}">${choice}</button>`).join('')}</div>
+                <p class="learning-feedback" aria-live="polite"></p>
+            </section>
+        `);
+        board().querySelectorAll('[data-insight]').forEach(button => button.addEventListener('click', () => {
+            const index = Number(button.dataset.insight);
+            if (index === correct) {
+                button.classList.add('correct');
+                const dailyBonus = saveCompletion();
+                completeInteractiveStep(dailyBonus ? `${success} 学びの森デイリーボーナス ${dailyBonus}GPを獲得！ ▽を押してまとめよう。` : `${success} ▽を押してまとめよう。`);
+            } else {
+                button.classList.add('wrong');
+                const feedback = board().querySelector('.learning-feedback');
+                if (feedback) feedback.textContent = "答えだけでなく、次の授業でも使える『勉強の仕方』を選ぼう。";
+            }
+        }));
+    }
+
+    function renderStudySummary({ lesson, points, answer }) {
+        const completed = selectedLesson?.id && getState().completedLessons?.includes(selectedLesson.id);
+        setBoard(`
+            <section class="learning-summary-card study-method-summary">
+                <p class="learning-summary-label">${lesson}番　勉強の仕方</p>
+                <ol>${points.map(point => `<li>${point}</li>`).join('')}</ol>
+                <p class="learning-summary-answer">${answer}</p>
+                <p class="study-real-exp">本当の経験値は、君自身についている。</p>
+                <p class="learning-complete-mark">${completed ? '✓ 学び直し完了' : '最後まで取り組みました'}</p>
+            </section>
+        `);
     }
 
     function setBoard(html) {
