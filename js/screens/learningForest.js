@@ -1,8 +1,8 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver2.0
-   算数の広場・第1〜8問の詳しい学び直し
+   学びの森 Ver2.1
+   算数の広場・第1〜10問の詳しい学び直し
    ========================================================= */
 
 (() => {
@@ -18,8 +18,8 @@
         { number: 6, group: 2, title: "ケーキの買い物", ready: true, id: "math-savings-06" },
         { number: 7, group: 2, title: "えん筆の本数と代金", ready: true, id: "math-difference-07" },
         { number: 8, group: 2, title: "あめの入れ方", ready: true, id: "math-repacking-08" },
-        { number: 9, group: 3, title: "折り紙の余りと不足" },
-        { number: 10, group: 3, title: "あめを配る人数と個数" },
+        { number: 9, group: 3, title: "折り紙の余りと不足", ready: true, id: "math-distribution-09" },
+        { number: 10, group: 3, title: "あめを配る人数と個数", ready: true, id: "math-distribution-10" },
         { number: 11, group: 3, title: "ノートの余りと不足" },
         { number: 12, group: 3, title: "クッキーを分ける" },
         { number: 13, group: 3, title: "長いすと5年生" },
@@ -185,6 +185,41 @@
         ];
     }
 
+
+    function createLesson9Steps() {
+        return [
+            makeStep("9番も、まずは問題文を原文のまま読んでみよう。今回は『余り』と『不足』が、どうつながっているかを絵にして考えるよ。", renderLesson9Problem),
+            makeStep("3枚ずつ配り終えると、折り紙が6枚残る。この6枚は、まだ子どもたちへ配れる折り紙だ。", () => renderLesson9Distribution("three")),
+            makeStep("3枚ずつから4枚ずつへ変えるには、子ども1人につき、あと何枚必要かな？", () => renderGenericChoice({ question: "1人につき増やす枚数は？", choices: [{ value: "1", label: "1枚" }, { value: "2", label: "2枚" }, { value: "7", label: "7枚" }], correct: "1", success: "そう。4−3＝1だから、1人につきあと1枚必要だ。▽を押して続けよう。", hint: "3枚から4枚へ増える分を考えよう。" }), true),
+            makeStep("余っていた6枚を、子どもへ1枚ずつ配ると、6人分は3枚から4枚にできる。", () => renderLesson9Distribution("use-six")),
+            makeStep("でも問題文には『2枚足りません』とある。つまり、余っていた6枚を全部使っても、さらに2枚必要だったんだ。", () => renderLesson9Distribution("short-two")),
+            makeStep("4枚ずつ配るために、全員へ追加したかった折り紙は全部で何枚かな？", () => renderGenericNumber({ title: "全員へ追加する折り紙", formula: "6 ＋ 2 ＝", expected: "8", unit: "枚", success: "8枚。余っていた6枚を使い、さらに2枚必要だったからだね。▽を押して続けよう。", hint: "余っていた6枚から、足りない2枚のところまで進むよ。" }), true),
+            makeStep("この8枚は、子ども全員へ1枚ずつ追加するための枚数だ。1人に1枚ずつで8枚必要なら、子どもは何人かな？", () => renderGenericNumber({ title: "子どもの人数", formula: "8 ÷ 1 ＝", expected: "8", unit: "人", success: "8人。全員へ1枚ずつ追加するために8枚必要だったんだ。▽を押して、確かめよう。", hint: "1人につき1枚ずつ追加するよ。" }), true),
+            makeStep("3枚ずつ配る場合と4枚ずつ配る場合で、折り紙の全部の枚数が同じになるか確かめよう。", renderLesson9Check),
+            makeStep("ゆっくり考えた道筋を、効率のよい式へまとめよう。", () => renderLesson9Shortcut("intro")),
+            makeStep("まず、1人につき増える枚数は4−3＝1枚。余りから不足まで必要な枚数は6＋2＝8枚だ。", () => renderLesson9Shortcut("steps")),
+            makeStep("だから、（6＋2）÷（4−3）＝8人。式を意味がつながる順番に並べよう。", () => renderGenericOrder({ formulas: ["4−3＝1（1人につき増やす枚数）", "6＋2＝8（全員へ追加する枚数）", "8÷1＝8（子どもの人数）"], success: "8人。余りと不足の間を、1人分の差で分けた式になっているね。▽を押して、9番の学びをまとめよう。", hint: "まず1人分の差、次に余りと不足を合わせよう。" }), true),
+            makeStep("主人公：『余った6枚と足りない2枚は反対なのに、ここでは足すんだね。』 ギルドマスター：『余った6枚を全部使い、さらに2枚必要だからだよ。』", renderLesson9Summary)
+        ];
+    }
+
+    function createLesson10Steps() {
+        return [
+            makeStep("10番も、まずは問題文を原文のまま読んでみよう。今度は『余り』が2つ出てくるよ。", renderLesson10Problem),
+            makeStep("1人6個ずつ配ると、あめが15個残る。", () => renderLesson10Distribution("six")),
+            makeStep("1人8個ずつ配ると、残るあめは5個になる。余りは何個減ったかな？", () => renderGenericNumber({ title: "余りの減った数", formula: "15 − 5 ＝", expected: "10", unit: "個", success: "10個。多く配ったぶん、余りが15個から5個へ減ったんだ。▽を押して続けよう。", hint: "最初の余り15個と、あとの余り5個を比べよう。" }), true),
+            makeStep("6個ずつから8個ずつへ変えると、子ども1人につき何個多く配ることになるかな？", () => renderGenericChoice({ question: "1人につき増えるあめは？", choices: [{ value: "1", label: "1個" }, { value: "2", label: "2個" }, { value: "10", label: "10個" }], correct: "2", success: "そう。8−6＝2だから、1人につき2個ずつ多く配った。▽を押して続けよう。", hint: "6個から8個へ増える分だよ。" }), true),
+            makeStep("余りが10個減ったのは、子ども全員へ2個ずつ多く配ったからだ。", () => renderLesson10Distribution("difference")),
+            makeStep("10個の中に、1人分の2個が何回あるかな？", () => renderGenericNumber({ title: "子どもの人数", formula: "10 ÷ 2 ＝", expected: "5", unit: "人", success: "5人。5人へ2個ずつ多く配ると、余りが10個減るね。▽を押して続けよう。", hint: "減った10個を、1人分の2個ずつに分けよう。" }), true),
+            makeStep("子どもが5人と分かった。6個ずつ配って15個余るとき、あめは全部で何個かな？", () => renderGenericNumber({ title: "あめの全部の数", formula: "6 × 5 ＋ 15 ＝", expected: "45", unit: "個", success: "45個。8個ずつ配る場合でも同じになるか確かめよう。▽を押して続けよう。", hint: "5人へ6個ずつ配った分に、余り15個を足そう。" }), true),
+            makeStep("8×5＋5も45。どちらの配り方でも全部のあめは同じ45個になる。", renderLesson10Check),
+            makeStep("ゆっくり考えたことを、効率のよい式へまとめよう。", () => renderLesson10Shortcut("intro")),
+            makeStep("余りの差は15−5＝10個。1人分の差は8−6＝2個。だから（15−5）÷（8−6）＝5人だ。", () => renderLesson10Shortcut("steps")),
+            makeStep("式を意味がつながる順番に並べよう。", () => renderGenericOrder({ formulas: ["15−5＝10（余りの差）", "8−6＝2（1人につき増える個数）", "10÷2＝5（子どもの人数）", "6×5＋15＝45（あめの全部の数）"], success: "子どもは5人、あめは45個。余りどうしの差から人数を求められたね。▽を押して、10番の学びをまとめよう。", hint: "余りの差、1人分の差、人数、全部の数の順だよ。" }), true),
+            makeStep("ギルドマスター：『余りどうしなら引き算。前の問題のように余りと不足なら足し算。言葉の違いを図にすると、式の理由が見えるんだ。』", renderLesson10Summary)
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
@@ -193,7 +228,9 @@
         5: createLesson5Steps,
         6: createLesson6Steps,
         7: createLesson7Steps,
-        8: createLesson8Steps
+        8: createLesson8Steps,
+        9: createLesson9Steps,
+        10: createLesson10Steps
     };
 
     function init() {
@@ -1288,6 +1325,134 @@
     function renderGenericSummary({ label, points, formulas, answer }) {
         const completed = selectedLesson?.id && getState().completedLessons?.includes(selectedLesson.id);
         setBoard(`<div class="learning-summary-card"><p class="learning-summary-label">${label}</p><ol>${points.map((point) => `<li>${point}</li>`).join('')}</ol><div class="learning-summary-formulas">${formulas.map((formula) => `<span>${formula}</span>`).join('')}</div><p class="learning-summary-answer">${answer}</p><p class="learning-complete-mark">${completed ? '✓ 学び直し完了' : '最後まで取り組みました'}</p></div>`);
+    }
+
+
+    function renderLesson9Problem() {
+        setBoard(`
+            <article class="learning-problem-card lesson9-problem-card">
+                <p class="learning-problem-label">9番の問題</p>
+                <p>折り紙を子どもたちに分けようと思います。</p>
+                <p>1人に3枚ずつ分けようとすると6枚あまり、1人に4枚ずつ分けようとすると2枚足りません。</p>
+                <p>子どもは何人いますか。</p>
+            </article>
+        `);
+    }
+
+    function renderLesson9Distribution(stage) {
+        const cards = Array.from({ length: 8 }, (_, index) => {
+            const extra = stage === "use-six" && index < 6;
+            const short = stage === "short-two" && index >= 6;
+            return `<span class="distribution-child ${extra ? "has-extra" : ""} ${short ? "is-short" : ""}"><small>子ども${index + 1}</small><b>● ● ●${extra ? " ●" : ""}${short ? " ＋？" : ""}</b></span>`;
+        }).join("");
+        const note = stage === "three"
+            ? "3枚ずつ配ったあと、6枚余っている"
+            : stage === "use-six"
+                ? "余った6枚で、6人へ1枚ずつ追加できた"
+                : "残り2人にも1枚ずつ必要なので、さらに2枚足りない";
+        setBoard(`
+            <div class="distribution-board lesson9-distribution">
+                <div class="distribution-children">${cards}</div>
+                <div class="distribution-stock">
+                    <strong>${stage === "three" ? "余り 6枚" : stage === "use-six" ? "6枚を配った" : "さらに 2枚必要"}</strong>
+                    <p>${note}</p>
+                </div>
+            </div>
+        `);
+    }
+
+    function renderLesson9Check() {
+        setBoard(`
+            <div class="distribution-check-board">
+                <div><small>3枚ずつ配る</small><b>3 × 8 ＋ 6</b><strong>＝30枚</strong></div>
+                <span>＝</span>
+                <div><small>4枚ずつ配る</small><b>4 × 8 − 2</b><strong>＝30枚</strong></div>
+                <p>どちらも30枚。だから子ども8人で合っている。</p>
+            </div>
+        `);
+    }
+
+    function renderLesson9Shortcut(stage) {
+        setBoard(`
+            <div class="distribution-shortcut-board ${stage === "steps" ? "is-revealed" : ""}">
+                <small>第2段階</small>
+                <h3>効率のよい式</h3>
+                <div><span>1人分の差</span><b>4 − 3 ＝ 1枚</b></div>
+                <div><span>余りから不足まで</span><b>6 ＋ 2 ＝ 8枚</b></div>
+                <strong>（6＋2）÷（4−3）＝8人</strong>
+            </div>
+        `);
+    }
+
+    function renderLesson9Summary() {
+        renderGenericSummary({
+            label: "9番の学び",
+            points: ["3枚から4枚へは、1人につき1枚増える", "余った6枚を使っても、さらに2枚必要なので6＋2", "全員へ1枚ずつ追加する8枚から、子どもは8人"],
+            formulas: ["4−3＝1", "6＋2＝8", "8÷1＝8"],
+            answer: "子どもは8人"
+        });
+    }
+
+    function renderLesson10Problem() {
+        setBoard(`
+            <article class="learning-problem-card lesson10-problem-card">
+                <p class="learning-problem-label">10番の問題</p>
+                <p>子ども会に集まった子どもたちにあめを配るのに、1人6個ずつにすると15個あまり、1人8個ずつにすると5個あまります。</p>
+                <p>子どもは何人いますか。また、あめは何個ありますか。</p>
+            </article>
+        `);
+    }
+
+    function renderLesson10Distribution(stage) {
+        const perChild = stage === "six" ? 6 : 8;
+        const children = Array.from({ length: 5 }, (_, index) => `
+            <span class="distribution-child ${stage === "difference" ? "has-extra" : ""}">
+                <small>子ども${index + 1}</small>
+                <b>${Array.from({ length: perChild }, () => "●").join(" ")}</b>
+                ${stage === "difference" ? "<em>＋2個</em>" : ""}
+            </span>
+        `).join("");
+        setBoard(`
+            <div class="distribution-board lesson10-distribution">
+                <div class="distribution-children">${children}</div>
+                <div class="distribution-stock">
+                    <strong>${stage === "six" ? "6個ずつ・余り15個" : "1人につき2個多く配る"}</strong>
+                    <p>${stage === "difference" ? "5人へ2個ずつ多く配ると、余りは10個減る" : "全員へ6個ずつ配った場面"}</p>
+                </div>
+            </div>
+        `);
+    }
+
+    function renderLesson10Check() {
+        setBoard(`
+            <div class="distribution-check-board">
+                <div><small>6個ずつ配る</small><b>6 × 5 ＋ 15</b><strong>＝45個</strong></div>
+                <span>＝</span>
+                <div><small>8個ずつ配る</small><b>8 × 5 ＋ 5</b><strong>＝45個</strong></div>
+                <p>どちらも45個。子どもは5人、あめは45個。</p>
+            </div>
+        `);
+    }
+
+    function renderLesson10Shortcut(stage) {
+        setBoard(`
+            <div class="distribution-shortcut-board ${stage === "steps" ? "is-revealed" : ""}">
+                <small>第2段階</small>
+                <h3>効率のよい式</h3>
+                <div><span>余りの差</span><b>15 − 5 ＝ 10個</b></div>
+                <div><span>1人分の差</span><b>8 − 6 ＝ 2個</b></div>
+                <strong>（15−5）÷（8−6）＝5人</strong>
+            </div>
+        `);
+    }
+
+    function renderLesson10Summary() {
+        renderGenericSummary({
+            label: "10番の学び",
+            points: ["余り15個と余り5個の差は10個", "6個から8個へは、1人につき2個増える", "10÷2＝5人。6×5＋15＝45個"],
+            formulas: ["15−5＝10", "8−6＝2", "10÷2＝5", "6×5＋15＝45"],
+            answer: "子どもは5人　あめは45個"
+        });
     }
 
     function setBoard(html) {
