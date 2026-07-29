@@ -1423,3 +1423,214 @@
     #learningforest-screen .lesson8-shortcut-step { padding: 4px 8px; }
     #learningforest-screen .lesson8-shortcut-arrow { font-size: 12px; }
 }
+
+
+/* =========================================================
+   学びの森 Ver2.1・第9問／第10問 配り方の差
+   ========================================================= */
+
+.distribution-board {
+    width: min(94%, 820px);
+    margin: 0 auto;
+    display: grid;
+    gap: 14px;
+    align-content: center;
+    min-height: 100%;
+}
+
+.distribution-children {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.distribution-child {
+    min-height: 70px;
+    padding: 8px 6px;
+    border: 2px solid rgba(245, 230, 174, 0.75);
+    border-radius: 12px;
+    background: rgba(255, 250, 220, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    text-align: center;
+}
+
+.distribution-child small {
+    font-size: clamp(11px, 1.4vw, 15px);
+    opacity: 0.88;
+}
+
+.distribution-child b {
+    font-size: clamp(13px, 1.7vw, 19px);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.distribution-child.has-extra {
+    border-color: #f0d36f;
+    background: rgba(240, 211, 111, 0.18);
+}
+
+.distribution-child.is-short {
+    border-style: dashed;
+    border-color: #f2a1a1;
+    background: rgba(160, 45, 45, 0.18);
+}
+
+.distribution-child em {
+    color: #f4da78;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.distribution-stock {
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(12, 35, 24, 0.72);
+    text-align: center;
+}
+
+.distribution-stock strong {
+    display: block;
+    color: #ffe18a;
+    font-size: clamp(18px, 2.4vw, 28px);
+}
+
+.distribution-stock p {
+    margin: 5px 0 0;
+    line-height: 1.45;
+}
+
+.distribution-check-board {
+    width: min(92%, 820px);
+    min-height: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 14px;
+    align-items: center;
+}
+
+.distribution-check-board > div {
+    padding: 18px 12px;
+    border: 2px solid rgba(245, 230, 174, 0.78);
+    border-radius: 14px;
+    background: rgba(12, 35, 24, 0.72);
+    text-align: center;
+}
+
+.distribution-check-board small,
+.distribution-check-board b,
+.distribution-check-board strong {
+    display: block;
+}
+
+.distribution-check-board b {
+    margin: 8px 0 4px;
+    font-size: clamp(20px, 3vw, 34px);
+}
+
+.distribution-check-board strong {
+    color: #ffe18a;
+    font-size: clamp(18px, 2.4vw, 28px);
+}
+
+.distribution-check-board > span {
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 900;
+}
+
+.distribution-check-board > p {
+    grid-column: 1 / -1;
+    margin: 0;
+    text-align: center;
+    font-weight: 800;
+}
+
+.distribution-shortcut-board {
+    width: min(88%, 720px);
+    min-height: 100%;
+    margin: 0 auto;
+    display: grid;
+    align-content: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.distribution-shortcut-board > small {
+    color: #f4d77b;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+}
+
+.distribution-shortcut-board h3 {
+    margin: 0 0 6px;
+    font-size: clamp(23px, 3vw, 36px);
+}
+
+.distribution-shortcut-board > div {
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(255, 250, 220, 0.10);
+    opacity: 0.45;
+    transform: translateY(4px);
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.distribution-shortcut-board.is-revealed > div {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.distribution-shortcut-board span,
+.distribution-shortcut-board b {
+    display: block;
+}
+
+.distribution-shortcut-board b {
+    margin-top: 3px;
+    color: #ffe18a;
+    font-size: clamp(18px, 2.5vw, 29px);
+}
+
+.distribution-shortcut-board > strong {
+    margin-top: 4px;
+    padding: 11px 14px;
+    border: 2px solid #f0d36f;
+    border-radius: 12px;
+    color: #fff0ad;
+    font-size: clamp(20px, 2.8vw, 32px);
+}
+
+@media (max-height: 520px) and (min-width: 600px) {
+    .distribution-children {
+        gap: 5px;
+    }
+
+    .distribution-child {
+        min-height: 43px;
+        padding: 3px;
+        gap: 1px;
+    }
+
+    .distribution-stock {
+        padding: 6px 10px;
+    }
+
+    .distribution-check-board > div {
+        padding: 8px;
+    }
+
+    .distribution-shortcut-board {
+        gap: 5px;
+    }
+
+    .distribution-shortcut-board > div,
+    .distribution-shortcut-board > strong {
+        padding: 5px 9px;
+    }
+}
