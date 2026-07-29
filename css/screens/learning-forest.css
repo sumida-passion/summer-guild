@@ -1634,3 +1634,104 @@
         padding: 5px 9px;
     }
 }
+
+
+/* =========================================================
+   学びの森 Ver2.2・第11〜12問「勉強の仕方」
+   ========================================================= */
+#learningforest-screen .study-method-tutorial,
+#learningforest-screen .understanding-cloze,
+#learningforest-screen .notebook-training,
+#learningforest-screen .study-difference-diagram,
+#learningforest-screen .study-verification,
+#learningforest-screen .study-shortcut,
+#learningforest-screen .study-insight-choice {
+    width: min(94%, 850px);
+    min-height: 100%;
+    margin: 0 auto;
+    display: grid;
+    align-content: center;
+    gap: 10px;
+}
+#learningforest-screen .study-method-tutorial header,
+#learningforest-screen .understanding-cloze header,
+#learningforest-screen .notebook-training header,
+#learningforest-screen .study-difference-diagram header,
+#learningforest-screen .study-verification header,
+#learningforest-screen .study-shortcut header,
+#learningforest-screen .study-insight-choice header { text-align: center; }
+#learningforest-screen .study-method-tutorial header small,
+#learningforest-screen .understanding-cloze header small,
+#learningforest-screen .notebook-training header small,
+#learningforest-screen .study-difference-diagram header small,
+#learningforest-screen .study-verification header small,
+#learningforest-screen .study-shortcut header small,
+#learningforest-screen .study-insight-choice header small { color:#f1d477; font-weight:900; letter-spacing:.12em; }
+#learningforest-screen .study-method-tutorial h3,
+#learningforest-screen .understanding-cloze h3,
+#learningforest-screen .notebook-training h3,
+#learningforest-screen .study-difference-diagram h3,
+#learningforest-screen .study-verification h3,
+#learningforest-screen .study-shortcut h3,
+#learningforest-screen .study-insight-choice h3 { margin:2px 0; font-size:clamp(20px,2.6vw,34px); }
+#learningforest-screen .study-color-rule,
+#learningforest-screen .board-copy,
+#learningforest-screen .teacher-explanation,
+#learningforest-screen .notebook-advice { padding:10px 14px; border-radius:12px; display:grid; gap:3px; }
+#learningforest-screen .study-color-rule b,
+#learningforest-screen .board-copy b,
+#learningforest-screen .teacher-explanation b,
+#learningforest-screen .notebook-advice b { font-size:clamp(14px,1.8vw,20px); }
+#learningforest-screen .is-yellow { background:#f1d56f; color:#2e2818; border:2px solid #fff0a8; }
+#learningforest-screen .is-white { background:#f7f3e7; color:#2f332f; border:2px solid #fff; }
+#learningforest-screen .is-green { background:#bfe3b5; color:#17351c; border:2px solid #dff5d8; }
+#learningforest-screen .study-confirm-button,
+#learningforest-screen .cloze-submit,
+#learningforest-screen .notebook-done-button { justify-self:center; min-width:180px; padding:10px 20px; border:2px solid #f3dc8b; border-radius:999px; background:#6f471f; color:#fff5cf; font-weight:900; font-size:clamp(15px,1.8vw,20px); }
+#learningforest-screen .study-no-calculator { margin-top:10px; padding:8px 12px; border:2px dashed #f2d679; border-radius:10px; color:#ffe99a; text-align:center; font-weight:900; }
+#learningforest-screen .cloze-sentences { display:grid; gap:7px; }
+#learningforest-screen .cloze-sentences label { display:grid; grid-template-columns:1fr minmax(145px, 34%); gap:8px; align-items:center; padding:7px 10px; border-radius:10px; background:rgba(255,255,255,.09); }
+#learningforest-screen .cloze-sentences select { width:100%; padding:7px; border:2px solid #dbc77d; border-radius:8px; font-weight:800; }
+#learningforest-screen .cloze-sentences select.wrong { border-color:#e99090; background:#ffe3e3; }
+#learningforest-screen .cloze-sentences select.correct { border-color:#7bc989; background:#e2f7df; }
+#learningforest-screen .board-copy span { display:block; font-size:clamp(16px,2.1vw,25px); font-weight:900; }
+#learningforest-screen .difference-track { display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:center; }
+#learningforest-screen .difference-part { padding:14px; border-radius:13px; text-align:center; background:rgba(255,255,255,.1); border:2px solid rgba(245,226,156,.7); }
+#learningforest-screen .difference-part b { display:block; color:#ffe58a; font-size:clamp(28px,4vw,48px); }
+#learningforest-screen .difference-part span { font-weight:800; }
+#learningforest-screen .difference-arrow { font-size:34px; font-weight:950; }
+#learningforest-screen .difference-total,
+#learningforest-screen .difference-unit { padding:9px 12px; border-radius:10px; background:rgba(12,35,24,.72); text-align:center; font-size:clamp(16px,2vw,23px); }
+#learningforest-screen .difference-total strong,
+#learningforest-screen .difference-unit strong { color:#ffe18a; }
+#learningforest-screen .study-verification { grid-template-columns:1fr 1fr; }
+#learningforest-screen .study-verification header,
+#learningforest-screen .study-verification p { grid-column:1/-1; }
+#learningforest-screen .study-verification > div { padding:15px; border:2px solid rgba(245,226,156,.72); border-radius:12px; background:rgba(12,35,24,.68); text-align:center; }
+#learningforest-screen .study-verification span,
+#learningforest-screen .study-verification b { display:block; }
+#learningforest-screen .study-verification b { margin-top:6px; color:#ffe18a; font-size:clamp(18px,2.5vw,29px); }
+#learningforest-screen .study-verification p { margin:0; text-align:center; font-weight:850; }
+#learningforest-screen .study-shortcut > p { margin:0; padding:7px 12px; border-radius:9px; background:rgba(255,255,255,.09); text-align:center; }
+#learningforest-screen .study-shortcut > strong { padding:13px; border:2px solid #f0d36f; border-radius:13px; color:#fff0ad; text-align:center; font-size:clamp(21px,3vw,35px); }
+#learningforest-screen .study-insight-choice > div { display:grid; gap:8px; }
+#learningforest-screen .study-insight-choice button { padding:11px 13px; border:2px solid rgba(241,216,136,.72); border-radius:11px; background:rgba(255,255,255,.09); color:#fff7d8; font-weight:850; text-align:left; }
+#learningforest-screen .study-insight-choice button.correct { background:rgba(74,150,76,.55); border-color:#a8e3a2; }
+#learningforest-screen .study-insight-choice button.wrong { background:rgba(155,56,56,.45); border-color:#efa2a2; }
+#learningforest-screen .study-real-exp { margin:8px 0 0; padding:10px; border:2px solid #e9cf76; border-radius:11px; color:#ffe99d; text-align:center; font-weight:950; }
+@media (max-height: 560px) and (min-width: 600px) {
+    #learningforest-screen .study-method-tutorial,
+    #learningforest-screen .understanding-cloze,
+    #learningforest-screen .notebook-training,
+    #learningforest-screen .study-difference-diagram,
+    #learningforest-screen .study-verification,
+    #learningforest-screen .study-shortcut,
+    #learningforest-screen .study-insight-choice { gap:5px; }
+    #learningforest-screen .study-color-rule,
+    #learningforest-screen .board-copy,
+    #learningforest-screen .teacher-explanation,
+    #learningforest-screen .notebook-advice { padding:5px 9px; }
+    #learningforest-screen .cloze-sentences { gap:3px; }
+    #learningforest-screen .cloze-sentences label { padding:3px 7px; }
+    #learningforest-screen .difference-part { padding:6px; }
+}
