@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-29T07:53:07.250070+00:00",
-    "commit": "112605c",
+    "atUtc": "2026-07-29T07:53:34.438142+00:00",
+    "commit": "c8b2d74",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97168552,
+    "totalBytes": 97187972,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1789,9 +1789,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 102084,
-      "sha1": "dc3b83a3da",
-      "lineCount": 1633
+      "sizeBytes": 121504,
+      "sha1": "f3b1c3c19f",
+      "lineCount": 1879
     },
     {
       "path": "js/screens/musicShop.js",
@@ -3086,6 +3086,8 @@
         "createLesson8Steps",
         "createLesson9Steps",
         "createLesson10Steps",
+        "createLesson11Steps",
+        "createLesson12Steps",
         "init",
         "open",
         "close",
@@ -3167,14 +3169,12 @@
         "renderLesson10Check",
         "renderLesson10Shortcut",
         "renderLesson10Summary",
-        "setBoard",
-        "board",
-        "syncLearningPlayer",
-        "setupCanvas",
-        "startStroke",
-        "drawStroke",
-        "endStroke",
-        "canvasPoint"
+        "renderStudyMethodTutorial",
+        "renderStudyMethodProblem",
+        "renderUnderstandingCloze",
+        "renderNotebookPrompt",
+        "renderStudyDifferenceDiagram",
+        "renderStudyVerification"
       ],
       "classes": [],
       "windowExports": [
@@ -3656,7 +3656,7 @@
     {
       "status": "M",
       "paths": [
-        "css/screens/learning-forest.css"
+        "js/screens/learningForest.js"
       ]
     }
   ],
