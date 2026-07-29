@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-27T06:30:51.903053+00:00",
-    "commit": "42816b8",
+    "atUtc": "2026-07-29T04:14:24.060264+00:00",
+    "commit": "ac3986f",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97140914,
+    "totalBytes": 97158627,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1404,9 +1404,9 @@
       "stem": "learning-forest",
       "extension": ".css",
       "extensionNormalized": ".css",
-      "sizeBytes": 46432,
-      "sha1": "144e722802",
-      "lineCount": 1425
+      "sizeBytes": 50694,
+      "sha1": "3f3e500571",
+      "lineCount": 1636
     },
     {
       "path": "data/achievements/.gitkeep",
@@ -1593,8 +1593,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 19558,
-      "sha1": "08a5f71492",
+      "sizeBytes": 19774,
+      "sha1": "6df33cb5de",
       "lineCount": 790
     },
     {
@@ -1789,9 +1789,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 88829,
-      "sha1": "012ecfc8ab",
-      "lineCount": 1468
+      "sizeBytes": 102084,
+      "sha1": "dc3b83a3da",
+      "lineCount": 1633
     },
     {
       "path": "js/screens/musicShop.js",
@@ -1973,8 +1973,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4503,
-      "sha1": "acccc69dae",
+      "sizeBytes": 4511,
+      "sha1": "899793943c",
       "lineCount": 177
     },
     {
@@ -2005,9 +2005,9 @@
       "stem": "UPLOAD_FILES",
       "extension": ".txt",
       "extensionNormalized": ".txt",
-      "sizeBytes": 303,
-      "sha1": "c14a06817a",
-      "lineCount": 13
+      "sizeBytes": 275,
+      "sha1": "59cf04a2f2",
+      "lineCount": 11
     }
   ],
   "images": [
@@ -3073,6 +3073,8 @@
         "createLesson6Steps",
         "createLesson7Steps",
         "createLesson8Steps",
+        "createLesson9Steps",
+        "createLesson10Steps",
         "init",
         "open",
         "close",
@@ -3144,6 +3146,16 @@
         "renderGenericNumber",
         "renderGenericOrder",
         "renderGenericSummary",
+        "renderLesson9Problem",
+        "renderLesson9Distribution",
+        "renderLesson9Check",
+        "renderLesson9Shortcut",
+        "renderLesson9Summary",
+        "renderLesson10Problem",
+        "renderLesson10Distribution",
+        "renderLesson10Check",
+        "renderLesson10Shortcut",
+        "renderLesson10Summary",
         "setBoard",
         "board",
         "syncLearningPlayer",
@@ -3151,18 +3163,7 @@
         "startStroke",
         "drawStroke",
         "endStroke",
-        "canvasPoint",
-        "redrawMemo",
-        "resizeCanvas",
-        "scheduleCanvasResize",
-        "openMemo",
-        "closeMemo",
-        "undoMemo",
-        "clearMemo",
-        "todayKey",
-        "saveCompletion",
-        "getState",
-        "bind"
+        "canvasPoint"
       ],
       "classes": [],
       "windowExports": [
@@ -3644,7 +3645,7 @@
     {
       "status": "M",
       "paths": [
-        "js/quests/review.js"
+        "css/screens/learning-forest.css"
       ]
     }
   ],
