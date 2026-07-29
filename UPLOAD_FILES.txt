@@ -1,13 +1,11 @@
 今回GitHubへアップロードするファイル
 
-js/quests/review.js
+js/screens/learningForest.js
+css/screens/learning-forest.css
 index.html
 service-worker.js
-project-index.json
 docs/GPT_HANDOFF.md
 docs/development-log.md
-docs/GPT_PROJECT_STATE.md
-docs/PROJECT_STATE.json
 UPLOAD_FILES.txt
 
 ※差分ZIPは上記と同じ相対パスで収録しています。
