@@ -1118,48 +1118,51 @@
 
     function createLesson22Steps() {
         return [
-            makeStep("まずは実際の問題文を読もう。道の『両側』と、木の間の『区間』に注目しよう。", () => renderHypothesisProblem({
+            makeStep("まずは実際の問題文を読もう。道の『両側』と、木と木の間にできる『区間』に注目しよう。", () => renderHypothesisProblem({
                 label: "6-1",
                 lines: [
                     "240mの道の両側に、桜の木が8mおきに植えてあります。",
                     "桜の木は全部で何本植えてありますか。"
                 ]
             }), true),
-            makeStep("まず片側だけを見よう。240mを8mずつに分けると、区間はいくつできる？", () => renderRoadTreeBoard({ stage: "intervals" })),
-            makeStep("240mの中に8mの区間はいくつある？", () => renderGenericNumber({
+            makeStep("まず、区間と木の本数の関係を小さな図で見てみよう。1区間をはさむ木は何本あるかな？", () => renderRoadTreeBoard({ stage: "pattern-1" })),
+            makeStep("1区間なら木は2本。では、2区間ならどうなる？", () => renderRoadTreeBoard({ stage: "pattern-2" })),
+            makeStep("2区間なら木は3本。では、3区間なら？", () => renderRoadTreeBoard({ stage: "pattern-3" })),
+            makeStep("1区間で2本、2区間で3本、3区間で4本。木の本数は、いつも区間数より1本多いね。", () => renderRoadTreeBoard({ stage: "rule" })),
+            makeStep("それでは実際の240mの道を考えよう。240mを8mずつに分けると、いくつの区間ができる？", () => renderGenericNumber({
                 title: "片側の区間数",
                 formula: "240 ÷ 8 ＝",
                 expected: "30",
                 unit: "区間",
-                success: "片側には30区間ある。けれど、木の本数は30本ではないよ。▽を押して続けよう。",
+                success: "30区間だね。次は、その30区間をはさむ木の本数を考えよう。▽を押して続けよう。",
                 hint: "道の長さ240mを、1区間8mで分けよう。"
             }), true),
-            makeStep("道のはしからはしまで植えると、区間30個をはさむ木は、区間より1本多くなる。", () => renderRoadTreeBoard({ stage: "one-side" })),
+            makeStep("8mの区間が30個続いている。区間数より木は1本多いから、片側には何本ある？", () => renderRoadTreeBoard({ stage: "thirty-intervals" })),
             makeStep("片側の木は何本になる？", () => renderGenericNumber({
                 title: "片側の木の本数",
                 formula: "30 ＋ 1 ＝",
                 expected: "31",
                 unit: "本",
-                success: "片側は31本。問題は道の両側だ。▽を押して続けよう。",
-                hint: "両端にも木があるので、区間数より1本多い。"
+                success: "片側は31本。けれど、問題には『道の両側』と書いてあったね。▽を押して続けよう。",
+                hint: "木の本数は、区間数より1本多い。"
             }), true),
-            makeStep("同じ31本の並びが、道の反対側にもある。", () => renderRoadTreeBoard({ stage: "both-sides" })),
-            makeStep("両側では全部で何本？", () => renderGenericNumber({
+            makeStep("『道の両側』とは、同じ31本の並びが道路をはさんで2列あるということだ。", () => renderRoadTreeBoard({ stage: "both-sides" })),
+            makeStep("片側31本が2列ある。桜の木は全部で何本？", () => renderGenericNumber({
                 title: "両側の木の本数",
                 formula: "31 × 2 ＝",
                 expected: "62",
                 unit: "本",
-                success: "全部で62本。区間と本数を区別できたね。▽を押して続けよう。",
-                hint: "片側31本が、道の両側にある。"
+                success: "正解は62本。区間、片側、両側の順に考えられたね。▽を押して続けよう。",
+                hint: "片側31本が、道路をはさんで2列ある。"
             }), true),
             makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
-                formulas: ["240÷8＝30区間", "道の両端にも木がある", "30＋1＝片側31本", "31×2＝62本"],
-                success: "区間→片側の本数→両側の本数の順で考えられた。▽を押してまとめよう。",
-                hint: "最初は片側の区間数を求めよう。"
+                formulas: ["240÷8＝30区間", "30＋1＝片側31本", "道の両側にも木がある", "31×2＝62本"],
+                success: "区間→片側の本数→道の両側→全部の本数の順で考えられた。▽を押してまとめよう。",
+                hint: "最初は片側の区間数を求め、その次に片側の木の本数を求めよう。"
             }), true),
-            makeStep("6-1では『はしからはしまで』なので、木の本数は区間数より1本多くなる。", () => renderGenericSummary({
+            makeStep("6-1では、木が道のはしからはしまで並ぶので、木の本数は区間数より1本多くなる。", () => renderGenericSummary({
                 label: "6-1の学び",
-                points: ["まず片側だけで考える", "240÷8で30区間を求める", "両端の木があるので片側31本、最後に2倍する"],
+                points: ["1区間なら木2本、2区間なら木3本、3区間なら木4本", "240÷8で片側30区間、30＋1で片側31本", "同じ並びが道の両側にあるので、最後に2倍する"],
                 formulas: ["240÷8＝30", "30＋1＝31", "31×2＝62"],
                 answer: "桜の木は全部で62本"
             }))
@@ -1168,30 +1171,31 @@
 
     function createLesson23Steps() {
         return [
-            makeStep("まずは実際の問題文を読もう。6-1で求めた本数を使って考える問題だ。", () => renderHypothesisProblem({
+            makeStep("まずは実際の問題文を読もう。これは、さっきの6-1の続きの問題だよ。", () => renderHypothesisProblem({
                 label: "6-2",
                 lines: [
                     "新しく20本の桜の木を増やして、両はしの木はそのままで、等しい間隔になるように植えかえることにしました。",
                     "何mおきに植えればよいですか。"
                 ]
             }), true),
-            makeStep("6-1で、もとの桜は両側合わせて62本だった。そこへ20本増えると全部で何本？", () => renderGenericNumber({
+            makeStep("これは6-1の続きだよ。240mの道に8mおきで植えたとき、桜は両側合わせて62本だったね。", () => renderRoadTreeBoard({ stage: "recap-62" })),
+            makeStep("その62本に、新しく20本を増やす。全部で何本になる？", () => renderGenericNumber({
                 title: "増やしたあとの本数",
                 formula: "62 ＋ 20 ＝",
                 expected: "82",
                 unit: "本",
-                success: "両側合わせて82本。左右に同じ本数ずつ植える。▽を押して続けよう。",
-                hint: "もとの62本に、新しい20本を足そう。"
+                success: "両側合わせて82本。道路の両側に同じ本数ずつ植えるよ。▽を押して続けよう。",
+                hint: "さっきの答え62本に、新しい20本を足そう。"
             }), true),
             makeStep("両側合わせて82本なので、片側には何本ある？", () => renderGenericNumber({
                 title: "片側の本数",
                 formula: "82 ÷ 2 ＝",
                 expected: "41",
                 unit: "本",
-                success: "片側は41本。両はしの木はそのままだから、区間数を考えよう。▽を押して続けよう。",
-                hint: "道の両側に同じ本数ずつある。"
+                success: "片側は41本。両はしの木はそのままだから、次は区間数を考えよう。▽を押して続けよう。",
+                hint: "道路をはさんだ2列に、同じ本数ずつ植える。"
             }), true),
-            makeStep("両はしに木がある並びでは、木41本の間にできる区間は40個だ。", () => renderRoadTreeBoard({ stage: "replant" })),
+            makeStep("木が41本なら、その間にできる区間はいくつかな？ 6-1とは反対に、木の本数から1を引こう。", () => renderRoadTreeBoard({ stage: "replant" })),
             makeStep("片側41本なら、区間はいくつ？", () => renderGenericNumber({
                 title: "植えかえ後の区間数",
                 formula: "41 − 1 ＝",
@@ -1208,21 +1212,20 @@
                 success: "6mおきに植えればよい。▽を押して続けよう。",
                 hint: "道の長さ240mを、40区間で分けよう。"
             }), true),
-            makeStep("6mおきなら、240÷6＝40区間、木は片側41本になる。", () => renderRoadTreeBoard({ stage: "replant-answer" })),
+            makeStep("6mおきなら、240÷6＝40区間。木は片側41本になり、両側で82本になるね。", () => renderRoadTreeBoard({ stage: "replant-answer" })),
             makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
                 formulas: ["62＋20＝全部82本", "82÷2＝片側41本", "41−1＝40区間", "240÷40＝6m"],
-                success: "本数から区間数へ戻して、新しい間隔を求められた。▽を押してまとめよう。",
-                hint: "まず増やしたあとの全部の本数を求めよう。"
+                success: "6-1の答えを受け継ぎ、本数から区間数へ戻して新しい間隔を求められた。▽を押してまとめよう。",
+                hint: "まず、もとの62本に20本を増やそう。"
             }), true),
-            makeStep("6-2では、木の本数から区間数へ戻すときに1を引くことがポイントだ。", () => renderGenericSummary({
+            makeStep("6-2では、6-1で求めた62本から出発し、木の本数から区間数へ戻すときに1を引くことがポイントだ。", () => renderGenericSummary({
                 label: "6-2の学び",
-                points: ["両側の木を82本に増やす", "片側41本に分ける", "両端に木があるので40区間と考える"],
+                points: ["6-1の答え62本に20本を増やして82本", "道の両側なので片側41本", "木41本なら40区間。240mを40区間に分ける"],
                 formulas: ["62＋20＝82", "82÷2＝41", "41−1＝40", "240÷40＝6"],
                 answer: "6mおきに植える"
             }))
         ];
     }
-
 
     const lessonFactories = {
         1: createLesson1Steps,
@@ -2358,51 +2361,105 @@
     }
 
     function renderRoadTreeBoard({ stage }) {
-        const both = stage === "both-sides";
-        const replant = stage === "replant" || stage === "replant-answer";
-        const intervalLabel = replant ? "6m" : "8m";
-        const treeCount = replant ? 41 : 31;
-        const intervalCount = replant ? 40 : 30;
-        const row = `
-            <div style="display:flex;align-items:center;justify-content:center;gap:0;max-width:680px;margin:10px auto;">
-                ${Array.from({ length: 7 }, (_, index) => `
+        const makeRow = ({ interval = "8m", count = 7, suffix = "" } = {}) => `
+            <div style="display:flex;align-items:center;justify-content:center;gap:0;max-width:760px;margin:8px auto;">
+                ${Array.from({ length: count }, (_, index) => `
                     <span style="display:flex;align-items:center;">
-                        <b style="font-size:30px;line-height:1;">🌸</b>
-                        ${index < 6 ? `<i style="display:inline-flex;align-items:center;justify-content:center;width:56px;border-top:4px solid #f1e4b5;font-style:normal;font-weight:800;font-size:14px;color:#fff;">${intervalLabel}</i>` : ""}
+                        <b style="font-size:29px;line-height:1;">🌸</b>
+                        ${index < count - 1 ? `<i style="display:inline-flex;align-items:center;justify-content:center;width:54px;border-top:4px solid #f1e4b5;font-style:normal;font-weight:800;font-size:14px;color:#fff;">${interval}</i>` : ""}
                     </span>
                 `).join("")}
+                ${suffix ? `<strong style="margin-left:12px;font-size:18px;color:#f6e7b7;">${suffix}</strong>` : ""}
             </div>`;
-        const title = stage === "intervals"
-            ? "まず片側の区間を数える"
-            : stage === "one-side"
-                ? "区間30個をはさむ木"
-                : stage === "both-sides"
-                    ? "同じ並びが道の両側にある"
-                    : stage === "replant"
-                        ? "木41本なら区間は40個"
-                        : "6mおきに植えかえた並び";
-        const note = stage === "intervals"
-            ? "240m÷8m＝30区間"
-            : stage === "one-side"
-                ? "木の本数＝区間数＋1　だから31本"
-                : stage === "both-sides"
-                    ? "片側31本×2＝62本"
-                    : stage === "replant"
-                        ? "両はしの木を残すので、41−1＝40区間"
-                        : "240m÷40区間＝6m";
-        setBoard(`
-            <section class="hypothesis-board">
-                <header><small>${replant ? "6-2" : "6-1"}</small><h3>${title}</h3></header>
-                ${row}
-                ${both ? row : ""}
-                <div class="hypothesis-flow">
-                    <div><span>道の長さ</span><b>240m</b></div>
-                    <div><span>片側</span><b>${treeCount}本・${intervalCount}区間</b></div>
-                    <div><span>${both ? "両側" : "間隔"}</span><b>${both ? "62本" : intervalLabel + "おき"}</b></div>
-                </div>
-                <p>${note}</p>
-            </section>
-        `);
+
+        const patternData = {
+            "pattern-1": { count: 2, title: "1区間をはさむ木", note: "1区間　→　木2本" },
+            "pattern-2": { count: 3, title: "2区間をはさむ木", note: "2区間　→　木3本" },
+            "pattern-3": { count: 4, title: "3区間をはさむ木", note: "3区間　→　木4本" }
+        };
+
+        if (patternData[stage]) {
+            const data = patternData[stage];
+            setBoard(`
+                <section class="hypothesis-board">
+                    <header><small>6-1</small><h3>${data.title}</h3></header>
+                    ${makeRow({ count: data.count })}
+                    <div class="hypothesis-flow">
+                        <div><span>区間</span><b>${data.count - 1}個</b></div>
+                        <div><span>木</span><b>${data.count}本</b></div>
+                    </div>
+                    <p>${data.note}</p>
+                </section>
+            `);
+            return;
+        }
+
+        if (stage === "rule") {
+            setBoard(`
+                <section class="hypothesis-board">
+                    <header><small>6-1</small><h3>区間と木の本数のきまり</h3></header>
+                    <div class="hypothesis-flow">
+                        <div><span>1区間</span><b>木2本</b></div>
+                        <div><span>2区間</span><b>木3本</b></div>
+                        <div><span>3区間</span><b>木4本</b></div>
+                    </div>
+                    <p style="font-size:27px;font-weight:900;">木の本数 ＝ 区間数 ＋ 1</p>
+                </section>
+            `);
+            return;
+        }
+
+        if (stage === "thirty-intervals") {
+            setBoard(`
+                <section class="hypothesis-board">
+                    <header><small>6-1</small><h3>8mの区間が30個</h3></header>
+                    ${makeRow({ suffix: "……240mまで続く" })}
+                    <div class="hypothesis-flow">
+                        <div><span>道の長さ</span><b>240m</b></div>
+                        <div><span>間隔</span><b>8mおき</b></div>
+                        <div><span>区間</span><b>30個</b></div>
+                    </div>
+                    <p>木の本数は区間数より1本多い。30＋1は？</p>
+                </section>
+            `);
+            return;
+        }
+
+        if (stage === "both-sides" || stage === "recap-62") {
+            const isRecap = stage === "recap-62";
+            setBoard(`
+                <section class="hypothesis-board">
+                    <header><small>${isRecap ? "6-2" : "6-1"}</small><h3>${isRecap ? "6-1を振り返ろう" : "これが『道の両側』"}</h3></header>
+                    ${makeRow({ suffix: "30区間・31本" })}
+                    <div style="height:34px;display:flex;align-items:center;justify-content:center;margin:0 auto;color:#f7e8b6;font-weight:900;letter-spacing:8px;">道路　道路　道路　道路　道路</div>
+                    ${makeRow({ suffix: "30区間・31本" })}
+                    <div class="hypothesis-flow">
+                        <div><span>片側</span><b>31本</b></div>
+                        <div><span>もう片側</span><b>31本</b></div>
+                        ${isRecap ? '<div><span>両側</span><b>62本</b></div>' : ""}
+                    </div>
+                    <p>${isRecap ? "240m・8mおきでは、両側合わせて62本だった。" : "同じ31本の並びが、道路をはさんで2列ある。"}</p>
+                </section>
+            `);
+            return;
+        }
+
+        const replant = stage === "replant" || stage === "replant-answer";
+        if (replant) {
+            const answered = stage === "replant-answer";
+            setBoard(`
+                <section class="hypothesis-board">
+                    <header><small>6-2</small><h3>${answered ? "6mおきに植えかえた並び" : "木41本の間にできる区間"}</h3></header>
+                    ${makeRow({ interval: answered ? "6m" : "？m", suffix: answered ? "40区間・41本" : "41本" })}
+                    <div class="hypothesis-flow">
+                        <div><span>片側の木</span><b>41本</b></div>
+                        <div><span>区間</span><b>${answered ? "40個" : "木より1少ない"}</b></div>
+                        ${answered ? '<div><span>間隔</span><b>6mおき</b></div>' : ""}
+                    </div>
+                    <p>${answered ? "240m÷40区間＝6m" : "両はしに木があるので、区間数は41−1。"}</p>
+                </section>
+            `);
+        }
     }
 
     function renderGenericSummary({ label, points, formulas, answer }) {
