@@ -9,7 +9,7 @@
    ・LocalStorage（GP・衣装・招待済み楽団など）には触れない
    ========================================================= */
 
-const SW_VERSION = "20260730-learning-forest-lessons-5-3-5-4-6-1-6-2-v1";
+const SW_VERSION = "20260730-learning-forest-6-1-6-2-flow-v2";
 const CACHE_PREFIX = "summer-guild-";
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${SW_VERSION}`;
 
