@@ -290,9 +290,9 @@
                     { before: "4個ずつ分けると、クッキーが", answer: "9個余る", choices: ["9個余る", "9個足りない", "4人余る"] },
                     { before: "6個ずつ分けるには、クッキーが", answer: "5個足りない", choices: ["5個余る", "5個足りない", "6個足りない"] },
                     { before: "1人分の差は", answer: "2個", choices: ["2個", "10個", "14個"] },
-                    { before: "余りから不足までの全体の差は", answer: "14個", choices: ["4個", "9個", "14個"] }
+                    { before: "余っている9個は、1人4個から6個へ増やすために", answer: "使える", choices: ["使える", "使えない", "捨てる"] }
                 ],
-                hint: "『余る』と『足りない』は、間をつなぐので足す。4個と6個は、1人分の違いを比べよう。",
+                hint: "まず『4個ずつで9個余る』場面を考えよう。その9個は、みんなへ追加して配れるクッキーだよ。",
                 success: "問題の意味を整理できた。自分のノートへ、必要な情報を書こう。▽を押して続けよう。"
             }), true),
             makeStep("ノートへ、問題番号と必要な条件を書こう。今回は書く内容を自分で選んでみよう。", () => renderNotebookPrompt({
@@ -301,12 +301,15 @@
                 advice: "式を書き足せるように、下を少し空けておこう。",
                 detail: "板書は必ず写す。説明は、自分に必要だと思うところを選んで書く。"
             }), true),
-            makeStep("余り9個を使っても、さらに5個必要。全員へ増やすクッキーは14個になる。", () => renderStudyDifferenceDiagram({ lesson: 12, stage: "whole" })),
+            makeStep("4個ずつ配り終わると、手元にはクッキーが9個残っている。", () => renderLesson12CookieFlow("surplus")),
+            makeStep("ギルドマスター：『せっかく9個あるんだ。まず、みんなへもう1個ずつ足してみよう。』これで1人5個ずつになる。", () => renderLesson12CookieFlow("five")),
+            makeStep("ギルドマスター：『まだ全員6個にはなっていないね。もう1個ずつ足してみよう。』ところが、途中でクッキーがなくなった。", () => renderLesson12CookieFlow("six-short")),
+            makeStep("あと5個あれば、全員が6個ずつになる。最初に使えた9個と、あと必要な5個を合わせると、追加分は全部で14個だ。", () => renderLesson12CookieFlow("total")),
             makeStep("ノートへ、自分で見つけた2つの差を書き足そう。", () => renderNotebookPrompt({
                 title: "考えた式",
-                lines: ["6−4＝2個", "9＋5＝14個"],
-                advice: "同じ役割の式は、縦をそろえて書くと見直しやすい。",
-                detail: "『1人分の差』『全体の差』という言葉も必要だと思えば加えよう。"
+                lines: ["1人分の差　6−4＝2個", "追加に必要な全部　9＋5＝14個"],
+                advice: "9個は実際に使えた分、5個はあと必要だった分、と言葉も一緒に書こう。",
+                detail: "『余り＋不足』と暗記するより、6個ずつにするための追加分を全部集めた式だと考えよう。"
             }), true),
             makeStep("全体の差14個を、1人分の差2個ずつに分けよう。何人に分ける問題かな？", () => renderGenericNumber({ title: "分ける人数", formula: "14 ÷ 2 ＝", expected: "7", unit: "人", success: "7人。次はクッキーの全部の数を求めよう。▽を押して続けよう。", hint: "14個の中に、1人分の2個が何回あるか考えよう。" }), true),
             makeStep("4個ずつ7人へ分けて9個余る。クッキーは全部で何個かな？", () => renderGenericNumber({ title: "クッキーの全部の数", formula: "4 × 7 ＋ 9 ＝", expected: "37", unit: "個", success: "37個。もう一つの条件にも合うか確かめよう。▽を押して続けよう。", hint: "7人へ4個ずつ分けた数に、余り9個を足そう。" }), true),
@@ -1636,6 +1639,73 @@
             openMemo();
             completeInteractiveStep("書けたね。メモパッドを閉じたら、▽を押して次へ進もう。");
         });
+    }
+
+    function renderLesson12CookieFlow(stage) {
+        const configs = {
+            surplus: {
+                title: "4個ずつ配ったあと",
+                note: "手元に9個余っている",
+                rows: [
+                    { label: "子どもA", count: 4 },
+                    { label: "子どもB", count: 4 },
+                    { label: "子どもC", count: 4 }
+                ],
+                footer: "この9個は、みんなへ追加して配るために使える。"
+            },
+            five: {
+                title: "まず1個ずつ足す",
+                note: "1人5個ずつになる",
+                rows: [
+                    { label: "子どもA", count: 5, added: 1 },
+                    { label: "子どもB", count: 5, added: 1 },
+                    { label: "子どもC", count: 5, added: 1 }
+                ],
+                footer: "余っていた9個から、みんなへ1個ずつ配っている。"
+            },
+            "six-short": {
+                title: "もう1個ずつ足す",
+                note: "6個ずつにしたいが、途中でなくなる",
+                rows: [
+                    { label: "子どもA", count: 6, added: 2 },
+                    { label: "子どもB", count: 6, added: 2 },
+                    { label: "子どもC", count: 5, added: 1, short: true }
+                ],
+                footer: "全員を6個ずつにするには、あと5個必要だった。"
+            },
+            total: {
+                title: "6個ずつにする追加分",
+                note: "使えた9個 ＋ あと必要な5個",
+                rows: [],
+                footer: "9＋5＝14個"
+            }
+        };
+        const config = configs[stage] || configs.surplus;
+        const cookie = '<span class="lesson12-cookie" aria-hidden="true">●</span>';
+        setBoard(`
+            <section class="lesson12-cookie-flow">
+                <header><small>THINK STEP BY STEP</small><h3>${config.title}</h3></header>
+                <p class="lesson12-flow-note">${config.note}</p>
+                ${config.rows.length ? `
+                    <div class="lesson12-cookie-rows">
+                        ${config.rows.map(row => `
+                            <div class="lesson12-cookie-row${row.short ? ' is-short' : ''}">
+                                <b>${row.label}</b>
+                                <div>${Array.from({ length: row.count }, (_, index) => `<span class="lesson12-cookie${index >= 4 ? ' is-added' : ''}" aria-hidden="true">●</span>`).join('')}</div>
+                                <span>${row.count}個${row.short ? '（あと1個）' : ''}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : `
+                    <div class="lesson12-total-flow">
+                        <div><b>9個</b><span>実際に使えた分</span></div>
+                        <strong>＋</strong>
+                        <div><b>5個</b><span>あと必要だった分</span></div>
+                    </div>
+                `}
+                <p class="lesson12-flow-footer">${config.footer}</p>
+            </section>
+        `);
     }
 
     function renderStudyDifferenceDiagram({ lesson }) {
