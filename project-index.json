@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-30T09:50:21.248727+00:00",
-    "commit": "4795bc0",
+    "atUtc": "2026-07-30T09:50:38.832538+00:00",
+    "commit": "81d2760",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97287110,
+    "totalBytes": 97291298,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1789,9 +1789,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 188146,
-      "sha1": "44a5371d36",
-      "lineCount": 2943
+      "sizeBytes": 192334,
+      "sha1": "6e8b626e83",
+      "lineCount": 3000
     },
     {
       "path": "js/screens/musicShop.js",
@@ -3687,27 +3687,9 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
-      "paths": [
-        "UPLOAD_FILES_learning-forest-6-1-6-2-flow-v2.txt"
-      ]
-    },
-    {
       "status": "M",
       "paths": [
-        "index.html"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "project-index.json"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "service-worker.js"
+        "js/screens/learningForest.js"
       ]
     }
   ],
