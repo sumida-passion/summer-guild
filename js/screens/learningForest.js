@@ -1,8 +1,8 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver2.2
-   算数の広場・第1〜10問＋第11〜12問「勉強の仕方」
+   学びの森 Ver2.3
+   算数の広場・第1〜10問＋第11〜13問「勉強の仕方」
    ========================================================= */
 
 (() => {
@@ -22,7 +22,7 @@
         { number: 10, group: 3, label: "3-2", title: "あめを配る人数と個数", ready: true, id: "math-distribution-10" },
         { number: 11, group: 3, label: "3-3", title: "ノートの余りと不足", ready: true, id: "math-study-method-11" },
         { number: 12, group: 3, label: "3-4", title: "クッキーを分ける", ready: true, id: "math-study-method-12" },
-        { number: 13, group: 3, label: "3-5", title: "長いすと5年生" },
+        { number: 13, group: 3, label: "3-5", title: "長いすと5年生", ready: true, id: "math-study-method-13" },
         { number: 14, group: 4, label: "4-1", title: "あめとガム", ready: true, id: "math-hypothesis-14" },
         { number: 15, group: 4, label: "4-2", title: "シュークリームとケーキ", ready: true, id: "math-hypothesis-15" },
         { number: 16, group: 4, label: "4-3", title: "じゃんけんの得点", ready: true, id: "math-hypothesis-16" },
@@ -273,9 +273,9 @@
                 correct: 0,
                 success: "その通り。理解→ノート→図→計算→確認の順で進むと、勉強の力そのものが育つ。"
             }), true),
-            makeStep("本当の経験値は、画面の中だけではなく、君自身についている。", () => renderStudySummary({
+            makeStep("今日の問題は『余る』と『足りない』が出てきたね。これから同じ仲間の問題が続く。答えではなく、『あ、このタイプだ』と気づく力を育てよう。", () => renderStudySummary({
                 lesson: 11,
-                points: ["問題をやさしい言葉に言い換える", "黄色の板書を写し、緑の助言でノートを整える", "理解してから計算し、答えを元の問題で確かめる"],
+                points: ["問題をやさしい言葉に言い換える", "黄色の板書を写し、緑の助言でノートを整える", "『余る・足りない問題』という仲間に気づく"],
                 answer: "子ども18人　ノート70冊"
             }))
         ]);
@@ -320,12 +320,135 @@
                 correct: 0,
                 success: "その力が、教室で先生の話を聞き、自分のノートを作る力につながっていく。"
             }), true),
-            makeStep("案内が少なくても、同じ学び方を自分で使えた。これが本当のレベルアップだ。", () => renderStudySummary({
+            makeStep("3-3と3-4は、どちらも『余る・足りない問題』の仲間だったね。前の問題と同じ考え方に気づけたことが、本当のレベルアップだ。", () => renderStudySummary({
                 lesson: 12,
-                points: ["必要な条件を短くノートへ書く", "1人分の差と全体の差を見つける", "計算のあとに、両方の条件で検算する"],
+                points: ["必要な条件を短くノートへ書く", "1人分の差と全体の差を見つける", "前の問題と同じ仲間だと気づく"],
                 answer: "7人　クッキー37個"
             }))
         ];
+    }
+
+
+    function createLesson13Steps() {
+        return [
+            makeStep("3-5も、3-3・3-4と同じ『余る・足りない問題』の仲間だ。でも今回は、『最後の長いすだけ1人』という新しい条件が一つ増えているよ。", () => renderLesson13Problem()),
+            makeStep("まず問題の意味を、やさしい言葉へ言い換えよう。", () => renderUnderstandingCloze({
+                lesson: 13,
+                sentences: [
+                    { before: "4人ずつ座ると、長いすに座れない人が", answer: "31人いる", choices: ["31人いる", "31人余る", "4人いる"] },
+                    { before: "6人ずつ座ると、最後の長いすには", answer: "1人だけ座る", choices: ["1人だけ座る", "6人座る", "31人座る"] },
+                    { before: "最後の長いすは、6人満席と比べて", answer: "5人少ない", choices: ["5人少ない", "1人少ない", "6人多い"] },
+                    { before: "4人ずつの世界から6人ずつへ変えると、長いす1脚につき", answer: "2人多く座れる", choices: ["2人多く座れる", "2人少なく座れる", "10人多く座れる"] }
+                ],
+                hint: "『座れない31人』『最後は1人』『6人満席ならあと5人』という言葉を、一つずつ確かめよう。",
+                success: "条件を正しく整理できた。次は、長いすの世界を図で比べよう。▽を押して続けよう。"
+            }), true),
+            makeStep("ノートへ、二つの座り方を短く書こう。", () => renderNotebookPrompt({
+                title: "学びの森 3-5",
+                lines: ["4人ずつ → 31人座れない", "6人ずつ → 最後の長いすは1人"],
+                advice: "今回は『最後だけ1人』を忘れないよう、丸で囲んでおこう。",
+                detail: "前の問題と同じところ、新しく増えた条件を分けて書くと見やすい。"
+            }), true),
+            makeStep("4人ずつ座った世界では、すべての長いすに4人ずつ座り、それでも31人が立ったままだ。", () => renderLesson13BenchDiagram("four")),
+            makeStep("6人ずつ座った世界では、最後の長いすだけ1人。6人満席と比べると、そこには5人分の空席がある。", () => renderLesson13BenchDiagram("six")),
+            makeStep("二つの世界の差をそろえよう。4人ずつでは31人が座れず、6人ずつの世界では満席より5人少ない。合わせて36人分の違いになる。", () => renderLesson13BenchDiagram("difference")),
+            makeStep("長いす1脚については、4人から6人へ2人多く座れる。36人分の違いの中に、2人分が何回あるかな？", () => renderGenericNumber({
+                title: "長いすの数",
+                formula: "（31 ＋ 5）÷（6 − 4）＝",
+                expected: "18",
+                unit: "脚",
+                success: "18脚。『31＋5』は、二つの座り方の間にある36人分の差だ。▽を押して続けよう。",
+                hint: "座れない31人と、最後の空席5人分を合わせて36人。1脚につき2人多く座れる。"
+            }), true),
+            makeStep("長いすは18脚。4人ずつ18脚へ座り、さらに31人が座れない。5年生は全部で何人かな？", () => renderGenericNumber({
+                title: "5年生の人数",
+                formula: "4 × 18 ＋ 31 ＝",
+                expected: "103",
+                unit: "人",
+                success: "103人。次は、6人ずつの条件にも合うか確かめよう。▽を押して続けよう。",
+                hint: "18脚に4人ずつ座った人数へ、座れなかった31人を足そう。"
+            }), true),
+            makeStep("6人ずつなら、最初の17脚は満席で、最後の1脚だけ1人。6×17＋1＝103人となり、両方の条件に合う。", () => renderStudyVerification({
+                left: "4×18＋31",
+                right: "6×17＋1",
+                answer: "103人"
+            })),
+            makeStep("3-3から3-5を並べると、全部同じ仲間だと分かる。違うのは、最後の条件だけだ。", () => renderDistributionFamilyBoard()),
+            makeStep("今日の気づきに一番近いものを選ぼう。", () => renderInsightChoice({
+                choices: ["新しい問題でも、前に見た『余る・足りない問題』の仲間だと考える", "問題ごとに式だけを別々に暗記する", "『最後だけ1人』という条件は使わなくてよい"],
+                correct: 0,
+                success: "その通り。勉強ができる人は、問題を一問ずつ暗記せず、『これは前にも見た仲間だ』と気づいて考える。"
+            }), true),
+            makeStep("新しい問題に出会ったら、『これはどの仲間かな？』と考えてみよう。問題を仲間分けする力は、次の学びへの地図になる。", () => renderStudySummary({
+                lesson: 13,
+                points: ["前の問題と同じ仲間を見つける", "新しく増えた条件だけを丁寧に読む", "二つの世界の差をそろえて考える"],
+                answer: "長いす18脚　5年生103人"
+            }))
+        ];
+    }
+
+    function renderLesson13Problem() {
+        setBoard(`
+            <article class="learning-problem-card study-method-problem">
+                <p class="learning-problem-label">3-5の問題</p>
+                <p>5年生が長いすに4人ずつ座ると、31人が座れません。</p>
+                <p>6人ずつ座ると、最後の長いすには1人だけ座ります。</p>
+                <p>長いすは何脚あり、5年生は何人いますか。</p>
+                <div class="study-no-calculator">同じ仲間を探す　新しい条件を見つける</div>
+            </article>
+        `);
+    }
+
+    function renderLesson13BenchDiagram(stage) {
+        const content = {
+            four: {
+                title: "4人ずつの世界",
+                top: "各長いすに4人",
+                bottom: "＋ 座れない31人",
+                note: "31人分、まだ席が必要"
+            },
+            six: {
+                title: "6人ずつの世界",
+                top: "ほとんどの長いすに6人",
+                bottom: "最後だけ1人",
+                note: "6人満席より5人少ない"
+            },
+            difference: {
+                title: "二つの世界の間",
+                top: "座れない31人",
+                bottom: "＋ 最後の空席5人分",
+                note: "全部で36人分の違い"
+            }
+        }[stage];
+        setBoard(`
+            <section class="bench-lesson-board">
+                <header><small>3-5　余る・足りない問題</small><h3>${content.title}</h3></header>
+                <div class="bench-row" aria-hidden="true">
+                    <div class="bench-seat">${stage === "four" ? "👤👤👤👤" : "👤👤👤👤👤👤"}</div>
+                    <div class="bench-seat">${stage === "difference" ? "31人" : stage === "six" ? "👤👤👤👤👤👤" : "👤👤👤👤"}</div>
+                    <div class="bench-seat is-last">${stage === "six" ? "👤＋空席5" : stage === "difference" ? "空席5" : "👤👤👤👤"}</div>
+                </div>
+                <div class="bench-equation">
+                    <b>${content.top}</b>
+                    <span>${content.bottom}</span>
+                </div>
+                <p>${content.note}</p>
+            </section>
+        `);
+    }
+
+    function renderDistributionFamilyBoard() {
+        setBoard(`
+            <section class="distribution-family-board">
+                <header><small>問題を仲間分けする</small><h3>余る・足りない問題</h3></header>
+                <div class="distribution-family-grid">
+                    <article><b>3-3</b><span>余る</span><span>足りない</span></article>
+                    <article><b>3-4</b><span>余る</span><span>足りない</span></article>
+                    <article><b>3-5</b><span>座れない</span><span>最後だけ1人</span></article>
+                </div>
+                <p>配る・座る場面は違っても、二つの世界の差を比べる同じ仲間。</p>
+            </section>
+        `);
     }
 
 
@@ -554,6 +677,7 @@
         10: createLesson10Steps,
         11: createLesson11Steps,
         12: createLesson12Steps,
+        13: createLesson13Steps,
         14: createLesson14Steps,
         15: createLesson15Steps,
         16: createLesson16Steps
