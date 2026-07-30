@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-30T06:05:59.616270+00:00",
-    "commit": "cd6f0d6",
+    "atUtc": "2026-07-30T06:06:32.844471+00:00",
+    "commit": "81885b3",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97202108,
+    "totalBytes": 97206120,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1789,9 +1789,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 122705,
-      "sha1": "be217b6f1e",
-      "lineCount": 1903
+      "sizeBytes": 126717,
+      "sha1": "4b61cffb31",
+      "lineCount": 1973
     },
     {
       "path": "js/screens/musicShop.js",
@@ -3656,13 +3656,7 @@
     {
       "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
+        "js/screens/learningForest.js"
       ]
     }
   ],
