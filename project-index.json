@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-30T06:52:33.992904+00:00",
-    "commit": "a544714",
+    "atUtc": "2026-07-30T07:21:34.883242+00:00",
+    "commit": "5e88cb1",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97221693,
+    "totalBytes": 97221741,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1593,8 +1593,8 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 19859,
-      "sha1": "a7fb32f67e",
+      "sizeBytes": 19909,
+      "sha1": "ceef8dcb61",
       "lineCount": 790
     },
     {
@@ -1973,8 +1973,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4518,
-      "sha1": "48e3733523",
+      "sizeBytes": 4516,
+      "sha1": "549d4684a0",
       "lineCount": 177
     },
     {
@@ -3656,7 +3656,13 @@
     {
       "status": "M",
       "paths": [
-        "js/screens/learningForest.js"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
