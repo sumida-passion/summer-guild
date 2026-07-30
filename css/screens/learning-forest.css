@@ -1735,3 +1735,69 @@
     #learningforest-screen .cloze-sentences label { padding:3px 7px; }
     #learningforest-screen .difference-part { padding:6px; }
 }
+
+/* =========================================================
+   2026-07-30 学びの森：ノート画面の進行ボタン・戻り導線安定化
+   ========================================================= */
+#learningforest-screen .notebook-training {
+    min-height: 0;
+    height: 100%;
+    max-height: 100%;
+    align-content: start;
+    grid-template-rows: auto auto auto auto auto;
+    gap: clamp(4px, .65vh, 8px);
+    padding: 1px 4px 6px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+#learningforest-screen .notebook-training header h3 {
+    margin: 0;
+    font-size: clamp(18px, 2.2vw, 30px);
+    line-height: 1.05;
+}
+#learningforest-screen .notebook-training header small {
+    font-size: clamp(10px, 1vw, 14px);
+}
+#learningforest-screen .notebook-training .board-copy,
+#learningforest-screen .notebook-training .teacher-explanation,
+#learningforest-screen .notebook-training .notebook-advice {
+    padding: clamp(5px, .7vh, 9px) clamp(9px, 1vw, 13px);
+    gap: 1px;
+    line-height: 1.25;
+}
+#learningforest-screen .notebook-training .board-copy span {
+    font-size: clamp(14px, 1.8vw, 22px);
+    line-height: 1.22;
+}
+#learningforest-screen .notebook-training .teacher-explanation span,
+#learningforest-screen .notebook-training .notebook-advice span {
+    font-size: clamp(12px, 1.35vw, 17px);
+    line-height: 1.28;
+}
+#learningforest-screen .notebook-training .notebook-done-button {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    min-width: 170px;
+    min-height: 38px;
+    padding: 7px 18px;
+    margin: 1px auto 0;
+    box-shadow: 0 -4px 12px rgba(9, 27, 17, .5), 0 3px 0 #3d2712;
+}
+#learningforest-screen #backGuildHallFromLearning[data-destination="lesson-list"] {
+    min-width: 160px;
+}
+@media (max-height: 720px) and (min-width: 700px) {
+    #learningforest-screen .notebook-training { gap: 3px; }
+    #learningforest-screen .notebook-training .board-copy,
+    #learningforest-screen .notebook-training .teacher-explanation,
+    #learningforest-screen .notebook-training .notebook-advice { padding: 4px 8px; }
+    #learningforest-screen .notebook-training .notebook-done-button {
+        min-height: 34px;
+        padding: 5px 15px;
+        font-size: 14px;
+    }
+}
+
