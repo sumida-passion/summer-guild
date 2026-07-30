@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-30T06:52:06.835243+00:00",
-    "commit": "b2350a4",
+    "atUtc": "2026-07-30T06:52:33.992904+00:00",
+    "commit": "a544714",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97208006,
+    "totalBytes": 97221693,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1789,9 +1789,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 126717,
-      "sha1": "4b61cffb31",
-      "lineCount": 1973
+      "sizeBytes": 140404,
+      "sha1": "72c9cad5f0",
+      "lineCount": 2189
     },
     {
       "path": "js/screens/musicShop.js",
@@ -3090,6 +3090,10 @@
         "createLesson10Steps",
         "createLesson11Steps",
         "createLesson12Steps",
+        "renderHypothesisBoard",
+        "createLesson14Steps",
+        "createLesson15Steps",
+        "createLesson16Steps",
         "init",
         "open",
         "close",
@@ -3170,11 +3174,7 @@
         "renderLesson10Distribution",
         "renderLesson10Check",
         "renderLesson10Shortcut",
-        "renderLesson10Summary",
-        "renderStudyMethodTutorial",
-        "renderStudyMethodProblem",
-        "renderUnderstandingCloze",
-        "renderNotebookPrompt"
+        "renderLesson10Summary"
       ],
       "classes": [],
       "windowExports": [
@@ -3656,13 +3656,7 @@
     {
       "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
+        "js/screens/learningForest.js"
       ]
     }
   ],
