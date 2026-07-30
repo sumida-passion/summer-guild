@@ -10,32 +10,32 @@
     const DAILY_BONUS_GP = 3;
 
     const lessonCatalog = [
-        { number: 1, group: 1, title: "兄と弟のお金", ready: true, id: "math-wasa-01" },
-        { number: 2, group: 1, title: "3人で分けたおこづかい", ready: true, id: "math-wasa-02" },
-        { number: 3, group: 1, title: "姉と妹のお金", ready: true, id: "math-wasa-03" },
-        { number: 4, group: 1, title: "3つの容器の水", ready: true, id: "math-volume-04" },
-        { number: 5, group: 2, title: "はがきと切手", ready: true, id: "math-difference-05" },
-        { number: 6, group: 2, title: "ケーキの買い物", ready: true, id: "math-savings-06" },
-        { number: 7, group: 2, title: "えん筆の本数と代金", ready: true, id: "math-difference-07" },
-        { number: 8, group: 2, title: "あめの入れ方", ready: true, id: "math-repacking-08" },
-        { number: 9, group: 3, title: "折り紙の余りと不足", ready: true, id: "math-distribution-09" },
-        { number: 10, group: 3, title: "あめを配る人数と個数", ready: true, id: "math-distribution-10" },
-        { number: 11, group: 3, title: "ノートの余りと不足", ready: true, id: "math-study-method-11" },
-        { number: 12, group: 3, title: "クッキーを分ける", ready: true, id: "math-study-method-12" },
-        { number: 13, group: 3, title: "長いすと5年生" },
-        { number: 14, group: 4, title: "あめとガム" },
-        { number: 15, group: 4, title: "シュークリームとケーキ" },
-        { number: 16, group: 4, title: "じゃんけんの得点" },
-        { number: 17, group: 4, title: "おはじきの増減" },
-        { number: 18, group: 5, title: "ジュースとお茶" },
-        { number: 19, group: 5, title: "2種類のおもり" },
-        { number: 20, group: 5, title: "コイン投げの得点" },
-        { number: 21, group: 5, title: "的当てゲーム" },
-        { number: 22, group: 6, title: "道の両側の桜" },
-        { number: 23, group: 6, title: "桜を増やして植え直す" },
-        { number: 24, group: 7, title: "電柱の最初から最後まで" },
-        { number: 25, group: 7, title: "電柱の間に木を植える" },
-        { number: 26, group: 8, title: "池のまわりの花" }
+        { number: 1, group: 1, label: "1-1", title: "兄と弟のお金", ready: true, id: "math-wasa-01" },
+        { number: 2, group: 1, label: "1-2", title: "3人で分けたおこづかい", ready: true, id: "math-wasa-02" },
+        { number: 3, group: 1, label: "1-3", title: "姉と妹のお金", ready: true, id: "math-wasa-03" },
+        { number: 4, group: 1, label: "1-4", title: "3つの容器の水", ready: true, id: "math-volume-04" },
+        { number: 5, group: 2, label: "2-1", title: "はがきと切手", ready: true, id: "math-difference-05" },
+        { number: 6, group: 2, label: "2-2", title: "ケーキの買い物", ready: true, id: "math-savings-06" },
+        { number: 7, group: 2, label: "2-3", title: "えん筆の本数と代金", ready: true, id: "math-difference-07" },
+        { number: 8, group: 2, label: "2-4", title: "あめの入れ方", ready: true, id: "math-repacking-08" },
+        { number: 9, group: 3, label: "3-1", title: "折り紙の余りと不足", ready: true, id: "math-distribution-09" },
+        { number: 10, group: 3, label: "3-2", title: "あめを配る人数と個数", ready: true, id: "math-distribution-10" },
+        { number: 11, group: 3, label: "3-3", title: "ノートの余りと不足", ready: true, id: "math-study-method-11" },
+        { number: 12, group: 3, label: "3-4", title: "クッキーを分ける", ready: true, id: "math-study-method-12" },
+        { number: 13, group: 3, label: "3-5", title: "長いすと5年生" },
+        { number: 14, group: 4, label: "4-1", title: "あめとガム" },
+        { number: 15, group: 4, label: "4-2", title: "シュークリームとケーキ" },
+        { number: 16, group: 4, label: "4-3", title: "じゃんけんの得点" },
+        { number: 17, group: 4, label: "4-4", title: "おはじきの増減" },
+        { number: 18, group: 5, label: "5-1", title: "ジュースとお茶" },
+        { number: 19, group: 5, label: "5-2", title: "2種類のおもり" },
+        { number: 20, group: 5, label: "5-3", title: "コイン投げの得点" },
+        { number: 21, group: 5, label: "5-4", title: "的当てゲーム" },
+        { number: 22, group: 6, label: "6-1", title: "道の両側の桜" },
+        { number: 23, group: 6, label: "6-2", title: "桜を増やして植え直す" },
+        { number: 24, group: 7, label: "7-1", title: "電柱の最初から最後まで" },
+        { number: 25, group: 7, label: "7-2", title: "電柱の間に木を植える" },
+        { number: 26, group: 8, label: "8-1", title: "池のまわりの花" }
     ];
 
     let currentStep = 0;
@@ -47,6 +47,17 @@
     let activeStroke = null;
     let canvasContext = null;
     let resizeTimer = 0;
+
+    function getLessonLabel(number) {
+        return lessonCatalog.find((item) => item.number === Number(number))?.label || String(number);
+    }
+
+    function updateLearningExitButton() {
+        const button = document.getElementById("backGuildHallFromLearning");
+        if (!button) return;
+        button.textContent = selectedLesson ? "問題一覧へ戻る" : "ギルドホールへ戻る";
+        button.dataset.destination = selectedLesson ? "lesson-list" : "guildhall";
+    }
 
     function makeStep(text, boardRenderer, interactive = false) {
         return { text, board: boardRenderer, interactive, initiallyInteractive: interactive };
@@ -69,7 +80,7 @@
 
     function createLesson2Steps() {
         return [
-            makeStep("2番は、3人の関係を一本分ずつ整理する問題だ。まず妹を基準の『1本分』として考えよう。", renderLesson2Problem),
+            makeStep("1-2は、3人の関係を一本分ずつ整理する問題だ。まず妹を基準の『1本分』として考えよう。", renderLesson2Problem),
             makeStep("妹の金額を1本分にする。金額はまだ分からなくていい。", () => renderLesson2Diagram("sister")),
             makeStep("兄は妹の2倍だから、同じ長さを2本並べる。", () => renderLesson2Diagram("brother")),
             makeStep("姉は妹と同じ1本分に、さらに80円多い。3人を並べると、同じ長さが全部で4本と、余分な80円になる。", () => renderLesson2Diagram("all")),
@@ -78,28 +89,28 @@
             makeStep("920円は同じ4本分。妹の1本分はいくらになる？", () => renderGenericNumber({ title: "妹の1本分を求めよう", formula: "920 ÷ 4 ＝", expected: "230", success: "妹は230円。1本分が分かったぞ。▽を押して続けよう。", hint: "920円を、同じ4本に等しく分けよう。" }), true),
             makeStep("兄は妹の2倍。230円の2倍はいくらになる？", () => renderGenericNumber({ title: "兄の金額を求めよう", formula: "230 × 2 ＝", expected: "460", success: "兄は460円。妹2本分だ。▽を押して続けよう。", hint: "妹の230円を2本分にしよう。" }), true),
             makeStep("姉は妹より80円多い。230円に80円を足すといくら？", () => renderGenericNumber({ title: "姉の金額を求めよう", formula: "230 ＋ 80 ＝", expected: "310", success: "姉は310円。3人の金額が全部そろった。▽を押して続けよう。", hint: "妹の230円に、多い80円を戻そう。" }), true),
-            makeStep("最後に、式を正しい順番に並べて、考え方を確かめよう。", () => renderGenericOrder({ formulas: ["1000−80＝920", "920÷4＝230", "230×2＝460", "230＋80＝310"], success: "全部つながった。▽を押して、2番の学びをまとめよう。", hint: "まず余分な80円を外し、次に1本分を求めよう。" }), true),
-            makeStep("よくできた。『余分な分を外す→同じ本数で分ける→それぞれの関係へ戻す』。これが2番の学びだ。", renderLesson2Summary)
+            makeStep("最後に、式を正しい順番に並べて、考え方を確かめよう。", () => renderGenericOrder({ formulas: ["1000−80＝920", "920÷4＝230", "230×2＝460", "230＋80＝310"], success: "全部つながった。▽を押して、1-2の学びをまとめよう。", hint: "まず余分な80円を外し、次に1本分を求めよう。" }), true),
+            makeStep("よくできた。『余分な分を外す→同じ本数で分ける→それぞれの関係へ戻す』。これが1-2の学びだ。", renderLesson2Summary)
         ];
     }
 
     function createLesson3Steps() {
         return [
-            makeStep("3番は、妹の分から姉の分を組み立てて、同じ場所を見比べる問題だ。", renderLesson3Problem),
+            makeStep("1-3は、妹の分から姉の分を組み立てて、同じ場所を見比べる問題だ。", renderLesson3Problem),
             makeStep("妹の金額はまだ分からない。そこで、妹の金額を赤い1本分で表そう。姉は、その1本分より500円多い。", () => renderLesson3Diagram("difference")),
             makeStep("もう一つの条件は『姉は妹の3倍より100円少ない』。だから100円を足すと、妹の3本分ぴったりになる。", () => renderLesson3Diagram("before-add")),
             makeStep("黄色の100円を、500円の右隣へ動かして、妹の3本分ぴったりにしよう。", renderLesson3Drag, true),
             makeStep("上の赤い1本分は妹そのもの。だから、その右側の『500円＋100円』は――ここは妹2本分だよね。", renderLesson3AlignedDiagram),
             makeStep("500＋100＝600円。その600円が妹2本分だ。妹の1本分はいくらになる？", () => renderGenericNumber({ title: "妹の1本分を求めよう", formula: "600 ÷ 2 ＝", expected: "300", success: "妹は300円。600円を2本に分けると、1本分が出た。▽を押して続けよう。", hint: "500円＋100円の600円は、赤い2本分だったね。" }), true),
             makeStep("姉は妹より500円多い。300円に500円を足すといくら？", () => renderGenericNumber({ title: "姉の金額を求めよう", formula: "300 ＋ 500 ＝", expected: "800", success: "姉は800円。妹の3倍より100円少ないことも確かめられる。▽を押して続けよう。", hint: "妹の300円に、多い500円を足そう。" }), true),
-            makeStep("最後に、気付いた順番で式を並べよう。", () => renderGenericOrder({ formulas: ["500＋100＝600", "600円＝妹2本分", "600÷2＝300", "300＋500＝800"], success: "『600円＝妹2本分』が見つかったから、全部つながった。▽を押して、3番の学びをまとめよう。", hint: "まず500円と100円を合わせて、妹2本分を作ろう。" }), true),
+            makeStep("最後に、気付いた順番で式を並べよう。", () => renderGenericOrder({ formulas: ["500＋100＝600", "600円＝妹2本分", "600÷2＝300", "300＋500＝800"], success: "『600円＝妹2本分』が見つかったから、全部つながった。▽を押して、1-3の学びをまとめよう。", hint: "まず500円と100円を合わせて、妹2本分を作ろう。" }), true),
             makeStep("よくできた。分からない金額を1本分にして、同じ位置をぴったりそろえると、『600円が妹2本分』だと見つけられる。", renderLesson3Summary)
         ];
     }
 
     function createLesson4Steps() {
         return [
-            makeStep("4番は、問題文の日本語を一つずつ絵に変えながら考える問題だ。まずは、問題文を原文のまま読んでみよう。", renderLesson4Problem),
+            makeStep("1-4は、問題文の日本語を一つずつ絵に変えながら考える問題だ。まずは、問題文を原文のまま読んでみよう。", renderLesson4Problem),
             makeStep("ギルドマスター：『同じかさだけ水が入る3つの容器』というのは、A・B・Cのどれも、満タンまで入る水の量が同じという意味だ。", () => renderLesson4Containers("equal")),
             makeStep("主人公：『あれ？ Aがいっぱいになったあと、どうしてBは4分の1で止めて、Cにも入れたんだろう？』", () => renderLesson4Containers("question")),
             makeStep("ギルドマスター：『いいところに気付いたね。でも、問題文には水を入れた順番は書かれていないんだ。書いてあるのは、全部移し終えたあとの状態だけだよ。』", () => renderLesson4Containers("final")),
@@ -107,28 +118,28 @@
             makeStep("ギルドマスター：『そう。では、満タンのAを4分の4と考えよう。Bは4分の1、Cは4分の3だ。』", renderLesson4Fractions),
             makeStep("3つを合わせると、4分の4＋4分の1＋4分の3。分子の合計はいくつになる？", renderLesson4FractionCheck, true),
             makeStep("4分の8は、同じ容器2個分だ。その2個分が16L。容器1個分は何Lかな？", () => renderGenericNumber({ title: "容器1個分を求めよう", formula: "16 ÷ 2 ＝", expected: "8", unit: "L", success: "容器1個には8L入る。問題文の日本語から、最後の状態を正しく絵にできたね。▽を押して続けよう。", hint: "16Lは、同じ容器2個分だったね。" }), true),
-            makeStep("最後に、文章から計算へ変えた順番を並べて確かめよう。", () => renderGenericOrder({ formulas: ["A＝4/4、B＝1/4、C＝3/4", "4/4＋1/4＋3/4＝8/4", "8/4＝容器2個分", "16÷2＝8"], success: "日本語を絵に変え、分数を容器の個数へ変えたから、答えまでつながった。▽を押して、4番の学びをまとめよう。", hint: "まず、A・B・Cの最後の状態を分数で表すところから始めよう。" }), true),
+            makeStep("最後に、文章から計算へ変えた順番を並べて確かめよう。", () => renderGenericOrder({ formulas: ["A＝4/4、B＝1/4、C＝3/4", "4/4＋1/4＋3/4＝8/4", "8/4＝容器2個分", "16÷2＝8"], success: "日本語を絵に変え、分数を容器の個数へ変えたから、答えまでつながった。▽を押して、1-4の学びをまとめよう。", hint: "まず、A・B・Cの最後の状態を分数で表すところから始めよう。" }), true),
             makeStep("よくできた。文章題では、書いてあることと書いていないことを分け、言葉を一つずつ絵に変えることが大切だ。", renderLesson4Summary)
         ];
     }
 
     function createLesson5Steps() {
         return [
-            makeStep("5番も、まずは問題文を原文のまま読んでみよう。どの言葉が、解き方を教えてくれているかな。", renderLesson5Problem),
+            makeStep("2-1も、まずは問題文を原文のまま読んでみよう。どの言葉が、解き方を教えてくれているかな。", renderLesson5Problem),
             makeStep("主人公：『50円と80円と420円……。数字は見えるけど、どこに反応したらいいんだろう？』", () => renderLesson5Keywords(false)),
             makeStep("ギルドマスター：『ポイントは、“同じ枚数ずつ買った”と、“1枚あたりの値段の差が30円”ってところだね。この言葉に反応できるのが大切だな。』", () => renderLesson5Keywords(true)),
             makeStep("はがき1枚は50円、切手1枚は80円。1枚ずつ買うたびに、代金にはいくらの差ができるかな？", renderLesson5PriceChoice, true),
             makeStep("そう。1枚なら30円差、2枚なら60円差、3枚なら90円差。『同じ枚数』だから、この30円の差が同じ回数だけ積み重なるんだ。", renderLesson5DifferenceGrowth),
             makeStep("主人公：『なるほど！ 420円の中に、1枚ごとの差の30円が何回あるかを考えればいいんだ！』", renderLesson5UnknownCount),
             makeStep("420円の差は、30円の差が何回分かな？", () => renderGenericNumber({ title: "買った枚数を求めよう", formula: "420 ÷ 30 ＝", expected: "14", unit: "枚", success: "14枚。同じ枚数ずつ買ったので、はがきも切手も14枚ずつだ。▽を押して続けよう。", hint: "合計の差420円の中に、1枚ごとの差30円がいくつあるか考えよう。" }), true),
-            makeStep("最後に、問題文の言葉から式へつなげた順番を並べよう。", () => renderGenericOrder({ formulas: ["同じ枚数ずつ買った", "80−50＝30（1枚ごとの差）", "420円＝30円の差が何回分か", "420÷30＝14"], success: "『同じ枚数』と『1枚ごとの差』に反応できたから、420÷30につながった。▽を押して、5番の学びをまとめよう。", hint: "まず『同じ枚数』に注目し、次に1枚ごとの差を求めよう。" }), true),
+            makeStep("最後に、問題文の言葉から式へつなげた順番を並べよう。", () => renderGenericOrder({ formulas: ["同じ枚数ずつ買った", "80−50＝30（1枚ごとの差）", "420円＝30円の差が何回分か", "420÷30＝14"], success: "『同じ枚数』と『1枚ごとの差』に反応できたから、420÷30につながった。▽を押して、2-1の学びをまとめよう。", hint: "まず『同じ枚数』に注目し、次に1枚ごとの差を求めよう。" }), true),
             makeStep("よくできた。文章題では、数字だけでなく、数字どうしを結びつける言葉に反応することが大切だ。", renderLesson5Summary)
         ];
     }
 
     function createLesson6Steps() {
         return [
-            makeStep("6番も、まずは問題文を原文のまま読んでみよう。分からない『いくつか』より、数と金額がはっきり分かるところを探すんだ。", renderLesson6Problem),
+            makeStep("2-2も、まずは問題文を原文のまま読んでみよう。分からない『いくつか』より、数と金額がはっきり分かるところを探すんだ。", renderLesson6Problem),
             makeStep("主人公：『代金は予定と同じ金額……。ここが同じってことは、300円でいくつか買う予定の金額と、250円で実際にいくつか買った金額が一緒ってことだね。』", () => renderLesson6SameTotal(false)),
             makeStep("ギルドマスター：『そうだね、そこがポイントだ。予定と実際では、個数は違っても、使った代金の合計は同じなんだ。』", () => renderLesson6SameTotal(true)),
             makeStep("主人公：『でも、“いくつか”ばっかりじゃ、どこから考えたらいいか分からないや……。』", renderLesson6Unknowns),
@@ -138,14 +149,14 @@
             makeStep("ギルドマスター：『そそ！ それがポイントだ。1個につき、いくら安く買えたのかな？』", renderLesson6UnitDifferenceChoice, true),
             makeStep("主人公：『1個につき50円安かったのを積み重ねていったら、500円の余裕ができたってことだ！』", renderLesson6SavingsStack),
             makeStep("主人公：『ということは……50円が何回分集まったら500円になるかを考えればいいんだ！』", () => renderGenericNumber({ title: "最初に買う予定だった個数を求めよう", formula: "500 ÷ 50 ＝", expected: "10", unit: "個", success: "10個。最初は300円のケーキを10個買うつもりだったんだ。▽を押して続けよう。", hint: "500円の中に、1個ごとの50円の差が何回あるか考えよう。" }), true),
-            makeStep("最後に、分かる数字から考えた順番を並べて確かめよう。", () => renderGenericOrder({ formulas: ["250×2＝500（2個分の余裕）", "300−250＝50（1個ごとの余裕）", "500円＝50円が何回分か", "500÷50＝10"], success: "『いくつか』は後回しにして、はっきり分かる2個分の500円から考えたから、答えまでつながった。▽を押して、6番の学びをまとめよう。", hint: "まず、実際に2個多く買えたことで必要になった金額を求めよう。" }), true),
+            makeStep("最後に、分かる数字から考えた順番を並べて確かめよう。", () => renderGenericOrder({ formulas: ["250×2＝500（2個分の余裕）", "300−250＝50（1個ごとの余裕）", "500円＝50円が何回分か", "500÷50＝10"], success: "『いくつか』は後回しにして、はっきり分かる2個分の500円から考えたから、答えまでつながった。▽を押して、2-2の学びをまとめよう。", hint: "まず、実際に2個多く買えたことで必要になった金額を求めよう。" }), true),
             makeStep("よくできた。分からない『いくつか』からではなく、数と金額がはっきりしているところから考える。1個ごとの50円の差が積み重なって500円になったんだ。", renderLesson6Summary)
         ];
     }
 
     function createLesson7Steps() {
         return [
-            makeStep("7番も、まずは問題文を原文のまま読んでみよう。今回は『1本ごとの差』『9本多い』『代金は220円高い』を、順番に絵へ変えていくよ。", renderLesson7Problem),
+            makeStep("2-3も、まずは問題文を原文のまま読んでみよう。今回は『1本ごとの差』『9本多い』『代金は220円高い』を、順番に絵へ変えていくよ。", renderLesson7Problem),
             makeStep("主人公：『100円と80円だから、2人が1本ずつ買うたびに、あきらくんの代金が20円ずつ多くなるね。』", renderLesson7UnitDifference),
             makeStep("ギルドマスター：『そう。まずは9本の違いをいったん置いて、2人が同じ本数買ったときだけを考えよう。220円の差は、20円の差が何回積み重なったものかな？』", () => renderGenericNumber({ title: "220円の差ができる回数", formula: "220 ÷ 20 ＝", expected: "11", unit: "回", success: "11回。2人が11本ずつなら、あきらくんの代金が220円高くなる。▽を押して続けよう。", hint: "1回ごとの差は20円。220円の中に20円が何回あるか考えよう。" }), true),
             makeStep("まず2人とも11本ずつ買った場面を置こう。この時点では、あきらくんの代金が220円高い。", () => renderLesson7CountState("equal")),
@@ -159,14 +170,14 @@
             makeStep("ゆかさんのほうが9本多いということは、80×9＝720円分、ゆかさんが多いということだね。", () => renderLesson7Shortcut("extra")),
             makeStep("720円多いところから、最後はあきらくんが220円多く終わった。つまり、720円分をひっくり返し、さらに220円進んだんだ。", () => renderLesson7Shortcut("turn")),
             makeStep("だから、あきらくんが作った差は720＋220＝940円。1回の差が20円なので、940円分を20円で割れば買った回数が出る。", () => renderLesson7Shortcut("formula")),
-            makeStep("近道の式を、意味がつながる順番に並べてみよう。", () => renderGenericOrder({ formulas: ["80×9＝720（ゆかさんが多い分）", "720＋220＝940（ひっくり返してさらに進む差）", "100−80＝20（1本ごとの差）", "940÷20＝47"], success: "47本。さっきゆっくり考えたことを、一気にまとめた式になっているね。▽を押して、7番の学びをまとめよう。", hint: "まず9本分を金額にし、次に最後の220円を足そう。" }), true),
+            makeStep("近道の式を、意味がつながる順番に並べてみよう。", () => renderGenericOrder({ formulas: ["80×9＝720（ゆかさんが多い分）", "720＋220＝940（ひっくり返してさらに進む差）", "100−80＝20（1本ごとの差）", "940÷20＝47"], success: "47本。さっきゆっくり考えたことを、一気にまとめた式になっているね。▽を押して、2-3の学びをまとめよう。", hint: "まず9本分を金額にし、次に最後の220円を足そう。" }), true),
             makeStep("主人公：『なるほど！ さっきゆっくり考えたことを、一気に計算しただけなんだ！』 ギルドマスター：『その通り。近道は、理解してから使うと、一番力になる。』", renderLesson7Summary)
         ];
     }
 
     function createLesson8Steps() {
         return [
-            makeStep("8番も、まずは問題文を原文のまま読んでみよう。今回は、最後に見えている『6ふくろ多くできた』から考えていくよ。", renderLesson8Problem),
+            makeStep("2-4も、まずは問題文を原文のまま読んでみよう。今回は、最後に見えている『6ふくろ多くできた』から考えていくよ。", renderLesson8Problem),
             makeStep("主人公：『最後の形では、4個入りの袋が、最初より6袋多くできたんだね。』", () => renderLesson8FinalBags(false)),
             makeStep("ギルドマスター：『そう。では、増えた6袋には、あめが全部で何個入っているかな？』", () => renderGenericNumber({ title: "増えた6袋に入ったあめ", formula: "6 × 4 ＝", expected: "24", unit: "個", success: "24個。最後には、24個分の余裕ができたと考えられるね。▽を押して続けよう。", hint: "増えた袋は6袋で、1袋に4個ずつ入っているよ。" }), true),
             makeStep("主人公：『つまり、最後には24個分の余裕ができたってことなんだ！』", () => renderLesson8FinalBags(true)),
@@ -180,7 +191,7 @@
             makeStep("次に、増えた6袋に入ったあめの数を求める。", () => renderLesson8Shortcut("extra")),
             makeStep("24個の余裕が、1回2個ずつ何回生まれたかを求める。", () => renderLesson8Shortcut("count")),
             makeStep("最後に、もとの12袋に6個ずつ入っていたことから、全部の数を求める。", () => renderLesson8Shortcut("answer")),
-            makeStep("効率のよい式を、意味がつながる順番に並べてみよう。", () => renderGenericOrder({ formulas: ["6−4＝2（1回の詰め替えで生まれる余裕）", "4×6＝24（増えた6袋に入ったあめ）", "24÷2＝12（もとの袋の数）", "12×6＝72（あめの全部の数）"], success: "72個。ゆっくり考えた道筋を、式だけで短く表せたね。▽を押して、8番の学びをまとめよう。", hint: "まず1袋ごとの余裕、次に増えた6袋分、そして元の袋数を求めよう。" }), true),
+            makeStep("効率のよい式を、意味がつながる順番に並べてみよう。", () => renderGenericOrder({ formulas: ["6−4＝2（1回の詰め替えで生まれる余裕）", "4×6＝24（増えた6袋に入ったあめ）", "24÷2＝12（もとの袋の数）", "12×6＝72（あめの全部の数）"], success: "72個。ゆっくり考えた道筋を、式だけで短く表せたね。▽を押して、2-4の学びをまとめよう。", hint: "まず1袋ごとの余裕、次に増えた6袋分、そして元の袋数を求めよう。" }), true),
             makeStep("主人公：『なるほど！ さっき考えたことを、式だけで短く書いたんだ！』 ギルドマスター：『その通り。式は、考え方を短く表したものなんだ。』", renderLesson8Summary)
         ];
     }
@@ -188,7 +199,7 @@
 
     function createLesson9Steps() {
         return [
-            makeStep("9番も、まずは問題文を原文のまま読んでみよう。今回は『余り』と『不足』が、どうつながっているかを絵にして考えるよ。", renderLesson9Problem),
+            makeStep("3-1も、まずは問題文を原文のまま読んでみよう。今回は『余り』と『不足』が、どうつながっているかを絵にして考えるよ。", renderLesson9Problem),
             makeStep("3枚ずつ配り終えると、折り紙が6枚残る。この6枚は、まだ子どもたちへ配れる折り紙だ。", () => renderLesson9Distribution("three")),
             makeStep("3枚ずつから4枚ずつへ変えるには、子ども1人につき、あと何枚必要かな？", () => renderGenericChoice({ question: "1人につき増やす枚数は？", choices: [{ value: "1", label: "1枚" }, { value: "2", label: "2枚" }, { value: "7", label: "7枚" }], correct: "1", success: "そう。4−3＝1だから、1人につきあと1枚必要だ。▽を押して続けよう。", hint: "3枚から4枚へ増える分を考えよう。" }), true),
             makeStep("余っていた6枚を、子どもへ1枚ずつ配ると、6人分は3枚から4枚にできる。", () => renderLesson9Distribution("use-six")),
@@ -198,14 +209,14 @@
             makeStep("3枚ずつ配る場合と4枚ずつ配る場合で、折り紙の全部の枚数が同じになるか確かめよう。", renderLesson9Check),
             makeStep("ゆっくり考えた道筋を、効率のよい式へまとめよう。", () => renderLesson9Shortcut("intro")),
             makeStep("まず、1人につき増える枚数は4−3＝1枚。余りから不足まで必要な枚数は6＋2＝8枚だ。", () => renderLesson9Shortcut("steps")),
-            makeStep("だから、（6＋2）÷（4−3）＝8人。式を意味がつながる順番に並べよう。", () => renderGenericOrder({ formulas: ["4−3＝1（1人につき増やす枚数）", "6＋2＝8（全員へ追加する枚数）", "8÷1＝8（子どもの人数）"], success: "8人。余りと不足の間を、1人分の差で分けた式になっているね。▽を押して、9番の学びをまとめよう。", hint: "まず1人分の差、次に余りと不足を合わせよう。" }), true),
+            makeStep("だから、（6＋2）÷（4−3）＝8人。式を意味がつながる順番に並べよう。", () => renderGenericOrder({ formulas: ["4−3＝1（1人につき増やす枚数）", "6＋2＝8（全員へ追加する枚数）", "8÷1＝8（子どもの人数）"], success: "8人。余りと不足の間を、1人分の差で分けた式になっているね。▽を押して、3-1の学びをまとめよう。", hint: "まず1人分の差、次に余りと不足を合わせよう。" }), true),
             makeStep("主人公：『余った6枚と足りない2枚は反対なのに、ここでは足すんだね。』 ギルドマスター：『余った6枚を全部使い、さらに2枚必要だからだよ。』", renderLesson9Summary)
         ];
     }
 
     function createLesson10Steps() {
         return [
-            makeStep("10番も、まずは問題文を原文のまま読んでみよう。今度は『余り』が2つ出てくるよ。", renderLesson10Problem),
+            makeStep("3-2も、まずは問題文を原文のまま読んでみよう。今度は『余り』が2つ出てくるよ。", renderLesson10Problem),
             makeStep("1人6個ずつ配ると、あめが15個残る。", () => renderLesson10Distribution("six")),
             makeStep("1人8個ずつ配ると、残るあめは5個になる。余りは何個減ったかな？", () => renderGenericNumber({ title: "余りの減った数", formula: "15 − 5 ＝", expected: "10", unit: "個", success: "10個。多く配ったぶん、余りが15個から5個へ減ったんだ。▽を押して続けよう。", hint: "最初の余り15個と、あとの余り5個を比べよう。" }), true),
             makeStep("6個ずつから8個ずつへ変えると、子ども1人につき何個多く配ることになるかな？", () => renderGenericChoice({ question: "1人につき増えるあめは？", choices: [{ value: "1", label: "1個" }, { value: "2", label: "2個" }, { value: "10", label: "10個" }], correct: "2", success: "そう。8−6＝2だから、1人につき2個ずつ多く配った。▽を押して続けよう。", hint: "6個から8個へ増える分だよ。" }), true),
@@ -215,7 +226,7 @@
             makeStep("8×5＋5も45。どちらの配り方でも全部のあめは同じ45個になる。", renderLesson10Check),
             makeStep("ゆっくり考えたことを、効率のよい式へまとめよう。", () => renderLesson10Shortcut("intro")),
             makeStep("余りの差は15−5＝10個。1人分の差は8−6＝2個。だから（15−5）÷（8−6）＝5人だ。", () => renderLesson10Shortcut("steps")),
-            makeStep("式を意味がつながる順番に並べよう。", () => renderGenericOrder({ formulas: ["15−5＝10（余りの差）", "8−6＝2（1人につき増える個数）", "10÷2＝5（子どもの人数）", "6×5＋15＝45（あめの全部の数）"], success: "子どもは5人、あめは45個。余りどうしの差から人数を求められたね。▽を押して、10番の学びをまとめよう。", hint: "余りの差、1人分の差、人数、全部の数の順だよ。" }), true),
+            makeStep("式を意味がつながる順番に並べよう。", () => renderGenericOrder({ formulas: ["15−5＝10（余りの差）", "8−6＝2（1人につき増える個数）", "10÷2＝5（子どもの人数）", "6×5＋15＝45（あめの全部の数）"], success: "子どもは5人、あめは45個。余りどうしの差から人数を求められたね。▽を押して、3-2の学びをまとめよう。", hint: "余りの差、1人分の差、人数、全部の数の順だよ。" }), true),
             makeStep("ギルドマスター：『余りどうしなら引き算。前の問題のように余りと不足なら足し算。言葉の違いを図にすると、式の理由が見えるんだ。』", renderLesson10Summary)
         ];
     }
@@ -241,7 +252,7 @@
                 success: "問題の意味を正しく言い換えられた。次は、分かったことをノートに残そう。▽を押して続けよう。"
             }), true),
             makeStep("ノートを開こう。黄色は板書だから必ず写す。緑は、ノートの取り方のコツだ。", () => renderNotebookPrompt({
-                title: "学びの森11",
+                title: "学びの森 3-3",
                 lines: ["3冊ずつ → 16冊余る", "5冊ずつ → 20冊足りない"],
                 advice: "このあと式を書き足すので、ここは1行空けよう。",
                 detail: "問題文を全部写さず、大切な数字と言葉だけを短く書こう。"
@@ -272,7 +283,7 @@
 
     function createLesson12Steps() {
         return [
-            makeStep("12番は、11番で練習した勉強の進め方を、自分の力で使う問題だ。今回は案内を少し減らすよ。", () => renderStudyMethodProblem(12)),
+            makeStep("3-4は、3-3で練習した勉強の進め方を、自分の力で使う問題だ。今回は案内を少し減らすよ。", () => renderStudyMethodProblem(12)),
             makeStep("問題の意味が合うように、空欄を完成させよう。", () => renderUnderstandingCloze({
                 lesson: 12,
                 sentences: [
@@ -285,7 +296,7 @@
                 success: "問題の意味を整理できた。自分のノートへ、必要な情報を書こう。▽を押して続けよう。"
             }), true),
             makeStep("ノートへ、問題番号と必要な条件を書こう。今回は書く内容を自分で選んでみよう。", () => renderNotebookPrompt({
-                title: "学びの森12",
+                title: "学びの森 3-4",
                 lines: ["4個ずつ → 9個余る", "6個ずつ → 5個足りない"],
                 advice: "式を書き足せるように、下を少し空けておこう。",
                 detail: "板書は必ず写す。説明は、自分に必要だと思うところを選んで書く。"
@@ -302,7 +313,7 @@
             makeStep("6個ずつなら、6×7＝42個必要。37個では5個足りない。両方の条件に合っている。", () => renderStudyVerification({ left: "4×7＋9", right: "6×7−5", answer: "37個" })),
             makeStep("効率のよい式を、自分の考えとつなげて確認しよう。", () => renderStudyShortcut({ formula: "（9＋5）÷（6−4）＝7人", notes: ["9＋5＝14個", "6−4＝2個"] })),
             makeStep("今日できたことに一番近いものを選ぼう。", () => renderInsightChoice({
-                choices: ["11番の手順を使って、自分で必要な情報と式を整理した", "問題文を読まずに数字を組み合わせた", "答えが出たので確認はしなかった"],
+                choices: ["3-3の手順を使って、自分で必要な情報と式を整理した", "問題文を読まずに数字を組み合わせた", "答えが出たので確認はしなかった"],
                 correct: 0,
                 success: "その力が、教室で先生の話を聞き、自分のノートを作る力につながっていく。"
             }), true),
@@ -356,6 +367,7 @@
         syncLearningPlayer();
         closeMemo();
         showLessonSelect();
+        updateLearningExitButton();
         if (window.QuestMusicPlayer && typeof window.QuestMusicPlayer.playLearningForest === "function") {
             window.QuestMusicPlayer.playLearningForest();
         }
@@ -449,7 +461,7 @@
         const back = document.getElementById("learningBackStep");
         const restartButton = document.getElementById("learningRestart");
 
-        if (text) text.textContent = "夏期講習プリントの1〜26番から、学び直したい問題を選ぼう。番号を選べば、いつでも解説を見直せるぞ。";
+        if (text) text.textContent = "夏期講習プリントの1-1〜8-1から、学び直したい問題を選ぼう。テキストと同じ番号だから、いつでも迷わず見直せるぞ。";
         if (mark) {
             mark.hidden = true;
             mark.textContent = "▼";
@@ -460,17 +472,19 @@
         if (restartButton) restartButton.disabled = true;
 
         renderLessonSelect();
+        updateLearningExitButton();
     }
 
     function startLesson(number) {
         const lesson = lessonCatalog.find((item) => item.number === number);
         if (!lesson || !lesson.ready) {
             const text = document.getElementById("learningText");
-            if (text) text.textContent = `${number}番「${lesson?.title || "この問題"}」は、ただいま詳しい解説を準備中だ。1番から学び直してみよう。`;
+            if (text) text.textContent = `${getLessonLabel(number)}「${lesson?.title || "この問題"}」は、ただいま詳しい解説を準備中だ。1-1から学び直してみよう。`;
             return;
         }
 
         selectedLesson = lesson;
+        updateLearningExitButton();
         currentSteps = lessonFactories[number]();
         currentStep = 0;
         clearMemo();
@@ -502,8 +516,8 @@
                                             type="button"
                                             class="lesson-number-button ${lesson.ready ? "is-ready" : "is-preparing"} ${done ? "is-complete" : ""}"
                                             data-lesson-number="${lesson.number}"
-                                            aria-label="${lesson.number}番 ${lesson.title}${lesson.ready ? "" : " 準備中"}">
-                                            <strong>${lesson.number}</strong>
+                                            aria-label="${lesson.label} ${lesson.title}${lesson.ready ? "" : " 準備中"}">
+                                            <strong>${lesson.label}</strong>
                                             <span class="lesson-button-title">${lesson.title}</span>
                                             <em>${done ? "✓" : lesson.ready ? "▶" : "…"}</em>
                                         </button>
@@ -534,7 +548,7 @@
     function renderProblem(showAnswer) {
         setBoard(`
             <article class="learning-problem-card">
-                <p class="learning-problem-label">今日の問題</p>
+                <p class="learning-problem-label">1-1の問題</p>
                 <p>兄は弟より <strong>180円多く</strong> 持っています。</p>
                 <p>2人の持っているお金を合わせると <strong>1700円</strong> です。</p>
                 <p>2人はそれぞれいくら持っていますか。</p>
@@ -732,7 +746,7 @@
         const completed = selectedLesson?.id && getState().completedLessons?.includes(selectedLesson.id);
         setBoard(`
             <div class="learning-summary-card">
-                <p class="learning-summary-label">今日の学び</p>
+                <p class="learning-summary-label">1-1の学び</p>
                 <ol>
                     <li><strong>違っている分</strong>の180円を先に外す</li>
                     <li>残った1520円を<strong>同じ2本</strong>に分ける</li>
@@ -752,7 +766,7 @@
     function renderLesson2Problem() {
         setBoard(`
             <article class="learning-problem-card">
-                <p class="learning-problem-label">2番の問題</p>
+                <p class="learning-problem-label">1-2の問題</p>
                 <p>1000円を兄・姉・妹の3人で分けます。</p>
                 <p>兄は妹の <strong>2倍</strong>、姉は妹より <strong>80円多く</strong> もらいました。</p>
                 <p>3人はそれぞれ何円もらいましたか。</p>
@@ -785,7 +799,7 @@
 
     function renderLesson2Summary() {
         renderGenericSummary({
-            label: "2番の学び",
+            label: "1-2の学び",
             points: ["姉だけが多い80円を先に外す", "残った920円を同じ4本に分ける", "1本分230円から兄と姉の金額を作る"],
             formulas: ["1000−80＝920", "920÷4＝230", "230×2＝460", "230＋80＝310"],
             answer: "兄 460円　姉 310円　妹 230円"
@@ -795,7 +809,7 @@
     function renderLesson3Problem() {
         setBoard(`
             <article class="learning-problem-card">
-                <p class="learning-problem-label">3番の問題</p>
+                <p class="learning-problem-label">1-3の問題</p>
                 <p>姉は妹より <strong>500円多く</strong> 持っています。</p>
                 <p>姉は妹の <strong>3倍より100円少ない</strong> そうです。</p>
                 <p>2人はそれぞれ何円持っていますか。</p>
@@ -886,7 +900,7 @@
 
     function renderLesson3Summary() {
         renderGenericSummary({
-            label: "3番の学び",
+            label: "1-3の学び",
             points: ["妹の分を赤い1本で表す", "500円＋100円の真下に、同じ大きさの妹2本分をそろえる", "600円を2で割って妹を求め、500円を足して姉を求める"],
             formulas: ["500＋100＝600", "600円＝妹2本分", "600÷2＝300", "300＋500＝800"],
             answer: "姉 800円　妹 300円"
@@ -897,7 +911,7 @@
     function renderLesson4Problem() {
         setBoard(`
             <article class="learning-problem-card lesson4-problem-card">
-                <p class="learning-problem-label">4番の問題（原文）</p>
+                <p class="learning-problem-label">1-4の問題（原文）</p>
                 <p>同じかさだけ水が入る3つの容器A、B、Cを用意し、バケツに入った16Lの水を全部3つの容器へ移しました。</p>
                 <p>Aは満タン、Bは容器の <strong>1/4</strong>、Cは容器の <strong>3/4</strong> まで水が入りました。</p>
                 <p>容器1つには何Lの水が入りますか。</p>
@@ -966,7 +980,7 @@
 
     function renderLesson4Summary() {
         renderGenericSummary({
-            label: "4番の学び",
+            label: "1-4の学び",
             points: ["最初に問題文を原文のまま読む", "『同じかさだけ入る』を『満タンまで入る量が同じ』へ翻訳する", "順番は書かれていないので、最後の状態だけを使う", "4/4＋1/4＋3/4＝8/4＝容器2個分と考える"],
             formulas: ["4/4＋1/4＋3/4＝8/4", "8/4＝容器2個分", "16÷2＝8"],
             answer: "容器1つには 8L 入る"
@@ -976,7 +990,7 @@
     function renderLesson5Problem() {
         setBoard(`
             <article class="learning-problem-card lesson5-problem-card">
-                <p class="learning-problem-label">5番の問題（原文）</p>
+                <p class="learning-problem-label">2-1の問題（原文）</p>
                 <p>1枚50円のはがきと、1枚80円の切手を同じ枚数ずつ買ったら、はがきと切手の代金の差は420円になりました。</p>
                 <p>はがきは何枚買いましたか。</p>
             </article>
@@ -1040,7 +1054,7 @@
 
     function renderLesson5Summary() {
         renderGenericSummary({
-            label: "5番の学び",
+            label: "2-1の学び",
             points: [
                 "問題文は最初に原文のまま読む",
                 "『同じ枚数ずつ』という言葉に反応する",
@@ -1055,7 +1069,7 @@
     function renderLesson6Problem() {
         setBoard(`
             <article class="learning-problem-card lesson6-problem-card">
-                <p class="learning-problem-label">6番の問題（原文）</p>
+                <p class="learning-problem-label">2-2の問題（原文）</p>
                 <p>1個300円のケーキを何個か買うつもりでお店に行きましたが、実際には1個250円のケーキを何個か買いました。</p>
                 <p>代金は予定と同じ金額で、予定していた個数よりも2個多く買えました。</p>
                 <p>はじめ、300円のケーキを何個買うつもりでお店に行きましたか。</p>
@@ -1132,7 +1146,7 @@
 
     function renderLesson6Summary() {
         renderGenericSummary({
-            label: "6番の学び",
+            label: "2-2の学び",
             points: [
                 "問題文は最初に原文のまま読む",
                 "『代金は予定と同じ』から、予定と実際の合計金額が等しいと読む",
@@ -1232,7 +1246,7 @@
 
     function renderLesson7Summary() {
         renderGenericSummary({
-            label: "7番の学び",
+            label: "2-3の学び",
             points: [
                 "まず原文を読み、『1本ごとの差』『9本多い』『220円高い』に反応する",
                 "じっくり考えるときは、220÷20＝11から場面を一つずつ動かす",
@@ -1319,7 +1333,7 @@
 
     function renderLesson8Summary() {
         renderGenericSummary({
-            label: "8番の学び",
+            label: "2-4の学び",
             points: [
                 "まず問題文を原文のまま読み、『6ふくろ多くできた』に反応する",
                 "増えた6袋は、4×6＝24個分の余裕を表す",
@@ -1427,7 +1441,7 @@
     function renderLesson9Problem() {
         setBoard(`
             <article class="learning-problem-card lesson9-problem-card">
-                <p class="learning-problem-label">9番の問題</p>
+                <p class="learning-problem-label">3-1の問題</p>
                 <p>折り紙を子どもたちに分けようと思います。</p>
                 <p>1人に3枚ずつ分けようとすると6枚あまり、1人に4枚ずつ分けようとすると2枚足りません。</p>
                 <p>子どもは何人いますか。</p>
@@ -1482,7 +1496,7 @@
 
     function renderLesson9Summary() {
         renderGenericSummary({
-            label: "9番の学び",
+            label: "3-1の学び",
             points: ["3枚から4枚へは、1人につき1枚増える", "余った6枚を使っても、さらに2枚必要なので6＋2", "全員へ1枚ずつ追加する8枚から、子どもは8人"],
             formulas: ["4−3＝1", "6＋2＝8", "8÷1＝8"],
             answer: "子どもは8人"
@@ -1492,7 +1506,7 @@
     function renderLesson10Problem() {
         setBoard(`
             <article class="learning-problem-card lesson10-problem-card">
-                <p class="learning-problem-label">10番の問題</p>
+                <p class="learning-problem-label">3-2の問題</p>
                 <p>子ども会に集まった子どもたちにあめを配るのに、1人6個ずつにすると15個あまり、1人8個ずつにすると5個あまります。</p>
                 <p>子どもは何人いますか。また、あめは何個ありますか。</p>
             </article>
@@ -1544,7 +1558,7 @@
 
     function renderLesson10Summary() {
         renderGenericSummary({
-            label: "10番の学び",
+            label: "3-2の学び",
             points: ["余り15個と余り5個の差は10個", "6個から8個へは、1人につき2個増える", "10÷2＝5人。6×5＋15＝45個"],
             formulas: ["15−5＝10", "8−6＝2", "10÷2＝5", "6×5＋15＝45"],
             answer: "子どもは5人　あめは45個"
@@ -1575,7 +1589,7 @@
         const is11 = lesson === 11;
         setBoard(`
             <article class="learning-problem-card study-method-problem">
-                <p class="learning-problem-label">${lesson}番の問題</p>
+                <p class="learning-problem-label">${getLessonLabel(lesson)}の問題</p>
                 <p>${is11 ? 'ノートを子どもたちに3冊ずつ配ると16冊余り、5冊ずつ配ると20冊足りません。' : 'クッキーを子どもたちに4個ずつ分けると9個余り、6個ずつ分けると5個足りません。'}</p>
                 <p>${is11 ? '子どもは何人いますか。また、ノートは全部で何冊ありますか。' : '子どもは何人いますか。また、クッキーは全部で何個ありますか。'}</p>
                 <div class="study-no-calculator">まだ計算しない　まず意味をつかむ</div>
@@ -1692,7 +1706,7 @@
         const completed = selectedLesson?.id && getState().completedLessons?.includes(selectedLesson.id);
         setBoard(`
             <section class="learning-summary-card study-method-summary">
-                <p class="learning-summary-label">${lesson}番　勉強の仕方</p>
+                <p class="learning-summary-label">${getLessonLabel(lesson)}　勉強の仕方</p>
                 <ol>${points.map(point => `<li>${point}</li>`).join('')}</ol>
                 <p class="learning-summary-answer">${answer}</p>
                 <p class="study-real-exp">本当の経験値は、君自身についている。</p>
@@ -1875,5 +1889,15 @@
         if (element) element.addEventListener(eventName, handler);
     }
 
-    window.LearningForest = { init, open, close };
+    window.LearningForest = {
+        init,
+        open,
+        close,
+        hasActiveLesson: () => Boolean(selectedLesson),
+        returnToLessonSelect: () => {
+            if (!selectedLesson) return false;
+            showLessonSelect();
+            return true;
+        }
+    };
 })();
