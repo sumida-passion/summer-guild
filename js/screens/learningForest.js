@@ -23,9 +23,9 @@
         { number: 11, group: 3, label: "3-3", title: "ノートの余りと不足", ready: true, id: "math-study-method-11" },
         { number: 12, group: 3, label: "3-4", title: "クッキーを分ける", ready: true, id: "math-study-method-12" },
         { number: 13, group: 3, label: "3-5", title: "長いすと5年生" },
-        { number: 14, group: 4, label: "4-1", title: "あめとガム" },
-        { number: 15, group: 4, label: "4-2", title: "シュークリームとケーキ" },
-        { number: 16, group: 4, label: "4-3", title: "じゃんけんの得点" },
+        { number: 14, group: 4, label: "4-1", title: "あめとガム", ready: true, id: "math-hypothesis-14" },
+        { number: 15, group: 4, label: "4-2", title: "シュークリームとケーキ", ready: true, id: "math-hypothesis-15" },
+        { number: 16, group: 4, label: "4-3", title: "じゃんけんの得点", ready: true, id: "math-hypothesis-16" },
         { number: 17, group: 4, label: "4-4", title: "おはじきの増減" },
         { number: 18, group: 5, label: "5-1", title: "ジュースとお茶" },
         { number: 19, group: 5, label: "5-2", title: "2種類のおもり" },
@@ -328,6 +328,219 @@
         ];
     }
 
+
+    function renderHypothesisBoard({ label, title, hypothesis, reality, difference, unitChange, conclusion, note = "" }) {
+        setBoard(`
+            <section class="learning-summary-card">
+                <p class="learning-summary-label">${label}　仮説を立てて考える</p>
+                <h3>${title}</h3>
+                <ol>
+                    <li><strong>仮説</strong>　${hypothesis}</li>
+                    <li><strong>現実</strong>　${reality}</li>
+                    <li><strong>差</strong>　${difference}</li>
+                    <li><strong>1回の変化</strong>　${unitChange}</li>
+                </ol>
+                <p class="learning-summary-answer">${conclusion}</p>
+                ${note ? `<p>${note}</p>` : ""}
+            </section>
+        `);
+    }
+
+    function createLesson14Steps() {
+        return [
+            makeStep("4-1からは、式を先に覚えるのではなく、『考えやすい世界』を作って考える練習だ。", () => renderHypothesisBoard({
+                label: "4-1",
+                title: "あめとガム",
+                hypothesis: "まず、全部あめだった世界を作る。",
+                reality: "実際の代金と比べる。",
+                difference: "実際の方が高い分を見つける。",
+                unitChange: "あめ1個をガム1個へ変えると、330−180＝150円高くなる。",
+                conclusion: "差額の中に150円が何回あるかを考える。"
+            })),
+            makeStep("ギルドマスター：『まず、一番考えやすい世界を作ってみよう。』今回は、全部あめだった世界だ。", () => renderHypothesisBoard({
+                label: "4-1",
+                title: "仮説",
+                hypothesis: "全部あめだったら、と考える。",
+                reality: "本当は、あめとガムが混ざっている。",
+                difference: "まだ計算しない。",
+                unitChange: "まだ見ない。",
+                conclusion: "最初は、考えやすい世界を一つ作ればよい。"
+            })),
+            makeStep("ギルドマスター：『実際とは何が違うかな？』全部あめの代金と、実際の代金との差を見る。", () => renderHypothesisBoard({
+                label: "4-1",
+                title: "現実と比べる",
+                hypothesis: "全部あめの代金",
+                reality: "問題に書かれた実際の代金",
+                difference: "実際の方が高い。",
+                unitChange: "ガムが入るたびに高くなる。",
+                conclusion: "この差は、ガムへ変わった分の合計だ。"
+            })),
+            makeStep("ギルドマスター：『その違いは1回でどれくらい変わる？』あめ180円がガム330円へ変わると、いくら高くなる？", () => renderGenericNumber({
+                title: "1個変わるときの差",
+                formula: "330 − 180 ＝",
+                expected: "150",
+                unit: "円",
+                success: "150円。あめ1個をガム1個へ変えるたび、代金は150円高くなる。▽を押して続けよう。",
+                hint: "ガム330円から、あめ180円を引こう。"
+            }), true),
+            makeStep("ギルドマスター：『その違いは何回起きているかな？』実際との差額を150円ずつに分ければ、ガムの個数が分かる。", () => renderHypothesisBoard({
+                label: "4-1",
+                title: "差が何回分か",
+                hypothesis: "全部あめ",
+                reality: "あめとガム",
+                difference: "実際との差額",
+                unitChange: "1回150円",
+                conclusion: "差額 ÷ 150 ＝ ガムの個数"
+            })),
+            makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["全部あめだった世界を作る", "実際の代金との差を見る", "330−180＝150円", "差額÷150＝ガムの個数"],
+                success: "仮説→現実→差→何回分、の順で考えられた。▽を押してまとめよう。",
+                hint: "まず『全部あめ』から始めよう。"
+            }), true),
+            makeStep("今日は答えの出し方よりも、考え方を学んだね。考えやすい仮説を立てると、式はあとから自然に生まれる。", () => renderHypothesisBoard({
+                label: "4-1",
+                title: "今日の考え方",
+                hypothesis: "全部あめ",
+                reality: "本当の代金",
+                difference: "代金の差",
+                unitChange: "1個150円",
+                conclusion: "差が150円の何回分かを考える。"
+            }))
+        ];
+    }
+
+    function createLesson15Steps() {
+        return [
+            makeStep("4-2も、まず一番考えやすい世界を作ろう。今回は、全部シュークリームだった世界だけで考える。", () => renderHypothesisBoard({
+                label: "4-2",
+                title: "シュークリームとケーキ",
+                hypothesis: "全部シュークリーム",
+                reality: "実際はシュークリームとケーキ",
+                difference: "代金の差を見る",
+                unitChange: "1個変わると150円高くなる",
+                conclusion: "差が150円の何回分かを考える。"
+            })),
+            makeStep("ギルドマスター：『まず、一番考えやすい世界を作ってみよう。』全部シュークリームなら、代金は3240円だ。", () => renderHypothesisBoard({
+                label: "4-2",
+                title: "仮説",
+                hypothesis: "全部シュークリーム＝3240円",
+                reality: "まだ比べない",
+                difference: "まだ求めない",
+                unitChange: "まだ見ない",
+                conclusion: "考えやすい世界を先に作った。"
+            })),
+            makeStep("ギルドマスター：『実際とは何が違うかな？』本当の代金4890円は、全部シュークリームよりいくら高い？", () => renderGenericNumber({
+                title: "実際との差",
+                formula: "4890 − 3240 ＝",
+                expected: "1650",
+                unit: "円",
+                success: "1650円高い。この差は、シュークリームがケーキへ変わった分だ。▽を押して続けよう。",
+                hint: "実際の4890円から、仮説の3240円を引こう。"
+            }), true),
+            makeStep("ギルドマスター：『その違いは1回でどれくらい変わる？』シュークリーム1個をケーキ1個へ変えると、150円高くなる。", () => renderHypothesisBoard({
+                label: "4-2",
+                title: "1回の変化",
+                hypothesis: "シュークリーム1個",
+                reality: "ケーキ1個",
+                difference: "150円高い",
+                unitChange: "1回＝150円",
+                conclusion: "1650円は、150円が何回分か。"
+            })),
+            makeStep("ギルドマスター：『その違いは何回起きているかな？』1650円の中に150円はいくつある？", () => renderGenericNumber({
+                title: "ケーキの個数",
+                formula: "1650 ÷ 150 ＝",
+                expected: "11",
+                unit: "個",
+                success: "11個。ケーキへ変わった回数は11回だった。▽を押して続けよう。",
+                hint: "1650円を、1回分の150円で分けよう。"
+            }), true),
+            makeStep("最後に、式が生まれた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["全部シュークリーム＝3240円", "4890−3240＝1650円", "1個変わると150円高い", "1650÷150＝11個"],
+                success: "式を先に覚えず、考えた順番から式を作れた。▽を押してまとめよう。",
+                hint: "最初は全部シュークリームの世界だ。"
+            }), true),
+            makeStep("実は全部ケーキだった世界から考えても答えは出せるよ。でも、まずは自分が考えやすい仮説を一つ立てればいい。", () => renderHypothesisBoard({
+                label: "4-2",
+                title: "発展",
+                hypothesis: "全部シュークリームから考えた",
+                reality: "全部ケーキからでも考えられる",
+                difference: "仮説は一つではない",
+                unitChange: "大切なのは考え始められること",
+                conclusion: "ケーキは11個",
+                note: "今回は、全部シュークリームの考え方だけで最後まで解いた。"
+            }))
+        ];
+    }
+
+    function createLesson16Steps() {
+        return [
+            makeStep("4-3は、全部勝った世界を作って考える。", () => renderHypothesisBoard({
+                label: "4-3",
+                title: "じゃんけんの得点",
+                hypothesis: "15回全部勝ち",
+                reality: "実際は55点",
+                difference: "点数の差を見る",
+                unitChange: "勝ちが負けへ変わると10点下がる",
+                conclusion: "差が10点の何回分かを考える。"
+            })),
+            makeStep("ギルドマスター：『まず、一番考えやすい世界を作ってみよう。』15回全部勝ったら、7×15＝105点だ。", () => renderHypothesisBoard({
+                label: "4-3",
+                title: "仮説",
+                hypothesis: "全部勝ち＝105点",
+                reality: "実際は55点",
+                difference: "これから比べる",
+                unitChange: "まだ見ない",
+                conclusion: "一番高い点になる世界を作った。"
+            })),
+            makeStep("ギルドマスター：『実際とは何が違うかな？』105点より実際の55点は、何点低い？", () => renderGenericNumber({
+                title: "仮説と現実の差",
+                formula: "105 − 55 ＝",
+                expected: "50",
+                unit: "点",
+                success: "50点低い。負けがある分だけ、全部勝ちより点数が下がっている。▽を押して続けよう。",
+                hint: "全部勝ち105点から、実際55点を引こう。"
+            }), true),
+            makeStep("ギルドマスター：『その違いは1回でどれくらい変わる？』勝ちは7点、負けは−3点。勝ち1回が負け1回へ変わると何点変わる？", () => renderGenericNumber({
+                title: "1回変わるときの差",
+                formula: "7 − (−3) ＝",
+                expected: "10",
+                unit: "点",
+                success: "10点。勝ち1回が負け1回へ変わると、合計点は10点下がる。▽を押して続けよう。",
+                hint: "7点から−3点へ変わる差は10点だ。"
+            }), true),
+            makeStep("ギルドマスター：『その違いは何回起きているかな？』50点低いのは、10点の変化が何回分？", () => renderGenericNumber({
+                title: "負けた回数",
+                formula: "50 ÷ 10 ＝",
+                expected: "5",
+                unit: "回",
+                success: "負けは5回。15回のうち残りが勝ちだ。▽を押して続けよう。",
+                hint: "50点を、1回分の10点で分けよう。"
+            }), true),
+            makeStep("全部で15回、負けが5回。勝ちは何回かな？", () => renderGenericNumber({
+                title: "勝った回数",
+                formula: "15 − 5 ＝",
+                expected: "10",
+                unit: "回",
+                success: "勝ちは10回。これで勝ちと負けの回数が分かった。▽を押して続けよう。",
+                hint: "全部15回から、負け5回を引こう。"
+            }), true),
+            makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["全部勝ち＝105点", "105−55＝50点", "勝ち→負けで10点変化", "50÷10＝負け5回"],
+                success: "仮説と現実の差から、負けた回数を見つけられた。▽を押してまとめよう。",
+                hint: "まず全部勝ちの世界を作ろう。"
+            }), true),
+            makeStep("今日は答えの出し方よりも、考え方を学んだね。実は仮説は一つじゃない。大切なのは、『どの仮説が正しいか』ではなく、『考えやすい仮説を立てて考え始めること』なんだ。", () => renderHypothesisBoard({
+                label: "4-3",
+                title: "第4章のまとめ",
+                hypothesis: "仮説を立てる",
+                reality: "現実と比べる",
+                difference: "違いを見る",
+                unitChange: "違いが何回分か考える",
+                conclusion: "考え方から、式を自然に生み出す。"
+            }))
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
@@ -340,7 +553,10 @@
         9: createLesson9Steps,
         10: createLesson10Steps,
         11: createLesson11Steps,
-        12: createLesson12Steps
+        12: createLesson12Steps,
+        14: createLesson14Steps,
+        15: createLesson15Steps,
+        16: createLesson16Steps
     };
 
     function init() {
