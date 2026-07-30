@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-30T08:58:08.153114+00:00",
-    "commit": "b64e7c0",
+    "atUtc": "2026-07-30T08:58:30.371629+00:00",
+    "commit": "e6dedd3",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97284994,
+    "totalBytes": 97287220,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1538,9 +1538,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 52712,
-      "sha1": "f1419c8010",
-      "lineCount": 554
+      "sizeBytes": 54072,
+      "sha1": "4679a68cb4",
+      "lineCount": 565
     },
     {
       "path": "docs/game-rules.md",
@@ -1560,9 +1560,9 @@
       "stem": "GPT_HANDOFF",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 30846,
-      "sha1": "366abc94d4",
-      "lineCount": 488
+      "sizeBytes": 31712,
+      "sha1": "bbfd964f63",
+      "lineCount": 497
     },
     {
       "path": "docs/GPT_PROJECT_STATE.md",
@@ -3678,7 +3678,13 @@
     {
       "status": "M",
       "paths": [
-        "js/screens/learningForest.js"
+        "docs/GPT_HANDOFF.md"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "docs/development-log.md"
       ]
     }
   ],
