@@ -13,16 +13,16 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-30T08:16:56.333862+00:00",
-    "commit": "202602b",
-    "commitSubject": "Add files via upload"
+    "atUtc": "2026-07-30T08:54:28.714084+00:00",
+    "commit": "working-zip",
+    "commitSubject": "Implement learning forest lessons 5-3, 5-4, 6-1, 6-2"
   },
   "summary": {
-    "fileCount": 188,
+    "fileCount": 189,
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97264451,
+    "totalBytes": 97287220,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -31,7 +31,7 @@
       ".md": 6,
       ".mp3": 15,
       ".png": 68,
-      ".txt": 3,
+      ".txt": 4,
       ".webmanifest": 1,
       ".yml": 1,
       "[no-extension]": 53
@@ -120,6 +120,61 @@
       "sizeBytes": 16575,
       "sha1": "8ec7931057",
       "lineCount": 385
+    },
+    {
+      "path": "README.md",
+      "directory": ".",
+      "name": "README.md",
+      "stem": "README",
+      "extension": ".md",
+      "extensionNormalized": ".md",
+      "sizeBytes": 28,
+      "sha1": "83de97a1fe",
+      "lineCount": 1
+    },
+    {
+      "path": "UPLOAD_FILES.txt",
+      "directory": ".",
+      "name": "UPLOAD_FILES.txt",
+      "stem": "UPLOAD_FILES",
+      "extension": ".txt",
+      "extensionNormalized": ".txt",
+      "sizeBytes": 275,
+      "sha1": "59cf04a2f2",
+      "lineCount": 11
+    },
+    {
+      "path": "UPLOAD_FILES_learning-forest-11-12.txt",
+      "directory": ".",
+      "name": "UPLOAD_FILES_learning-forest-11-12.txt",
+      "stem": "UPLOAD_FILES_learning-forest-11-12",
+      "extension": ".txt",
+      "extensionNormalized": ".txt",
+      "sizeBytes": 831,
+      "sha1": "acb89bd5c2",
+      "lineCount": 21
+    },
+    {
+      "path": "UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt",
+      "directory": ".",
+      "name": "UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt",
+      "stem": "UPLOAD_FILES_learning-forest-4-4-5-1-5-2",
+      "extension": ".txt",
+      "extensionNormalized": ".txt",
+      "sizeBytes": 629,
+      "sha1": "2e34ed2cfd",
+      "lineCount": 20
+    },
+    {
+      "path": "UPLOAD_FILES_learning-forest-5-3-5-4-6-1-6-2.txt",
+      "directory": ".",
+      "name": "UPLOAD_FILES_learning-forest-5-3-5-4-6-1-6-2.txt",
+      "stem": "UPLOAD_FILES_learning-forest-5-3-5-4-6-1-6-2",
+      "extension": ".txt",
+      "extensionNormalized": ".txt",
+      "sizeBytes": 738,
+      "sha1": "03c5498d70",
+      "lineCount": 24
     },
     {
       "path": "assets/app-icons/.gitkeep",
@@ -272,16 +327,6 @@
       "sha1": "e882067dda"
     },
     {
-      "path": "assets/audio/quests/learningForest.mp3",
-      "directory": "assets/audio/quests",
-      "name": "learningForest.mp3",
-      "stem": "learningForest",
-      "extension": ".mp3",
-      "extensionNormalized": ".mp3",
-      "sizeBytes": 3209645,
-      "sha1": "685d72d4eb"
-    },
-    {
       "path": "assets/audio/quests/The Clockwork Gambit 2.mp3",
       "directory": "assets/audio/quests",
       "name": "The Clockwork Gambit 2.mp3",
@@ -310,6 +355,16 @@
       "extensionNormalized": ".mp3",
       "sizeBytes": 3017441,
       "sha1": "de7173bcc8"
+    },
+    {
+      "path": "assets/audio/quests/learningForest.mp3",
+      "directory": "assets/audio/quests",
+      "name": "learningForest.mp3",
+      "stem": "learningForest",
+      "extension": ".mp3",
+      "extensionNormalized": ".mp3",
+      "sizeBytes": 3209645,
+      "sha1": "685d72d4eb"
     },
     {
       "path": "assets/audio/quests/vsMathGuildMaster_final.mp3",
@@ -1142,6 +1197,16 @@
       "sha1": "da39a3ee5e"
     },
     {
+      "path": "assets/items/furniture/GuildTableClock.PNG",
+      "directory": "assets/items/furniture",
+      "name": "GuildTableClock.PNG",
+      "stem": "GuildTableClock",
+      "extension": ".PNG",
+      "extensionNormalized": ".png",
+      "sizeBytes": 78168,
+      "sha1": "8c265d3de3"
+    },
+    {
       "path": "assets/items/furniture/bookshelf.PNG",
       "directory": "assets/items/furniture",
       "name": "bookshelf.PNG",
@@ -1160,16 +1225,6 @@
       "extensionNormalized": ".png",
       "sizeBytes": 261271,
       "sha1": "d2ebfc4d9f"
-    },
-    {
-      "path": "assets/items/furniture/GuildTableClock.PNG",
-      "directory": "assets/items/furniture",
-      "name": "GuildTableClock.PNG",
-      "stem": "GuildTableClock",
-      "extension": ".PNG",
-      "extensionNormalized": ".png",
-      "sizeBytes": 78168,
-      "sha1": "8c265d3de3"
     },
     {
       "path": "assets/items/furniture/magicBroom.PNG",
@@ -1521,48 +1576,15 @@
       "sha1": "da39a3ee5e"
     },
     {
-      "path": "docs/asset-guide.md",
-      "directory": "docs",
-      "name": "asset-guide.md",
-      "stem": "asset-guide",
-      "extension": ".md",
-      "extensionNormalized": ".md",
-      "sizeBytes": 8,
-      "sha1": "cd2275866b",
-      "lineCount": 1
-    },
-    {
-      "path": "docs/development-log.md",
-      "directory": "docs",
-      "name": "development-log.md",
-      "stem": "development-log",
-      "extension": ".md",
-      "extensionNormalized": ".md",
-      "sizeBytes": 52712,
-      "sha1": "f1419c8010",
-      "lineCount": 554
-    },
-    {
-      "path": "docs/game-rules.md",
-      "directory": "docs",
-      "name": "game-rules.md",
-      "stem": "game-rules",
-      "extension": ".md",
-      "extensionNormalized": ".md",
-      "sizeBytes": 5480,
-      "sha1": "2817271bd4",
-      "lineCount": 70
-    },
-    {
       "path": "docs/GPT_HANDOFF.md",
       "directory": "docs",
       "name": "GPT_HANDOFF.md",
       "stem": "GPT_HANDOFF",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 30846,
-      "sha1": "366abc94d4",
-      "lineCount": 488
+      "sizeBytes": 31712,
+      "sha1": "bbfd964f63",
+      "lineCount": 497
     },
     {
       "path": "docs/GPT_PROJECT_STATE.md",
@@ -1587,14 +1609,47 @@
       "lineCount": 1883
     },
     {
+      "path": "docs/asset-guide.md",
+      "directory": "docs",
+      "name": "asset-guide.md",
+      "stem": "asset-guide",
+      "extension": ".md",
+      "extensionNormalized": ".md",
+      "sizeBytes": 8,
+      "sha1": "cd2275866b",
+      "lineCount": 1
+    },
+    {
+      "path": "docs/development-log.md",
+      "directory": "docs",
+      "name": "development-log.md",
+      "stem": "development-log",
+      "extension": ".md",
+      "extensionNormalized": ".md",
+      "sizeBytes": 54072,
+      "sha1": "4679a68cb4",
+      "lineCount": 565
+    },
+    {
+      "path": "docs/game-rules.md",
+      "directory": "docs",
+      "name": "game-rules.md",
+      "stem": "game-rules",
+      "extension": ".md",
+      "extensionNormalized": ".md",
+      "sizeBytes": 5480,
+      "sha1": "2817271bd4",
+      "lineCount": 70
+    },
+    {
       "path": "index.html",
       "directory": ".",
       "name": "index.html",
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 19963,
-      "sha1": "1453ff0f62",
+      "sizeBytes": 20071,
+      "sha1": "fecef09bfa",
       "lineCount": 790
     },
     {
@@ -1789,9 +1844,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 168453,
-      "sha1": "c3e28ffa3d",
-      "lineCount": 2625
+      "sizeBytes": 188146,
+      "sha1": "44a5371d36",
+      "lineCount": 2943
     },
     {
       "path": "js/screens/musicShop.js",
@@ -1943,18 +1998,8 @@
       "extension": ".webmanifest",
       "extensionNormalized": ".webmanifest",
       "sizeBytes": 598,
-      "sha1": "57906bcc9e"
-    },
-    {
-      "path": "README.md",
-      "directory": ".",
-      "name": "README.md",
-      "stem": "README",
-      "extension": ".md",
-      "extensionNormalized": ".md",
-      "sizeBytes": 28,
-      "sha1": "83de97a1fe",
-      "lineCount": 1
+      "sha1": "57906bcc9e",
+      "lineCount": 26
     },
     {
       "path": "saves/.gitkeep",
@@ -1973,8 +2018,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4518,
-      "sha1": "2ff7d01df3",
+      "sizeBytes": 4522,
+      "sha1": "2328097e46",
       "lineCount": 177
     },
     {
@@ -1997,39 +2042,6 @@
       "sizeBytes": 27130,
       "sha1": "5f78fead5c",
       "lineCount": 1650
-    },
-    {
-      "path": "UPLOAD_FILES.txt",
-      "directory": ".",
-      "name": "UPLOAD_FILES.txt",
-      "stem": "UPLOAD_FILES",
-      "extension": ".txt",
-      "extensionNormalized": ".txt",
-      "sizeBytes": 275,
-      "sha1": "59cf04a2f2",
-      "lineCount": 11
-    },
-    {
-      "path": "UPLOAD_FILES_learning-forest-11-12.txt",
-      "directory": ".",
-      "name": "UPLOAD_FILES_learning-forest-11-12.txt",
-      "stem": "UPLOAD_FILES_learning-forest-11-12",
-      "extension": ".txt",
-      "extensionNormalized": ".txt",
-      "sizeBytes": 831,
-      "sha1": "acb89bd5c2",
-      "lineCount": 21
-    },
-    {
-      "path": "UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt",
-      "directory": ".",
-      "name": "UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt",
-      "stem": "UPLOAD_FILES_learning-forest-4-4-5-1-5-2",
-      "extension": ".txt",
-      "extensionNormalized": ".txt",
-      "sizeBytes": 629,
-      "sha1": "2e34ed2cfd",
-      "lineCount": 20
     }
   ],
   "images": [

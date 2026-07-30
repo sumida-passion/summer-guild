@@ -1,0 +1,24 @@
+学びの森 5-3・5-4・6-1・6-2 実装版
+作成日: 2026-07-30
+
+GitHubへアップロードするファイル
+
+1. js/screens/learningForest.js
+2. index.html
+3. service-worker.js
+4. docs/GPT_HANDOFF.md
+5. docs/development-log.md
+6. project-index.json
+7. UPLOAD_FILES_learning-forest-5-3-5-4-6-1-6-2.txt
+
+各ファイルを、上記と同じ相対パスへ上書きしてください。
+
+実装内容
+- 5-3 コイン投げの得点
+- 5-4 的当てゲーム
+- 6-1 道の両側の桜
+- 6-2 桜を増やして植え直す
+- 4問とも最初に実際の問題文を表示
+- iPad Safari/PWA更新用のバージョン更新
+
+アップロード後、GitHub Actionsによって project-index.json が再生成される場合があります。
