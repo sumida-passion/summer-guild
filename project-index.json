@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-07-30T03:51:27.083327+00:00",
-    "commit": "cfed1d6",
+    "atUtc": "2026-07-30T03:51:42.577936+00:00",
+    "commit": "65ecd3b",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97189703,
+    "totalBytes": 97190904,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1789,9 +1789,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 121504,
-      "sha1": "f3b1c3c19f",
-      "lineCount": 1879
+      "sizeBytes": 122705,
+      "sha1": "be217b6f1e",
+      "lineCount": 1903
     },
     {
       "path": "js/screens/musicShop.js",
@@ -3075,6 +3075,8 @@
     {
       "path": "js/screens/learningForest.js",
       "functions": [
+        "getLessonLabel",
+        "updateLearningExitButton",
         "makeStep",
         "createLesson1Steps",
         "createLesson2Steps",
@@ -3172,9 +3174,7 @@
         "renderStudyMethodTutorial",
         "renderStudyMethodProblem",
         "renderUnderstandingCloze",
-        "renderNotebookPrompt",
-        "renderStudyDifferenceDiagram",
-        "renderStudyVerification"
+        "renderNotebookPrompt"
       ],
       "classes": [],
       "windowExports": [
@@ -3656,7 +3656,7 @@
     {
       "status": "M",
       "paths": [
-        "js/app.js"
+        "js/screens/learningForest.js"
       ]
     }
   ],
