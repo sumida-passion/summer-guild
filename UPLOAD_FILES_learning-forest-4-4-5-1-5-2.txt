@@ -1,0 +1,20 @@
+学びの森 4-4／5-1／5-2 実装版
+
+GitHubへ、次のファイルを同じ場所へ上書きアップロードしてください。
+
+1. index.html
+2. service-worker.js
+3. js/screens/learningForest.js
+4. css/screens/learning-forest.css
+5. docs/GPT_HANDOFF.md
+6. docs/development-log.md
+7. project-index.json
+8. UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt
+
+実装内容
+- 4-4「おはじきの増減」
+- 5-1「ジュースとお茶」
+- 5-2「2種類のおもり」
+- iPad/PWA向けキャッシュ版更新
+
+アップロード後はGitHub Actionsによって project-index.json が再生成される場合があります。
