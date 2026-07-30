@@ -26,9 +26,9 @@
         { number: 14, group: 4, label: "4-1", title: "あめとガム", ready: true, id: "math-hypothesis-14" },
         { number: 15, group: 4, label: "4-2", title: "シュークリームとケーキ", ready: true, id: "math-hypothesis-15" },
         { number: 16, group: 4, label: "4-3", title: "じゃんけんの得点", ready: true, id: "math-hypothesis-16" },
-        { number: 17, group: 4, label: "4-4", title: "おはじきの増減" },
-        { number: 18, group: 5, label: "5-1", title: "ジュースとお茶" },
-        { number: 19, group: 5, label: "5-2", title: "2種類のおもり" },
+        { number: 17, group: 4, label: "4-4", title: "おはじきの増減", ready: true, id: "math-hypothesis-17" },
+        { number: 18, group: 5, label: "5-1", title: "ジュースとお茶", ready: true, id: "math-hypothesis-18" },
+        { number: 19, group: 5, label: "5-2", title: "2種類のおもり", ready: true, id: "math-hypothesis-19" },
         { number: 20, group: 5, label: "5-3", title: "コイン投げの得点" },
         { number: 21, group: 5, label: "5-4", title: "的当てゲーム" },
         { number: 22, group: 6, label: "6-1", title: "道の両側の桜" },
@@ -713,6 +713,266 @@
         ];
     }
 
+
+    function renderTwoTypeObjects({ label, title, total, firstCount, firstLabel, secondLabel, firstIcon, secondIcon, note }) {
+        const first = Number(firstCount);
+        const count = Number(total);
+        const objects = Array.from({ length: count }, (_, index) => {
+            const isFirst = index < first;
+            return `<span class="two-type-object ${isFirst ? "is-first" : "is-second"}"><b>${isFirst ? firstIcon : secondIcon}</b><small>${isFirst ? firstLabel : secondLabel}</small></span>`;
+        }).join("");
+        setBoard(`
+            <section class="two-type-board">
+                <header><small>${label}</small><h3>${title}</h3></header>
+                <div class="two-type-object-grid">${objects}</div>
+                <p>${note}</p>
+            </section>
+        `);
+    }
+
+    function renderWeightBoxBoard({ stage }) {
+        const showRemoved = stage === "removed" || stage === "all-light" || stage === "answer";
+        const heavyCount = stage === "answer" ? 9 : 0;
+        const objects = Array.from({ length: 20 }, (_, index) => {
+            const heavy = index < heavyCount;
+            return `<span class="weight-object ${heavy ? "is-heavy" : "is-light"}"><b>●</b><small>${heavy ? "230g" : "120g"}</small></span>`;
+        }).join("");
+        setBoard(`
+            <section class="weight-box-board ${showRemoved ? "box-is-removed" : ""}">
+                <header><small>5-2</small><h3>箱と20個のおもり</h3></header>
+                <div class="weight-scene">
+                    <div class="weight-box"><strong>箱</strong><span>140g</span>${showRemoved ? "<em>先に外す</em>" : ""}</div>
+                    <div class="weight-total"><span>${stage === "start" ? "全部で3530g" : "おもりだけ3390g"}</span></div>
+                </div>
+                <div class="weight-object-grid">${objects}</div>
+                <p>${stage === "start"
+                    ? "3530gには、箱140gも入っている。"
+                    : stage === "removed"
+                        ? "3530−140＝3390g。ここから20個のおもりだけで考える。"
+                        : stage === "all-light"
+                            ? "全部120gなら、120×20＝2400g。"
+                            : "230gが9個、120gが11個。合わせて20個。"}</p>
+            </section>
+        `);
+    }
+
+    function createLesson17Steps() {
+        return [
+            makeStep("まずは実際の問題文を読もう。まだ式は考えなくて大丈夫だよ。", () => renderHypothesisProblem({
+                label: "4-4",
+                lines: [
+                    "勝てばおはじきを3個もらい、負ければ2個とられるというゲームをします。",
+                    "はじめ30個のおはじきを持っていましたが、15回ゲームをしたところ、持っているおはじきの数は35個になっていました。",
+                    "このとき、勝った回数は何回ですか。"
+                ]
+            }), true),
+            makeStep("4-4も、まず一番考えやすい世界を作ろう。今回は15回全部負けた世界だ。", () => renderHypothesisBoard({
+                label: "4-4",
+                title: "おはじきの増減",
+                hypothesis: "15回全部負け",
+                reality: "実際は35個",
+                difference: "おはじきの差を見る",
+                unitChange: "負けが勝ちへ変わると5個増える",
+                conclusion: "差が5個の何回分かを考える。"
+            })),
+            makeStep("最初は30個。15回全部負けると、2個ずつ15回とられる。残りはいくつ？", () => renderGenericNumber({
+                title: "全部負けた世界",
+                formula: "30 − 2 × 15 ＝",
+                expected: "0",
+                unit: "個",
+                success: "全部負けなら0個になる。けれど実際は35個残っている。▽を押して続けよう。",
+                hint: "2個ずつ15回、合計30個とられる。"
+            }), true),
+            makeStep("仮説では0個、実際は35個。この二つの世界には35個の差がある。", () => renderHypothesisBoard({
+                label: "4-4",
+                title: "仮説と現実",
+                hypothesis: "全部負け＝0個",
+                reality: "実際＝35個",
+                difference: "35個多い",
+                unitChange: "次に1回の変化を見る",
+                conclusion: "勝ちへ変わった分だけ増えている。"
+            })),
+            makeStep("負け1回を勝ち1回へ変えると、2個とられなくなり、さらに3個もらえる。合わせて何個増える？", () => renderGenericNumber({
+                title: "1回変わるときの差",
+                formula: "2 ＋ 3 ＝",
+                expected: "5",
+                unit: "個",
+                success: "1回変わるごとに5個増える。▽を押して続けよう。",
+                hint: "とられなくなる2個と、もらえる3個を合わせよう。"
+            }), true),
+            makeStep("35個の差は、5個の変化が何回分かな？", () => renderGenericNumber({
+                title: "勝った回数",
+                formula: "35 ÷ 5 ＝",
+                expected: "7",
+                unit: "回",
+                success: "勝ちは7回。▽を押して、考えた順番を確かめよう。",
+                hint: "35個を、1回分の5個で分けよう。"
+            }), true),
+            makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["全部負け＝0個", "実際との差＝35個", "負け→勝ちで5個増える", "35÷5＝勝ち7回"],
+                success: "仮説と現実の差から、勝った回数を見つけられた。▽を押してまとめよう。",
+                hint: "まず15回全部負けた世界を作ろう。"
+            }), true),
+            makeStep("4-4も、第4章の『仮説→現実→差→差が何回分』で解けたね。", () => renderGenericSummary({
+                label: "4-4の学び",
+                points: ["15回全部負けた世界を作る", "実際の35個との差を見る", "負けが勝ちへ変わると5個増える"],
+                formulas: ["30−2×15＝0", "2＋3＝5", "35÷5＝7"],
+                answer: "勝った回数 7回"
+            }))
+        ];
+    }
+
+    function createLesson18Steps() {
+        return [
+            makeStep("まずは実際の問題文を読もう。まだ式は考えなくて大丈夫だよ。", () => renderHypothesisProblem({
+                label: "5-1",
+                lines: [
+                    "1本160円のジュースと1本120円のお茶を合わせて18本買うと、代金の合計は2400円になりました。",
+                    "このとき、ジュースとお茶をそれぞれ何本買いましたか。"
+                ]
+            }), true),
+            makeStep("18本全部を、安い120円のお茶だったことにしてみよう。", () => renderTwoTypeObjects({
+                label: "5-1",
+                title: "まず全部お茶の世界",
+                total: 18,
+                firstCount: 0,
+                firstLabel: "ジュース",
+                secondLabel: "お茶",
+                firstIcon: "J",
+                secondIcon: "茶",
+                note: "18本全部がお茶なら、120×18＝2160円。"
+            })),
+            makeStep("実際は2400円。全部お茶の2160円より、いくら高い？", () => renderGenericNumber({
+                title: "実際との差",
+                formula: "2400 − 2160 ＝",
+                expected: "240",
+                unit: "円",
+                success: "実際は240円高い。この差は、お茶がジュースへ変わった分だ。▽を押して続けよう。",
+                hint: "実際の2400円から、全部お茶の2160円を引こう。"
+            }), true),
+            makeStep("お茶1本をジュース1本へ替えると、何円高くなる？", () => renderGenericNumber({
+                title: "1本変わるときの差",
+                formula: "160 − 120 ＝",
+                expected: "40",
+                unit: "円",
+                success: "1本替えるごとに40円高くなる。▽を押して続けよう。",
+                hint: "ジュース160円とお茶120円の差を求めよう。"
+            }), true),
+            makeStep("240円の差は、40円の変化が何本分かな？", () => renderGenericNumber({
+                title: "ジュースの本数",
+                formula: "240 ÷ 40 ＝",
+                expected: "6",
+                unit: "本",
+                success: "ジュースは6本。残りがお茶だ。▽を押して続けよう。",
+                hint: "240円を、1本分の40円で分けよう。"
+            }), true),
+            makeStep("全部で18本、ジュースが6本。お茶は何本？", () => renderGenericNumber({
+                title: "お茶の本数",
+                formula: "18 − 6 ＝",
+                expected: "12",
+                unit: "本",
+                success: "お茶は12本。18本を色分けして確かめよう。▽を押して続けよう。",
+                hint: "全部18本からジュース6本を引こう。"
+            }), true),
+            makeStep("6本をジュース、残り12本をお茶に替えると、実際の買い方になる。", () => renderTwoTypeObjects({
+                label: "5-1",
+                title: "実際の18本",
+                total: 18,
+                firstCount: 6,
+                firstLabel: "ジュース",
+                secondLabel: "お茶",
+                firstIcon: "J",
+                secondIcon: "茶",
+                note: "160×6＋120×12＝960＋1440＝2400円。"
+            })),
+            makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["全部お茶＝2160円", "2400−2160＝240円", "160−120＝40円", "240÷40＝ジュース6本"],
+                success: "全部を一方だと仮定して、差から本数を見つけられた。▽を押してまとめよう。",
+                hint: "最初は18本全部をお茶にする。"
+            }), true),
+            makeStep("第5章でも、第4章で覚えた考え方が使えたね。", () => renderGenericSummary({
+                label: "5-1の学び",
+                points: ["18本全部をお茶だと仮定する", "実際との差240円を求める", "1本の差40円で割る"],
+                formulas: ["120×18＝2160", "2400−2160＝240", "160−120＝40", "240÷40＝6"],
+                answer: "ジュース6本　お茶12本"
+            }))
+        ];
+    }
+
+    function createLesson19Steps() {
+        return [
+            makeStep("まずは実際の問題文を読もう。まだ式は考えなくて大丈夫だよ。", () => renderHypothesisProblem({
+                label: "5-2",
+                lines: [
+                    "1個120gのおもりと1個230gのおもりを合わせて20個用意し、140gの箱に入れて重さをはかると、重さの合計は3530gでした。",
+                    "このとき、120gのおもりは何個ですか。"
+                ]
+            }), true),
+            makeStep("この3530gには、20個のおもりだけでなく箱140gも入っている。まず箱を分けて考えよう。", () => renderWeightBoxBoard({ stage: "start" })),
+            makeStep("箱140gを取り除くと、おもりだけの重さはいくつ？", () => renderGenericNumber({
+                title: "おもりだけの重さ",
+                formula: "3530 − 140 ＝",
+                expected: "3390",
+                unit: "g",
+                success: "おもり20個だけの重さは3390g。ここから仮説を作ろう。▽を押して続けよう。",
+                hint: "全部の重さから箱140gを引こう。"
+            }), true),
+            makeStep("箱を先に外せた。ここから20個全部を軽い120gのおもりだと仮定する。", () => renderWeightBoxBoard({ stage: "removed" })),
+            makeStep("20個全部が120gなら、重さは何g？", () => renderGenericNumber({
+                title: "全部120gの世界",
+                formula: "120 × 20 ＝",
+                expected: "2400",
+                unit: "g",
+                success: "全部120gなら2400g。実際のおもりは3390gだ。▽を押して続けよう。",
+                hint: "120gのおもりが20個あると考えよう。"
+            }), true),
+            makeStep("実際の3390gは、全部120gの2400gより何g重い？", () => renderGenericNumber({
+                title: "実際との差",
+                formula: "3390 − 2400 ＝",
+                expected: "990",
+                unit: "g",
+                success: "実際は990g重い。この差は、120gが230gへ変わった分だ。▽を押して続けよう。",
+                hint: "実際3390gから、仮説2400gを引こう。"
+            }), true),
+            makeStep("120gのおもり1個を230gへ替えると、何g重くなる？", () => renderGenericNumber({
+                title: "1個変わるときの差",
+                formula: "230 − 120 ＝",
+                expected: "110",
+                unit: "g",
+                success: "1個替えるごとに110g重くなる。▽を押して続けよう。",
+                hint: "230gと120gの差を求めよう。"
+            }), true),
+            makeStep("990gの差は、110gの変化が何個分かな？", () => renderGenericNumber({
+                title: "230gのおもり",
+                formula: "990 ÷ 110 ＝",
+                expected: "9",
+                unit: "個",
+                success: "230gのおもりは9個。求めたいのは120gのおもりだ。▽を押して続けよう。",
+                hint: "990gを、1個分の110gで分けよう。"
+            }), true),
+            makeStep("全部で20個、230gが9個。120gのおもりは何個？", () => renderGenericNumber({
+                title: "120gのおもり",
+                formula: "20 − 9 ＝",
+                expected: "11",
+                unit: "個",
+                success: "120gのおもりは11個。色分けして確かめよう。▽を押して続けよう。",
+                hint: "全部20個から、230gの9個を引こう。"
+            }), true),
+            makeStep("20個を色分けすると、230gが9個、120gが11個になる。", () => renderWeightBoxBoard({ stage: "answer" })),
+            makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["3530−140＝3390g", "全部120g＝2400g", "3390−2400＝990g", "990÷110＝230gが9個"],
+                success: "箱を先に外し、その後は同じ仮説の流れで解けた。▽を押してまとめよう。",
+                hint: "最初に箱140gを取り除こう。"
+            }), true),
+            makeStep("5-2では、仮説を立てる前に、問題に混ざった箱の重さを整理したことが大切だ。", () => renderGenericSummary({
+                label: "5-2の学び",
+                points: ["最初に箱140gを取り除く", "20個全部を120gだと仮定する", "差990gを1個の差110gで割る"],
+                formulas: ["3530−140＝3390", "120×20＝2400", "3390−2400＝990", "990÷110＝9", "20−9＝11"],
+                answer: "120gのおもり 11個"
+            }))
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
@@ -729,7 +989,10 @@
         13: createLesson13Steps,
         14: createLesson14Steps,
         15: createLesson15Steps,
-        16: createLesson16Steps
+        16: createLesson16Steps,
+        17: createLesson17Steps,
+        18: createLesson18Steps,
+        19: createLesson19Steps
     };
 
     function init() {
