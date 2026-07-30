@@ -345,6 +345,16 @@ function bindButtons() {
     });
 
     bindActionButton(["backGuildHallFromLearning"], async () => {
+        if (
+            window.LearningForest
+            && typeof window.LearningForest.hasActiveLesson === "function"
+            && window.LearningForest.hasActiveLesson()
+            && typeof window.LearningForest.returnToLessonSelect === "function"
+        ) {
+            window.LearningForest.returnToLessonSelect();
+            return;
+        }
+
         if (window.LearningForest && typeof window.LearningForest.close === "function") {
             window.LearningForest.close();
         }
