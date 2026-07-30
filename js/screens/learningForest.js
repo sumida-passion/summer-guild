@@ -469,71 +469,113 @@
         `);
     }
 
+    function renderHypothesisProblem({ label, lines }) {
+        setBoard(`
+            <article class="learning-problem-card hypothesis-problem">
+                <p class="learning-problem-label">${label}の問題</p>
+                ${lines.map(line => `<p>${line}</p>`).join("")}
+                <div class="study-no-calculator">まだ式を考えない　まず問題を読む</div>
+                <button type="button" class="notebook-done-button hypothesis-problem-next">わかった！</button>
+            </article>
+        `);
+        board().querySelector(".hypothesis-problem-next")?.addEventListener("click", () => {
+            completeInteractiveStep("問題を読めたね。▽を押して、考え方を学ぼう。");
+        });
+    }
+
     function createLesson14Steps() {
         return [
+            makeStep("まずは実際の問題文を読もう。大丈夫。まだ式は考えなくていいよ。", () => renderHypothesisProblem({
+                label: "4-1",
+                lines: [
+                    "1個30円のあめと1個110円のガムを合わせて15個買うと、代金の合計は1170円です。",
+                    "このとき、あめとガムをそれぞれ何個買いましたか。"
+                ]
+            }), true),
             makeStep("4-1からは、式を先に覚えるのではなく、『考えやすい世界』を作って考える練習だ。", () => renderHypothesisBoard({
                 label: "4-1",
                 title: "あめとガム",
                 hypothesis: "まず、全部あめだった世界を作る。",
-                reality: "実際の代金と比べる。",
+                reality: "実際の1170円と比べる。",
                 difference: "実際の方が高い分を見つける。",
-                unitChange: "あめ1個をガム1個へ変えると、330−180＝150円高くなる。",
-                conclusion: "差額の中に150円が何回あるかを考える。"
+                unitChange: "あめ1個をガム1個へ変えると、110−30＝80円高くなる。",
+                conclusion: "差額の中に80円が何回あるかを考える。"
             })),
-            makeStep("ギルドマスター：『まず、一番考えやすい世界を作ってみよう。』今回は、全部あめだった世界だ。", () => renderHypothesisBoard({
+            makeStep("ギルドマスター：『まず、一番考えやすい世界を作ってみよう。』今回は、15個全部あめだった世界だ。", () => renderHypothesisBoard({
                 label: "4-1",
                 title: "仮説",
-                hypothesis: "全部あめだったら、と考える。",
-                reality: "本当は、あめとガムが混ざっている。",
+                hypothesis: "全部あめなら30×15＝450円",
+                reality: "本当は、あめとガムが混ざって1170円。",
                 difference: "まだ計算しない。",
                 unitChange: "まだ見ない。",
                 conclusion: "最初は、考えやすい世界を一つ作ればよい。"
             })),
-            makeStep("ギルドマスター：『実際とは何が違うかな？』全部あめの代金と、実際の代金との差を見る。", () => renderHypothesisBoard({
-                label: "4-1",
-                title: "現実と比べる",
-                hypothesis: "全部あめの代金",
-                reality: "問題に書かれた実際の代金",
-                difference: "実際の方が高い。",
-                unitChange: "ガムが入るたびに高くなる。",
-                conclusion: "この差は、ガムへ変わった分の合計だ。"
-            })),
-            makeStep("ギルドマスター：『その違いは1回でどれくらい変わる？』あめ180円がガム330円へ変わると、いくら高くなる？", () => renderGenericNumber({
-                title: "1個変わるときの差",
-                formula: "330 − 180 ＝",
-                expected: "150",
+            makeStep("ギルドマスター：『実際とは何が違うかな？』全部あめの450円と、実際の1170円との差はいくら？", () => renderGenericNumber({
+                title: "実際との差",
+                formula: "1170 − 450 ＝",
+                expected: "720",
                 unit: "円",
-                success: "150円。あめ1個をガム1個へ変えるたび、代金は150円高くなる。▽を押して続けよう。",
-                hint: "ガム330円から、あめ180円を引こう。"
+                success: "720円高い。この差は、あめがガムへ変わった分の合計だ。▽を押して続けよう。",
+                hint: "実際の1170円から、全部あめの450円を引こう。"
             }), true),
-            makeStep("ギルドマスター：『その違いは何回起きているかな？』実際との差額を150円ずつに分ければ、ガムの個数が分かる。", () => renderHypothesisBoard({
-                label: "4-1",
-                title: "差が何回分か",
-                hypothesis: "全部あめ",
-                reality: "あめとガム",
-                difference: "実際との差額",
-                unitChange: "1回150円",
-                conclusion: "差額 ÷ 150 ＝ ガムの個数"
-            })),
+            makeStep("ギルドマスター：『その違いは1回でどれくらい変わる？』あめ30円がガム110円へ変わると、いくら高くなる？", () => renderGenericNumber({
+                title: "1個変わるときの差",
+                formula: "110 − 30 ＝",
+                expected: "80",
+                unit: "円",
+                success: "80円。あめ1個をガム1個へ変えるたび、代金は80円高くなる。▽を押して続けよう。",
+                hint: "ガム110円から、あめ30円を引こう。"
+            }), true),
+            makeStep("ギルドマスター：『その違いは何回起きているかな？』720円の中に80円はいくつある？", () => renderGenericNumber({
+                title: "ガムの個数",
+                formula: "720 ÷ 80 ＝",
+                expected: "9",
+                unit: "個",
+                success: "ガムは9個。全部15個だから、残りがあめだ。▽を押して続けよう。",
+                hint: "720円を、1回分の80円で分けよう。"
+            }), true),
+            makeStep("全部で15個、ガムが9個。あめは何個かな？", () => renderGenericNumber({
+                title: "あめの個数",
+                formula: "15 − 9 ＝",
+                expected: "6",
+                unit: "個",
+                success: "あめは6個。30×6＋110×9＝1170円で、問題の条件にも合う。▽を押して続けよう。",
+                hint: "全部15個から、ガム9個を引こう。"
+            }), true),
             makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
-                formulas: ["全部あめだった世界を作る", "実際の代金との差を見る", "330−180＝150円", "差額÷150＝ガムの個数"],
+                formulas: ["全部あめ＝450円", "1170−450＝720円", "110−30＝80円", "720÷80＝ガム9個"],
                 success: "仮説→現実→差→何回分、の順で考えられた。▽を押してまとめよう。",
                 hint: "まず『全部あめ』から始めよう。"
             }), true),
             makeStep("今日は答えの出し方よりも、考え方を学んだね。考えやすい仮説を立てると、式はあとから自然に生まれる。", () => renderHypothesisBoard({
                 label: "4-1",
                 title: "今日の考え方",
-                hypothesis: "全部あめ",
-                reality: "本当の代金",
-                difference: "代金の差",
-                unitChange: "1個150円",
-                conclusion: "差が150円の何回分かを考える。"
+                hypothesis: "全部あめ＝450円",
+                reality: "本当は1170円",
+                difference: "720円高い",
+                unitChange: "1個80円",
+                conclusion: "ガム9個、あめ6個"
             }))
         ];
     }
 
     function createLesson15Steps() {
         return [
+            makeStep("まずは実際の問題文を読もう。大丈夫。まだ式は考えなくていいよ。", () => renderHypothesisProblem({
+                label: "4-2",
+                lines: [
+                    "1個180円のシュークリームと1個330円のケーキを合わせて18個買い、100円の箱につめたら、代金が4990円になりました。",
+                    "このとき、ケーキは何個買いましたか。"
+                ]
+            }), true),
+            makeStep("箱代100円は、シュークリームとケーキの代金とは別だね。まず、お菓子だけの代金を確かめよう。", () => renderGenericNumber({
+                title: "お菓子だけの代金",
+                formula: "4990 − 100 ＝",
+                expected: "4890",
+                unit: "円",
+                success: "お菓子18個の代金は4890円。ここから、考えやすい世界を作っていこう。▽を押して続けよう。",
+                hint: "合計4990円から、箱代100円を引こう。"
+            }), true),
             makeStep("4-2も、まず一番考えやすい世界を作ろう。今回は、全部シュークリームだった世界だけで考える。", () => renderHypothesisBoard({
                 label: "4-2",
                 title: "シュークリームとケーキ",
@@ -597,6 +639,13 @@
 
     function createLesson16Steps() {
         return [
+            makeStep("まずは実際の問題文を読もう。大丈夫。まだ式は考えなくていいよ。", () => renderHypothesisProblem({
+                label: "4-3",
+                lines: [
+                    "じゃんけんをして、勝ったら7点もらい、負けたら3点ひかれるゲームをします。",
+                    "全部で15回ゲームをしたところ、あいこはなく、得点が55点になりました。勝ったのは何回ですか。"
+                ]
+            }), true),
             makeStep("4-3は、全部勝った世界を作って考える。", () => renderHypothesisBoard({
                 label: "4-3",
                 title: "じゃんけんの得点",
