@@ -1,7 +1,7 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver2.3
+   学びの森 Ver2.4
    算数の広場・第1〜10問＋第11〜13問「勉強の仕方」
    ========================================================= */
 
@@ -29,10 +29,10 @@
         { number: 17, group: 4, label: "4-4", title: "おはじきの増減", ready: true, id: "math-hypothesis-17" },
         { number: 18, group: 5, label: "5-1", title: "ジュースとお茶", ready: true, id: "math-hypothesis-18" },
         { number: 19, group: 5, label: "5-2", title: "2種類のおもり", ready: true, id: "math-hypothesis-19" },
-        { number: 20, group: 5, label: "5-3", title: "コイン投げの得点" },
-        { number: 21, group: 5, label: "5-4", title: "的当てゲーム" },
-        { number: 22, group: 6, label: "6-1", title: "道の両側の桜" },
-        { number: 23, group: 6, label: "6-2", title: "桜を増やして植え直す" },
+        { number: 20, group: 5, label: "5-3", title: "コイン投げの得点", ready: true, id: "math-hypothesis-20" },
+        { number: 21, group: 5, label: "5-4", title: "的当てゲーム", ready: true, id: "math-hypothesis-21" },
+        { number: 22, group: 6, label: "6-1", title: "道の両側の桜", ready: true, id: "math-interval-22" },
+        { number: 23, group: 6, label: "6-2", title: "桜を増やして植え直す", ready: true, id: "math-interval-23" },
         { number: 24, group: 7, label: "7-1", title: "電柱の最初から最後まで" },
         { number: 25, group: 7, label: "7-2", title: "電柱の間に木を植える" },
         { number: 26, group: 8, label: "8-1", title: "池のまわりの花" }
@@ -973,6 +973,257 @@
         ];
     }
 
+
+    function createLesson20Steps() {
+        return [
+            makeStep("まずは実際の問題文を読もう。まだ式は考えなくて大丈夫だよ。", () => renderHypothesisProblem({
+                label: "5-3",
+                lines: [
+                    "コインを投げて、表が出たら6点もらい、うらが出たら3点ひかれるゲームをします。",
+                    "全部で20回ゲームをしたところ、得点が39点になりました。表が出たのは何回ですか。"
+                ]
+            }), true),
+            makeStep("まず、20回全部うらだった世界を作ってみよう。", () => renderHypothesisBoard({
+                label: "5-3",
+                title: "コイン投げの得点",
+                hypothesis: "20回全部うら",
+                reality: "実際は39点",
+                difference: "仮説と実際の差を見る",
+                unitChange: "うら1回が表1回へ変わると9点増える",
+                conclusion: "差が9点の何回分かを考える。"
+            })),
+            makeStep("20回全部うらなら、3点ずつひかれる。得点はいくつになる？", () => renderGenericNumber({
+                title: "全部うらの世界",
+                formula: "3 × 20 ＝",
+                expected: "60",
+                unit: "点ひかれる",
+                success: "60点ひかれるので、全部うらなら−60点。実際は39点だ。▽を押して続けよう。",
+                hint: "3点ひかれることを、−3点として20回分考えよう。"
+            }), true),
+            makeStep("全部うらの−60点から、実際の39点まで何点増えている？", () => renderGenericNumber({
+                title: "仮説と実際の差",
+                formula: "39 − (−60) ＝",
+                expected: "99",
+                unit: "点",
+                success: "実際は99点高い。この99点は、うらが表へ変わった分だ。▽を押して続けよう。",
+                hint: "−60点から39点までの差を考えよう。"
+            }), true),
+            makeStep("うら1回を表1回へ変えると、−3点から＋6点になる。何点増える？", () => renderGenericNumber({
+                title: "1回変わるときの差",
+                formula: "6 − (−3) ＝",
+                expected: "9",
+                unit: "点",
+                success: "1回変わるごとに9点増える。▽を押して続けよう。",
+                hint: "3点ひかれなくなり、さらに6点もらえるので、3＋6でも考えられる。"
+            }), true),
+            makeStep("99点の差は、9点の変化が何回分かな？", () => renderGenericNumber({
+                title: "表が出た回数",
+                formula: "99 ÷ 9 ＝",
+                expected: "11",
+                unit: "回",
+                success: "表は11回。残り9回がうらだ。▽を押して続けよう。",
+                hint: "99点を、1回分の9点で分けよう。"
+            }), true),
+            makeStep("表11回、うら9回で、本当に39点になるか確かめよう。", () => renderScoreCheckBoard({
+                label: "5-3",
+                first: "表 11回 × 6点＝66点",
+                second: "うら 9回 × −3点＝−27点",
+                total: "66−27＝39点",
+                note: "問題の得点39点と一致する。"
+            })),
+            makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["全部うら＝−60点", "39−(−60)＝99点", "表とうらの差＝9点", "99÷9＝表11回"],
+                success: "全部うらの仮説から、表の回数を見つけられた。▽を押してまとめよう。",
+                hint: "まず20回全部うらだった世界を作ろう。"
+            }), true),
+            makeStep("5-3も『全部一方だったら』と考えると、得点の増減を整理できる。", () => renderGenericSummary({
+                label: "5-3の学び",
+                points: ["20回全部うらだと仮定する", "実際の39点との差99点を求める", "うらが表へ変わると1回9点増える"],
+                formulas: ["−3×20＝−60", "39−(−60)＝99", "6−(−3)＝9", "99÷9＝11"],
+                answer: "表が出た回数 11回"
+            }))
+        ];
+    }
+
+    function createLesson21Steps() {
+        return [
+            makeStep("まずは実際の問題文を読もう。最初の持ち点も大切な条件だよ。", () => renderHypothesisProblem({
+                label: "5-4",
+                lines: [
+                    "的に当たると5点もらえ、はずれると1点ひかれるゲームをします。",
+                    "はじめの持ち点を10点として、このゲームを25回したところ、得点が81点になりました。",
+                    "このとき、的に当たったのは何回ですか。"
+                ]
+            }), true),
+            makeStep("まず、最後の81点から、はじめの持ち点10点を分けよう。ゲーム25回で増えた得点はいくつ？", () => renderGenericNumber({
+                title: "ゲームで増えた得点",
+                formula: "81 − 10 ＝",
+                expected: "71",
+                unit: "点",
+                success: "ゲーム25回による増減は71点。ここから全部はずれの世界を作ろう。▽を押して続けよう。",
+                hint: "最後の得点81点から、最初から持っていた10点を引こう。"
+            }), true),
+            makeStep("25回全部はずれだったと仮定すると、ゲームによる得点は何点？", () => renderGenericNumber({
+                title: "全部はずれの世界",
+                formula: "1 × 25 ＝",
+                expected: "25",
+                unit: "点ひかれる",
+                success: "25点ひかれるので、全部はずれなら−25点。実際のゲーム分は71点だ。▽を押して続けよう。",
+                hint: "1回につき1点ひかれるので、−1点が25回だ。"
+            }), true),
+            makeStep("仮説の−25点から、実際の71点まで何点増えている？", () => renderGenericNumber({
+                title: "仮説と実際の差",
+                formula: "71 − (−25) ＝",
+                expected: "96",
+                unit: "点",
+                success: "実際は96点高い。この差は、はずれが当たりへ変わった分だ。▽を押して続けよう。",
+                hint: "−25点から71点までの差を考えよう。"
+            }), true),
+            makeStep("はずれ1回を当たり1回へ変えると、−1点から＋5点になる。何点増える？", () => renderGenericNumber({
+                title: "1回変わるときの差",
+                formula: "5 − (−1) ＝",
+                expected: "6",
+                unit: "点",
+                success: "1回変わるごとに6点増える。▽を押して続けよう。",
+                hint: "1点ひかれなくなり、さらに5点もらえるので、1＋5でも考えられる。"
+            }), true),
+            makeStep("96点の差は、6点の変化が何回分かな？", () => renderGenericNumber({
+                title: "的に当たった回数",
+                formula: "96 ÷ 6 ＝",
+                expected: "16",
+                unit: "回",
+                success: "当たりは16回。残り9回がはずれだ。▽を押して続けよう。",
+                hint: "96点を、1回分の6点で分けよう。"
+            }), true),
+            makeStep("最初の10点も入れて、本当に81点になるか確かめよう。", () => renderScoreCheckBoard({
+                label: "5-4",
+                first: "当たり 16回 × 5点＝80点",
+                second: "はずれ 9回 × −1点＝−9点",
+                total: "10＋80−9＝81点",
+                note: "問題の得点81点と一致する。"
+            })),
+            makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["81−10＝ゲーム分71点", "全部はずれ＝−25点", "71−(−25)＝96点", "96÷6＝当たり16回"],
+                success: "最初の持ち点を分けてから、全部はずれの仮説で解けた。▽を押してまとめよう。",
+                hint: "最初に81点から持ち点10点を引こう。"
+            }), true),
+            makeStep("5-4では、仮説を作る前に『最初から持っていた10点』を分けたことが大切だ。", () => renderGenericSummary({
+                label: "5-4の学び",
+                points: ["最後の81点から持ち点10点を分ける", "25回全部はずれだと仮定する", "はずれが当たりへ変わると6点増える"],
+                formulas: ["81−10＝71", "−1×25＝−25", "71−(−25)＝96", "96÷6＝16"],
+                answer: "的に当たった回数 16回"
+            }))
+        ];
+    }
+
+    function createLesson22Steps() {
+        return [
+            makeStep("まずは実際の問題文を読もう。道の『両側』と、木の間の『区間』に注目しよう。", () => renderHypothesisProblem({
+                label: "6-1",
+                lines: [
+                    "240mの道の両側に、桜の木が8mおきに植えてあります。",
+                    "桜の木は全部で何本植えてありますか。"
+                ]
+            }), true),
+            makeStep("まず片側だけを見よう。240mを8mずつに分けると、区間はいくつできる？", () => renderRoadTreeBoard({ stage: "intervals" })),
+            makeStep("240mの中に8mの区間はいくつある？", () => renderGenericNumber({
+                title: "片側の区間数",
+                formula: "240 ÷ 8 ＝",
+                expected: "30",
+                unit: "区間",
+                success: "片側には30区間ある。けれど、木の本数は30本ではないよ。▽を押して続けよう。",
+                hint: "道の長さ240mを、1区間8mで分けよう。"
+            }), true),
+            makeStep("道のはしからはしまで植えると、区間30個をはさむ木は、区間より1本多くなる。", () => renderRoadTreeBoard({ stage: "one-side" })),
+            makeStep("片側の木は何本になる？", () => renderGenericNumber({
+                title: "片側の木の本数",
+                formula: "30 ＋ 1 ＝",
+                expected: "31",
+                unit: "本",
+                success: "片側は31本。問題は道の両側だ。▽を押して続けよう。",
+                hint: "両端にも木があるので、区間数より1本多い。"
+            }), true),
+            makeStep("同じ31本の並びが、道の反対側にもある。", () => renderRoadTreeBoard({ stage: "both-sides" })),
+            makeStep("両側では全部で何本？", () => renderGenericNumber({
+                title: "両側の木の本数",
+                formula: "31 × 2 ＝",
+                expected: "62",
+                unit: "本",
+                success: "全部で62本。区間と本数を区別できたね。▽を押して続けよう。",
+                hint: "片側31本が、道の両側にある。"
+            }), true),
+            makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["240÷8＝30区間", "道の両端にも木がある", "30＋1＝片側31本", "31×2＝62本"],
+                success: "区間→片側の本数→両側の本数の順で考えられた。▽を押してまとめよう。",
+                hint: "最初は片側の区間数を求めよう。"
+            }), true),
+            makeStep("6-1では『はしからはしまで』なので、木の本数は区間数より1本多くなる。", () => renderGenericSummary({
+                label: "6-1の学び",
+                points: ["まず片側だけで考える", "240÷8で30区間を求める", "両端の木があるので片側31本、最後に2倍する"],
+                formulas: ["240÷8＝30", "30＋1＝31", "31×2＝62"],
+                answer: "桜の木は全部で62本"
+            }))
+        ];
+    }
+
+    function createLesson23Steps() {
+        return [
+            makeStep("まずは実際の問題文を読もう。6-1で求めた本数を使って考える問題だ。", () => renderHypothesisProblem({
+                label: "6-2",
+                lines: [
+                    "新しく20本の桜の木を増やして、両はしの木はそのままで、等しい間隔になるように植えかえることにしました。",
+                    "何mおきに植えればよいですか。"
+                ]
+            }), true),
+            makeStep("6-1で、もとの桜は両側合わせて62本だった。そこへ20本増えると全部で何本？", () => renderGenericNumber({
+                title: "増やしたあとの本数",
+                formula: "62 ＋ 20 ＝",
+                expected: "82",
+                unit: "本",
+                success: "両側合わせて82本。左右に同じ本数ずつ植える。▽を押して続けよう。",
+                hint: "もとの62本に、新しい20本を足そう。"
+            }), true),
+            makeStep("両側合わせて82本なので、片側には何本ある？", () => renderGenericNumber({
+                title: "片側の本数",
+                formula: "82 ÷ 2 ＝",
+                expected: "41",
+                unit: "本",
+                success: "片側は41本。両はしの木はそのままだから、区間数を考えよう。▽を押して続けよう。",
+                hint: "道の両側に同じ本数ずつある。"
+            }), true),
+            makeStep("両はしに木がある並びでは、木41本の間にできる区間は40個だ。", () => renderRoadTreeBoard({ stage: "replant" })),
+            makeStep("片側41本なら、区間はいくつ？", () => renderGenericNumber({
+                title: "植えかえ後の区間数",
+                formula: "41 − 1 ＝",
+                expected: "40",
+                unit: "区間",
+                success: "区間は40個。240mを40区間に等しく分けよう。▽を押して続けよう。",
+                hint: "両端に木があるので、区間数は木の本数より1少ない。"
+            }), true),
+            makeStep("240mを40区間に等しく分けると、1区間は何m？", () => renderGenericNumber({
+                title: "新しい間隔",
+                formula: "240 ÷ 40 ＝",
+                expected: "6",
+                unit: "m",
+                success: "6mおきに植えればよい。▽を押して続けよう。",
+                hint: "道の長さ240mを、40区間で分けよう。"
+            }), true),
+            makeStep("6mおきなら、240÷6＝40区間、木は片側41本になる。", () => renderRoadTreeBoard({ stage: "replant-answer" })),
+            makeStep("最後に、考えた順番を並べよう。", () => renderGenericOrder({
+                formulas: ["62＋20＝全部82本", "82÷2＝片側41本", "41−1＝40区間", "240÷40＝6m"],
+                success: "本数から区間数へ戻して、新しい間隔を求められた。▽を押してまとめよう。",
+                hint: "まず増やしたあとの全部の本数を求めよう。"
+            }), true),
+            makeStep("6-2では、木の本数から区間数へ戻すときに1を引くことがポイントだ。", () => renderGenericSummary({
+                label: "6-2の学び",
+                points: ["両側の木を82本に増やす", "片側41本に分ける", "両端に木があるので40区間と考える"],
+                formulas: ["62＋20＝82", "82÷2＝41", "41−1＝40", "240÷40＝6"],
+                answer: "6mおきに植える"
+            }))
+        ];
+    }
+
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
@@ -992,7 +1243,11 @@
         16: createLesson16Steps,
         17: createLesson17Steps,
         18: createLesson18Steps,
-        19: createLesson19Steps
+        19: createLesson19Steps,
+        20: createLesson20Steps,
+        21: createLesson21Steps,
+        22: createLesson22Steps,
+        23: createLesson23Steps
     };
 
     function init() {
@@ -2085,6 +2340,69 @@
                 else { if (feedback) feedback.textContent = hint; window.setTimeout(() => renderGenericOrder({ formulas, success, hint }), 900); }
             }
         }));
+    }
+
+
+    function renderScoreCheckBoard({ label, first, second, total, note }) {
+        setBoard(`
+            <section class="hypothesis-board">
+                <header><small>${label}</small><h3>答えを確かめよう</h3></header>
+                <div class="hypothesis-flow">
+                    <div><span>当たり・表</span><b>${first}</b></div>
+                    <div><span>はずれ・うら</span><b>${second}</b></div>
+                    <div><span>合計</span><b>${total}</b></div>
+                </div>
+                <p>${note}</p>
+            </section>
+        `);
+    }
+
+    function renderRoadTreeBoard({ stage }) {
+        const both = stage === "both-sides";
+        const replant = stage === "replant" || stage === "replant-answer";
+        const intervalLabel = replant ? "6m" : "8m";
+        const treeCount = replant ? 41 : 31;
+        const intervalCount = replant ? 40 : 30;
+        const row = `
+            <div style="display:flex;align-items:center;justify-content:center;gap:0;max-width:680px;margin:10px auto;">
+                ${Array.from({ length: 7 }, (_, index) => `
+                    <span style="display:flex;align-items:center;">
+                        <b style="font-size:30px;line-height:1;">🌸</b>
+                        ${index < 6 ? `<i style="display:inline-flex;align-items:center;justify-content:center;width:56px;border-top:4px solid #f1e4b5;font-style:normal;font-weight:800;font-size:14px;color:#fff;">${intervalLabel}</i>` : ""}
+                    </span>
+                `).join("")}
+            </div>`;
+        const title = stage === "intervals"
+            ? "まず片側の区間を数える"
+            : stage === "one-side"
+                ? "区間30個をはさむ木"
+                : stage === "both-sides"
+                    ? "同じ並びが道の両側にある"
+                    : stage === "replant"
+                        ? "木41本なら区間は40個"
+                        : "6mおきに植えかえた並び";
+        const note = stage === "intervals"
+            ? "240m÷8m＝30区間"
+            : stage === "one-side"
+                ? "木の本数＝区間数＋1　だから31本"
+                : stage === "both-sides"
+                    ? "片側31本×2＝62本"
+                    : stage === "replant"
+                        ? "両はしの木を残すので、41−1＝40区間"
+                        : "240m÷40区間＝6m";
+        setBoard(`
+            <section class="hypothesis-board">
+                <header><small>${replant ? "6-2" : "6-1"}</small><h3>${title}</h3></header>
+                ${row}
+                ${both ? row : ""}
+                <div class="hypothesis-flow">
+                    <div><span>道の長さ</span><b>240m</b></div>
+                    <div><span>片側</span><b>${treeCount}本・${intervalCount}区間</b></div>
+                    <div><span>${both ? "両側" : "間隔"}</span><b>${both ? "62本" : intervalLabel + "おき"}</b></div>
+                </div>
+                <p>${note}</p>
+            </section>
+        `);
     }
 
     function renderGenericSummary({ label, points, formulas, answer }) {
