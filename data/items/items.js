@@ -12,6 +12,7 @@
 window.GUILD_SHOP_ITEMS = [
     ...(Array.isArray(window.FURNITURE_SHOP_ITEMS) ? window.FURNITURE_SHOP_ITEMS : []),
     { id: "black_dog_pet", name: "黒犬を迎える", price: 110, pet: true },
+    { id: "yellow_bird_pet", name: "きいろのトリ", price: 200, pet: true },
     { id: "dog_food", name: "黒犬の餌", price: 13, repeatable: true, consumable: "dogFood" },
     { id: "dog_blanket", name: "犬用の毛布", price: 30, petDecoration: true },
     { id: "dog_toy_ball", name: "犬用ボール", price: 22, petDecoration: true },
