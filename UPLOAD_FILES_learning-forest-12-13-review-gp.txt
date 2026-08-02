@@ -1,0 +1,14 @@
+GitHubへアップロードするファイル
+================================
+
+1. js/screens/learningForest.js
+2. css/screens/learning-forest.css
+3. js/quests/review.js
+4. index.html
+5. service-worker.js
+6. docs/GPT_HANDOFF.md
+7. docs/development-log.md
+
+補足:
+- index.html と service-worker.js はPWAキャッシュ更新のため必ず同時にアップロードしてください。
+- project-index.json はGitHub Actionsによる自動生成対象のため、手動更新していません。
