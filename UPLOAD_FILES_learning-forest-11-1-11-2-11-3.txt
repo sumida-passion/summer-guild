@@ -1,0 +1,30 @@
+学びの森 11-1・11-2・11-3 実装版
+作成日：2026-08-02
+
+GitHubへアップロードするファイル
+（リポジトリ直下から見た配置先）
+
+1. js/screens/learningForest.js
+   - 11-1、11-2、11-3の問題・解説・公式・逆算教材を追加
+   - 問題一覧を 10-3 → 11-1 → 11-2 → 11-3 の順に更新
+   - 10-4、10-5のボタンは表示しない
+
+2. index.html
+   - learningForest.js の読込バージョンを更新
+
+3. service-worker.js
+   - PWAキャッシュバージョンを更新
+
+4. docs/GPT_HANDOFF.md
+   - 11-1〜11-3の実装仕様を引き継ぎ情報へ追記
+
+5. docs/development-log.md
+   - Ver2.6の実装履歴を追記
+
+6. UPLOAD_FILES_learning-forest-11-1-11-2-11-3.txt
+   - このアップロード対象一覧
+
+注意
+- index.html と service-worker.js は、iPad Safari／PWAに古いJavaScriptを残さないため、learningForest.jsと同時にアップロードしてください。
+- project-index.json はGitHub Actionsで自動生成される索引のため、今回の手作業アップロード対象には含めていません。
+- 既存のLocalStorage、GP、装備、完了記録のキーは変更していません。
