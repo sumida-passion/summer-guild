@@ -293,6 +293,10 @@ function purchaseGuildShopItem(item) {
         window.BlackDogPet.showWelcome();
     }
 
+    if (item.id === "yellow_bird_pet" && window.YellowBirdPet) {
+        window.YellowBirdPet.showWelcome();
+    }
+
 
     return true;
 
