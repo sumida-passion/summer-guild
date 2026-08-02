@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-08-02T08:18:15.208089+00:00",
-    "commit": "cf38677",
+    "atUtc": "2026-08-02T08:18:43.778001+00:00",
+    "commit": "cb8edab",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 74,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97689265,
+    "totalBytes": 97690081,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1664,9 +1664,9 @@
       "stem": "app",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 45161,
-      "sha1": "c75f66cfca",
-      "lineCount": 2477
+      "sizeBytes": 45461,
+      "sha1": "1d972fec5e",
+      "lineCount": 2485
     },
     {
       "path": "js/components/.gitkeep",
@@ -1893,9 +1893,9 @@
       "stem": "settings",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 51210,
-      "sha1": "488c9cb1e4",
-      "lineCount": 3041
+      "sizeBytes": 51726,
+      "sha1": "ce08db6ef6",
+      "lineCount": 3059
     },
     {
       "path": "js/storage.js",
@@ -3482,6 +3482,8 @@
         "consumeDogFood",
         "hasShownBlackDogWelcome",
         "markBlackDogWelcomeShown",
+        "hasShownYellowBirdWelcome",
+        "markYellowBirdWelcomeShown",
         "isBlackDogCostumeEquipped"
       ],
       "classes": [],
@@ -3843,31 +3845,13 @@
     {
       "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
+        "js/app.js"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "docs/GPT_PROJECT_STATE.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/PROJECT_STATE.json"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/game-rules.md"
+        "js/settings.js"
       ]
     }
   ],
