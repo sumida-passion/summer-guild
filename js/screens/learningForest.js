@@ -33,9 +33,9 @@
         { number: 21, group: 5, label: "5-4", title: "的当てゲーム", ready: true, id: "math-hypothesis-21" },
         { number: 22, group: 6, label: "6-1", title: "道の両側の桜", ready: true, id: "math-interval-22" },
         { number: 23, group: 6, label: "6-2", title: "桜を増やして植え直す", ready: true, id: "math-interval-23" },
-        { number: 24, group: 7, label: "7-1", title: "電柱の最初から最後まで" },
-        { number: 25, group: 7, label: "7-2", title: "電柱の間に木を植える" },
-        { number: 26, group: 8, label: "8-1", title: "池のまわりの花" }
+        { number: 24, group: 10, label: "10-1", title: "6ずつ増える数列", ready: true, id: "math-sequence-24" },
+        { number: 25, group: 10, label: "10-2", title: "奇数の数列", ready: true, id: "math-sequence-25" },
+        { number: 26, group: 10, label: "10-3", title: "7ずつ増える数列", ready: true, id: "math-sequence-26" }
     ];
 
     let currentStep = 0;
@@ -1227,6 +1227,150 @@
         ];
     }
 
+
+    function createLesson24Steps() {
+        return [
+            makeStep("まずは10-1の問題文を読もう。前半は図で意味をつかみ、後半は塾で使う公式につなげるよ。", () => renderSequenceProblem({
+                label: "10-1",
+                sequence: "2、8、14、20、26、32、……",
+                ordinal: "30番目"
+            }), true),
+            makeStep("数と数の間を見よう。2から8、8から14へ、いくつずつ増えているかな？", () => renderSequenceBoard({ label: "10-1", values: [2, 8, 14, 20], difference: 6, stage: "difference" })),
+            makeStep("1番目の2は、もう最初の場所にいる。1番目から2番目へ進むのは1回だね。", () => renderSequenceBoard({ label: "10-1", values: [2, 8, 14, 20], difference: 6, stage: "positions" })),
+            makeStep("では、1番目から30番目まで『＋6』をする回数は何回かな？", () => renderGenericChoice({
+                question: "30番目まで進む回数は？",
+                choices: [{ value: "30", label: "30回" }, { value: "29", label: "29回" }],
+                correct: "29",
+                success: "そう。最初の2を1番目として置いているので、進むのは30−1＝29回だ。▽を押して続けよう。",
+                hint: "1番目から2番目は1回、1番目から3番目は2回。順番より1回少ないよ。"
+            }), true),
+            makeStep("＋6を29回すると、最初の2からどれだけ増える？", () => renderGenericNumber({
+                title: "増える全部の数",
+                formula: "6 × 29 ＝",
+                expected: "174",
+                unit: "",
+                success: "174増える。最後に、最初の数2を足そう。▽を押して続けよう。",
+                hint: "増える数6を、29回分かけよう。"
+            }), true),
+            makeStep("最初の2に174を足すと、30番目はいくつ？", () => renderGenericNumber({
+                title: "30番目の数",
+                formula: "2 ＋ 174 ＝",
+                expected: "176",
+                unit: "",
+                success: "30番目は176。図で考えた理由がつながったね。▽を押して、公式にしよう。",
+                hint: "最初の数2を忘れずに足そう。"
+            }), true),
+            makeStep("ここからは『公式で考えよう』。今の考え方は、毎回この形にまとめられる。", () => renderSequenceFormulaBoard({
+                label: "10-1", first: 2, difference: 6, ordinal: 30, expression: "2＋6×（30−1）＝176", stage: "formula"
+            })),
+            makeStep("公式のどこに何を入れたか、順番に確かめよう。", () => renderSequenceFormulaBoard({
+                label: "10-1", first: 2, difference: 6, ordinal: 30, expression: "2＋6×29＝176", stage: "substitute"
+            })),
+            makeStep("最後に、理解から公式までの順番を並べよう。", () => renderGenericOrder({
+                formulas: ["数の差は6", "30番目まで進むのは30−1＝29回", "6×29＝174", "2＋174＝176"],
+                success: "図で理解したことが、2＋6×（30−1）という公式になった。▽を押してまとめよう。",
+                hint: "最初に増え方を見つけ、次に進む回数を考えよう。"
+            }), true),
+            makeStep("10-1では、公式を先に暗記せず、『順番より1回少なく進む』ことから公式の意味を理解した。", () => renderGenericSummary({
+                label: "10-1の学び",
+                points: ["2、8、14…は6ずつ増える", "1番目から30番目へ進むのは29回", "最初の数＋増える数×（順番−1）で求められる"],
+                formulas: ["6×29＝174", "2＋174＝176", "2＋6×（30−1）＝176"],
+                answer: "30番目の数は176"
+            }))
+        ];
+    }
+
+    function createLesson25Steps() {
+        return [
+            makeStep("10-2を読もう。10-1と同じタイプだと見抜けるかがポイントだよ。", () => renderSequenceProblem({
+                label: "10-2",
+                sequence: "1、3、5、7、9、11、13、……",
+                ordinal: "25番目"
+            }), true),
+            makeStep("まず増え方を確かめよう。この数列はいくつずつ増えている？", () => renderSequenceBoard({ label: "10-2", values: [1, 3, 5, 7, 9], difference: 2, stage: "difference" })),
+            makeStep("この問題も『最初の数＋増える数×（順番−1）』に当てはまるね。3つの数字を整理しよう。", () => renderSequenceFormulaBoard({
+                label: "10-2", first: 1, difference: 2, ordinal: 25, expression: "1＋2×（25−1）", stage: "identify"
+            })),
+            makeStep("25番目まで進む回数はいくつ？", () => renderGenericNumber({
+                title: "進む回数",
+                formula: "25 − 1 ＝",
+                expected: "24",
+                unit: "回",
+                success: "24回。公式の（順番−1）の部分だね。▽を押して続けよう。",
+                hint: "最初の1が1番目なので、進む回数は1つ少ない。"
+            }), true),
+            makeStep("公式に当てはめて計算しよう。25番目はいくつ？", () => renderGenericNumber({
+                title: "25番目の数",
+                formula: "1 ＋ 2 × 24 ＝",
+                expected: "49",
+                unit: "",
+                success: "25番目は49。今回は公式を使って速く解けたね。▽を押して続けよう。",
+                hint: "先に2×24＝48、それから最初の1を足そう。"
+            }), true),
+            makeStep("1、3、5、7…は奇数の並びでもある。でも、今回はどんな等間隔の数列にも使える公式で解いた。", () => renderSequenceFormulaBoard({
+                label: "10-2", first: 1, difference: 2, ordinal: 25, expression: "1＋2×（25−1）＝49", stage: "answer"
+            })),
+            makeStep("公式で解く手順を並べよう。", () => renderGenericOrder({
+                formulas: ["最初の数は1", "増える数は2", "順番−1は25−1＝24", "1＋2×24＝49"],
+                success: "問題の形を見抜き、必要な数字を公式へ入れられた。▽を押してまとめよう。",
+                hint: "最初の数、増える数、順番−1の順に整理しよう。"
+            }), true),
+            makeStep("10-2では、10-1で理解した公式を自分で使う練習をした。", () => renderGenericSummary({
+                label: "10-2の学び",
+                points: ["同じ差で増える数列だと見抜く", "最初の数・増える数・求める順番を探す", "順番−1を忘れず公式へ入れる"],
+                formulas: ["25−1＝24", "1＋2×24＝49"],
+                answer: "25番目の数は49"
+            }))
+        ];
+    }
+
+    function createLesson26Steps() {
+        return [
+            makeStep("10-3を読もう。99番目のように大きな順番でも、同じ公式で考えられるよ。", () => renderSequenceProblem({
+                label: "10-3",
+                sequence: "3、10、17、24、31、38、……",
+                ordinal: "99番目"
+            }), true),
+            makeStep("まず何を探す？ 隣り合う数の差を調べよう。", () => renderSequenceBoard({ label: "10-3", values: [3, 10, 17, 24, 31], difference: 7, stage: "difference" })),
+            makeStep("最初の数は3、増える数は7、求めるのは99番目。公式へ入れよう。", () => renderSequenceFormulaBoard({
+                label: "10-3", first: 3, difference: 7, ordinal: 99, expression: "3＋7×（99−1）", stage: "identify"
+            })),
+            makeStep("99番目まで進む回数はいくつ？", () => renderGenericNumber({
+                title: "進む回数",
+                formula: "99 − 1 ＝",
+                expected: "98",
+                unit: "回",
+                success: "98回。次は7×98を工夫して計算しよう。▽を押して続けよう。",
+                hint: "求める順番から1を引こう。"
+            }), true),
+            makeStep("98は100−2と考えられる。7×98を工夫すると？", () => renderSequenceFormulaBoard({
+                label: "10-3", first: 3, difference: 7, ordinal: 99, expression: "7×98＝7×100−7×2＝700−14＝686", stage: "calculation"
+            })),
+            makeStep("増えた分は686。最初の3を足すと99番目はいくつ？", () => renderGenericNumber({
+                title: "99番目の数",
+                formula: "3 ＋ 686 ＝",
+                expected: "689",
+                unit: "",
+                success: "99番目は689。大きな順番でも、公式なら同じ流れで解けたね。▽を押して続けよう。",
+                hint: "増えた686に、最初の数3を足そう。"
+            }), true),
+            makeStep("10-1から10-3まで、公式を使うときの共通手順を整理しよう。", () => renderSequenceFormulaBoard({
+                label: "今回覚える技", first: "最初の数", difference: "増える数", ordinal: "順番", expression: "答え＝最初の数＋増える数×（順番−1）", stage: "master"
+            })),
+            makeStep("最後に、公式で考える手順を並べよう。", () => renderGenericOrder({
+                formulas: ["最初の数3を見つける", "増える数7を見つける", "99−1＝98回", "3＋7×98＝689"],
+                success: "理解してから公式を使い、大きな順番も速く求められた。▽を押してまとめよう。",
+                hint: "最初の数と増える数を見つけてから、順番−1を使おう。"
+            }), true),
+            makeStep("公式は魔法の暗記ではなく、図で理解した『最初から何回進むか』を短く表したものだ。", () => renderGenericSummary({
+                label: "10-1〜10-3 今回覚える技",
+                points: ["最初の数を見つける", "いくつずつ増えるかを調べる", "求める順番より1回少なく進む", "公式へ当てはめて計算する"],
+                formulas: ["答え＝最初の数＋増える数×（順番−1）", "3＋7×（99−1）＝689"],
+                answer: "99番目の数は689"
+            }))
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
@@ -1250,7 +1394,10 @@
         20: createLesson20Steps,
         21: createLesson21Steps,
         22: createLesson22Steps,
-        23: createLesson23Steps
+        23: createLesson23Steps,
+        24: createLesson24Steps,
+        25: createLesson25Steps,
+        26: createLesson26Steps
     };
 
     function init() {
@@ -1374,7 +1521,7 @@
         const back = document.getElementById("learningBackStep");
         const restartButton = document.getElementById("learningRestart");
 
-        if (text) text.textContent = "夏期講習プリントの1-1〜8-1から、学び直したい問題を選ぼう。テキストと同じ番号だから、いつでも迷わず見直せるぞ。";
+        if (text) text.textContent = "夏期講習プリントの実装済み問題から、学び直したい番号を選ぼう。6-2の次は10-1だ。テキストと同じ番号だから迷わず見直せるぞ。";
         if (mark) {
             mark.hidden = true;
             mark.textContent = "▼";
@@ -1414,7 +1561,7 @@
             <section class="lesson-select" aria-label="夏期講習プリント問題一覧">
                 <header class="lesson-select-header">
                     <span>SUMMER COURSE REVIEW</span>
-                    <h2>算数の学び直し　全26問</h2>
+                    <h2>算数の学び直し　実装済み26問</h2>
                     <p>プリントと同じ番号を選んでください</p>
                 </header>
                 <div class="lesson-group-list">
@@ -2460,6 +2607,53 @@
                 </section>
             `);
         }
+    }
+
+
+    function renderSequenceProblem({ label, sequence, ordinal }) {
+        setBoard(`
+            <article class="learning-problem-card">
+                <p class="learning-problem-label">${label}の問題</p>
+                <p><strong>${sequence}</strong>と、あるきまりにしたがって数がならんでいます。</p>
+                <p>このとき、<strong>${ordinal}</strong>の数を求めなさい。</p>
+                <button type="button" class="learning-confirm-button">問題を読んだ</button>
+            </article>
+        `);
+        const button = board().querySelector('.learning-confirm-button');
+        if (button) button.addEventListener('click', () => completeInteractiveStep('問題の条件を確認できた。▽を押して続けよう。'));
+    }
+
+    function renderSequenceBoard({ label, values, difference, stage }) {
+        const arrows = values.slice(0, -1).map(() => `<span style="display:inline-flex;flex-direction:column;align-items:center;min-width:58px;"><small style="color:#ffe78a;font-weight:900;">＋${difference}</small><b style="font-size:25px;">→</b></span>`);
+        const row = values.map((value, index) => `${index ? arrows[index - 1] : ''}<span style="display:inline-flex;flex-direction:column;align-items:center;justify-content:center;min-width:62px;"><b style="font-size:34px;color:#fff7c2;">${value}</b>${stage === 'positions' ? `<small style="color:#b9f5c8;">${index + 1}番目</small>` : ''}</span>`).join('');
+        setBoard(`
+            <section class="hypothesis-board">
+                <header><small>${label}</small><h3>${stage === 'positions' ? '順番と進む回数' : '増え方を見つけよう'}</h3></header>
+                <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;margin:18px auto;">${row}</div>
+                <div class="hypothesis-flow">
+                    <div><span>1回進むごとに</span><b>＋${difference}</b></div>
+                    ${stage === 'positions' ? '<div><span>1番目→4番目</span><b>3回進む</b></div>' : '<div><span>隣り合う数の差</span><b>いつも同じ</b></div>'}
+                </div>
+                <p>${stage === 'positions' ? '求める順番まで進む回数は、順番より1回少ない。' : `この数列は、毎回${difference}ずつ増える。`}</p>
+            </section>
+        `);
+    }
+
+    function renderSequenceFormulaBoard({ label, first, difference, ordinal, expression, stage }) {
+        const title = stage === 'master' ? '公式で考えよう' : stage === 'calculation' ? 'かけ算を工夫しよう' : stage === 'answer' ? '公式で速く解けた' : '公式に当てはめよう';
+        setBoard(`
+            <section class="hypothesis-board">
+                <header><small>${label}</small><h3>${title}</h3></header>
+                <p style="font-size:28px;font-weight:900;color:#fff7c2;margin:12px 0;">答え ＝ 最初の数 ＋ 増える数 ×（順番 − 1）</p>
+                <div class="hypothesis-flow">
+                    <div><span>最初の数</span><b>${first}</b></div>
+                    <div><span>増える数</span><b>${difference}</b></div>
+                    <div><span>求める順番</span><b>${ordinal}</b></div>
+                </div>
+                <p style="font-size:${stage === 'calculation' ? '25px' : '31px'};font-weight:900;color:#b9f5c8;margin-top:16px;">${expression}</p>
+                <p>${stage === 'master' ? '①最初の数　②増える数　③順番−1　④最初の数を足す' : '図で考えた「進む回数」を、（順番−1）で表している。'}</p>
+            </section>
+        `);
     }
 
     function renderGenericSummary({ label, points, formulas, answer }) {
