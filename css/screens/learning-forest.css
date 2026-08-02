@@ -2238,3 +2238,151 @@
     }
 }
 
+
+
+/* =========================================================
+   学びの森 Ver2.5｜掲示板2ページ・循環問題
+   ========================================================= */
+#learningforest-screen .lesson-group-list.lesson-page-2 {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    max-height: 45%;
+}
+
+#learningforest-screen .lesson-page-controls {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    padding-top: clamp(5px, .8vh, 9px);
+}
+
+#learningforest-screen .lesson-page-controls button {
+    min-width: clamp(120px, 15vw, 190px);
+    border: 2px solid #f1d277;
+    border-radius: 999px;
+    padding: clamp(6px, .8vh, 10px) 18px;
+    background: linear-gradient(180deg, #8a662d, #4e3c21);
+    color: #fff5d0;
+    font-weight: 900;
+    font-size: clamp(12px, 1vw, 16px);
+    box-shadow: 0 3px 0 rgba(25, 18, 7, .55);
+    touch-action: manipulation;
+}
+
+#learningforest-screen .lesson-page-controls button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 rgba(25, 18, 7, .55);
+}
+
+#learningforest-screen .cycle-problem-card .cycle-note {
+    margin-top: 12px;
+    color: #f2d37e;
+    font-size: .9em;
+}
+
+#learningforest-screen .cycle-board {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: clamp(9px, 1.1vw, 17px);
+    color: #fff5d5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(7px, 1vh, 13px);
+}
+
+#learningforest-screen .cycle-board h3 {
+    margin: 0;
+    color: #f2d37e;
+    font-size: clamp(16px, 1.7vw, 27px);
+}
+
+#learningforest-screen .cycle-division {
+    padding: 7px 14px;
+    border: 2px solid rgba(241, 210, 119, .7);
+    border-radius: 10px;
+    background: rgba(15, 43, 32, .72);
+    font-size: clamp(18px, 2vw, 31px);
+    font-weight: 900;
+    letter-spacing: .03em;
+}
+
+#learningforest-screen .remainder-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(3px, .45vw, 7px);
+    font-size: clamp(11px, 1.05vw, 16px);
+}
+
+#learningforest-screen .remainder-flow span {
+    padding: 5px 7px;
+    border: 1px solid rgba(233, 197, 111, .55);
+    border-radius: 7px;
+    background: rgba(28, 69, 52, .82);
+}
+
+#learningforest-screen .remainder-flow span.is-repeat {
+    border: 3px solid #ef715e;
+    color: #fff4c6;
+    box-shadow: 0 0 0 2px rgba(255,255,255,.12);
+}
+
+#learningforest-screen .remainder-flow b {
+    color: #e9c56f;
+}
+
+#learningforest-screen .cycle-explanation {
+    margin: 0;
+    font-size: clamp(11px, 1vw, 15px);
+}
+
+#learningforest-screen .cycle-strip {
+    display: flex;
+    justify-content: center;
+    gap: clamp(4px, .5vw, 8px);
+}
+
+#learningforest-screen .cycle-strip span {
+    width: clamp(30px, 3.2vw, 48px);
+    height: clamp(30px, 3.2vw, 48px);
+    display: grid;
+    place-items: center;
+    border: 2px solid #e9c56f;
+    border-radius: 9px;
+    background: rgba(77, 102, 59, .9);
+    color: #fff8db;
+    font-size: clamp(17px, 1.8vw, 27px);
+    font-weight: 900;
+}
+
+#learningforest-screen .cycle-strip span.is-highlight {
+    background: #a94b36;
+    border-color: #ffe493;
+    transform: scale(1.12);
+    box-shadow: 0 0 12px rgba(255, 228, 147, .55);
+}
+
+#learningforest-screen .power-cycle-table {
+    width: min(92%, 520px);
+    display: grid;
+    gap: 4px;
+}
+
+#learningforest-screen .power-cycle-table p {
+    margin: 0;
+    padding: 5px 10px;
+    border-bottom: 1px solid rgba(242, 211, 126, .35);
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(12px, 1.15vw, 18px);
+}
+
+#learningforest-screen .cycle-division-answer {
+    margin: 0;
+    color: #f2d37e;
+    font-size: clamp(16px, 1.6vw, 25px);
+    font-weight: 900;
+}
