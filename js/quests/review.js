@@ -432,6 +432,10 @@ async function finishReviewQuiz(){
   const baseReward=correct;
   const bonus=claimReviewBonus(s.unitId,s.level);
   const totalReward=baseReward+bonus;
+  const gpBeforeCompletion =
+    typeof getGp === "function"
+      ? getGp()
+      : null;
 
   saveReviewHistory(s.unitId,s.level);
 
@@ -486,6 +490,21 @@ async function finishReviewQuiz(){
     if(!resultScreen?.classList.contains("active")
       && typeof showScreenImmediately==="function"){
       showScreenImmediately("result");
+    }
+  }finally{
+    /*
+      iPad Safari/PWAで結果画面だけ先に表示され、GP保存が反映されない事例への保険。
+      完了前後の所持GPを比較し、不足分だけを補うため、正常時に二重加算しない。
+    */
+    if(gpBeforeCompletion!==null && typeof getGp==="function"){
+      const expectedGp=gpBeforeCompletion+totalReward;
+      const currentGp=getGp();
+      if(currentGp<expectedGp && typeof addGp==="function"){
+        addGp(expectedGp-currentGp);
+      }
+      if(typeof updateGpDisplay==="function"){
+        updateGpDisplay();
+      }
     }
   }
 }
