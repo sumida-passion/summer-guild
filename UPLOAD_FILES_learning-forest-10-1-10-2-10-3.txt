@@ -1,0 +1,12 @@
+学びの森 10-1〜10-3 実装版：GitHubへアップロードするファイル
+
+1. js/screens/learningForest.js
+2. index.html
+3. service-worker.js
+4. docs/development-log.md
+5. docs/GPT_HANDOFF.md
+6. project-index.json
+7. UPLOAD_FILES_learning-forest-10-1-10-2-10-3.txt
+
+GitHubでは、各ファイルを上記と同じ場所へ上書きしてください。
+特に index.html と service-worker.js はキャッシュ更新のため必ず同時にアップロードしてください。
