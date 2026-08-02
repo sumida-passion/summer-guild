@@ -1,8 +1,8 @@
 "use strict";
 
 /* =========================================================
-   学びの森 Ver2.4
-   算数の広場・第1〜10問＋第11〜13問「勉強の仕方」
+   学びの森 Ver2.5
+   算数の広場・実装済み33問／掲示板2ページ対応
    ========================================================= */
 
 (() => {
@@ -38,7 +38,11 @@
         { number: 26, group: 10, label: "10-3", title: "7ずつ増える数列", ready: true, id: "math-sequence-26" },
         { number: 27, group: 11, label: "11-1", title: "4ずつ増える数列", ready: true, id: "math-sequence-27" },
         { number: 28, group: 11, label: "11-2", title: "5ずつ増える数列", ready: true, id: "math-sequence-28" },
-        { number: 29, group: 11, label: "11-3", title: "85は何番目", ready: true, id: "math-sequence-29" }
+        { number: 29, group: 11, label: "11-3", title: "85は何番目", ready: true, id: "math-sequence-29" },
+        { number: 30, group: 12, label: "12-1", title: "15÷7の小数第57位", ready: true, id: "math-cycle-30" },
+        { number: 31, group: 12, label: "12-2", title: "3を50回かけた一の位", ready: true, id: "math-cycle-31" },
+        { number: 32, group: 13, label: "13-1", title: "4÷13の小数第68位", ready: true, id: "math-cycle-32" },
+        { number: 33, group: 13, label: "13-2", title: "7を142回かけた一の位", ready: true, id: "math-cycle-33" }
     ];
 
     let currentStep = 0;
@@ -50,6 +54,7 @@
     let activeStroke = null;
     let canvasContext = null;
     let resizeTimer = 0;
+    let lessonPage = 1;
 
     function getLessonLabel(number) {
         return lessonCatalog.find((item) => item.number === Number(number))?.label || String(number);
@@ -1520,6 +1525,217 @@
         ];
     }
 
+
+    function renderCycleProblem({ label, text, note = "" }) {
+        setBoard(`
+            <article class="learning-problem-card cycle-problem-card">
+                <p class="learning-problem-label">${label}の問題</p>
+                <p>${text}</p>
+                ${note ? `<p class="cycle-note">${note}</p>` : ""}
+            </article>
+        `);
+    }
+
+    function renderDivisionCycleBoard({ dividend, divisor, quotient, remainders, cycle, highlight = "" }) {
+        setBoard(`
+            <section class="cycle-board">
+                <h3>${dividend}÷${divisor}を先生が途中まで計算</h3>
+                <div class="cycle-division">${quotient}</div>
+                <div class="remainder-flow">
+                    ${remainders.map((value, index) => `
+                        <span class="${index === 0 || index === remainders.length - 1 ? "is-repeat" : ""}">
+                            あまり${value}
+                        </span>
+                        ${index < remainders.length - 1 ? "<b>→</b>" : ""}
+                    `).join("")}
+                </div>
+                <p class="cycle-explanation">同じあまりに戻ると、その先も同じ計算になる。</p>
+                <div class="cycle-strip">
+                    ${cycle.split("").map((digit, index) => `<span class="${String(index + 1) === String(highlight) ? "is-highlight" : ""}">${digit}</span>`).join("")}
+                </div>
+            </section>
+        `);
+    }
+
+    function renderPowerCycleBoard({ base, rows, cycle, division = "", highlight = "" }) {
+        setBoard(`
+            <section class="cycle-board">
+                <h3>${base}を何回もかけたときの一の位</h3>
+                <div class="power-cycle-table">
+                    ${rows.map((row) => `<p><strong>${row.formula}</strong><span>一の位 ${row.last}</span></p>`).join("")}
+                </div>
+                <div class="cycle-strip">
+                    ${cycle.map((digit, index) => `<span class="${String(index + 1) === String(highlight) ? "is-highlight" : ""}">${digit}</span>`).join("")}
+                </div>
+                ${division ? `<p class="cycle-division-answer">${division}</p>` : ""}
+            </section>
+        `);
+    }
+
+    function renderCycleMethodSummary(answer) {
+        renderGenericSummary({
+            label: "繰り返し問題の学び",
+            points: [
+                "全部を計算せず、繰り返すまとまりを見つける",
+                "求める順番を、繰り返す個数で割る",
+                "あまりで、まとまりの何番目かを決める",
+                "あまり0なら、まとまりの最後の数字"
+            ],
+            formulas: ["求める順番 ÷ 周期の長さ", "あまり → 周期の中の位置"],
+            answer
+        });
+    }
+
+    function createLesson30Steps() {
+        return [
+            makeStep("12-1を読もう。小数第57位まで全部書くのではなく、割り算の中にある繰り返しを見つける問題だ。", () => renderCycleProblem({
+                label: "12-1",
+                text: "15÷7の計算をすると、小数第57位の数字はいくつになりますか。",
+                note: "今日は筆算そのものではなく、循環する仕組みを中心に学ぼう。"
+            })),
+            makeStep("本当のテストでは、同じあまりが出るまで筆算を続ける。メモパッドには書き切れないので、途中計算は先生が用意したぞ。", () => renderDivisionCycleBoard({
+                dividend: 15, divisor: 7,
+                quotient: "15÷7＝2.142857142857……",
+                remainders: [1, 3, 2, 6, 4, 5, 1],
+                cycle: "142857"
+            })),
+            makeStep("最初の『あまり1』に戻った。ここから同じ計算が始まるので、142857が6個ずつ繰り返す。", () => renderDivisionCycleBoard({
+                dividend: 15, divisor: 7,
+                quotient: "2.｜142857｜142857｜……",
+                remainders: [1, 3, 2, 6, 4, 5, 1],
+                cycle: "142857"
+            })),
+            makeStep("57番目が、6個のまとまりの何番目になるか調べよう。", () => renderGenericNumber({
+                title: "57番目を周期6で分ける",
+                formula: "57 ÷ 6 ＝ 9 あまり",
+                expected: "3",
+                unit: "",
+                success: "あまり3。次のまとまりの3番目を見ればよい。▽を押して続けよう。",
+                hint: "6×9＝54。57−54はいくつかな。"
+            }), true),
+            makeStep("142857の3番目の数字を選ぼう。", () => renderDivisionCycleBoard({
+                dividend: 15, divisor: 7,
+                quotient: "57÷6＝9あまり3",
+                remainders: [1, 3, 2, 6, 4, 5, 1],
+                cycle: "142857",
+                highlight: 3
+            })),
+            makeStep("小数第57位は2。試験では周期を見つける筆算を自分で行い、見つけた後はあまりで位置を決める。", () => renderCycleMethodSummary("小数第57位の数字は2"))
+        ];
+    }
+
+    function createLesson31Steps() {
+        return [
+            makeStep("12-2を読もう。3を50回かけた巨大な数を作る必要はない。一の位だけを追いかけよう。", () => renderCycleProblem({
+                label: "12-2",
+                text: "3を50回かけると、一の位の数字はいくつになりますか。"
+            })),
+            makeStep("最初の数回だけ計算すると、一の位に規則が見えてくる。", () => renderPowerCycleBoard({
+                base: 3,
+                rows: [
+                    { formula: "3¹＝3", last: 3 },
+                    { formula: "3²＝9", last: 9 },
+                    { formula: "3³＝27", last: 7 },
+                    { formula: "3⁴＝81", last: 1 },
+                    { formula: "3⁵＝243", last: 3 }
+                ],
+                cycle: [3, 9, 7, 1]
+            })),
+            makeStep("一の位は3、9、7、1の4個で繰り返す。50回目が周期の何番目か調べよう。", () => renderGenericNumber({
+                title: "50回目を周期4で分ける",
+                formula: "50 ÷ 4 ＝ 12 あまり",
+                expected: "2",
+                success: "あまり2。周期の2番目を見よう。▽を押して続けよう。",
+                hint: "4×12＝48。50−48を考えよう。"
+            }), true),
+            makeStep("周期の2番目は9。だから50回かけた数の一の位は9だ。", () => renderPowerCycleBoard({
+                base: 3,
+                rows: [
+                    { formula: "50÷4", last: "12あまり2" }
+                ],
+                cycle: [3, 9, 7, 1],
+                division: "周期の2番目 → 9",
+                highlight: 2
+            })),
+            makeStep("同じ数を何回もかける問題でも、一の位だけを見ると短い周期になる。", () => renderCycleMethodSummary("一の位は9"))
+        ];
+    }
+
+    function createLesson32Steps() {
+        return [
+            makeStep("13-1は12-1の復習だ。先生の途中計算から周期を見つけ、自分で68番目を決めよう。", () => renderCycleProblem({
+                label: "13-1",
+                text: "4÷13を計算すると、小数第68位の数字はいくつになりますか。"
+            })),
+            makeStep("割り算を続けると、同じあまりへ戻り、307692が繰り返す。0も一つの位として数えるぞ。", () => renderDivisionCycleBoard({
+                dividend: 4, divisor: 13,
+                quotient: "4÷13＝0.307692307692……",
+                remainders: [4, 1, 10, 9, 12, 3, 4],
+                cycle: "307692"
+            })),
+            makeStep("68番目を周期6で割ったあまりを求めよう。", () => renderGenericNumber({
+                title: "68番目を周期6で分ける",
+                formula: "68 ÷ 6 ＝ 11 あまり",
+                expected: "2",
+                success: "あまり2。周期の2番目を見よう。▽を押して続けよう。",
+                hint: "6×11＝66。68−66を考えよう。"
+            }), true),
+            makeStep("307692の2番目は0。0だからといって飛ばしてはいけない。", () => renderDivisionCycleBoard({
+                dividend: 4, divisor: 13,
+                quotient: "68÷6＝11あまり2",
+                remainders: [4, 1, 10, 9, 12, 3, 4],
+                cycle: "307692",
+                highlight: 2
+            })),
+            makeStep("小数第68位は0。小数第1位＝3、第2位＝0、第3位＝7と、0も正しく数える。", () => renderCycleMethodSummary("小数第68位の数字は0"))
+        ];
+    }
+
+    function createLesson33Steps() {
+        return [
+            makeStep("13-2は12-2の方法を自分で使う問題だ。7を142回かけた数の一の位を考えよう。", () => renderCycleProblem({
+                label: "13-2",
+                text: "7を142回かけると、一の位の数字はいくつになりますか。"
+            })),
+            makeStep("一の位だけを調べると、7、9、3、1の4個で繰り返す。", () => renderPowerCycleBoard({
+                base: 7,
+                rows: [
+                    { formula: "7¹＝7", last: 7 },
+                    { formula: "7²＝49", last: 9 },
+                    { formula: "7³＝343", last: 3 },
+                    { formula: "7⁴＝2401", last: 1 },
+                    { formula: "7⁵", last: 7 }
+                ],
+                cycle: [7, 9, 3, 1]
+            })),
+            makeStep("142回目が周期の何番目か調べよう。", () => renderGenericNumber({
+                title: "142回目を周期4で分ける",
+                formula: "142 ÷ 4 ＝ 35 あまり",
+                expected: "2",
+                success: "あまり2。周期の2番目を見よう。▽を押して続けよう。",
+                hint: "4×35＝140。142−140を考えよう。"
+            }), true),
+            makeStep("周期の2番目は9。だから一の位は9になる。", () => renderPowerCycleBoard({
+                base: 7,
+                rows: [{ formula: "142÷4", last: "35あまり2" }],
+                cycle: [7, 9, 3, 1],
+                division: "周期の2番目 → 9",
+                highlight: 2
+            })),
+            makeStep("循環小数も、何回もかける問題も、長く続く数字の中から短い繰り返しを見つけるのが鍵だ。", () => renderGenericSummary({
+                label: "12・13 今回覚える技",
+                points: [
+                    "まず繰り返すまとまりを見つける",
+                    "求める順番を、周期の長さで割る",
+                    "あまりで周期の何番目かを決める",
+                    "あまり0なら周期の最後"
+                ],
+                formulas: ["57÷6＝9あまり3", "142÷4＝35あまり2"],
+                answer: "13-2の一の位は9"
+            }))
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
@@ -1549,7 +1765,11 @@
         26: createLesson26Steps,
         27: createLesson27Steps,
         28: createLesson28Steps,
-        29: createLesson29Steps
+        29: createLesson29Steps,
+        30: createLesson30Steps,
+        31: createLesson31Steps,
+        32: createLesson32Steps,
+        33: createLesson33Steps
     };
 
     function init() {
@@ -1673,7 +1893,9 @@
         const back = document.getElementById("learningBackStep");
         const restartButton = document.getElementById("learningRestart");
 
-        if (text) text.textContent = "夏期講習プリントの実装済み問題から、学び直したい番号を選ぼう。6-2の次は10-1だ。テキストと同じ番号だから迷わず見直せるぞ。";
+        if (text) text.textContent = lessonPage === 1
+            ? "夏期講習プリントの実装済み問題から、学び直したい番号を選ぼう。1枚目は11-3までだ。"
+            : "続きの問題はこちらだ。12番から先の問題を選ぼう。";
         if (mark) {
             mark.hidden = true;
             mark.textContent = "▼";
@@ -1707,21 +1929,24 @@
     function renderLessonSelect() {
         const state = getState();
         const completed = new Set(Array.isArray(state.completedLessons) ? state.completedLessons : []);
-        const groups = [...new Set(lessonCatalog.map((lesson) => lesson.group))];
+        const visibleLessons = lessonCatalog.filter((lesson) =>
+            lessonPage === 1 ? lesson.group <= 11 : lesson.group >= 12
+        );
+        const groups = [...new Set(visibleLessons.map((lesson) => lesson.group))];
 
         setBoard(`
             <section class="lesson-select" aria-label="夏期講習プリント問題一覧">
                 <header class="lesson-select-header">
                     <span>SUMMER COURSE REVIEW</span>
-                    <h2>算数の学び直し　実装済み26問</h2>
-                    <p>プリントと同じ番号を選んでください</p>
+                    <h2>算数の学び直し　実装済み${lessonCatalog.length}問</h2>
+                    <p>${lessonPage === 1 ? "1枚目・11-3まで" : "2枚目・12番から"}</p>
                 </header>
-                <div class="lesson-group-list">
+                <div class="lesson-group-list lesson-page-${lessonPage}">
                     ${groups.map((group) => `
                         <div class="lesson-group">
                             <p class="lesson-group-title">大問 ${group}</p>
                             <div class="lesson-number-grid">
-                                ${lessonCatalog.filter((lesson) => lesson.group === group).map((lesson) => {
+                                ${visibleLessons.filter((lesson) => lesson.group === group).map((lesson) => {
                                     const done = lesson.id && completed.has(lesson.id);
                                     return `
                                         <button
@@ -1739,11 +1964,24 @@
                         </div>
                     `).join("")}
                 </div>
+                <div class="lesson-page-controls">
+                    ${lessonPage === 1
+                        ? '<button type="button" data-lesson-page="2">2枚目へ ▶</button>'
+                        : '<button type="button" data-lesson-page="1">◀ 1枚目へ</button>'}
+                </div>
             </section>
         `);
 
         board().querySelectorAll("[data-lesson-number]").forEach((button) => {
             button.addEventListener("click", () => startLesson(Number(button.dataset.lessonNumber)));
+        });
+        board().querySelector("[data-lesson-page]")?.addEventListener("click", (event) => {
+            lessonPage = Number(event.currentTarget.dataset.lessonPage) === 2 ? 2 : 1;
+            const text = document.getElementById("learningText");
+            if (text) text.textContent = lessonPage === 1
+                ? "夏期講習プリントの実装済み問題から、学び直したい番号を選ぼう。1枚目は11-3までだ。"
+                : "続きの問題はこちらだ。12番から先の問題を選ぼう。";
+            renderLessonSelect();
         });
     }
 
