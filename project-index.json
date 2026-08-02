@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-08-02T08:17:46.083889+00:00",
-    "commit": "88a009c",
+    "atUtc": "2026-08-02T08:18:15.208089+00:00",
+    "commit": "cf38677",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 74,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97681778,
+    "totalBytes": 97689265,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1598,9 +1598,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 57877,
-      "sha1": "997757690d",
-      "lineCount": 608
+      "sizeBytes": 58513,
+      "sha1": "d71afcf36c",
+      "lineCount": 618
     },
     {
       "path": "docs/game-rules.md",
@@ -1609,9 +1609,9 @@
       "stem": "game-rules",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 5480,
-      "sha1": "2817271bd4",
-      "lineCount": 70
+      "sizeBytes": 5860,
+      "sha1": "387a1c099e",
+      "lineCount": 77
     },
     {
       "path": "docs/GPT_HANDOFF.md",
@@ -1620,9 +1620,9 @@
       "stem": "GPT_HANDOFF",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 34452,
-      "sha1": "3e69d3a057",
-      "lineCount": 531
+      "sizeBytes": 35168,
+      "sha1": "32eb5aa632",
+      "lineCount": 542
     },
     {
       "path": "docs/GPT_PROJECT_STATE.md",
@@ -1631,9 +1631,9 @@
       "stem": "GPT_PROJECT_STATE",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 18552,
-      "sha1": "9ce30721a4",
-      "lineCount": 503
+      "sizeBytes": 19449,
+      "sha1": "6f8753d79d",
+      "lineCount": 525
     },
     {
       "path": "docs/PROJECT_STATE.json",
@@ -1642,9 +1642,9 @@
       "stem": "PROJECT_STATE",
       "extension": ".json",
       "extensionNormalized": ".json",
-      "sizeBytes": 69413,
-      "sha1": "afa4b81dab",
-      "lineCount": 1883
+      "sizeBytes": 74271,
+      "sha1": "99e3557159",
+      "lineCount": 2004
     },
     {
       "path": "index.html",
@@ -3843,7 +3843,31 @@
     {
       "status": "M",
       "paths": [
-        "data/items/items.js"
+        "docs/GPT_HANDOFF.md"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "docs/GPT_PROJECT_STATE.md"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "docs/PROJECT_STATE.json"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "docs/development-log.md"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "docs/game-rules.md"
       ]
     }
   ],
