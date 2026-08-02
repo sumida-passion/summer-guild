@@ -2477,6 +2477,49 @@ body.wardrobe-open {
     #blackDogLayer { width: clamp(110px, 22vw, 180px); }
 }
 
+
+/* きいろのトリ */
+#yellowBirdLayer {
+    position: absolute;
+    width: clamp(90px, 13vw, 150px);
+    aspect-ratio: 1 / 1;
+    transform: translateX(-50%);
+    transform-origin: center bottom;
+    z-index: 19;
+    pointer-events: none;
+}
+#yellowBirdLayer[hidden] { display: none !important; }
+.yellowbird-asset {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    pointer-events: auto;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.yellowbird-asset:hover,
+.yellowbird-asset:focus,
+.yellowbird-asset:focus-visible,
+.yellowbird-asset:active {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+@media (max-width: 700px) and (orientation: landscape) {
+    #yellowBirdLayer { width: clamp(70px, 11vw, 110px); }
+}
+
 /* =========================================================
    社会ギルド Ver1.0
    ========================================================= */
