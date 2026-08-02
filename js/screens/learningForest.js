@@ -35,7 +35,10 @@
         { number: 23, group: 6, label: "6-2", title: "桜を増やして植え直す", ready: true, id: "math-interval-23" },
         { number: 24, group: 10, label: "10-1", title: "6ずつ増える数列", ready: true, id: "math-sequence-24" },
         { number: 25, group: 10, label: "10-2", title: "奇数の数列", ready: true, id: "math-sequence-25" },
-        { number: 26, group: 10, label: "10-3", title: "7ずつ増える数列", ready: true, id: "math-sequence-26" }
+        { number: 26, group: 10, label: "10-3", title: "7ずつ増える数列", ready: true, id: "math-sequence-26" },
+        { number: 27, group: 11, label: "11-1", title: "4ずつ増える数列", ready: true, id: "math-sequence-27" },
+        { number: 28, group: 11, label: "11-2", title: "5ずつ増える数列", ready: true, id: "math-sequence-28" },
+        { number: 29, group: 11, label: "11-3", title: "85は何番目", ready: true, id: "math-sequence-29" }
     ];
 
     let currentStep = 0;
@@ -1371,6 +1374,152 @@
         ];
     }
 
+
+    function createLesson27Steps() {
+        return [
+            makeStep("11-1を読もう。10番台で覚えた公式を、この問題でも使える形だと見抜こう。", () => renderSequenceProblem({
+                label: "11-1",
+                sequence: "1、5、9、13、17、21、……",
+                ordinal: "50番目"
+            }), true),
+            makeStep("まず隣り合う数の差を確かめよう。いくつずつ増えているかな？", () => renderSequenceBoard({
+                label: "11-1", values: [1, 5, 9, 13, 17], difference: 4, stage: "difference"
+            })),
+            makeStep("この問題も同じ公式に当てはまる。最初の数、増える数、求める順番を整理しよう。", () => renderSequenceFormulaBoard({
+                label: "11-1", first: 1, difference: 4, ordinal: 50, expression: "1＋4×（50−1）", stage: "identify"
+            })),
+            makeStep("50番目まで進む回数はいくつ？", () => renderGenericNumber({
+                title: "進む回数",
+                formula: "50 − 1 ＝",
+                expected: "49",
+                unit: "回",
+                success: "49回。公式の（順番−1）の部分だ。▽を押して続けよう。",
+                hint: "最初の1が1番目なので、進む回数は1つ少ない。"
+            }), true),
+            makeStep("公式に当てはめて、50番目の数を求めよう。", () => renderGenericNumber({
+                title: "50番目の数",
+                formula: "1 ＋ 4 × 49 ＝",
+                expected: "197",
+                unit: "",
+                success: "50番目は197。同じ形だと見抜けば、公式で速く解ける。▽を押して続けよう。",
+                hint: "4×49＝196。最後に最初の数1を足そう。"
+            }), true),
+            makeStep("解き方の順番を並べて、公式の使い方を確認しよう。", () => renderGenericOrder({
+                formulas: ["最初の数は1", "増える数は4", "50−1＝49回", "1＋4×49＝197"],
+                success: "必要な3つを見つけて、公式へ正しく入れられた。▽を押してまとめよう。",
+                hint: "最初の数、増える数、順番−1の順に整理しよう。"
+            }), true),
+            makeStep("11-1では、問題の形を見抜いて、前に学んだ公式をそのまま使った。", () => renderGenericSummary({
+                label: "11-1の学び",
+                points: ["同じ差で増える数列だと見抜く", "最初の数1・増える数4・順番50を整理する", "順番より1少ない49回分を足す"],
+                formulas: ["50−1＝49", "1＋4×49＝197"],
+                answer: "50番目の数は197"
+            }))
+        ];
+    }
+
+    function createLesson28Steps() {
+        return [
+            makeStep("11-2を読もう。今度は、自分で公式に必要な3つを見つけよう。", () => renderSequenceProblem({
+                label: "11-2",
+                sequence: "1、6、11、16、21、26、……",
+                ordinal: "40番目"
+            }), true),
+            makeStep("まず増える数を見つけよう。6−1と11−6を比べるとどうなる？", () => renderSequenceBoard({
+                label: "11-2", values: [1, 6, 11, 16, 21], difference: 5, stage: "difference"
+            })),
+            makeStep("公式に入れる3つを確認しよう。最初の数は1、増える数は5、求めるのは40番目だ。", () => renderSequenceFormulaBoard({
+                label: "11-2", first: 1, difference: 5, ordinal: 40, expression: "1＋5×（40−1）", stage: "identify"
+            })),
+            makeStep("40番目まで進む回数を求めよう。", () => renderGenericNumber({
+                title: "進む回数",
+                formula: "40 − 1 ＝",
+                expected: "39",
+                unit: "回",
+                success: "39回。次は5を39回分足した大きさを考えよう。▽を押して続けよう。",
+                hint: "順番から1を引こう。"
+            }), true),
+            makeStep("公式に当てはめると、40番目はいくつ？", () => renderGenericNumber({
+                title: "40番目の数",
+                formula: "1 ＋ 5 × 39 ＝",
+                expected: "196",
+                unit: "",
+                success: "40番目は196。自分で3つの数字を見つけて解けたね。▽を押して続けよう。",
+                hint: "5×39＝195。そこへ最初の数1を足そう。"
+            }), true),
+            makeStep("公式を使う手順を、もう一度自分の言葉で並べよう。", () => renderGenericOrder({
+                formulas: ["最初の数1を見つける", "増える数5を見つける", "40−1＝39回", "1＋5×39＝196"],
+                success: "問題を見て、公式に必要な数字を自分で選べた。▽を押してまとめよう。",
+                hint: "数列の最初、隣り合う差、求める順番を見よう。"
+            }), true),
+            makeStep("11-2では、公式を教えてもらうだけでなく、必要な数字を自分で見つけて当てはめた。", () => renderGenericSummary({
+                label: "11-2の学び",
+                points: ["最初の数・増える数・順番を自分で探す", "進む回数は40−1＝39回", "公式を使って速く正確に求める"],
+                formulas: ["1＋5×（40−1）", "1＋5×39＝196"],
+                answer: "40番目の数は196"
+            }))
+        ];
+    }
+
+    function createLesson29Steps() {
+        return [
+            makeStep("11-3を読もう。今回は『何番目の数か』を求める、これまでとは逆向きの問題だ。", () => renderSequencePositionProblem({
+                label: "11-3",
+                sequence: "4、7、10、13、16、……",
+                target: 85
+            }), true),
+            makeStep("まず増え方を確かめよう。この数列は1回進むごとにいくつ増える？", () => renderSequenceBoard({
+                label: "11-3", values: [4, 7, 10, 13, 16], difference: 3, stage: "positions"
+            })),
+            makeStep("最初の4から85まで、全部でいくつ増えたかを考えよう。", () => renderGenericNumber({
+                title: "最初から増えた数",
+                formula: "85 − 4 ＝",
+                expected: "81",
+                unit: "",
+                success: "81増えた。次に、＋3が何回分あるかを求めよう。▽を押して続けよう。",
+                hint: "求めたい85から、最初の数4を引こう。"
+            }), true),
+            makeStep("81の中に、1回分の増え方3はいくつある？", () => renderGenericNumber({
+                title: "進んだ回数",
+                formula: "81 ÷ 3 ＝",
+                expected: "27",
+                unit: "回",
+                success: "27回進んだ。でも、最初の4はすでに1番目だったね。▽を押して続けよう。",
+                hint: "全部の増えた数81を、1回分の3で分けよう。"
+            }), true),
+            makeStep("最初の4が1番目なので、27回進んだ先は何番目？", () => renderGenericNumber({
+                title: "85の順番",
+                formula: "27 ＋ 1 ＝",
+                expected: "28",
+                unit: "番目",
+                success: "85は28番目。進んだ回数に、最初の1番目を足すんだ。▽を押して公式にしよう。",
+                hint: "進んだ回数27に、最初の位置1を足そう。"
+            }), true),
+            makeStep("ここからは『公式で考えよう』。何番目かを求めるときは、今の逆算をこの形にまとめられる。", () => renderSequencePositionFormulaBoard({
+                label: "11-3",
+                target: 85,
+                first: 4,
+                difference: 3,
+                expression: "（85−4）÷3＋1＝28"
+            })),
+            makeStep("もとの公式へ85を入れて考えても、同じ答えになる。", () => renderSequenceReverseEquationBoard({
+                label: "11-3",
+                expressionLines: ["85＝4＋3×（順番−1）", "85−4＝3×（順番−1）", "81÷3＝順番−1", "27＋1＝28番目"]
+            })),
+            makeStep("逆向きの問題を解く順番を並べよう。", () => renderGenericOrder({
+                formulas: ["85−4＝81", "81÷3＝27回", "最初の4は1番目", "27＋1＝28番目"],
+                success: "最初の数を引き、増える数で割り、最後に1を足す流れがつながった。▽を押してまとめよう。",
+                hint: "まず最初の数を引いて、何回進んだかを求めよう。"
+            }), true),
+            makeStep("11-3では、数を求める公式を逆向きに使って、『何番目か』を求めた。", () => renderGenericSummary({
+                label: "11-1〜11-3 今回覚える技",
+                points: ["ある順番の数は、最初の数＋増える数×（順番−1）", "何番目かは、最初の数を引いて増える数で割る", "最後に、最初の1番目を足す"],
+                formulas: ["数＝最初の数＋増える数×（順番−1）", "順番＝（その数−最初の数）÷増える数＋1", "（85−4）÷3＋1＝28"],
+                answer: "85は28番目"
+            }))
+        ];
+    }
+
     const lessonFactories = {
         1: createLesson1Steps,
         2: createLesson2Steps,
@@ -1397,7 +1546,10 @@
         23: createLesson23Steps,
         24: createLesson24Steps,
         25: createLesson25Steps,
-        26: createLesson26Steps
+        26: createLesson26Steps,
+        27: createLesson27Steps,
+        28: createLesson28Steps,
+        29: createLesson29Steps
     };
 
     function init() {
@@ -2621,6 +2773,49 @@
         `);
         const button = board().querySelector('.learning-confirm-button');
         if (button) button.addEventListener('click', () => completeInteractiveStep('問題の条件を確認できた。▽を押して続けよう。'));
+    }
+
+
+    function renderSequencePositionProblem({ label, sequence, target }) {
+        setBoard(`
+            <article class="learning-problem-card">
+                <p class="learning-problem-label">${label}の問題</p>
+                <p><strong>${sequence}</strong>と、あるきまりにしたがって数がならんでいます。</p>
+                <p>このとき、<strong>${target}は何番目の数ですか。</strong></p>
+                <button type="button" class="learning-confirm-button">問題を読んだ</button>
+            </article>
+        `);
+        const button = board().querySelector('.learning-confirm-button');
+        if (button) button.addEventListener('click', () => completeInteractiveStep('今回は数ではなく、順番を求める問題だ。▽を押して続けよう。'));
+    }
+
+    function renderSequencePositionFormulaBoard({ label, target, first, difference, expression }) {
+        setBoard(`
+            <section class="hypothesis-board">
+                <header><small>${label}</small><h3>何番目かの公式</h3></header>
+                <p style="font-size:27px;font-weight:900;color:#fff7c2;margin:12px 0;">順番 ＝（その数 − 最初の数）÷ 増える数 ＋ 1</p>
+                <div class="hypothesis-flow">
+                    <div><span>その数</span><b>${target}</b></div>
+                    <div><span>最初の数</span><b>${first}</b></div>
+                    <div><span>増える数</span><b>${difference}</b></div>
+                </div>
+                <p style="font-size:31px;font-weight:900;color:#b9f5c8;margin-top:16px;">${expression}</p>
+                <p>最初の数を引く → 増える数で割る → 最初の1番目を足す。</p>
+            </section>
+        `);
+    }
+
+    function renderSequenceReverseEquationBoard({ label, expressionLines }) {
+        setBoard(`
+            <section class="hypothesis-board">
+                <header><small>${label}</small><h3>もとの公式を逆向きに考える</h3></header>
+                <p style="font-size:24px;font-weight:900;color:#fff7c2;margin:10px 0;">数 ＝ 最初の数 ＋ 増える数 ×（順番 − 1）</p>
+                <div style="display:grid;gap:8px;max-width:720px;margin:14px auto;">
+                    ${expressionLines.map((line, index) => `<p style="font-size:${index === expressionLines.length - 1 ? '30px' : '25px'};font-weight:900;color:${index === expressionLines.length - 1 ? '#b9f5c8' : '#ffffff'};margin:0;">${line}</p>`).join('')}
+                </div>
+                <p>公式の意味が分かっていれば、逆向きの問題にも使える。</p>
+            </section>
+        `);
     }
 
     function renderSequenceBoard({ label, values, difference, stage }) {
