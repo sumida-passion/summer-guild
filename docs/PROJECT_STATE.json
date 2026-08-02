@@ -2,7 +2,7 @@
   "generator": {
     "name": "Summer Guild Project State Generator",
     "version": "1.0.0",
-    "generatedAt": "2026-07-27T06:24:31.727Z",
+    "generatedAt": "2026-08-02T07:44:39.421Z",
     "excludedGeneratedFiles": [
       "docs/GPT_PROJECT_STATE.md",
       "docs/PROJECT_STATE.json"
@@ -16,12 +16,12 @@
     "latestCommitMessage": "unknown"
   },
   "summary": {
-    "fileCount": 185,
+    "fileCount": 199,
     "directoryCount": 67,
-    "imageCount": 68,
+    "imageCount": 74,
     "audioCount": 15,
     "videoCount": 0,
-    "javascriptCount": 33,
+    "javascriptCount": 34,
     "cssCount": 6,
     "htmlCount": 1,
     "dataFileCount": 2
@@ -149,6 +149,12 @@
     "assets/characters/pet/dogtoy_ball.PNG",
     "assets/characters/pet/dogtoy_bone.PNG",
     "assets/characters/pet/dogtoy_rope.PNG",
+    "assets/characters/pet/piyo_base.PNG",
+    "assets/characters/pet/piyo_food.PNG",
+    "assets/characters/pet/piyo_happy.PNG",
+    "assets/characters/pet/piyo_joy.PNG",
+    "assets/characters/pet/piyo_sleepy.PNG",
+    "assets/characters/pet/piyo_talking.PNG",
     "assets/characters/player/accessories/.gitkeep",
     "assets/characters/player/accessories/neckwarmer_acc.PNG",
     "assets/characters/player/base/.gitkeep",
@@ -273,6 +279,7 @@
     "js/systems/owlMessenger.js",
     "js/systems/questEngine.js",
     "js/systems/questMusicPlayer.js",
+    "js/systems/yellowBirdPet.js",
     "manifest.webmanifest",
     "project-index.json",
     "README.md",
@@ -280,6 +287,13 @@
     "service-worker.js",
     "tests/.gitkeep",
     "tools/generateProjectState.js",
+    "UPLOAD_FILES_learning-forest-10-1-10-2-10-3.txt",
+    "UPLOAD_FILES_learning-forest-11-1-11-2-11-3.txt",
+    "UPLOAD_FILES_learning-forest-11-12.txt",
+    "UPLOAD_FILES_learning-forest-12-13-review-gp.txt",
+    "UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt",
+    "UPLOAD_FILES_learning-forest-5-3-5-4-6-1-6-2.txt",
+    "UPLOAD_FILES_learning-forest-6-1-6-2-flow-v2.txt",
     "UPLOAD_FILES.txt"
   ],
   "fileDetails": [
@@ -600,6 +614,42 @@
       "name": "dogtoy_rope.PNG",
       "extension": ".png",
       "sizeBytes": 17116
+    },
+    {
+      "path": "assets/characters/pet/piyo_base.PNG",
+      "name": "piyo_base.PNG",
+      "extension": ".png",
+      "sizeBytes": 49521
+    },
+    {
+      "path": "assets/characters/pet/piyo_food.PNG",
+      "name": "piyo_food.PNG",
+      "extension": ".png",
+      "sizeBytes": 60123
+    },
+    {
+      "path": "assets/characters/pet/piyo_happy.PNG",
+      "name": "piyo_happy.PNG",
+      "extension": ".png",
+      "sizeBytes": 59750
+    },
+    {
+      "path": "assets/characters/pet/piyo_joy.PNG",
+      "name": "piyo_joy.PNG",
+      "extension": ".png",
+      "sizeBytes": 56055
+    },
+    {
+      "path": "assets/characters/pet/piyo_sleepy.PNG",
+      "name": "piyo_sleepy.PNG",
+      "extension": ".png",
+      "sizeBytes": 55810
+    },
+    {
+      "path": "assets/characters/pet/piyo_talking.PNG",
+      "name": "piyo_talking.PNG",
+      "extension": ".png",
+      "sizeBytes": 54781
     },
     {
       "path": "assets/characters/player/accessories/.gitkeep",
@@ -1031,7 +1081,7 @@
       "path": "css/layout.css",
       "name": "layout.css",
       "extension": ".css",
-      "sizeBytes": 74488
+      "sizeBytes": 78520
     },
     {
       "path": "css/review.js",
@@ -1061,7 +1111,7 @@
       "path": "css/screens/learning-forest.css",
       "name": "learning-forest.css",
       "extension": ".css",
-      "sizeBytes": 46432
+      "sizeBytes": 74038
     },
     {
       "path": "data/achievements/.gitkeep",
@@ -1091,7 +1141,7 @@
       "path": "data/items/items.js",
       "name": "items.js",
       "extension": ".js",
-      "sizeBytes": 7398
+      "sizeBytes": 7480
     },
     {
       "path": "data/masters/.gitkeep",
@@ -1139,31 +1189,31 @@
       "path": "docs/development-log.md",
       "name": "development-log.md",
       "extension": ".md",
-      "sizeBytes": 43170
+      "sizeBytes": 58513
     },
     {
       "path": "docs/game-rules.md",
       "name": "game-rules.md",
       "extension": ".md",
-      "sizeBytes": 5480
+      "sizeBytes": 5860
     },
     {
       "path": "docs/GPT_HANDOFF.md",
       "name": "GPT_HANDOFF.md",
       "extension": ".md",
-      "sizeBytes": 25488
+      "sizeBytes": 35168
     },
     {
       "path": "index.html",
       "name": "index.html",
       "extension": ".html",
-      "sizeBytes": 19558
+      "sizeBytes": 19509
     },
     {
       "path": "js/app.js",
       "name": "app.js",
       "extension": ".js",
-      "sizeBytes": 44803
+      "sizeBytes": 45461
     },
     {
       "path": "js/components/.gitkeep",
@@ -1241,7 +1291,7 @@
       "path": "js/quests/review.js",
       "name": "review.js",
       "extension": ".js",
-      "sizeBytes": 62949
+      "sizeBytes": 63638
     },
     {
       "path": "js/quests/science.js",
@@ -1265,7 +1315,7 @@
       "path": "js/screens/learningForest.js",
       "name": "learningForest.js",
       "extension": ".js",
-      "sizeBytes": 88829
+      "sizeBytes": 232715
     },
     {
       "path": "js/screens/musicShop.js",
@@ -1277,7 +1327,7 @@
       "path": "js/screens/shop.js",
       "name": "shop.js",
       "extension": ".js",
-      "sizeBytes": 13211
+      "sizeBytes": 13327
     },
     {
       "path": "js/screens/wardrobe.js",
@@ -1289,7 +1339,7 @@
       "path": "js/settings.js",
       "name": "settings.js",
       "extension": ".js",
-      "sizeBytes": 51210
+      "sizeBytes": 51726
     },
     {
       "path": "js/storage.js",
@@ -1346,6 +1396,12 @@
       "sizeBytes": 7641
     },
     {
+      "path": "js/systems/yellowBirdPet.js",
+      "name": "yellowBirdPet.js",
+      "extension": ".js",
+      "sizeBytes": 5405
+    },
+    {
       "path": "manifest.webmanifest",
       "name": "manifest.webmanifest",
       "extension": ".webmanifest",
@@ -1355,7 +1411,7 @@
       "path": "project-index.json",
       "name": "project-index.json",
       "extension": ".json",
-      "sizeBytes": 120363
+      "sizeBytes": 127253
     },
     {
       "path": "README.md",
@@ -1373,7 +1429,7 @@
       "path": "service-worker.js",
       "name": "service-worker.js",
       "extension": ".js",
-      "sizeBytes": 4503
+      "sizeBytes": 4498
     },
     {
       "path": "tests/.gitkeep",
@@ -1388,10 +1444,52 @@
       "sizeBytes": 27130
     },
     {
+      "path": "UPLOAD_FILES_learning-forest-10-1-10-2-10-3.txt",
+      "name": "UPLOAD_FILES_learning-forest-10-1-10-2-10-3.txt",
+      "extension": ".txt",
+      "sizeBytes": 491
+    },
+    {
+      "path": "UPLOAD_FILES_learning-forest-11-1-11-2-11-3.txt",
+      "name": "UPLOAD_FILES_learning-forest-11-1-11-2-11-3.txt",
+      "extension": ".txt",
+      "sizeBytes": 1194
+    },
+    {
+      "path": "UPLOAD_FILES_learning-forest-11-12.txt",
+      "name": "UPLOAD_FILES_learning-forest-11-12.txt",
+      "extension": ".txt",
+      "sizeBytes": 831
+    },
+    {
+      "path": "UPLOAD_FILES_learning-forest-12-13-review-gp.txt",
+      "name": "UPLOAD_FILES_learning-forest-12-13-review-gp.txt",
+      "extension": ".txt",
+      "sizeBytes": 501
+    },
+    {
+      "path": "UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt",
+      "name": "UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt",
+      "extension": ".txt",
+      "sizeBytes": 629
+    },
+    {
+      "path": "UPLOAD_FILES_learning-forest-5-3-5-4-6-1-6-2.txt",
+      "name": "UPLOAD_FILES_learning-forest-5-3-5-4-6-1-6-2.txt",
+      "extension": ".txt",
+      "sizeBytes": 738
+    },
+    {
+      "path": "UPLOAD_FILES_learning-forest-6-1-6-2-flow-v2.txt",
+      "name": "UPLOAD_FILES_learning-forest-6-1-6-2-flow-v2.txt",
+      "extension": ".txt",
+      "sizeBytes": 198
+    },
+    {
       "path": "UPLOAD_FILES.txt",
       "name": "UPLOAD_FILES.txt",
       "extension": ".txt",
-      "sizeBytes": 303
+      "sizeBytes": 275
     }
   ],
   "assets": {
@@ -1416,6 +1514,12 @@
       "assets/characters/pet/dogtoy_ball.PNG",
       "assets/characters/pet/dogtoy_bone.PNG",
       "assets/characters/pet/dogtoy_rope.PNG",
+      "assets/characters/pet/piyo_base.PNG",
+      "assets/characters/pet/piyo_food.PNG",
+      "assets/characters/pet/piyo_happy.PNG",
+      "assets/characters/pet/piyo_joy.PNG",
+      "assets/characters/pet/piyo_sleepy.PNG",
+      "assets/characters/pet/piyo_talking.PNG",
       "assets/characters/player/accessories/neckwarmer_acc.PNG",
       "assets/characters/player/base/base.png",
       "assets/characters/player/clothes/bottoms/battle_bottoms.PNG",
@@ -1517,6 +1621,7 @@
       "js/systems/owlMessenger.js",
       "js/systems/questEngine.js",
       "js/systems/questMusicPlayer.js",
+      "js/systems/yellowBirdPet.js",
       "service-worker.js",
       "tools/generateProjectState.js"
     ],
@@ -1539,35 +1644,36 @@
   "indexHtml": {
     "exists": true,
     "stylesheets": [
-      "css/common.css?v=20260727-review-result-safari-v4",
-      "css/layout.css?v=20260727-review-result-safari-v4",
-      "css/screens/iphone-landscape.css?v=20260727-review-result-safari-v4",
-      "css/screens/learning-forest.css?v=20260727-review-result-safari-v4",
-      "css/developer.css?v=20260727-review-result-safari-v4"
+      "css/common.css?v=20260802-yellow-bird-pet-v1",
+      "css/layout.css?v=20260802-yellow-bird-pet-v1",
+      "css/screens/iphone-landscape.css?v=20260802-yellow-bird-pet-v1",
+      "css/screens/learning-forest.css?v=20260802-yellow-bird-pet-v1",
+      "css/developer.css?v=20260802-yellow-bird-pet-v1"
     ],
     "scripts": [
-      "js/settings.js?v=20260727-review-result-safari-v4",
-      "js/systems/owlMessenger.js?v=20260727-review-result-safari-v4",
-      "js/systems/furnitureSystem.js?v=20260727-review-result-safari-v4",
-      "data/items/items.js?v=20260727-review-result-safari-v4",
-      "data/shop/music.js?v=20260727-review-result-safari-v4",
-      "js/systems/musicPlayer.js?v=20260727-review-result-safari-v4",
-      "js/systems/questMusicPlayer.js?v=20260727-review-result-safari-v4",
-      "js/screens/shop.js?v=20260727-review-result-safari-v4",
-      "js/screens/musicShop.js?v=20260727-review-result-safari-v4",
-      "js/screens/wardrobe.js?v=20260727-review-result-safari-v4",
-      "js/systems/questEngine.js?v=20260727-review-result-safari-v4",
-      "js/quests/daily.js?v=20260727-review-result-safari-v4",
-      "js/numberpad.js?v=20260727-review-result-safari-v4",
-      "js/quests/hyakumasu.js?v=20260727-review-result-safari-v4",
-      "js/quests/review.js?v=20260727-review-result-safari-v4",
-      "js/systems/dailyDashboard.js?v=20260727-review-result-safari-v4",
-      "js/quests/math.js?v=20260727-review-result-safari-v4",
-      "js/quests/society.js?v=20260727-review-result-safari-v4",
-      "js/screens/learningForest.js?v=20260727-review-result-safari-v4",
-      "js/developer.js?v=20260727-review-result-safari-v4",
-      "js/systems/blackDogPet.js?v=20260727-review-result-safari-v4",
-      "js/app.js?v=20260727-review-result-safari-v4"
+      "js/settings.js?v=20260802-yellow-bird-pet-v1",
+      "js/systems/owlMessenger.js?v=20260802-yellow-bird-pet-v1",
+      "js/systems/furnitureSystem.js?v=20260802-yellow-bird-pet-v1",
+      "data/items/items.js?v=20260802-yellow-bird-pet-v1",
+      "data/shop/music.js?v=20260802-yellow-bird-pet-v1",
+      "js/systems/musicPlayer.js?v=20260802-yellow-bird-pet-v1",
+      "js/systems/questMusicPlayer.js?v=20260802-yellow-bird-pet-v1",
+      "js/screens/shop.js?v=20260802-yellow-bird-pet-v1",
+      "js/screens/musicShop.js?v=20260802-yellow-bird-pet-v1",
+      "js/screens/wardrobe.js?v=20260802-yellow-bird-pet-v1",
+      "js/systems/questEngine.js?v=20260802-yellow-bird-pet-v1",
+      "js/quests/daily.js?v=20260802-yellow-bird-pet-v1",
+      "js/numberpad.js?v=20260802-yellow-bird-pet-v1",
+      "js/quests/hyakumasu.js?v=20260802-yellow-bird-pet-v1",
+      "js/quests/review.js?v=20260802-yellow-bird-pet-v1",
+      "js/systems/dailyDashboard.js?v=20260802-yellow-bird-pet-v1",
+      "js/quests/math.js?v=20260802-yellow-bird-pet-v1",
+      "js/quests/society.js?v=20260802-yellow-bird-pet-v1",
+      "js/screens/learningForest.js?v=20260802-yellow-bird-pet-v1",
+      "js/developer.js?v=20260802-yellow-bird-pet-v1",
+      "js/systems/blackDogPet.js?v=20260802-yellow-bird-pet-v1",
+      "js/systems/yellowBirdPet.js?v=20260802-yellow-bird-pet-v1",
+      "js/app.js?v=20260802-yellow-bird-pet-v1"
     ],
     "images": [
       "assets/characters/player/base/base.png",
@@ -1605,6 +1711,7 @@
       "js/screens/learningForest.js",
       "js/developer.js",
       "js/systems/blackDogPet.js",
+      "js/systems/yellowBirdPet.js",
       "js/app.js",
       "assets/characters/player/base/base.png",
       "assets/characters/player/clothes/bottoms/default_bottoms.png",
@@ -1696,7 +1803,13 @@
       "│   │   │   ├── blanket.PNG",
       "│   │   │   ├── dogtoy_ball.PNG",
       "│   │   │   ├── dogtoy_bone.PNG",
-      "│   │   │   └── dogtoy_rope.PNG",
+      "│   │   │   ├── dogtoy_rope.PNG",
+      "│   │   │   ├── piyo_base.PNG",
+      "│   │   │   ├── piyo_food.PNG",
+      "│   │   │   ├── piyo_happy.PNG",
+      "│   │   │   ├── piyo_joy.PNG",
+      "│   │   │   ├── piyo_sleepy.PNG",
+      "│   │   │   └── piyo_talking.PNG",
       "│   │   └── player/",
       "│   │       ├── accessories/",
       "│   │       │   ├── .gitkeep",
@@ -1861,7 +1974,8 @@
       "│       ├── musicPlayer.js",
       "│       ├── owlMessenger.js",
       "│       ├── questEngine.js",
-      "│       └── questMusicPlayer.js",
+      "│       ├── questMusicPlayer.js",
+      "│       └── yellowBirdPet.js",
       "├── manifest.webmanifest",
       "├── project-index.json",
       "├── README.md",
@@ -1872,9 +1986,16 @@
       "│   └── .gitkeep",
       "├── tools/",
       "│   └── generateProjectState.js",
+      "├── UPLOAD_FILES_learning-forest-10-1-10-2-10-3.txt",
+      "├── UPLOAD_FILES_learning-forest-11-1-11-2-11-3.txt",
+      "├── UPLOAD_FILES_learning-forest-11-12.txt",
+      "├── UPLOAD_FILES_learning-forest-12-13-review-gp.txt",
+      "├── UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt",
+      "├── UPLOAD_FILES_learning-forest-5-3-5-4-6-1-6-2.txt",
+      "├── UPLOAD_FILES_learning-forest-6-1-6-2-flow-v2.txt",
       "└── UPLOAD_FILES.txt"
     ],
-    "text": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Afternoon in the Academy.mp3\n│   │   │   ├── Bloom in the Garden.mp3\n│   │   │   ├── Candlelit Banquet.mp3\n│   │   │   ├── Harbor Breeze.mp3\n│   │   │   ├── Morning Light in the Guild.mp3\n│   │   │   ├── Sunlight Through Leaves.mp3\n│   │   │   ├── The Quiet Court.mp3\n│   │   │   └── Thunder in the Hall.mp3\n│   │   ├── quests/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Blazing Dragoon's Charge.mp3\n│   │   │   ├── learningForest.mp3\n│   │   │   ├── The Clockwork Gambit 2.mp3\n│   │   │   ├── The Clockwork Gambit.mp3\n│   │   │   ├── The Moment Before the Shot.mp3\n│   │   │   ├── vsMathGuildMaster_final.mp3\n│   │   │   └── vsMathGuildMaster_start.mp3\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   ├── .gitkeep\n│   │   │   ├── map_Japan.PNG\n│   │   │   ├── map_world.PNG\n│   │   │   └── mathGuildForest.png\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   ├── .gitkeep\n│   │   │   │   └── mathGuildMaster.png\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   ├── pet/\n│   │   │   ├── .gitkeep\n│   │   │   ├── blackdog_base.PNG\n│   │   │   ├── blackdog_calm.PNG\n│   │   │   ├── blackdog_joy.PNG\n│   │   │   ├── blackdog_sleep.PNG\n│   │   │   ├── blanket.PNG\n│   │   │   ├── dogtoy_ball.PNG\n│   │   │   ├── dogtoy_bone.PNG\n│   │   │   └── dogtoy_rope.PNG\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   ├── .gitkeep\n│   │       │   └── neckwarmer_acc.PNG\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── .gitkeep\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_bottoms.PNG\n│   │       │   │   ├── bluejeans_bottoms.PNG\n│   │       │   │   ├── cycling_bottoms.PNG\n│   │       │   │   ├── default_bottoms.png\n│   │       │   │   ├── doctor_bottoms.PNG\n│   │       │   │   ├── kyudo_bottoms.PNG\n│   │       │   │   ├── longskirtgrey_bottoms.PNG\n│   │       │   │   ├── rocknroll_bottoms.PNG\n│   │       │   │   ├── schooluniform_bottoms.PNG\n│   │       │   │   ├── stripe_bottoms.PNG\n│   │       │   │   └── tennis_bottoms.PNG\n│   │       │   ├── capes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── kokugoguild_capes.PNG\n│   │       │   │   └── rikaguild_capes.PNG\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── blackdog_fullset.PNG\n│   │       │   │   └── cloudstrife_outerset.PNG\n│   │       │   ├── shoes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── doctor_shoes.PNG\n│   │       │   │   ├── kyudo_shoes.PNG\n│   │       │   │   └── schooluniform_shoes.PNG\n│   │       │   └── tops/\n│   │       │       ├── .gitkeep\n│   │       │       ├── battle_tops.PNG\n│   │       │       ├── border_tops.PNG\n│   │       │       ├── cycling_tops.PNG\n│   │       │       ├── default_tops.png\n│   │       │       ├── doctor_tops.PNG\n│   │       │       ├── foody_tops.PNG\n│   │       │       ├── kyudo_tops.PNG\n│   │       │       ├── lightning_tops.PNG\n│   │       │       ├── mountainparker_tops.PNG\n│   │       │       ├── rocknroll_tops.PNG\n│   │       │       ├── schooluniform_tops.PNG\n│   │       │       ├── schooluniformsummer_tops.PNG\n│   │       │       └── tennis_tops.PNG\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   ├── .gitkeep\n│   │       │   ├── glasses_head.PNG\n│   │       │   └── google_head.PNG\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       ├── .gitkeep\n│   │       ├── bookshelf.PNG\n│   │       ├── chair.PNG\n│   │       ├── GuildTableClock.PNG\n│   │       ├── magicBroom.PNG\n│   │       ├── magicCircle.PNG\n│   │       ├── magicCrystal.PNG\n│   │       ├── staffofLightning.PNG\n│   │       ├── starGlobe.PNG\n│   │       └── wisemenDesk.PNG\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button_pressed.png\n│       │   ├── wood_button.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── common.css\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.css\n│   ├── layout.css\n│   ├── review.js\n│   └── screens/\n│       ├── .gitkeep\n│       ├── common.css\n│       ├── iphone-landscape.css\n│       └── learning-forest.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   ├── .gitkeep\n│   │   └── items.js\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       ├── .gitkeep\n│       └── music.js\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   ├── game-rules.md\n│   └── GPT_HANDOFF.md\n├── index.html\n├── js/\n│   ├── app.js\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── review.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── learningForest.js\n│   │   ├── musicShop.js\n│   │   ├── shop.js\n│   │   └── wardrobe.js\n│   ├── settings.js\n│   ├── storage.js\n│   └── systems/\n│       ├── .gitkeep\n│       ├── blackDogPet.js\n│       ├── dailyDashboard.js\n│       ├── furnitureSystem.js\n│       ├── musicPlayer.js\n│       ├── owlMessenger.js\n│       ├── questEngine.js\n│       └── questMusicPlayer.js\n├── manifest.webmanifest\n├── project-index.json\n├── README.md\n├── saves/\n│   └── .gitkeep\n├── service-worker.js\n├── tests/\n│   └── .gitkeep\n├── tools/\n│   └── generateProjectState.js\n└── UPLOAD_FILES.txt"
+    "text": "summer-guild/\n├── .github/\n│   └── workflows/\n│       ├── .gitkeep\n│       └── generate-project-map.yml\n├── assets/\n│   ├── app-icons/\n│   │   ├── .gitkeep\n│   │   ├── apple-touch-icon.png\n│   │   ├── icon-192.png\n│   │   └── icon-512.png\n│   ├── audio/\n│   │   ├── bgm/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Afternoon in the Academy.mp3\n│   │   │   ├── Bloom in the Garden.mp3\n│   │   │   ├── Candlelit Banquet.mp3\n│   │   │   ├── Harbor Breeze.mp3\n│   │   │   ├── Morning Light in the Guild.mp3\n│   │   │   ├── Sunlight Through Leaves.mp3\n│   │   │   ├── The Quiet Court.mp3\n│   │   │   └── Thunder in the Hall.mp3\n│   │   ├── quests/\n│   │   │   ├── .gitkeep\n│   │   │   ├── Blazing Dragoon's Charge.mp3\n│   │   │   ├── learningForest.mp3\n│   │   │   ├── The Clockwork Gambit 2.mp3\n│   │   │   ├── The Clockwork Gambit.mp3\n│   │   │   ├── The Moment Before the Shot.mp3\n│   │   │   ├── vsMathGuildMaster_final.mp3\n│   │   │   └── vsMathGuildMaster_start.mp3\n│   │   └── sfx/\n│   │       └── .gitkeep\n│   ├── backgrounds/\n│   │   ├── facilities/\n│   │   │   └── .gitkeep\n│   │   ├── guild-hall/\n│   │   │   ├── .gitkeep\n│   │   │   └── guildhall.png\n│   │   ├── guilds/\n│   │   │   ├── .gitkeep\n│   │   │   ├── guildhall.png\n│   │   │   └── guildshop_bg.png\n│   │   ├── home/\n│   │   │   ├── .gitkeep\n│   │   │   └── room.png\n│   │   ├── masters/\n│   │   │   └── .gitkeep\n│   │   ├── special/\n│   │   │   ├── .gitkeep\n│   │   │   ├── map_Japan.PNG\n│   │   │   ├── map_world.PNG\n│   │   │   └── mathGuildForest.png\n│   │   └── title/\n│   │       ├── .gitkeep\n│   │       └── title.PNG\n│   ├── characters/\n│   │   ├── masters/\n│   │   │   ├── japanese/\n│   │   │   │   └── .gitkeep\n│   │   │   ├── math/\n│   │   │   │   ├── .gitkeep\n│   │   │   │   └── mathGuildMaster.png\n│   │   │   ├── science/\n│   │   │   │   └── .gitkeep\n│   │   │   └── social/\n│   │   │       └── .gitkeep\n│   │   ├── pet/\n│   │   │   ├── .gitkeep\n│   │   │   ├── blackdog_base.PNG\n│   │   │   ├── blackdog_calm.PNG\n│   │   │   ├── blackdog_joy.PNG\n│   │   │   ├── blackdog_sleep.PNG\n│   │   │   ├── blanket.PNG\n│   │   │   ├── dogtoy_ball.PNG\n│   │   │   ├── dogtoy_bone.PNG\n│   │   │   ├── dogtoy_rope.PNG\n│   │   │   ├── piyo_base.PNG\n│   │   │   ├── piyo_food.PNG\n│   │   │   ├── piyo_happy.PNG\n│   │   │   ├── piyo_joy.PNG\n│   │   │   ├── piyo_sleepy.PNG\n│   │   │   └── piyo_talking.PNG\n│   │   └── player/\n│   │       ├── accessories/\n│   │       │   ├── .gitkeep\n│   │       │   └── neckwarmer_acc.PNG\n│   │       ├── base/\n│   │       │   ├── .gitkeep\n│   │       │   └── base.png\n│   │       ├── clothes/\n│   │       │   ├── .gitkeep\n│   │       │   ├── bottoms/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── battle_bottoms.PNG\n│   │       │   │   ├── bluejeans_bottoms.PNG\n│   │       │   │   ├── cycling_bottoms.PNG\n│   │       │   │   ├── default_bottoms.png\n│   │       │   │   ├── doctor_bottoms.PNG\n│   │       │   │   ├── kyudo_bottoms.PNG\n│   │       │   │   ├── longskirtgrey_bottoms.PNG\n│   │       │   │   ├── rocknroll_bottoms.PNG\n│   │       │   │   ├── schooluniform_bottoms.PNG\n│   │       │   │   ├── stripe_bottoms.PNG\n│   │       │   │   └── tennis_bottoms.PNG\n│   │       │   ├── capes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── kokugoguild_capes.PNG\n│   │       │   │   └── rikaguild_capes.PNG\n│   │       │   ├── gloves/\n│   │       │   │   └── .gitkeep\n│   │       │   ├── outer/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── blackdog_fullset.PNG\n│   │       │   │   └── cloudstrife_outerset.PNG\n│   │       │   ├── shoes/\n│   │       │   │   ├── .gitkeep\n│   │       │   │   ├── doctor_shoes.PNG\n│   │       │   │   ├── kyudo_shoes.PNG\n│   │       │   │   └── schooluniform_shoes.PNG\n│   │       │   └── tops/\n│   │       │       ├── .gitkeep\n│   │       │       ├── battle_tops.PNG\n│   │       │       ├── border_tops.PNG\n│   │       │       ├── cycling_tops.PNG\n│   │       │       ├── default_tops.png\n│   │       │       ├── doctor_tops.PNG\n│   │       │       ├── foody_tops.PNG\n│   │       │       ├── kyudo_tops.PNG\n│   │       │       ├── lightning_tops.PNG\n│   │       │       ├── mountainparker_tops.PNG\n│   │       │       ├── rocknroll_tops.PNG\n│   │       │       ├── schooluniform_tops.PNG\n│   │       │       ├── schooluniformsummer_tops.PNG\n│   │       │       └── tennis_tops.PNG\n│   │       ├── face/\n│   │       │   └── .gitkeep\n│   │       ├── hands/\n│   │       │   └── .gitkeep\n│   │       ├── head/\n│   │       │   ├── .gitkeep\n│   │       │   ├── glasses_head.PNG\n│   │       │   └── google_head.PNG\n│   │       └── templates/\n│   │           └── .gitkeep\n│   ├── items/\n│   │   ├── consumables/\n│   │   │   └── .gitkeep\n│   │   ├── decorations/\n│   │   │   └── .gitkeep\n│   │   └── furniture/\n│   │       ├── .gitkeep\n│   │       ├── bookshelf.PNG\n│   │       ├── chair.PNG\n│   │       ├── GuildTableClock.PNG\n│   │       ├── magicBroom.PNG\n│   │       ├── magicCircle.PNG\n│   │       ├── magicCrystal.PNG\n│   │       ├── staffofLightning.PNG\n│   │       ├── starGlobe.PNG\n│   │       └── wisemenDesk.PNG\n│   └── ui/\n│       ├── buttons/\n│       │   ├── .gitkeep\n│       │   ├── numberpad_bg.png\n│       │   ├── wood_button_pressed.png\n│       │   ├── wood_button.png\n│       │   └── wood_panel.png\n│       ├── effects/\n│       │   └── .gitkeep\n│       ├── frames/\n│       │   └── .gitkeep\n│       └── icons/\n│           └── .gitkeep\n├── css/\n│   ├── common.css\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.css\n│   ├── layout.css\n│   ├── review.js\n│   └── screens/\n│       ├── .gitkeep\n│       ├── common.css\n│       ├── iphone-landscape.css\n│       └── learning-forest.css\n├── data/\n│   ├── achievements/\n│   │   └── .gitkeep\n│   ├── exams/\n│   │   └── .gitkeep\n│   ├── facilities/\n│   │   └── .gitkeep\n│   ├── items/\n│   │   ├── .gitkeep\n│   │   └── items.js\n│   ├── masters/\n│   │   └── .gitkeep\n│   ├── quests/\n│   │   └── .gitkeep\n│   ├── rewards/\n│   │   └── .gitkeep\n│   └── shop/\n│       ├── .gitkeep\n│       └── music.js\n├── docs/\n│   ├── .gitkeep\n│   ├── asset-guide.md\n│   ├── development-log.md\n│   ├── game-rules.md\n│   └── GPT_HANDOFF.md\n├── index.html\n├── js/\n│   ├── app.js\n│   ├── components/\n│   │   └── .gitkeep\n│   ├── developer.js\n│   ├── numberpad.js\n│   ├── quests/\n│   │   ├── cleaning.js\n│   │   ├── daily.js\n│   │   ├── engine.js\n│   │   ├── exercise.js\n│   │   ├── hyakumasu.js\n│   │   ├── kanji.js\n│   │   ├── math.js\n│   │   ├── music.js\n│   │   ├── reading.js\n│   │   ├── review.js\n│   │   ├── science.js\n│   │   └── society.js\n│   ├── screens/\n│   │   ├── .gitkeep\n│   │   ├── learningForest.js\n│   │   ├── musicShop.js\n│   │   ├── shop.js\n│   │   └── wardrobe.js\n│   ├── settings.js\n│   ├── storage.js\n│   └── systems/\n│       ├── .gitkeep\n│       ├── blackDogPet.js\n│       ├── dailyDashboard.js\n│       ├── furnitureSystem.js\n│       ├── musicPlayer.js\n│       ├── owlMessenger.js\n│       ├── questEngine.js\n│       ├── questMusicPlayer.js\n│       └── yellowBirdPet.js\n├── manifest.webmanifest\n├── project-index.json\n├── README.md\n├── saves/\n│   └── .gitkeep\n├── service-worker.js\n├── tests/\n│   └── .gitkeep\n├── tools/\n│   └── generateProjectState.js\n├── UPLOAD_FILES_learning-forest-10-1-10-2-10-3.txt\n├── UPLOAD_FILES_learning-forest-11-1-11-2-11-3.txt\n├── UPLOAD_FILES_learning-forest-11-12.txt\n├── UPLOAD_FILES_learning-forest-12-13-review-gp.txt\n├── UPLOAD_FILES_learning-forest-4-4-5-1-5-2.txt\n├── UPLOAD_FILES_learning-forest-5-3-5-4-6-1-6-2.txt\n├── UPLOAD_FILES_learning-forest-6-1-6-2-flow-v2.txt\n└── UPLOAD_FILES.txt"
   },
   "projectNotes": {
     "exists": false,
