@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-08-02T05:35:56.282009+00:00",
-    "commit": "7661e89",
+    "atUtc": "2026-08-02T05:36:19.417064+00:00",
+    "commit": "b1ff00b",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 68,
     "javascriptApiFileCount": 25,
-    "totalBytes": 97327430,
+    "totalBytes": 97340494,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1789,9 +1789,9 @@
       "stem": "learningForest",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 219651,
-      "sha1": "6aa7d85ca8",
-      "lineCount": 3389
+      "sizeBytes": 232715,
+      "sha1": "1003429f2b",
+      "lineCount": 3627
     },
     {
       "path": "js/screens/musicShop.js",
@@ -3180,6 +3180,14 @@
         "createLesson27Steps",
         "createLesson28Steps",
         "createLesson29Steps",
+        "renderCycleProblem",
+        "renderDivisionCycleBoard",
+        "renderPowerCycleBoard",
+        "renderCycleMethodSummary",
+        "createLesson30Steps",
+        "createLesson31Steps",
+        "createLesson32Steps",
+        "createLesson33Steps",
         "init",
         "open",
         "close",
@@ -3232,15 +3240,7 @@
         "renderLesson6Summary",
         "renderLesson7Problem",
         "renderLesson7UnitDifference",
-        "renderLesson7CountState",
-        "renderLesson7KeepGap",
-        "renderLesson7Turnaround",
-        "renderLesson7ShortcutIntro",
-        "renderLesson7Shortcut",
-        "renderLesson7Summary",
-        "renderLesson8Problem",
-        "renderLesson8FinalBags",
-        "renderLesson8Repacking"
+        "renderLesson7CountState"
       ],
       "classes": [],
       "windowExports": [
@@ -3722,13 +3722,7 @@
     {
       "status": "M",
       "paths": [
-        "docs/GPT_HANDOFF.md"
-      ]
-    },
-    {
-      "status": "M",
-      "paths": [
-        "docs/development-log.md"
+        "js/screens/learningForest.js"
       ]
     }
   ],
