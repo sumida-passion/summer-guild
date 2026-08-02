@@ -110,6 +110,7 @@ const DEFAULT_SETTINGS = {
 
     pet: {
         welcomeShown: false,
+        yellowBirdWelcomeShown: false,
 
         /*
           黒犬の表示倍率。
@@ -373,6 +374,7 @@ function mergeSettings(
 
     if (savedSettings.pet && typeof savedSettings.pet === "object") {
         merged.pet.welcomeShown = Boolean(savedSettings.pet.welcomeShown);
+        merged.pet.yellowBirdWelcomeShown = Boolean(savedSettings.pet.yellowBirdWelcomeShown);
         merged.pet.displayScale = Math.min(
             2,
             Math.max(
@@ -3033,6 +3035,22 @@ function hasShownBlackDogWelcome() {
 function markBlackDogWelcomeShown() {
     if (!Settings.pet) Settings.pet = { welcomeShown: false };
     Settings.pet.welcomeShown = true;
+    saveSettings();
+}
+
+function hasShownYellowBirdWelcome() {
+    return Boolean(Settings.pet?.yellowBirdWelcomeShown);
+}
+
+function markYellowBirdWelcomeShown() {
+    if (!Settings.pet) {
+        Settings.pet = {
+            welcomeShown: false,
+            yellowBirdWelcomeShown: false,
+            displayScale: 1
+        };
+    }
+    Settings.pet.yellowBirdWelcomeShown = true;
     saveSettings();
 }
 

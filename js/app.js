@@ -187,6 +187,10 @@ function initGame() {
         window.BlackDogPet.init();
     }
 
+    if (window.YellowBirdPet && typeof window.YellowBirdPet.init === "function") {
+        window.YellowBirdPet.init();
+    }
+
 
     bindButtons();
 
@@ -2228,6 +2232,10 @@ function activateScreen(
         window.BlackDogPet.handleScreenChange(screenName);
     }
 
+    if (window.YellowBirdPet && typeof window.YellowBirdPet.handleScreenChange === "function") {
+        window.YellowBirdPet.handleScreenChange(screenName);
+    }
+
     if (window.DailyDashboard && typeof window.DailyDashboard.handleScreenChange === "function") {
         window.DailyDashboard.handleScreenChange(screenName);
     }
@@ -2326,7 +2334,7 @@ function registerServiceWorker() {
         return;
     }
 
-    const BUILD_VERSION = "2026.07.22-mathguild1";
+    const BUILD_VERSION = "2026.08.02-yellow-bird-pet-v1";
     const RELOAD_KEY = `summerGuildSwReloaded:${BUILD_VERSION}`;
 
     const reloadOnceForNewWorker = () => {
