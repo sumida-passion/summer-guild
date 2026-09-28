@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-08-02T08:19:40.908351+00:00",
-    "commit": "e2875d2",
+    "atUtc": "2026-09-28T10:40:55.359795+00:00",
+    "commit": "b0a008b",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 74,
     "javascriptApiFileCount": 26,
-    "totalBytes": 97695602,
+    "totalBytes": 97696432,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1653,9 +1653,9 @@
       "stem": "index",
       "extension": ".html",
       "extensionNormalized": ".html",
-      "sizeBytes": 19509,
-      "sha1": "f4bcbdf68b",
-      "lineCount": 791
+      "sizeBytes": 20341,
+      "sha1": "81c498a58a",
+      "lineCount": 806
     },
     {
       "path": "js/app.js",
@@ -2044,8 +2044,8 @@
       "stem": "service-worker",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 4498,
-      "sha1": "67699ecc65",
+      "sizeBytes": 4496,
+      "sha1": "fb2b21b1e2",
       "lineCount": 177
     },
     {
@@ -2831,12 +2831,14 @@
       {
         "path": "index.html",
         "scripts": [
+          "data/exams/englishPhrases.js",
           "data/items/items.js",
           "data/shop/music.js",
           "js/app.js",
           "js/developer.js",
           "js/numberpad.js",
           "js/quests/daily.js",
+          "js/quests/english.js",
           "js/quests/hyakumasu.js",
           "js/quests/math.js",
           "js/quests/review.js",
@@ -3873,9 +3875,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "js/systems/yellowBirdPet.js"
+        "index.html"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "service-worker.js"
       ]
     }
   ],
