@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-09-28T10:43:22.085006+00:00",
-    "commit": "a83305f",
+    "atUtc": "2026-09-28T10:43:51.536299+00:00",
+    "commit": "510fbc4",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 74,
     "javascriptApiFileCount": 28,
-    "totalBytes": 97716949,
+    "totalBytes": 97718313,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1609,9 +1609,9 @@
       "stem": "development-log",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 58513,
-      "sha1": "d71afcf36c",
-      "lineCount": 618
+      "sizeBytes": 59024,
+      "sha1": "122aa5c09a",
+      "lineCount": 624
     },
     {
       "path": "docs/game-rules.md",
@@ -1620,9 +1620,9 @@
       "stem": "game-rules",
       "extension": ".md",
       "extensionNormalized": ".md",
-      "sizeBytes": 5860,
-      "sha1": "387a1c099e",
-      "lineCount": 77
+      "sizeBytes": 6713,
+      "sha1": "959ca92d2a",
+      "lineCount": 84
     },
     {
       "path": "docs/GPT_HANDOFF.md",
@@ -3932,9 +3932,15 @@
   },
   "latestCommitChanges": [
     {
-      "status": "A",
+      "status": "M",
       "paths": [
-        "data/exams/englishPhrases.js"
+        "docs/development-log.md"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "docs/game-rules.md"
       ]
     }
   ],
