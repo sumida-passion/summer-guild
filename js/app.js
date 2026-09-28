@@ -40,6 +40,9 @@ const SCREENS = {
     socialguild:
         "socialguild-screen",
 
+    englishguild:
+        "englishguild-screen",
+
     learningforest:
         "learningforest-screen",
 
@@ -338,6 +341,14 @@ function bindButtons() {
     });
 
     bindScreenButton(["backGuildHallFromSocial"], "guildhall");
+
+    bindActionButton(["gotoEnglishGuild"], () => {
+        if (window.EnglishGuild) window.EnglishGuild.open();
+    });
+    bindActionButton(["backGuildHallFromEnglish"], async () => {
+        if (window.EnglishGuild) window.EnglishGuild.close();
+        await changeScreen("guildhall");
+    });
 
 
     /* ギルドホール → 学びの森（算数の広場） */
@@ -2334,7 +2345,7 @@ function registerServiceWorker() {
         return;
     }
 
-    const BUILD_VERSION = "2026.08.02-yellow-bird-pet-v1";
+    const BUILD_VERSION = "2026.09.28-english-guild-v1";
     const RELOAD_KEY = `summerGuildSwReloaded:${BUILD_VERSION}`;
 
     const reloadOnceForNewWorker = () => {
