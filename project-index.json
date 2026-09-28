@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-09-28T11:08:36.355296+00:00",
-    "commit": "fb04471",
+    "atUtc": "2026-09-28T11:08:58.850084+00:00",
+    "commit": "8f698f1",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -22,7 +22,7 @@
     "directoryCount": 57,
     "imageCount": 74,
     "javascriptApiFileCount": 28,
-    "totalBytes": 97718615,
+    "totalBytes": 97720841,
     "extensions": {
       ".css": 6,
       ".html": 1,
@@ -1751,9 +1751,9 @@
       "stem": "english",
       "extension": ".js",
       "extensionNormalized": ".js",
-      "sizeBytes": 9090,
-      "sha1": "a92336f39e",
-      "lineCount": 98
+      "sizeBytes": 11316,
+      "sha1": "e9c264b58c",
+      "lineCount": 73
     },
     {
       "path": "js/quests/exercise.js",
@@ -3120,6 +3120,7 @@
     {
       "path": "js/quests/english.js",
       "functions": [
+        "safeInt",
         "read",
         "save",
         "clock",
@@ -3129,6 +3130,7 @@
         "elapsed",
         "pause",
         "resume",
+        "cancel",
         "open",
         "home",
         "guide",
@@ -3136,8 +3138,8 @@
         "question",
         "answer",
         "checkpoint",
-        "finish",
-        "escape"
+        "partTransition",
+        "finish"
       ],
       "classes": [],
       "windowExports": [
@@ -3934,7 +3936,7 @@
     {
       "status": "M",
       "paths": [
-        "js/app.js"
+        "js/quests/english.js"
       ]
     }
   ],
