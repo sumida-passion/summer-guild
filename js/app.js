@@ -2345,7 +2345,7 @@ function registerServiceWorker() {
         return;
     }
 
-    const BUILD_VERSION = "2026.09.28-english-guild-v1";
+    const BUILD_VERSION = "2026.09.28-english-guild-v2";
     const RELOAD_KEY = `summerGuildSwReloaded:${BUILD_VERSION}`;
 
     const reloadOnceForNewWorker = () => {
