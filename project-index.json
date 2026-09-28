@@ -13,8 +13,8 @@
     ]
   },
   "generated": {
-    "atUtc": "2026-09-28T10:43:51.536299+00:00",
-    "commit": "510fbc4",
+    "atUtc": "2026-09-28T11:07:39.891926+00:00",
+    "commit": "5a64ee7",
     "commitSubject": "Add files via upload"
   },
   "summary": {
@@ -1665,7 +1665,7 @@
       "extension": ".html",
       "extensionNormalized": ".html",
       "sizeBytes": 20341,
-      "sha1": "81c498a58a",
+      "sha1": "299f7047e3",
       "lineCount": 806
     },
     {
@@ -2067,7 +2067,7 @@
       "extension": ".js",
       "extensionNormalized": ".js",
       "sizeBytes": 4496,
-      "sha1": "fb2b21b1e2",
+      "sha1": "ad7bb8ddfa",
       "lineCount": 177
     },
     {
@@ -3934,13 +3934,13 @@
     {
       "status": "M",
       "paths": [
-        "docs/development-log.md"
+        "index.html"
       ]
     },
     {
       "status": "M",
       "paths": [
-        "docs/game-rules.md"
+        "service-worker.js"
       ]
     }
   ],
